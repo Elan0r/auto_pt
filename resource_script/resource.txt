@@ -323,9 +323,6 @@ use auxiliary/gather/ldap_hashdump
 services -p 636 -u -R
 run
 sleep 5
-
 spool off
-
-
 
 exit
