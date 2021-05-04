@@ -18,17 +18,20 @@ echo -e " "
 read -p "IP Address SMTP: " ip
 echo -e " "
 echo -e " "
+
+#Check if Folder exists
 if [ ! -d mail_test ]
 then
 	mkdir mail_test
 else
 	echo -e ''
 fi
+
 function single {
+
 	eval sub=$3
 	eval data=$4
-	echo $sub
-	echo $data
+	
 	echo -e "Server: $5"
 	echo -e "First check: \tExtern -> Intern"
 	swaks --ehlo mx.team-prosec.com --from $1 --h-From: "$1" --h-Subject: "$sub" --body "${data}" --to $2 --server $5 -tlso > mail_test/ext_to_int_$5.txt
@@ -44,6 +47,7 @@ function single {
 }
 
 function file {
+	
 	eval sub=$3
 	eval data=$4
 	for i in $(cat $5)
@@ -52,6 +56,7 @@ function file {
 	done
 }
 
+#When $IP ein File ist
 if [ -e $ip ]
 then
 	file $ext $int "\${sub}" "\${data}" $ip
