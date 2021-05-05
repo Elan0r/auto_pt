@@ -30,7 +30,7 @@ crackmapexec smb output/445_open.txt --gen-relay-list output/smb_sign_off.txt > 
 echo 'Done'
 
 #When Clients with Signing:false exist
-if [-s output/smb_sign_off.txt]
+if [ -s output/smb_sign_off.txt ] 
 	then
 	echo ''
 	
