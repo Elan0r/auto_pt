@@ -22,7 +22,7 @@ if [ -s /root/output/list/ipup.txt ]; then
 echo 'nmap PE bereits gelaufen'
 else
    echo 'NMAP PE Scan'
-   nmap -PE -sn -n --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/nmap/pe -iL /root/ipint.txt > /dev/null 2>&1
+   nmap -e eth0 -PE -sn -n --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/nmap/pe -iL /root/ipint.txt > /dev/null 2>&1
    echo ''
    echo 'Done'
 
@@ -34,7 +34,7 @@ fi
 #NMAP SSV SC Alles
 echo 'nmap ssv sc'
 
-nmap -sSV -sC -Pn --scan-delay 1 --max-retries 2 --max-hostgroup 20 --host-timeout 5m -oA /root/output/nmap/service -iL /root/output/list/ipup.txt > /dev/null 2>&1
+nmap -e eth0 -sSV -sC -Pn --scan-delay 1 --max-hostgroup 20 --host-timeout 10m -oA /root/output/nmap/service -iL /root/output/list/ipup.txt > /dev/null 2>&1
 echo 'Done'
 echo ''
 
