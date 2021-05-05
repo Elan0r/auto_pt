@@ -10,17 +10,26 @@ else
 fi
 
 
-#Creating Output Folders
-mkdir -p /root/output/nmap /root/output/list 
+if [ -d /root/output/nmap && -d /root/output/list ]; then
+    echo 'Ordner sind da!'
+else    
+    #Creating Output Folders
+    mkdir -p /root/output/nmap /root/output/list
+fi
 
 #NMAP PE SCAN
+if [ -s /root/output/list/ipup.txt ]; then
+echo 'nmap PE bereits gelaufen'
+else
+   echo 'NMAP PE Scan'
+   nmap -PE -sn -n --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/nmap/pe -iL /root/ipint.txt > /dev/null 2>&1
+   echo ''
+   echo 'Done'
 
-echo 'NMAP PE Scan'
-nmap -PE -sn -n --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/pe -iL /root/ipint.txt > /dev/null 2>&1
-echo ''
-echo 'Done'
-
-awk '/Up/ {print$2}' /root/output/nmap/pe.gnmap > /root/output/list/ipup.txt
+   #Piping the IP-Addresses of the Targets to a file
+   awk '/Up/ {print$2}' /root/output/nmap/pe.gnmap > /root/output/list/ipup.txt
+   echo ''
+fi
 
 #NMAP SSV SC Alles
 echo 'nmap ssv sc'
