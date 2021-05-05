@@ -48,8 +48,14 @@ awk '/445\open/ {print$2}' /root/output/nmap/service.gnmap > /root/output/list/s
 echo 'Done'
 echo ''
 echo 'cme SMB Signing relay LISTE'
-
-crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt > /root/output/cme_beauty.txt
+if [ -s /root/output/list/smb_sign_off.txt ]; then
+   echo 'SMB Signing Liste schon da'
+else
+   #Using Crackmap to Check which of the IP's with 445 open have Signing:false
+   echo 'Generating Relay List'
+   crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt > /root/output/cme_beauty.txt
+   echo 'Done'
+fi
 
 echo 'done'
 
