@@ -1,4 +1,3 @@
-
 workspace XXX
 
 setg THREADS 150
@@ -293,6 +292,7 @@ sleep 5
 
 echo "IPMI Hashdump"
 use scanner/ipmi/ipmi_dumphashes
+set OUTPUT_HASHCAT_FILE /tmp/msf/ipmi_hashcat
 services -p 623 -u -R
 run
 sleep 5
