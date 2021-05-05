@@ -48,7 +48,7 @@ else
 fi
 
 if [ -s /root/output/list/smb_sign_off.txt ]; then
-   echo 'SMB Signing Liste schon da weiter mit Responder unf NTLMRELAY'
+   echo 'SMB Signing Liste schon da weiter mit Responder und NTLMRELAY'
 else
    #Using Crackmap to Check which of the IP's with 445 open have Signing:false
    echo 'Generating Relay List'
