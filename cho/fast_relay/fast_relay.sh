@@ -57,7 +57,7 @@ if [-s output/smb_sign_off.txt]
 	wait $PID_RELAY
 	
 	#When Output-File exists and is not empty
-	if [-s output/ntlm_relay_ntlmv2.txt]
+	if [ -s output/ntlm_relay_ntlmv2.txt ]
 		then
 		#Show me 'dem Hashes
 		cat output/ntlm_relay_ntlmv2.txt
