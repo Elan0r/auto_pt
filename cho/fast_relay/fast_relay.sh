@@ -6,6 +6,7 @@ if [ -s /root/ipint.txt ]; then
     echo "ipint.txt ist da."
 else 
     echo "ipint.txt existiert nicht oder ist leer."
+	exit 1
 fi
 
 
