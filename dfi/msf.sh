@@ -28,4 +28,4 @@ echo "workspace -d $WS" > /root/input/msf/workspace.txt
 echo "workspace -a $WS" >> /root/input/msf/workspace.txt
 echo "db_import /root/output/nmap/service.xml" >> /root/input/msf/workspace.txt
 
-msfconsole -x "resource ./resource.txt resource /root/input/msf/workspace.txt"
+msfconsole -x "resource /root/input/msf/workspace.txt resource ./resource.txt"
