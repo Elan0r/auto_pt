@@ -12,7 +12,7 @@ else
 	exit 1
 fi
 
-if [ -d /root/output/nmap && -d /root/output/list ]; then
+if [[ -d /root/output/nmap && -d /root/output/list ]]; then
     echo 'Ordner sind da!'
 else    
     #Creating Output Folders
