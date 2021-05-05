@@ -25,7 +25,7 @@ echo 'Done'
 awk '/Up/ {print$2}' /root/output/pe.gnmap > /root/output/ips.txt
 echo ''
 
-cat /root/output/ips.txt
+#cat /root/output/ips.txt
 
 #NMAP Portscan for port 445
 echo 'NMAP Portscan 445'
@@ -37,14 +37,14 @@ echo 'Done'
 awk '/open/ {print$2}' /root/output/445.gnmap > /root/output/445_open.txt
 echo ''
 
-cat /root/output/445_open.txt
+#cat /root/output/445_open.txt
 
 #Using Crackmap to Check which of the IP's with 445 open have Signing:false
 echo 'Generating Relay List'
-crackmapexec smb /root/output/445_open.txt --gen-relay-list /root/output/smb_sign_off.txt
+crackmapexec smb /root/output/445_open.txt --gen-relay-list /root/output/smb_sign_off.txt > /dev/null 2>&1
 echo 'Done'
 
-cat /root/output/smb_sign_off.txt
+#cat /root/output/smb_sign_off.txt
 
 #When Clients with Signing:false exist
 if [ -s /root/output/smb_sign_off.txt ] 
