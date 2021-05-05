@@ -1,12 +1,21 @@
 #!/bin/bash
 
+echo 'Netze zum scannen in /root/ipint.txt fuer nmap'
+
+if [ -s /root/ipint.txt ]; then
+    echo "ipint.txt ist da."
+else 
+    echo "ipint.txt existiert nicht oder ist leer."
+fi
+
+
 #Creating Output Folders
 mkdir -p /root/output/nmap /root/output/list
 
 #NMAP PE SCAN
 
 echo 'NMAP PE Scan'
-nmap -PE -sn -n --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/pe $1 > /dev/null 2>&1
+nmap -PE -sn -n --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/pe -iL /root/ipint.txt > /dev/null 2>&1
 echo ''
 echo 'Done'
 
