@@ -1,11 +1,11 @@
 #!/bin/bash
 
-echo '! > Netze zum scannen in /root/ipint.txt fuer nmap'
+echo '! > Networks to scan in /root/ipint.txt for nmap'
 echo '' 
 if [ -s /root/ipint.txt ]; then
-    echo ' '
+    echo '! > IPs OK '
 else 
-    echo "! >> ipint.txt existiert nicht oder ist leer."
+    echo "! >> ipint.txt does not exist."
 	exit 1
 fi
 
@@ -18,9 +18,9 @@ else
 fi
 
 #NMAP PE SCAN
-echo '! > NMAP PE Scan'
+echo '! > NMAP PE Scan    FAST'
 if [ -s /root/output/list/ipup.txt ]; then
-echo '! >> nmap PE bereits gelaufen'
+echo '! >> nmap PE already Done!'
 else
    nmap -e eth0 -PE -sn -n --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/nmap/pe -iL /root/ipint.txt > /dev/null 2>&1
    echo ''
@@ -32,7 +32,7 @@ else
 fi
 
 #NMAP SSV SC Alles
-echo '! > NMAP SSV SC'
+echo '! > NMAP SSV SC   SLOW!'
 
 nmap -e eth0 -sSV -sC -Pn --scan-delay 1 --max-hostgroup 20 --host-timeout 10m -oA /root/output/nmap/service -iL /root/output/list/ipup.txt > /dev/null 2>&1
 echo '! > Done'
@@ -47,13 +47,13 @@ awk '/445\/open/ {print$2}' /root/output/nmap/service.gnmap > /root/output/list/
 
 #echo 'Done'
 echo ''
-echo '! > BUILDING CME SMB RELAY LISTE'
+echo '! > BUILDING CME SMB RELAY LIST'
 if [ -s /root/output/list/smb_sign_off.txt ]; then
    echo '! >> RELAY LIST EXISTS'
 else
    #Using Crackmap to Check which of the IP's with 445 open have Signing:false
    #echo 'Generating Relay List'
-   crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt # > /root/output/cme_beauty.txt
+   crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt > /root/output/cme_beauty.txt
    echo '! > Done'
 fi
 
@@ -69,7 +69,7 @@ for i in $(cat /root/output/list/smb_sign_off.txt); do echo smb://$i; done > /ro
 
 #echo 'Done'
 #echo ''
-echo 'merge relay ALL LISTE'
+echo 'Create Relay_ALL LIST'
 
 cat /root/output/list/relay* > /root/output/list/relay_all.txt
 
