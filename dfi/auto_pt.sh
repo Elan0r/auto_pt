@@ -12,7 +12,7 @@ chmod +x ./active_recon.sh
 chmod +x ./msf.sh
 chmod +x ./relay.sh
 chmod +x ./eyewitness.sh
-
+tmux rename_window AUTO_PT
 echo 'Start Active Recon'
 ./active_recon.sh
 echo 'Start Metasploit'
