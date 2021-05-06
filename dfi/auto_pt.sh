@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [[[ -d /root/output/nmap && -d /root/output/list && -d /root/input/msf ]]]; then
+    echo 'Ordner sind da!'
+else    
+    #Creating Output Folders
+    mkdir -p /root/output/nmap /root/output/list /root/input/msf
+fi
+
 chmod +x ./active_recon.sh
 chmod +x ./msf.sh
 chmod +x ./relay.sh
