@@ -1,10 +1,11 @@
 #!/bin/bash
 
 if [[[ -d /root/output/nmap && -d /root/output/list && -d /root/input/msf ]]]; then
-    echo 'Ordner sind da!'
+    echo '! > Folder Exist!'
 else    
     #Creating Output Folders
     mkdir -p /root/output/nmap /root/output/list /root/input/msf
+    echo '! > Folder Created!'
 fi
 
 chmod +x ./active_recon.sh
