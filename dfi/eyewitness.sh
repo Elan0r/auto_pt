@@ -10,4 +10,4 @@ else
     echo '! > Folder created!'
 fi
 
-eyewitness --web --timeout --delay 20 --no-prompt --prepend-https -x /root/output/nmap/service.xml -d /root/output/screens/
+eyewitness --web --timeout 20 --delay 20 --no-prompt --prepend-https -x /root/output/nmap/service.xml -d /root/output/screens/
