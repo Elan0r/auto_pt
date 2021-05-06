@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[[ -d /root/output/nmap && -d /root/output/list && -d /root/input/msf ]]]; then
+if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf ]; then
     echo '! > Folder Exist!'
 else    
     #Creating Output Folders
