@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ -s ./resource.txt ]; then
+if [ -s ./resource.txt ]; then
     echo '! > resource.txt check OK'
 else
     echo '! > resource.txt missing here: ' $PWD
