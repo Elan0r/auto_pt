@@ -34,7 +34,7 @@ fi
 #NMAP SSV SC Alles
 echo '! > NMAP SSV SC   SLOW!'
 
-nmap -e eth0 -sSV -sC -Pn --scan-delay 1 --max-hostgroup 20 --host-timeout 10m -oA /root/output/nmap/service -iL /root/output/list/ipup.txt > /dev/null 2>&1
+nmap -e eth0 -sSV -sC -Pn --scan-delay 1 --max-hostgroup 20 -oA /root/output/nmap/service -iL /root/output/list/ipup.txt > /dev/null 2>&1
 echo '! > Done'
 echo ''
 
