@@ -18,36 +18,31 @@ echo -e " "
 read -p "IP Address SMTP: " ip
 echo -e " "
 echo -e " "
-
-#Check if Folder exists
 if [ ! -d mail_test ]
 then
 	mkdir mail_test
 else
 	echo -e ''
 fi
-
 function single {
-
 	eval sub=$3
 	eval data=$4
-	
+
 	echo -e "Server: $5"
 	echo -e "First check: \tExtern -> Intern"
-	swaks --ehlo mx.team-prosec.com --from $1 --h-From: "$1" --h-Subject: "$sub" --body "${data}" --to $2 --server $5 -tlso > mail_test/ext_to_int_$5.txt
+	swaks --ehlo mx.team-prosec.com --from $1 --h-From: "$1" --h-Subject: "${sub}" --body "MailServer: $5 \n\n ${data}" --to $2 --server $5 -tlso > mail_test/ext_to_int_$5.txt
 	echo -e "Second check: \tIntern -> Intern"
-	swaks --ehlo mx.team-prosec.com --from $2 --h-From: "$2" --h-Subject: "$sub" --body "${data}" --to $2 --server $5 -tlso > mail_test/int_to_int_$5.txt
+	swaks --ehlo mx.team-prosec.com --from $2 --h-From: "$2" --h-Subject: "${sub}" --body "MailServer: $5 \n\n ${data}" --to $2 --server $5 -tlso > mail_test/int_to_int_$5.txt
 	echo -e "Third check: \tIntern -> Extern"
-	swaks --ehlo mx.team-prosec.com --from $2 --h-From: "$2" --h-Subject: "$sub" --body "${data}" --to $1 --server $5 -tlso > mail_test/int_to_ext_$5.txt
+	swaks --ehlo mx.team-prosec.com --from $2 --h-From: "$2" --h-Subject: "${sub}" --body "MailServer: $5 \n\n ${data}" --to $1 --server $5 -tlso > mail_test/int_to_ext_$5.txt
 	echo -e "Fourth check: \tExtern -> Extern"
-	swaks --ehlo mx.team-prosec.com --from $1 --h-From: "$1" --h-Subject: "$sub" --body "${data}" --to $1 --server $5 -tlso > mail_test/ext_to_ext_$5.txt
+	swaks --ehlo mx.team-prosec.com --from $1 --h-From: "$1" --h-Subject: "${sub}" --body "MailServer: $5 \n\n ${data}" --to $1 --server $5 -tlso > mail_test/ext_to_ext_$5.txt
 	echo -e " "
 	echo -e "Checks performed. Check output files for more information"
 	echo -e " "
 }
 
 function file {
-	
 	eval sub=$3
 	eval data=$4
 	for i in $(cat $5)
@@ -56,7 +51,6 @@ function file {
 	done
 }
 
-#When $IP ein File ist
 if [ -e $ip ]
 then
 	file $ext $int "\${sub}" "\${data}" $ip
