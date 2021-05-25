@@ -6,6 +6,14 @@ else
     #Creating Output Folders
     mkdir -p /root/output/nmap /root/output/list /root/input/msf
 fi
+echo -e ''  > /dev/pts/1
+echo -e ' _____           _____           _____              _       _____                      ' > /dev/pts/1
+echo -e '|  __ \         / ____|         |  __ \            (_)     |  __ \                     ' > /dev/pts/1
+echo -e '| |__) | __ ___| (___   ___  ___| |__) |_ _ ___ ___ ___   _| |__) |___  ___ ___  _ __  ' > /dev/pts/1
+echo -e '|  ___/ |__/ _ \\___ \ / _ \/ __|  ___/ _` / __/ __| \ \ / /  _  // _ \/ __/ _ \| |_ \ ' > /dev/pts/1
+echo -e '| |   | | | (_) |___) |  __/ (__| |  | (_| \__ \__ \ |\ V /| | \ \  __/ (_| (_) | | | |' > /dev/pts/1
+echo -e '|_|   |_|  \___/_____/ \___|\___|_|   \__,_|___/___/_| \_/ |_|  \_\___|\___\___/|_| |_|' > /dev/pts/1
+echo -e '' > /dev/pts/1
 
 tmux -f /root/dfitmux.conf new-session -d
 tmux rename-window 'Passive-Recon'
