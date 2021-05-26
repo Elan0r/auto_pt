@@ -86,14 +86,14 @@ echo "postgresql_login"
 use scanner/postgres/postgres_login
 services -p 5432 -u -R
 run
-sleep5
+sleep 5
 
 
 echo "mysql_login"
 use scanner/mysql/mysql_login
 services -p 3306 -u -R
 run
-sleep5
+sleep 5
 
 spool /tmp/msf/smb.txt
 echo "####SMB####"
