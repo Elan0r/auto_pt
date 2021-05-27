@@ -1,12 +1,5 @@
 #!/bin/bash
 
-if [ -s ./resource.txt ]; then
-    echo '! > resource.txt check OK'
-else
-    echo '! > resource.txt missing here: ' $PWD
-    exit 1
-fi
-
 echo -e '  _____           _____                         _        _____       _       _ _   '
 echo -e ' |  __ \         / ____|             /\        | |      / ____|     | |     (_) |  '
 echo -e ' | |__) | __ ___| (___   ___  ___   /  \  _   _| |_ ___| (___  _ __ | | ___  _| |_ '
@@ -16,6 +9,13 @@ echo -e ' |_|   |_|  \___/_____/ \___|\___/_/    \_\__,_|\__\___/_____/| .__/|_|
 echo -e '                                                              | |                  '
 echo -e '                                                              |_|                  '
 echo -e ''
+
+if [ -s ./resource.txt ]; then
+    #echo '! > resource.txt check OK'
+else
+    echo '! > resource.txt missing here: ' $PWD
+    exit 1
+fi
 
 IP=$(ip addr show eth0 | grep "inet " | cut -d '/' -f1 | cut -d ' ' -f6)
 #echo '! >> own IP eth0: '$IP
