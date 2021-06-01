@@ -20,7 +20,7 @@ echo -e " "
 echo -e " "
 if [ ! -d /root/output/mail_test ]
 then
-	mkdir mail_test
+	mkdir -p /root/output/mail_test
 else
 	echo -e ''
 fi
