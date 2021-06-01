@@ -11,7 +11,7 @@ echo -e '                                                              |_|      
 echo -e ''
 
 if [ -s ./resource.txt ]; then
-    #echo '! > resource.txt check OK'
+    echo '! > resource.txt check OK'
 else
     echo '! > resource.txt missing here: ' $PWD
     exit 1
