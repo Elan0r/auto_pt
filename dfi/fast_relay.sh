@@ -23,7 +23,7 @@ else
 fi
 
 if [[ -d /root/output/nmap && -d /root/output/list ]]; then
-    #echo '! > Folder exists!'
+    echo '! > Folder exists!'
 else    
     #Creating Output Folders
     mkdir -p /root/output/nmap /root/output/list
