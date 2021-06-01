@@ -16,7 +16,7 @@ IP=$(ip addr show eth0 | grep "inet " | cut -d '/' -f1 | cut -d ' ' -f6)
 #echo '! > Network to scan in /root/input/ipint.txt for nmap'
 
 if [ -s /root/input/ipint.txt ]; then
-   # echo "! >ipint.txt exists."
+    echo "! >ipint.txt exists."
 else 
     echo "! > ipint.txt missing in /root/input/ipint.txt."
 	exit 1
