@@ -11,8 +11,8 @@ echo ''
 #echo '! > Networks to scan in /root/input/ipint.txt for nmap'
 #echo '' 
 if [ -s /root/input/ipint.txt ]; then
-    #echo '! > IPs OK '
-else 
+    echo '! > IPs OK '
+else
     echo "! >> ipint.txt is missing in /root/input/ipint.txt."
 	exit 1
 fi
