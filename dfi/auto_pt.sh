@@ -17,8 +17,8 @@ else
 fi
 
 chmod +x ./active_recon.sh
-chmod +x ./msf.sh
-chmod +x ./relay.sh
+chmod +x ./autosploit.sh
+chmod +x ./fast_relay.sh
 chmod +x ./eyewitness.sh
 
 tmux rename-window 'AUTO_PT'
@@ -26,9 +26,9 @@ tmux rename-window 'AUTO_PT'
 echo 'Start Active Recon'
 ./active_recon.sh
 echo 'Start Metasploit'
-./msf.sh
+./autosploit.sh
 echo 'Start Relay'
-./relay.sh
+./fast_relay.sh
 echo 'make some Screens'
 ./eyewitness.sh
 echo 'PT Done xD'
