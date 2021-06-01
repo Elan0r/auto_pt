@@ -1,11 +1,19 @@
 #!/bin/bash
 
-echo '! > Networks to scan in /root/ipint.txt for nmap'
-echo '' 
-if [ -s /root/ipint.txt ]; then
-    echo '! > IPs OK '
+echo '  _____           _____                        _   _           _____                      '
+echo ' |  __ \         / ____|             /\       | | (_)         |  __ \                     '
+echo ' | |__) | __ ___| (___   ___  ___   /  \   ___| |_ ___   _____| |__) |___  ___ ___  _ __  '
+echo ' |  ___/ |__/ _ \\\___ \ / _ \/ __| / /\ \ / __| __| \ \ / / _ \  _  // _ \/ __/ _ \| |_ \ '
+echo ' | |   | | | (_) |___) |  __/ (__ / ____ \ (__| |_| |\ V /  __/ | \ \  __/ (_| (_) | | | |'
+echo ' |_|   |_|  \___/_____/ \___|\___/_/    \_\___|\__|_| \_/ \___|_|  \_\___|\___\___/|_| |_|'
+echo ''
+
+#echo '! > Networks to scan in /root/input/ipint.txt for nmap'
+#echo '' 
+if [ -s /root/input/ipint.txt ]; then
+    #echo '! > IPs OK '
 else 
-    echo "! >> ipint.txt does not exist."
+    echo "! >> ipint.txt is missing in /root/input/ipint.txt."
 	exit 1
 fi
 
