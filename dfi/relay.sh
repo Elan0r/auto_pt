@@ -1,19 +1,29 @@
 #!/bin/bash
 
+echo '  _____           _____           ______        _   _____      _             '
+echo ' |  __ \         / ____|         |  ____|      | | |  __ \    | |            '
+echo ' | |__) | __ ___| (___   ___  ___| |__ __ _ ___| |_| |__) |___| | __ _ _   _ '
+echo ' |  ___/ |__/ _ \\\___ \ / _ \/ __|  __/ _` / __| __|  _  // _ \ |/ _` | | | |'
+echo ' | |   | | | (_) |___) |  __/ (__| | | (_| \__ \ |_| | \ \  __/ | (_| | |_| |'
+echo ' |_|   |_|  \___/_____/ \___|\___|_|  \__,_|___/\__|_|  \_\___|_|\__,_|\__, |'
+echo '                                                                        __/ |'
+echo '                                                                       |___/ '
+echo ''
+
 IP=$(ip addr show eth0 | grep "inet " | cut -d '/' -f1 | cut -d ' ' -f6)
-echo '! > OwnIP eth0: '$IP
+#echo '! > OwnIP eth0: '$IP
 
-echo '! > Network to scan in /root/ipint.txt for nmap'
+#echo '! > Network to scan in /root/input/ipint.txt for nmap'
 
-if [ -s /root/ipint.txt ]; then
-    echo "! >ipint.txt exists."
+if [ -s /root/input/ipint.txt ]; then
+   # echo "! >ipint.txt exists."
 else 
-    echo "! > ipint.txt does not exist or is empty."
+    echo "! > ipint.txt missing in /root/input/ipint.txt."
 	exit 1
 fi
 
 if [[ -d /root/output/nmap && -d /root/output/list ]]; then
-    echo '! > Folder exists!'
+    #echo '! > Folder exists!'
 else    
     #Creating Output Folders
     mkdir -p /root/output/nmap /root/output/list
