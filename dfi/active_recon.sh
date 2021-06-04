@@ -23,7 +23,7 @@ if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /r
 else    
     #Creating Output Folders
     mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot
-    echo '! > Folder Created!'
+    #echo '! > Folder Created!'
 fi
 
 #NMAP PE SCAN
