@@ -18,11 +18,12 @@ else
 fi
 
 
-if [[ -d /root/output/nmap && -d /root/output/list ]]; then
-    echo ' '
+if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot ]; then
+    echo '! > Folder Exist!'
 else    
     #Creating Output Folders
-    mkdir -p /root/output/nmap /root/output/list
+    mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot
+    echo '! > Folder Created!'
 fi
 
 #NMAP PE SCAN
