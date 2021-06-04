@@ -8,11 +8,11 @@ echo -e ' | |   | | | (_) |___) |  __/ (__ / ____ \ |_| | || (_) | |      | |   
 echo -e ' |_|   |_|  \___/_____/ \___|\___/_/    \_\__,_|\__\___/|_|      |_|   '
 echo -e ''
 
-if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf ]; then
+if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot ]; then
     echo '! > Folder Exist!'
 else    
     #Creating Output Folders
-    mkdir -p /root/output/nmap /root/output/list /root/input/msf
+    mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot
     echo '! > Folder Created!'
 fi
 
