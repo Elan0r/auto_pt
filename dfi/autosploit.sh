@@ -20,14 +20,12 @@ fi
 IP=$(ip addr show eth0 | grep "inet " | cut -d '/' -f1 | cut -d ' ' -f6)
 #echo '! >> own IP eth0: '$IP
 
-if [[ -d /root/output/msf  && -d /root/input/msf ]]; then
-    echo '! > Folder exist!'
+if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot ]; then
+    echo '! > Folder Exist!'
 else    
     #Creating Output Folders
-    mkdir -p /root/output/msf
-
-    #create Input Folder
-    mkdir -p /root/input/msf
+    mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot
+    #echo '! > Folder Created!'
 fi
 
 read -p "Enter Workspace Name: " WS
