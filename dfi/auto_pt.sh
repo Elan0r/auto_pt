@@ -16,25 +16,21 @@ else
     #echo '! > Folder Created!'
 fi
 
-
 read -p "Enter Workspace Name: " WS
 echo 'workspace -d $WS' > /root/input/msf/workspace.txt
 echo 'workspace -a $WS' >> /root/input/msf/workspace.txt
 echo 'db_import /root/output/nmap/service.xml' >> /root/input/msf/workspace.txt
 
-chmod +x ./active_recon.sh
-chmod +x ./autosploit.sh
-chmod +x ./fast_relay.sh
-chmod +x ./eyewitness.sh
+chmod +x /opt/hacking/dfi/*.sh
 
 tmux rename-window 'AUTO_PT'
 
 echo 'Start Active Recon'
-./active_recon.sh
+/opt/hacking/dfi/active_recon.sh
 echo 'Start Metasploit'
-./autosploit.sh
+/opt/hacking/dfi/autosploit.sh
 echo 'Start Relay'
-./fast_relay.sh
+/opt/hacking/dfi/fast_relay.sh
 echo 'make some Screens'
-./eyewitness.sh
+/opt/hacking/dfi/eyewitness.sh
 echo 'PT Done xD'
