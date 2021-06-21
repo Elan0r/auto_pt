@@ -13,7 +13,7 @@ echo -e ''
 if [ -s ./resource.txt ]; then
     echo '! > resource.txt check OK'
 else
-    echo '! > resource.txt missing here: ' $PWD
+    echo '! > resource.txt missing here: /opt/hacking/dfi'
     exit 1
 fi
 
@@ -28,14 +28,15 @@ else
     #echo '! > Folder Created!'
 fi
 
-read -p "Enter Workspace Name: " WS
-
-#echo $WS
-
-echo "workspace -d $WS" > /root/input/msf/workspace.txt
-echo "workspace -a $WS" >> /root/input/msf/workspace.txt
-echo "db_import /root/output/nmap/service.xml" >> /root/input/msf/workspace.txt
+if [ -s /root/input/msf/workspace.txt ]; then
+    echo 'Workspace already set!'
+else
+    read -p "Enter Workspace Name: " WS
+    echo "workspace -d $WS" > /root/input/msf/workspace.txt
+    echo "workspace -a $WS" >> /root/input/msf/workspace.txt
+    echo "db_import /root/output/nmap/service.xml" >> /root/input/msf/workspace.txt
+fi
 
 echo '! > Start Metasploit Framework'
-msfconsole -qx "resource /root/input/msf/workspace.txt resource ./resource.txt" > /dev/null
+msfconsole -qx "resource /root/input/msf/workspace.txt resource /opt/hacking/dfi/resource.txt" > /dev/null
 echo '! > Done!'
