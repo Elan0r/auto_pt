@@ -17,8 +17,8 @@ else
 fi
 
 read -p "Enter Workspace Name: " WS
-echo 'workspace -d '$WS > /root/input/msf/workspace.txt
-echo 'workspace -a '$WS >> /root/input/msf/workspace.txt
+echo 'workspace -d ' $WS > /root/input/msf/workspace.txt
+echo 'workspace -a ' $WS >> /root/input/msf/workspace.txt
 echo 'db_import /root/output/nmap/service.xml' >> /root/input/msf/workspace.txt
 
 chmod +x /opt/hacking/dfi/*.sh
