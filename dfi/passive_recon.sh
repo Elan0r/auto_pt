@@ -1,10 +1,11 @@
 #!/bin/bash
 
-if [[ -d /root/output/nmap && -d /root/output/list && -d /root/input/msf ]]; then
-    echo '! > Folder Exists!'
+if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot -a -d /root/output/msf ]; then
+    echo '! > Folder Exist!'
 else    
     #Creating Output Folders
-    mkdir -p /root/output/nmap /root/output/list /root/input/msf
+    mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot /root/output/msf
+    #echo '! > Folder Created!'
 fi
 
 tmux -f /root/dfitmux.conf new-session -d
