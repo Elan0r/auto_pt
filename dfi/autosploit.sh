@@ -10,7 +10,7 @@ echo -e '                                                              | |      
 echo -e '                                                              |_|                  '
 echo -e ''
 
-if [ -s ./resource.txt ]; then
+if [ -s /opt/hacking/dfi/resource.txt ]; then
     echo '! > resource.txt check OK'
 else
     echo '! > resource.txt missing here: /opt/hacking/dfi'
@@ -20,11 +20,11 @@ fi
 IP=$(ip addr show eth0 | grep "inet " | cut -d '/' -f1 | cut -d ' ' -f6)
 #echo '! >> own IP eth0: '$IP
 
-if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot ]; then
+if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot -a -d /root/output/msf ]; then
     echo '! > Folder Exist!'
 else    
     #Creating Output Folders
-    mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot
+    mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot /root/output/msf
     #echo '! > Folder Created!'
 fi
 
@@ -32,9 +32,9 @@ if [ -s /root/input/msf/workspace.txt ]; then
     echo 'Workspace already set!'
 else
     read -p "Enter Workspace Name: " WS
-    echo "workspace -d $WS" > /root/input/msf/workspace.txt
-    echo "workspace -a $WS" >> /root/input/msf/workspace.txt
-    echo "db_import /root/output/nmap/service.xml" >> /root/input/msf/workspace.txt
+    echo 'workspace -d' $WS > /root/input/msf/workspace.txt
+    echo 'workspace -a' $WS >> /root/input/msf/workspace.txt
+    echo 'db_import /root/output/nmap/service.xml' >> /root/input/msf/workspace.txt
 fi
 
 echo '! > Start Metasploit Framework'
