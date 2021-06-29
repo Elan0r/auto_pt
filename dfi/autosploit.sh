@@ -40,3 +40,11 @@ fi
 echo '! > Start Metasploit Framework'
 msfconsole -qx "resource /root/input/msf/workspace.txt resource /opt/hacking/dfi/resource.txt" > /dev/null
 echo '! > Done!'
+
+if [ -z '$(ls -A /root/.msf4/loot)' ]; then
+   echo '! >'
+   echo '! > No MSF Loot!'
+   echo '! >'
+else
+   /bin/cp /root/.msf4/loot/* /root/output/loot/
+fi
