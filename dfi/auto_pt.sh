@@ -25,15 +25,36 @@ chmod +x /opt/hacking/dfi/*.sh
 
 tmux rename-window 'AUTO_PT'
 
+echo "Start auto_PT" > /root/output/runtime.txt
+/usr/bin/date >> /root/output/runtime.txt
 echo '! > Start Active Recon'
 /opt/hacking/dfi/active_recon.sh
+
+echo "Start autosploit" >> /root/output/runtime.txt
+/usr/bin/date >> /root/output/runtime.txt
+
 echo '! > Start Metasploit'
 /opt/hacking/dfi/autosploit.sh
+
+echo "Start fast_relay" >> /root/output/runtime.txt
+/usr/bin/date >> /root/output/runtime.txt
+
 echo '! > Start Relay'
 /opt/hacking/dfi/fast_relay.sh
+
+echo "Start Eyewitness" >> /root/output/runtime.txt
+/usr/bin/date >> /root/output/runtime.txt
+
 echo '! > make some Screens'
 /opt/hacking/dfi/eyewitness.sh
+
+echo "Start lootcollector" >> /root/output/runtime.txt
+/usr/bin/date >> /root/output/runtime.txt
+
 echo '! > Copy PCredz to loot'
 /usr/bin/cp /opt/PCredz/logs/* /root/output/loot/
 /usr/bin/cp /opt/PCredz/CredentialDump-Session.log /root/output/loot/
 echo '! > PT Done xD'
+
+echo "Finish PT" >> /root/output/runtime.txt
+/usr/bin/date >> /root/output/runtime.txt
