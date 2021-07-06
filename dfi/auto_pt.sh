@@ -25,12 +25,15 @@ chmod +x /opt/hacking/dfi/*.sh
 
 tmux rename-window 'AUTO_PT'
 
-echo 'Start Active Recon'
+echo '! > Start Active Recon'
 /opt/hacking/dfi/active_recon.sh
-echo 'Start Metasploit'
+echo '! > Start Metasploit'
 /opt/hacking/dfi/autosploit.sh
-echo 'Start Relay'
+echo '! > Start Relay'
 /opt/hacking/dfi/fast_relay.sh
-echo 'make some Screens'
+echo '! > make some Screens'
 /opt/hacking/dfi/eyewitness.sh
-echo 'PT Done xD'
+echo '! > Copy PCredz to loot'
+/usr/bin/cp /opt/PCredz/logs/* /root/output/loot/
+/usr/bin/cp /opt/PCredz/CredentialDump-Session.log /root/output/loot/
+echo '! > PT Done xD'
