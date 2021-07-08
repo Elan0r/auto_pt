@@ -104,11 +104,11 @@ hosts -R
 run
 sleep 5
 
-echo "smb2 - Detect systems that support the SMB 2.0 protocol"
-use auxiliary/scanner/smb/smb2
-services -u -p 445 -R
-run
-sleep 5
+#echo "smb2 - Detect systems that support the SMB 2.0 protocol"
+#use auxiliary/scanner/smb/smb2
+#services -u -p 445 -R
+#run
+#sleep 5
 
 echo "smb_enumshares - This module determines what shares are provided by the SMB service"
 use auxiliary/scanner/smb/smb_enumshares
@@ -151,14 +151,14 @@ services -u -p 25 -R
 run
 sleep 5
 
-echo "smtp_relay - SMTP Server e-mail accept check"
-use auxiliary/scanner/smtp/smtp_relay
-services -u -p 25 -R
-set MAILFROM sender@prosec-networks.com
-set MAILTO recipient@prosec-networks.com
-set EXTENDED true
-run
-sleep 5
+#echo "smtp_relay - SMTP Server e-mail accept check"
+#use auxiliary/scanner/smtp/smtp_relay
+#services -u -p 25 -R
+#set MAILFROM sender@prosec-networks.com
+#set MAILTO recipient@prosec-networks.com
+#set EXTENDED true
+#run
+#sleep 5
 
 echo "smtp_enum - Enum valid SMTP users"
 use auxiliary/scanner/smtp/smtp_enum
