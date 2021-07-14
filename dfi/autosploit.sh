@@ -37,6 +37,13 @@ else
     echo 'db_import /root/output/nmap/service.xml' >> /root/input/msf/workspace.txt
 fi
 
+# Check for SHD_MANAGER
+if grep -Fxq SHD_MANAGER /usr/share/metasploit-framework/data/wordlists/ipmi_users.txt; then
+   echo '! > SHD_Manager exists'
+else
+   echo 'SHD_MANAGER' > /usr/share/metasploit-framework/data/wordlists/ipmi_users.txt
+fi
+
 echo '! > Start Metasploit Framework'
 msfconsole -qx "resource /root/input/msf/workspace.txt resource /opt/hacking/dfi/resource.txt" > /dev/null
 echo '! > Done!'
