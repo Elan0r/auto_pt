@@ -51,6 +51,9 @@ echo '! > make some Screens'
 echo "Start lootcollector" >> /root/output/runtime.txt
 /usr/bin/date >> /root/output/runtime.txt
 
+echo "! > grab the loot!"
+/opt/hacking/dfi/looter.sh
+
 echo '! > PT Done xD'
 
 echo "Finish PT" >> /root/output/runtime.txt
