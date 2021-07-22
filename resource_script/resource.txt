@@ -16,11 +16,6 @@ hosts -R
 run
 sleep 5
 
-#echo "arp_sweep - Enumerate alive Hosts in local network using ARP requests"
-#use auxiliary/scanner/discovery/arp_sweep
-#hosts -R
-#run
-#sleep 5
 spool /tmp/msf/dns.txt
 echo "####DNS####"
 
@@ -62,9 +57,22 @@ hosts -R
 run
 sleep 5
 
+echo "mssql_login"
+use scanner/mssql/mssql_login
+services -u -p 1433 -R
+set PASSWORD pass
+run
+sleep 5
+
 echo "mysql_version - Enumerates the version of MySQL servers"
 use auxiliary/scanner/mysql/mysql_version
 services -u -p 3306 -R
+run
+sleep 5
+
+echo "mysql_login"
+use scanner/mysql/mysql_login
+services -p 3306 -u -R
 run
 sleep 5
 
@@ -74,24 +82,9 @@ services -u -p 5432 -R
 run
 sleep 5
 
-echo "mssql_login"
-use scanner/mssql/mssql_login
-services -u -p 1433 -R
-set PASSWORD pass
-run
-sleep 5
-
-
 echo "postgresql_login"
 use scanner/postgres/postgres_login
 services -p 5432 -u -R
-run
-sleep 5
-
-
-echo "mysql_login"
-use scanner/mysql/mysql_login
-services -p 3306 -u -R
 run
 sleep 5
 
@@ -104,17 +97,11 @@ hosts -R
 run
 sleep 5
 
-#echo "smb2 - Detect systems that support the SMB 2.0 protocol"
-#use auxiliary/scanner/smb/smb2
-#services -u -p 445 -R
-#run
-#sleep 5
-
 echo "smb_enumshares - This module determines what shares are provided by the SMB service"
 use auxiliary/scanner/smb/smb_enumshares
 hosts -R
 set ShowFiles true
-set SpiderShares true
+set SpiderShares false
 run
 sleep 5
 
