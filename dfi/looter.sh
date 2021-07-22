@@ -1,11 +1,18 @@
 #!/bin/bash
-if [ -d /root/output/loot ]
+if [ -d /root/output/loot -a -d /root/output/loot/hashes ]
     echo '! > Folder Exist!'
 else
     #Creating Output Folders
     mkdir -p /root/output/loot
+    mkdir -p /root/output/loot/hashes
     echo '! > Folder Created!'
 fi
+
+### PCreds
+/usr/bin/cp /opt/PCredz/logs/* /root/output/loot/hashes/
+/usr/bin/cp /opt/PCredz/CredentialDump-Session.log /root/output/loot/hashes/
+/usr/bin/cp /usr/share/responder/logs/*.txt /root/output/loot/hashes/
+/usr/bin/cp /root/.cme/logs/* /root/output/loot/hashes/
 
 ### SNMP
 awk '/Login Successful.*read-write/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/snmp_default_community_strings_RW.txt
@@ -50,4 +57,3 @@ awk '/VULNERABLE/ {print$2}' /root/output/msf/ipmi.txt | cut -d ":" -f 1 | sort 
 
 ### SMTP
 awk '/\+.*:143/ {print$2}' /root/output/msf/mail.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/imap.txt
-
