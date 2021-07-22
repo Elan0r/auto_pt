@@ -1,18 +1,51 @@
 #!/bin/bash
-if [ -d /root/output/loot -a -d /root/output/loot/hashes ]
+if [ -d /root/output/loot -a -d /root/output/loot/hashes ]; then
     echo '! > Folder Exist!'
 else
     #Creating Output Folders
-    mkdir -p /root/output/loot
-    mkdir -p /root/output/loot/hashes
+    mkdir -p /root/output/loot /root/output/loot/hashes
     echo '! > Folder Created!'
 fi
 
 ### PCreds
+if [ -z '$(ls -A /opt/PCredz/logs)' ]; then
+   echo '! >'
+   echo '! > No PCredz logs!'
+   echo '! >'
+else
 /usr/bin/cp /opt/PCredz/logs/* /root/output/loot/hashes/
+fi
+
+if [ -z '$(ls -A /opt/PCredz/CredentialDump-Session.log)' ]; then
+   echo '! > No PCredz Session!'
+   echo '! >'
+else
 /usr/bin/cp /opt/PCredz/CredentialDump-Session.log /root/output/loot/hashes/
+fi
+
+### Responder
+if [ -z '$(ls -A /usr/share/responder/logs/*.txt)' ]; then
+   echo '! > No Responder Hashes!'
+   echo '! >'
+else
 /usr/bin/cp /usr/share/responder/logs/*.txt /root/output/loot/hashes/
+fi
+
+### CrackMapExec
+if [ -z '$(ls -A /root/.cme/logs)' ]; then
+   echo '! > No CME Logs!'
+   echo '! >'
+else
 /usr/bin/cp /root/.cme/logs/* /root/output/loot/hashes/
+fi
+
+### Metasploit
+if [ -z '$(ls -A /root/.msf4/loot)' ]; then
+   echo '! > No MSF Loot!'
+   echo '! >'
+else
+   /bin/cp /root/.msf4/loot/* /root/output/loot/
+fi
 
 ### SNMP
 awk '/Login Successful.*read-write/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/snmp_default_community_strings_RW.txt
