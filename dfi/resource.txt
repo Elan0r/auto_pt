@@ -99,24 +99,12 @@ echo "smb_enumshares - This module determines what shares are provided by the SM
 use auxiliary/scanner/smb/smb_enumshares
 hosts -R
 set ShowFiles true
-set SpiderShares true
+set SpiderShares false
 run
 sleep 5
 
 echo "smb_enumusers - Determine what local users exist via the SAM RPC service"
 use auxiliary/scanner/smb/smb_enumusers
-hosts -R
-run
-sleep 5
-
-echo "smb_enumusers_domain - Determine what domain users are logged into a remote system via DCERPC"
-use auxiliary/scanner/smb/smb_enumusers_domain
-hosts -R
-run
-sleep 5
-
-echo "smb_lookupsid - Determine what users exist via brute force SID lookups"
-use auxiliary/scanner/smb/smb_lookupsid
 hosts -R
 run
 sleep 5
@@ -279,7 +267,7 @@ sleep 5
 
 echo "IPMI Hashdump"
 use scanner/ipmi/ipmi_dumphashes
-set OUTPUT_HASHCAT_FILE /root/output/msf/ipmi_hashcat
+set OUTPUT_HASHCAT_FILE /root/output/loot/hashes/ipmi_hashcat
 services -p 623 -u -R
 run
 sleep 5
@@ -297,11 +285,15 @@ use auxiliary/scanner/dcerpc/endpoint_mapper
 services -p 135 -u -R
 run
 sleep 5
+services -p 135 -u
+sleep 5
 
 echo "SunRPC Portmapper"
 use auxiliary/scanner/misc/sunrpc_portmapper
 services -p 111 -u -R
 run
+sleep 5
+services -p 111
 sleep 5
 
 spool /root/output/msf/ldap.txt
@@ -311,5 +303,8 @@ services -p 636 -u -R
 run
 sleep 5
 spool off
+
+hosts -o /root/output/list/msf_hosts.txt
+services -o /root/output/list/msf_services.txt
 
 exit
