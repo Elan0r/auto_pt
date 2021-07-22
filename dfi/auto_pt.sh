@@ -51,9 +51,6 @@ echo '! > make some Screens'
 echo "Start lootcollector" >> /root/output/runtime.txt
 /usr/bin/date >> /root/output/runtime.txt
 
-echo '! > Copy PCredz to loot'
-/usr/bin/cp /opt/PCredz/logs/* /root/output/loot/
-/usr/bin/cp /opt/PCredz/CredentialDump-Session.log /root/output/loot/
 echo '! > PT Done xD'
 
 echo "Finish PT" >> /root/output/runtime.txt
