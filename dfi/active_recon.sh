@@ -31,7 +31,7 @@ echo '! > NMAP PE Scan    FAST'
 if [ -s /root/output/list/ipup.txt ]; then
 echo '! >> nmap PE already Done!'
 else
-   nmap -e eth0 -PE -sn -n --max-retries 2 --max-hostgroup 20 --scan-delay 1 --exclude 10.242.2.0/24,10.222.222.0/24 -oA /root/output/nmap/pe -iL /root/input/ipint.txt > /dev/null 2>&1
+   nmap -e eth0 -PE -sn -n --max-retries 2 -oA /root/output/nmap/pe -iL /root/input/ipint.txt > /dev/null 2>&1
    echo ''
    echo '! > Done'
 
@@ -43,7 +43,7 @@ fi
 #NMAP SSV SC Alles
 echo '! > NMAP SSV SC   SLOW!'
 
-nmap -e eth0 -sSV -sC -Pn --scan-delay 1 --max-hostgroup 20 -oA /root/output/nmap/service -iL /root/output/list/ipup.txt > /dev/null 2>&1
+nmap -e eth0 -sSV -sC -Pn -oA /root/output/nmap/service -iL /root/output/list/ipup.txt > /dev/null 2>&1
 echo '! > Done'
 echo ''
 
