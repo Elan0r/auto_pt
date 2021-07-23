@@ -225,7 +225,8 @@ sleep 5
 
 echo "VMware vRealize Operations (vROps) Manager SSRF RCE"
 use exploit/linux/http/vmware_vrops_mgr_ssrf_rce 
-hosts -S vCenter -R
+hosts -S vmware -R
+set srvport 8081
 check
 sleep 5
 
