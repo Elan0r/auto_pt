@@ -56,7 +56,7 @@ run
 sleep 5
 
 echo "mssql_login"
-use scanner/mssql/mssql_login
+use auxiliary/scanner/mssql/mssql_login
 services -u -p 1433 -R
 set PASSWORD pass
 run
