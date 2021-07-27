@@ -62,7 +62,7 @@ awk '/\+.*OpenSSH/ {print$7,$2}' /root/output/msf/ssh.txt | sed 's/:22/ /g' | so
 awk '/\+.*:23/ {print$2}' /root/output/msf/telnet.txt  | cut -d ":" -f 1 | sort -u > /root/output/loot/telnet.txt
 
 ### SMB
-awk '/.*open.*Requires NLA\: No/ {print$1}' /root/output/msf/rdp.txt | sort -u > /root/output/loot/rdp.txt
+awk '/VULNERABLE.*MS17-010/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/eternalblue.txt
 
 ### SQL
 awk '/:1433.*Incorrect/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/mssql_login.txt
@@ -76,7 +76,7 @@ awk '/Endpoint Mapper (.*services)/ {print$1}' /root/output/msf/rpc.txt | sort -
 
 ### RDP
 awk '/vulnerable.*MS_T120/ {print$2}' /root/output/msf/rdp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/bluekeep.txt
-awk '/.*open.*Requires NLA\: No/ {print$1}' /root/output/msf/rdp.txt | sort -u > /root/output/loot/rdp.txt
+awk '/.*open.*Requires NLA: No/ {print$1}' /root/output/msf/rdp.txt | sort -u > /root/output/loot/rdp.txt
 
 ### NTP
 awk '/Vulnerable/ {print$2}' /root/output/msf/ntp.txt | cut -d ":" -f 1  | sort -u > /root/output/loot/ntp_amp.txt
