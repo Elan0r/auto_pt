@@ -63,6 +63,7 @@ awk '/\+.*:23/ {print$2}' /root/output/msf/telnet.txt  | cut -d ":" -f 1 | sort 
 
 ### SMB
 awk '/VULNERABLE.*MS17-010/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/eternalblue.txt
+awk '/Found user:/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 3 | sort -u > /root/output/loot/users.txt
 
 ### SQL
 awk '/:1433.*Incorrect/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/mssql_login.txt
