@@ -15,7 +15,7 @@ if [ -d /root/output/screens ]]; then
 else    
     #Creating Output Folders
     mkdir -p /root/output/screens
-    echo '! > Folder created!'
+    # echo '! > Folder created!'
 fi
 
 eyewitness --web --timeout 20 --delay 20 --no-prompt --prepend-https -x /root/output/nmap/service.xml -d /root/output/screens/
