@@ -67,7 +67,7 @@ awk '/Found user:/ {print$2,$6,$7,$8,$9}' /root/output/msf/smb.txt | sort -u > /
 awk '/running Windows 200/ {print}' /root/output/msf/smb.txt | cut -c18- | sed 's/:... //' | sort -u > /root/output/loot/eol_windows.txt
 awk '/versions:1/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/smb_v1.txt 
 awk '/signatures:opt/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 > /root/output/loot/smb_no_signing.txt
-awk '/(\(DISK\)|\(IPC\)|\(PRINTER\))/{print}' /root/output/msf/smb.txt | sed 's/:... //' | sort -u > /root/output/loot/smb_shares.txt
+awk '/(\(DISK\)|\(IPC\)|\(PRINTER\))/{print}' /root/output/msf/smb.txt | cut -c18- | sed 's/:... //' | sort -u > /root/output/loot/smb_shares.txt
 
 ### SQL
 awk '/:1433.*Incorrect/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/mssql_login.txt
