@@ -22,7 +22,7 @@ awk '/\+.*OpenSSH/ {print$7,$2}' ssh.txt | sed 's/:22/ /g' | sort -u > findings/
 awk '/\+.*:23/ {print$2}' telnet.txt  | cut -d ":" -f 1 | sort -u > findings/telnet.txt
 
 ### SMB
-awk '/.*open.*Requires NLA\: No/ {print$1}' rdp.txt | sort -u > findings/rdp.txt
+awk '/VULNERABLE.*MS17-010/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/eternalblue.txt
 
 ### SQL
 awk '/:1433.*Incorrect/ {print$2}' sql.txt | cut -d ":" -f 1 | sort -u > findings/mssql_login.txt
@@ -36,7 +36,7 @@ awk '/Endpoint Mapper (.*services)/ {print$1}' rpc.txt | sort -u > findings/rpc_
 
 ### RDP
 awk '/vulnerable.*MS_T120/ {print$2}' rdp.txt | cut -d ":" -f 1 | sort -u > findings/bluekeep.txt
-awk '/.*open.*Requires NLA\: No/ {print$1}' rdp.txt | sort -u > findings/rdp.txt
+awk '/.*open.*Requires NLA: No/ {print$1}' rdp.txt | sort -u > findings/rdp.txt
 
 ### NTP
 awk '/Vulnerable/ {print$2}' ntp.txt | cut -d ":" -f 1  | sort -u > findings/ntp_amp.txt
