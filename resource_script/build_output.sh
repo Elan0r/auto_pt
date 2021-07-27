@@ -22,7 +22,9 @@ awk '/\+.*OpenSSH/ {print$7,$2}' ssh.txt | sed 's/:22/ /g' | sort -u > findings/
 awk '/\+.*:23/ {print$2}' telnet.txt  | cut -d ":" -f 1 | sort -u > findings/telnet.txt
 
 ### SMB
-awk '/VULNERABLE.*MS17-010/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/eternalblue.txt
+awk '/VULNERABLE.*MS17-010/ {print$2}' smb.txt | cut -d ":" -f 1 | sort -u > findings/eternalblue.txt
+awk '/Found user:/ {print$2,$6,$7,$8,$9}' smb.txt | sort -u > findings/users.txt
+awk '/running Windows 200/ {print}' smb.txt | cut -c18- | sed 's/:... //' | sort -u > findings/eol_windows.txt
 
 ### SQL
 awk '/:1433.*Incorrect/ {print$2}' sql.txt | cut -d ":" -f 1 | sort -u > findings/mssql_login.txt
