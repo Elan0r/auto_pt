@@ -13,7 +13,7 @@ if [ -s /root/input/msf/ws.txt ] || [ -s /root/output/msf/zerohosts.txt ]; then
 else
     read -p "Enter Workspace Name: " WS
     echo 'workspace -a ' $WS > /root/input/msf/ws.txt
-    echo 'hosts -c name,address -o /root/output/msf/zerohosts.txt' >> /root/input/msf/ws.txt
+    echo 'hosts -S Windows -c name,address -o /root/output/msf/zerohosts.txt' >> /root/input/msf/ws.txt
     echo 'exit' >> /root/input/msf/ws.txt
 fi
 
