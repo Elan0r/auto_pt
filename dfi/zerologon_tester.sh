@@ -8,9 +8,16 @@ else
     #echo '! > Folder Created!'
 fi
 
-msfconsole -qx "resource /root/input/msf/workspace.txt" > /dev/null
-hosts -c name,address -o /root/output/msf/zerohosts.txt
-exit
+if [ -s /root/input/msf/ws.txt ]; then
+    echo 'Workspace already set!'
+else
+    read -p "Enter Workspace Name: " WS
+    echo 'workspace -a ' $WS > /root/input/msf/ws.txt
+    echo 'hosts -c name,address -o /root/output/msf/zerohosts.txt' >> /root/input/msf/ws.txt
+    echo 'exit' >> /root/input/msf/ws.txt
+fi
+
+msfconsole -qx "resource /root/input/msf/ws.txt" > /dev/null
 awk '/\"/ {print}' /root/output/msf/zerohosts.txt | grep -v '""' | cut -d '"' -f 2,4 | sed 's/"/ /' > /root/output/list/zero.txt
 
 if [ -d /opt/CVE-2020-1472 ]; then
