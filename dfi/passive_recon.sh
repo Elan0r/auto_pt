@@ -8,9 +8,6 @@ else
     #echo '! > Folder Created!'
 fi
 
-/bin/zsh
-source /opt/hacking/dfi/zshrc 
-
 tmux -f /opt/hacking/dfi/dfitmux.conf new-session -d
 tmux rename-window 'Passive-Recon'
 
