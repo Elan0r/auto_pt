@@ -6,6 +6,7 @@
  echo "|  ___/ '__/ _ \\\\\___ \ / _ \/ __| / / / _ \ '__/ _ \| |    | '_ \ / _ \/ __| |/ /"
  echo "| |   | | | (_) |___) |  __/ (__ / /_|  __/ | | (_) | |____| | | |  __/ (__|   < "
  echo "|_|   |_|  \___/_____/ \___|\___/_____\___|_|  \___/ \_____|_| |_|\___|\___|_|\_\\"
+ echo ""
 
 if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot -a -d /root/output/msf ]; then
     echo '! > Folder Exist!'
