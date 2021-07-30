@@ -8,6 +8,13 @@ else
     #echo '! > Folder Created!'
 fi
 
+if [ -d /opt/PCredz ]; then
+    echo '! > No Download nessesary.'
+else
+    git clone https://github.com/lgandx/PCredz.git /opt/
+    apt install -y python3-pip libpcap-dev && pip3 install Cython python-libpcap
+fi
+
 tmux -f /opt/hacking/dfi/dfitmux.conf new-session -d
 tmux rename-window 'Passive-Recon'
 
@@ -20,7 +27,7 @@ echo -e '| |   | | | (_) |___) |  __/ (__| |  | (_| \__ \__ \ |\ V /  __/ | \ \ 
 echo -e '|_|   |_|  \___/_____/ \___|\___|_|   \__,_|___/___/_| \_/ \___|_|  \_\___|\___\___/|_| |_|' > /dev/pts/1
 echo -e '' > /dev/pts/1
 
-tmux send 'netdiscover -L -i eth0 > /root/output/netdiscover' ENTER
+tmux send 'netdiscover -L -i eth0 >> /root/output/netdiscover' ENTER
 tmux split-window
 tmux send 'python3 /opt/PCredz/Pcredz -i eth0 -c' ENTER
 tmux split-window
