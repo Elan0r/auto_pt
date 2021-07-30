@@ -1,7 +1,9 @@
 fast alles geklaut von <b>CHO</b> <br>
 <br>
-Erste Versuche eines Teil/vollAutomatisierten Pentests, der die ersten ca 1-5h von alleine arbeitet.<br>
+First try of automating PT as good as possible -> as Failsave as Possible<br>
 <br>
 <b>chmod +x *.sh</b><br>
-dann start des <b>passive_recon.sh</b> für netdiscover und PCredz im tmux<br>
-wenn der Testzeitraum beginnt <b>auto_pt.sh</b> starten und Extern fertig machen.
+first start <b>passive_recon.sh</b> for netdiscover and PCredz in tmux -> beware it's <b>dfitmux.conf</b>!<br>
+<small>maybe not compatible with iTerm tmux integration.</small>
+enter <b>tmux a</b>, create a new window and start <b>auto_pt.sh</b>.<br>
+Now you have time to check external.
