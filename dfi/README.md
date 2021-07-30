@@ -1,4 +1,4 @@
-fast alles geklaut von <b>>CHO</b> <br>
+fast alles geklaut von <b>CHO</b> <br>
 <br>
 Erste Versuche eines Teil/vollAutomatisierten Pentests, der die ersten ca 1-5h von alleine arbeitet.<br>
 <br>
