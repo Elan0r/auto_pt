@@ -1,5 +1,5 @@
 workspace XXX
-
+mkdir /tmp/msf
 setg THREADS 150
 spool /tmp/msf/udp_scan.txt
 echo "####ADDITIONAL CHECKS####"
