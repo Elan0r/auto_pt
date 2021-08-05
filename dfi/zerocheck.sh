@@ -3,7 +3,7 @@
  echo " _____           _____           ______               _____ _               _    "
  echo "|  __ \         / ____|         |___  /              / ____| |             | |   "
  echo "| |__) | __ ___| (___   ___  ___   / / ___ _ __ ___ | |    | |__   ___  ___| | __"
- echo "|  ___/ '__/ _ \\\\\___ \ / _ \/ __| / / / _ \ '__/ _ \| |    | '_ \ / _ \/ __| |/ /"
+ echo "|  ___/ '__/ _ \\\\___ \ / _ \/ __| / / / _ \ '__/ _ \| |    | '_ \ / _ \/ __| |/ /"
  echo "| |   | | | (_) |___) |  __/ (__ / /_|  __/ | | (_) | |____| | | |  __/ (__|   < "
  echo "|_|   |_|  \___/_____/ \___|\___/_____\___|_|  \___/ \_____|_| |_|\___|\___|_|\_\\"
  echo ""
@@ -16,7 +16,7 @@ else
     #echo '! > Folder Created!'
 fi
 
-if [ -s /root/input/msf/ws.txt ] || [ -s /root/output/msf/zerohosts.txt ]; then
+if [ -s /root/input/msf/ws.txt ] || [ /root/output/msf/zerohosts.txt ]; then
     echo '! >Workspace already set or zerohosts available!'
 else
     read -p "Enter Workspace Name: " WS
@@ -36,7 +36,7 @@ if [ -d /opt/CVE-2020-1472 ]; then
     echo '! > No Download nessesary.'
 else
     cd /opt
-    git clone https://github.com/SecuraBV/CVE-2020-1472.git /opt/
+    git clone https://github.com/SecuraBV/CVE-2020-1472.git /opt/CVE-2020-1472
     pip3 install -r /opt/CVE-2020-1472/requirements.txt
 fi
 
