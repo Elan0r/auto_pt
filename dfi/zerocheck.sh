@@ -41,7 +41,7 @@ else
 fi
 
 if [ -s /root/output/list/zero.txt ]; then
-    for i in /root/output/list/zero.txt do
+    for i in $(cat /root/output/list/zero.txt); do
         python3 /opt/CVE-2020-1472/zerologon_tester.py $i >> /root/output/msf/zerologon.txt
     done
     echo '! > Check Done!'
