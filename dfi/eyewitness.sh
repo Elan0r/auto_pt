@@ -8,7 +8,7 @@ else
     #echo '! > Folder Created!'
 fi
 
-if [ -d /root/output/screens ]]; then
+if [ -d /root/output/screens ]; then
     echo '! > Folder exist; mv screens screens_old for Backup purpose!'
     mv /root/output/screens /root/output/screens_old
     mkdir -p /root/output/screens
