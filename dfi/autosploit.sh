@@ -45,7 +45,7 @@ else
    echo 'SHD_MANAGER' > /usr/share/metasploit-framework/data/wordlists/ipmi_users.txt
 fi
 
-msfdb start
+msfdb init
 echo '! > Start Metasploit Framework'
 msfconsole -qx "resource /root/input/msf/workspace.txt resource /opt/hacking/dfi/resource.txt" > /dev/null
 echo '! > MSF Done!'
