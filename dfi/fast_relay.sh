@@ -4,7 +4,7 @@ echo ''
 echo "  _____           _____           ______        _   _____      _             "
 echo " |  __ \         / ____|         |  ____|      | | |  __ \    | |            "
 echo " | |__) | __ ___| (___   ___  ___| |__ __ _ ___| |_| |__) |___| | __ _ _   _ "
-echo " |  ___/ '__/ _ \\\\\___ \ / _ \/ __|  __/ _\` / __| __|  _  // _ \ |/ _\` | | | |"
+echo " |  ___/ '__/ _ \\\\___ \ / _ \/ __|  __/ _\` / __| __|  _  // _ \ |/ _\` | | | |"
 echo " | |   | | | (_) |___) |  __/ (__| | | (_| \__ \ |_| | \ \  __/ | (_| | |_| |"
 echo " |_|   |_|  \___/_____/ \___|\___|_|  \__,_|___/\__|_|  \_\___|_|\__,_|\__, |"
 echo "                                                                        __/ |"
@@ -51,12 +51,8 @@ else
    #NMAP Portscan for port 445
    #echo '! > NMAP Portscan 445'
    nmap -p 445 --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/nmap/445 -iL /root/output/list/ipup.txt > /dev/null 2>&1
-   #echo ''
-   #echo '! >> Done'
-
    #Piping IP's with 445 open to a file
    awk '/open/ {print$2}' /root/output/nmap/445.gnmap > /root/output/list/smb_open.txt
-   #echo ''
 fi
 
 if [ -s /root/output/list/smb_sign_off.txt ]; then
@@ -64,7 +60,7 @@ if [ -s /root/output/list/smb_sign_off.txt ]; then
 else
    #Using Crackmap to Check which of the IP's with 445 open have Signing:false
    #echo '! > Generating Relay List'
-   crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt >> /root/output/cme_beauty.txt
+   crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt | tee /root/output/cme_beauty.txt
    #echo '! >> Done'
 fi
 
