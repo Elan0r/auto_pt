@@ -4,7 +4,7 @@ echo ''
 echo "  _____           _____                         _        _____       _       _ _   "
 echo " |  __ \         / ____|             /\        | |      / ____|     | |     (_) |  "
 echo " | |__) | __ ___| (___   ___  ___   /  \  _   _| |_ ___| (___  _ __ | | ___  _| |_ "
-echo " |  ___/ '__/ _ \\\\\___ \ / _ \/ __| / /\ \| | | | __/ _ \\\\\___ \| '_ \| |/ _ \| | __|"
+echo " |  ___/ '__/ _ \\\\___ \ / _ \/ __| / /\ \| | | | __/ _ \\\\___ \| '_ \| |/ _ \| | __|"
 echo " | |   | | | (_) |___) |  __/ (__ / ____ \ |_| | || (_) |___) | |_) | | (_) | | |_ "
 echo " |_|   |_|  \___/_____/ \___|\___/_/    \_\__,_|\__\___/_____/| .__/|_|\___/|_|\__|"
 echo "                                                              | |                  "
@@ -45,6 +45,7 @@ else
    echo 'SHD_MANAGER' > /usr/share/metasploit-framework/data/wordlists/ipmi_users.txt
 fi
 
+msfdb start
 echo '! > Start Metasploit Framework'
 msfconsole -qx "resource /root/input/msf/workspace.txt resource /opt/hacking/dfi/resource.txt" > /dev/null
 echo '! > MSF Done!'
