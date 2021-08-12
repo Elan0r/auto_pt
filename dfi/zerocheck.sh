@@ -21,29 +21,23 @@ if [ -s /root/input/msf/ws.txt ] || [ /root/output/msf/zerohosts.txt ]; then
 else
     read -p "Enter Workspace Name: " WS
     echo 'workspace -a ' $WS > /root/input/msf/ws.txt
-    echo 'hosts -S Windows -c name,address -o /root/output/msf/zerohosts.txt' >> /root/input/msf/ws.txt
-    echo 'exit' >> /root/input/msf/ws.txt
+    echo 'hosts -S Windows -c name,address -o /root/output/msf/zerohosts.txt' > /root/input/msf/zerohosts.txt
+    echo 'exit' >> /root/input/msf/zerohosts.txt
 fi
 
 if [ -s /root/output/list/zero.txt ]; then
     echo '! > list zero.txt available!'
 else
-    msfconsole -qx "resource /root/input/msf/ws.txt" > /dev/null
-    awk '/\"/ {print}' /root/output/msf/zerohosts.txt | grep -v '""' | cut -d '"' -f 2,4 | sed 's/"/ /' > /root/output/list/zero.txt
+    msfconsole -qx "resource /root/input/msf/ws.txt resource /root/input/msf/zerohosts.txt" > /dev/null
+    awk '/"/ {print}' /root/output/msf/zerohosts.txt | grep -v '""' | cut -d '"' -f 2,4 | sed 's/"/ /' > /root/output/list/zero.txt
 fi
 
-if [ -d /opt/CVE-2020-1472 ]; then
-    echo '! > No Download nessesary.'
-else
-    cd /opt
-    git clone https://github.com/SecuraBV/CVE-2020-1472.git /opt/CVE-2020-1472
-    pip3 install -r /opt/CVE-2020-1472/requirements.txt
-fi
 
 if [ -s /root/output/list/zero.txt ]; then
-    for i in $(cat /root/output/list/zero.txt); do
-        python3 /opt/CVE-2020-1472/zerologon_tester.py $i >> /root/output/msf/zerologon.txt
-    done
+    printf '%sspool /root/output/msf/zerologon.txt\necho "ZeroLogon"\nuse auxiliary/admin/dcerpc/cve_2020_1472_zerologon\n' > /root/input/msf/zerologon.txt
+    awk '// {printf"\nset nbname "$1"\nset rhosts "$2"\ncheck"}' /root/output/list/zero.txt >> /root/input/msf/zerologon.txt
+    echo "\nexit" >> /root/input/msf/zerologon.txt
+    msfconsole -qx "resource /root/input/msf/ws.txt resource /root/input/msf/zerologon.txt"
     echo '! > Check Done!'
 else
     echo '! > Check not possible no Targets /root/output/list/zero.txt'
