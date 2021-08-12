@@ -3,7 +3,7 @@ echo ''
 echo "  _____           _____                         _        _____ _______ "
 echo " |  __ \         / ____|             /\        | |      |  __ \__   __|"
 echo " | |__) | __ ___| (___   ___  ___   /  \  _   _| |_ ___ | |__) | | |   "
-echo " |  ___/ '__/ _ \\\\\___ \ / _ \/ __| / /\ \| | | | __/ _ \|  ___/  | |   "
+echo " |  ___/ '__/ _ \\\\___ \ / _ \/ __| / /\ \| | | | __/ _ \|  ___/  | |   "
 echo " | |   | | | (_) |___) |  __/ (__ / ____ \ |_| | || (_) | |      | |   "
 echo " |_|   |_|  \___/_____/ \___|\___/_/    \_\__,_|\__\___/|_|      |_|   "
 echo ''
@@ -35,6 +35,12 @@ echo "Start autosploit" >> /root/output/runtime.txt
 
 echo '! > Start Metasploit'
 /opt/hacking/dfi/autosploit.sh
+
+echo "Start zerocheck" >> /root/output/runtime.txt
+/usr/bin/date >> /root/output/runtime.txt
+
+echo '! > Start Zerocheck'
+/opt/hacking/dfi/zerocheck.sh
 
 echo "Start fast_relay" >> /root/output/runtime.txt
 /usr/bin/date >> /root/output/runtime.txt
