@@ -92,8 +92,9 @@ awk '/LOGIN FAILED.*\(Incorrect: Access/ {print$2}' /root/output/msf/sql.txt | c
 ### RPC
 mkdir -p /root/output/loot/intern/rpc/sun
 awk '/\+.*SunRPC/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/sun/hosts.txt
+mkdir -p /root/output/loot/intern/rpc/mapper
+awk '/Endpoint Mapper (.*services)/ {print$1}' /root/output/msf/rpc.txt | sort -u > /root/output/loot/intern/rpc/mapper/hosts.txt
 mkdir -p /root/output/loot/intern/rpc/fuzz
-awk '/Endpoint Mapper (.*services)/ {print$1}' /root/output/msf/rpc.txt | sort -u > /root/output/loot/intern/rpc/fuzz/hosts.txt
 awk '/\*.*(LRPC|TCP|PIPE)/{print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/fuzz/rpc_fuzz.txt
 mkdir -p /root/output/loot/intern/rpc/zerologon
 mkdir -p /root/output/loot/intern/rpc/printnightmare
