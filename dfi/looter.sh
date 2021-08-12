@@ -97,6 +97,7 @@ awk '/Endpoint Mapper (.*services)/ {print$1}' /root/output/msf/rpc.txt | sort -
 mkdir -p /root/output/loot/intern/rpc/fuzz
 awk '/\*.*(LRPC|TCP|PIPE)/{print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/fuzz/rpc_fuzz.txt
 mkdir -p /root/output/loot/intern/rpc/zerologon
+awk '/The target is vulnerable/ {print$2}' /root/output/msf/zerologon.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/zerologon/hosts.txt
 mkdir -p /root/output/loot/intern/rpc/printnightmare
 mkdir -p /root/output/loot/intern/rpc/petitpotam
 mkdir -p /root/output/loot/intern/rpc/null
