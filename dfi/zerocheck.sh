@@ -36,7 +36,7 @@ if [ -s /root/output/list/zero.txt ]; then
     printf '%sspool /root/output/msf/zerologon.txt\necho "ZeroLogon"\nuse auxiliary/admin/dcerpc/cve_2020_1472_zerologon\n' > /root/input/msf/zerologon.txt
     awk '// {printf"\nset nbname "$1"\nset rhosts "$2"\ncheck\n"}' /root/output/list/zero.txt >> /root/input/msf/zerologon.txt
     printf '%s\nexit\n' >> /root/input/msf/zerologon.txt
-    msfconsole -qx "resource /root/input/msf/ws.txt resource /root/input/msf/zerologon.txt"
+    msfconsole -qx "resource /root/input/msf/ws.txt resource /root/input/msf/zerologon.txt" > /dev/null
     echo '! > Check Done!'
 else
     echo '! > Check not possible no Targets /root/output/list/zero.txt'
