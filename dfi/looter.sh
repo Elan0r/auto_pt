@@ -128,3 +128,7 @@ mkdir -p /root/output/loot/intern/mail/pop3
 awk '/\+.*:110/ {print$2}' /root/output/msf/mail.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/mail/pop3/hosts.txt
 mkdir -p /root/output/loot/intern/mail/relay
 awk '/Potential open SMTP relay/ {print$2}' /root/output/msf/mail.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/mail/relay/hosts.txt
+
+### SSDP
+mkdir -p /root/output/loot/intern/ssdp/amp
+awk '/x Amplification/ {print$2}' /root/output/msf/ssdp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/ssdp/amp/hosts.txt
