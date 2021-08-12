@@ -307,7 +307,7 @@ sleep 5
 spool /root/output/msf/ssdp.txt
 echo "SSDP Amp"
 use auxiliary/scanner/upnp/ssdp_amp
-services -p 1900 -R
+hosts -R
 run
 sleep 5
 
