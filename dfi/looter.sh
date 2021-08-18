@@ -112,6 +112,10 @@ awk '/.*open.*Requires NLA: No/ {print$1}' /root/output/msf/rdp.txt | sort -u > 
 mkdir -p /root/output/loot/intern/ntp/amp
 awk '/Vulnerable/ {print$2}' /root/output/msf/ntp.txt | cut -d ":" -f 1  | sort -u > /root/output/loot/intern/ntp/amp/hosts.txt
 
+### NetBIOS
+mkdir -p /root/output/loot/intern/ad/nbt
+awk '/NetBIOS/ {print$5}' /root/output/msf/udp_scan.txt | cut -d ":" -f 1  | sort -u > /root/output/loot/intern/ad/nbt/hosts.txt
+
 ### DNS
 mkdir -p /root/output/loot/intern/dns/amp
 awk '/x Amplification/ {print$2}' /root/output/msf/dns.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/dns/amp/hosts.txt
