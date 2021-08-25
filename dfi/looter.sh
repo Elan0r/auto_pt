@@ -1,4 +1,7 @@
 #!/bin/bash
+
+/usr/bin/figlet ProSecLooter
+
 if [ -d /root/output/loot/hashes -a -d /root/output/loot/intern ]; then
     echo '! > Folder Exist!'
 else
@@ -44,7 +47,7 @@ if [ -z '$(ls -A /root/.msf4/loot)' ]; then
    echo '! > No MSF Loot!'
    echo '! >'
 else
-   /bin/cp /root/.msf4/loot/* /root/output/loot/
+   /usr/bin/cp /root/.msf4/loot/* /root/output/loot/
 fi
 
 ### SNMP
@@ -75,7 +78,7 @@ awk '/running Windows 200/ {print}' /root/output/msf/smb.txt | cut -c18- | sed '
 mkdir -p /root/output/loot/intern/smb/v1
 awk '/versions:1/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/smb/v1/hosts.txt 
 mkdir -p /root/output/loot/intern/smb/sign
-awk '/signatures:opt/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 > /root/output/loot/intern/smb/sign/hosts.txt
+awk '/signatures:opt/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/smb/sign/hosts.txt
 mkdir -p /root/output/loot/intern/smb/share
 awk '/(\(DISK\)|\(IPC\)|\(PRINTER\))/{print}' /root/output/msf/smb.txt | cut -c18- | sed 's/:... //' | sort -u > /root/output/loot/intern/smb/share/smb_shares.txt
 
@@ -122,7 +125,7 @@ awk '/x Amplification/ {print$2}' /root/output/msf/dns.txt | cut -d ":" -f 1 | s
 
 ### IPMI
 mkdir -p /root/output/loot/intern/ipmi/hash
-awk '/Hash found/ {print$2}' /root/output/msf/ipmi.txt | cut -d ":" -f 1 | sort -u > mkdir -p /root/output/loot/intern/ipmi/hash/hosts.txt
+awk '/Hash found/ {print$2}' /root/output/msf/ipmi.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/ipmi/hash/hosts.txt
 mkdir -p /root/output/loot/intern/ipmi/cipher
 awk '/VULNERABLE/ {print$2}' /root/output/msf/ipmi.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/ipmi/cipher/hosts.txt
 
