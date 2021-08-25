@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/usr/bin/figlet ProSecLooter
+figlet ProSecLooter
 
 if [ -d /root/output/loot/hashes -a -d /root/output/loot/intern ]; then
     echo '! > Folder Exist!'
@@ -16,14 +16,14 @@ if [ -z '$(ls -A /opt/PCredz/logs)' ]; then
    echo '! > No PCredz logs!'
    echo '! >'
 else
-/usr/bin/cp /opt/PCredz/logs/* /root/output/loot/hashes/
+cp /opt/PCredz/logs/* /root/output/loot/hashes/
 fi
 
 if [ -z '$(ls -A /opt/PCredz/CredentialDump-Session.log)' ]; then
    echo '! > No PCredz Session!'
    echo '! >'
 else
-/usr/bin/cp /opt/PCredz/CredentialDump-Session.log /root/output/loot/hashes/
+cp /opt/PCredz/CredentialDump-Session.log /root/output/loot/hashes/
 fi
 
 ### Responder
@@ -31,7 +31,7 @@ if [ -z '$(ls -A /usr/share/responder/logs/*.txt)' ]; then
    echo '! > No Responder Hashes!'
    echo '! >'
 else
-/usr/bin/cp /usr/share/responder/logs/*.txt /root/output/loot/hashes/
+cp /usr/share/responder/logs/*.txt /root/output/loot/hashes/
 fi
 
 ### CrackMapExec
@@ -39,7 +39,7 @@ if [ -z '$(ls -A /root/.cme/logs)' ]; then
    echo '! > No CME Logs!'
    echo '! >'
 else
-/usr/bin/cp /root/.cme/logs/* /root/output/loot/hashes/
+cp /root/.cme/logs/* /root/output/loot/hashes/
 fi
 
 ### Metasploit
@@ -47,7 +47,7 @@ if [ -z '$(ls -A /root/.msf4/loot)' ]; then
    echo '! > No MSF Loot!'
    echo '! >'
 else
-   /usr/bin/cp /root/.msf4/loot/* /root/output/loot/
+   cp /root/.msf4/loot/* /root/output/loot/
 fi
 
 ### SNMP
