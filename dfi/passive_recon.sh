@@ -15,6 +15,12 @@ else
     apt install -y python3-pip libpcap-dev && pip3 install Cython python-libpcap
 fi
 
+if [ -d /opt/PCredz/logs ]; then
+    echo '! > Logfolder OK.'
+else
+     mkdir -p /opt/PCredz/logs
+fi
+
 tmux -f /opt/hacking/dfi/dfitmux.conf new-session -d
 tmux rename-window 'Passive-Recon'
 
