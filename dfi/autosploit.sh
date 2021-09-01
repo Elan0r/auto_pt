@@ -27,6 +27,8 @@ else
     echo 'workspace -d ' $WS > /root/input/msf/workspace.txt
     echo 'workspace -a ' $WS >> /root/input/msf/workspace.txt
     echo 'db_import /root/output/nmap/service.xml' >> /root/input/msf/workspace.txt
+    #for Zerocheck
+    echo 'workspace -a ' $WS > /root/input/msf/ws.txt
 fi
 
 # Check for SHD_MANAGER
