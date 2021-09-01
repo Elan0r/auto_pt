@@ -40,3 +40,5 @@ msfdb init
 echo '! > Start Metasploit Framework'
 msfconsole -qx "resource /root/input/msf/workspace.txt resource /opt/hacking/dfi/resource.txt" > /dev/null
 echo '! > MSF Done!'
+
+awk '/"/ {print}' /root/output/msf/zerohosts.txt | grep -v '""' | cut -d '"' -f 2,4 | sed 's/"/ /' > /root/output/list/zero.txt
