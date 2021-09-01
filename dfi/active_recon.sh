@@ -30,7 +30,7 @@ else
    echo '! > Done'
 
    #Piping the IP-Addresses of the Targets to a file
-   awk '/Up/ {print$2}' /root/output/nmap/pe.gnmap > /root/output/list/ipup.txt
+   awk '/Up/ {print$2}' /root/output/nmap/pe.gnmap | sort -u > /root/output/list/ipup.txt
    echo ''
 fi
 
@@ -43,10 +43,10 @@ echo ''
 
 #echo 'File Splitt in Service LISTEN'
 
-awk '/135\/open/ {print$2}' /root/output/nmap/service.gnmap > /root/output/list/rpc_open.txt
-awk '/389\/open/ {print$3}' /root/output/nmap/service.gnmap | sed 's/(/''/' | sed 's/)/''/' > /root/output/list/ldap_open.txt
-awk '/88\/open/ {print$2}' /root/output/nmap/service.gnmap > /root/output/list/kerberos_open.txt
-awk '/445\/open/ {print$2}' /root/output/nmap/service.gnmap > /root/output/list/smb_open.txt
+awk '/135\/open/ {print$2}' /root/output/nmap/service.gnmap  | sort -u > /root/output/list/rpc_open.txt
+awk '/389\/open/ {print$3}' /root/output/nmap/service.gnmap | sed 's/(/''/' | sed 's/)/''/'  | sort -u > /root/output/list/ldap_open.txt
+awk '/88\/open/ {print$2}' /root/output/nmap/service.gnmap  | sort -u > /root/output/list/kerberos_open.txt
+awk '/445\/open/ {print$2}' /root/output/nmap/service.gnmap  | sort -u > /root/output/list/smb_open.txt
 
 #echo 'Done'
 echo ''
