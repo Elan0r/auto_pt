@@ -24,8 +24,8 @@ fi
 tmux -f /opt/hacking/dfi/dfitmux.conf new-session -d
 tmux rename-window 'Passive-Recon'
 
-figlet ProSecPassiveRecon > /dev/pts/1
-figlet ProSecPassiveRecon > /dev/pts/0
+figlet -w 90 ProSecPassiveRecon > /dev/pts/1
+figlet -w 90 ProSecPassiveRecon > /dev/pts/0
 
 tmux send 'netdiscover -L -i eth0 >> /root/output/netdiscover' ENTER
 tmux split-window
