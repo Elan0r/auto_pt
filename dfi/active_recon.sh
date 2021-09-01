@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet ProSecActiveRecon
+figlet -w 87 ProSecActiveRecon
 
 #echo '! > Networks to scan in /root/input/ipint.txt for nmap'
 #echo '' 
