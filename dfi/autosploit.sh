@@ -9,14 +9,11 @@ else
     exit 1
 fi
 
-IP=$(ip addr show eth0 | grep "inet " | cut -d '/' -f1 | cut -d ' ' -f6)
-#echo '! >> own IP eth0: '$IP
-
-if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot -a -d /root/output/msf -a -d /root/output/loot/hashes ]; then
+if [ -d /root/input/msf -a -d /root/output/loot -a -d /root/output/msf -a -d /root/output/loot/hashes ]; then
     echo '! > Folder Exist!'
 else    
     #Creating Output Folders
-    mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot /root/output/msf /root/output/loot/hashes
+    mkdir -p /root/input/msf /root/output/loot /root/output/msf /root/output/loot/hashes
     #echo '! > Folder Created!'
 fi
 
@@ -44,3 +41,5 @@ msfconsole -qx "resource /root/input/msf/workspace.txt resource /opt/hacking/dfi
 echo '! > MSF Done!'
 
 awk '/"/ {print}' /root/output/msf/zerohosts.txt | grep -v '""' | cut -d '"' -f 2,4 | sed 's/"/ /' > /root/output/list/zero.txt
+
+exit 0
