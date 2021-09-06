@@ -118,9 +118,18 @@ awk '/.*open.*Requires NLA: No/ {print$1}' /root/output/msf/rdp.txt | sort -u > 
 mkdir -p /root/output/loot/intern/ntp/amplification
 awk '/Vulnerable/ {print$2}' /root/output/msf/ntp.txt | cut -d ":" -f 1  | sort -u > /root/output/loot/intern/ntp/amplification/hosts.txt
 
-### NetBIOS
+### AD
 mkdir -p /root/output/loot/intern/ad/netbios
 awk '/NetBIOS/ {print$5}' /root/output/msf/udp_scan.txt | cut -d ":" -f 1  | sort -u > /root/output/loot/intern/ad/netbios/hosts.txt
+mkdir -p /root/output/loot/intern/ad/asreproast
+mkdir -p /root/output/loot/intern/ad/delegation
+mkdir -p /root/output/loot/intern/ad/kerberoasting
+mkdir -p /root/output/loot/intern/ad/krbtgt
+mkdir -p /root/output/loot/intern/ad/laps
+mkdir -p /root/output/loot/intern/ad/netsession
+mkdir -p /root/output/loot/intern/ad/ntlm_auth
+mkdir -p /root/output/loot/intern/ad/passpol
+mkdir -p /root/output/loot/intern/ad/quota
 
 ### DNS
 mkdir -p /root/output/loot/intern/dns/amplification
@@ -171,3 +180,11 @@ mkdir -p /root/output/loot/intern/network/vtp
 mkdir -p /root/output/loot/intern/voip/h323
 mkdir -p /root/output/loot/intern/voip/sip
 mkdir -p /root/output/loot/intern/voip/rtp
+
+### Creds
+mkdir -p /root/output/loot/intern/creds/bmc
+mkdir -p /root/output/loot/intern/creds/network
+mkdir -p /root/output/loot/intern/creds/phone
+mkdir -p /root/output/loot/intern/creds/printer
+mkdir -p /root/output/loot/intern/creds/ups
+
