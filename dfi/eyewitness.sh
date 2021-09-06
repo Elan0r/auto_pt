@@ -19,3 +19,5 @@ else
 fi
 
 eyewitness --web --timeout 20 --delay 20 --no-prompt --prepend-https -x /root/output/nmap/service.xml -d /root/output/screens/
+
+exit 0
