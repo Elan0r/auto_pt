@@ -188,3 +188,4 @@ mkdir -p /root/output/loot/intern/creds/phone
 mkdir -p /root/output/loot/intern/creds/printer
 mkdir -p /root/output/loot/intern/creds/ups
 
+exit 0
