@@ -74,14 +74,13 @@ awk '/\+.*:23/ {print$2}' /root/output/msf/telnet.txt  | cut -d ":" -f 1 | sort 
 ### SMB
 mkdir -p /root/output/loot/intern/smb/eternal_blue
 awk '/VULNERABLE.*MS17-010/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/smb/eternal_blue/hosts.txt
-mkdir -p /root/output/loot/intern/smb/user_enum
-awk '/Found user:/ {print$2,$6,$7,$8,$9}' /root/output/msf/smb.txt | sort -u > /root/output/loot/intern/smb/user_enum/users.txt
 mkdir -p /root/output/loot/intern/smb/smb_v1
 awk '/versions:1/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/smb/smb_v1/hosts.txt 
 mkdir -p /root/output/loot/intern/smb/smb_signing
 awk '/signatures:opt/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/smb/smb_signing/hosts.txt
 mkdir -p /root/output/loot/intern/smb/anonymous_enumeration
 awk '/(\(DISK\)|\(IPC\)|\(PRINTER\))/{print}' /root/output/msf/smb.txt | cut -c18- | sed 's/:... //' | sort -u > /root/output/loot/intern/smb/anonymous_enumeration/smb_shares.txt
+awk '/Found user:/ {print$2,$6,$7,$8,$9}' /root/output/msf/smb.txt | sort -u > /root/output/loot/intern/smb/anonymous_enumeration/users.txt
 
 ### Database
 mkdir -p /root/output/loot/intern/database/mssql/login
