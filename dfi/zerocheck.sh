@@ -18,7 +18,7 @@ else
         echo '! >Workspace already set!'
     else
         read -p "Enter Workspace Name: " WS
-        echo 'workspace -a ' $WS > /root/input/msf/ws.txt
+        echo 'workspace ' $WS > /root/input/msf/ws.txt
     fi
     
     echo 'hosts -S Windows -c name,address -o /root/output/msf/zerohosts.txt' > /root/input/msf/zerohosts.txt
