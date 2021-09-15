@@ -79,21 +79,22 @@ if __name__ == '__main__':
                     out = str(output)
                     if error in out:
                         print(green + '[+] ' + endc + x + 'Error code ' + yellow + '404' + endc)
-                        exit()
-                    if xpoweredby in out:
-                        print(green + '[+] ' + endc + x + ' present header: ' + yellow + 'X-Powered-By' + endc)
-                        write_file(x, 'X-Powered-By')
-                    if xframe in out:
-                        print(green + '[+] ' + endc + x + ' is missing header: ' + yellow + 'X-Frame-Options' + endc)
-                        write_file(x, 'X-Frame-Options')
-                    if stricttransport in out:
-                        print(green + '[+] ' + endc + x + ' is missing header: ' + yellow + 'Strict-Transport-Security' + endc)
-                        write_file(x, 'Strict-Transport-Security')
-                    if contentsecurity in out:
-                        print(green + '[+] ' + endc + x + ' is missing header: ' + yellow + 'Content-Security-Policy' + endc)
-                        write_file(x, 'Content-Security-Policy')
-                    else:
                         pass
+                    else:
+                        if xpoweredby in out:
+                            print(green + '[+] ' + endc + x + ' present header: ' + yellow + 'X-Powered-By' + endc)
+                            write_file(x, 'X-Powered-By')
+                        if xframe in out:
+                            print(green + '[+] ' + endc + x + ' is missing header: ' + yellow + 'X-Frame-Options' + endc)
+                            write_file(x, 'X-Frame-Options')
+                        if stricttransport in out:
+                            print(green + '[+] ' + endc + x + ' is missing header: ' + yellow + 'Strict-Transport-Security' + endc)
+                            write_file(x, 'Strict-Transport-Security')
+                        if contentsecurity in out:
+                            print(green + '[+] ' + endc + x + ' is missing header: ' + yellow + 'Content-Security-Policy' + endc)
+                            write_file(x, 'Content-Security-Policy')
+                        else:
+                            pass
                 except subprocess.CalledProcessError:
                     pass
     except KeyboardInterrupt:
