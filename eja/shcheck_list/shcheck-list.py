@@ -7,6 +7,7 @@ yellow = '\033[33m'
 endc = '\033[m'
 urls = []
 
+error = '404'
 xpoweredby = 'header \x1b[93mX-Powered-By\x1b[0m is present!'
 xframe = 'Missing security header: \x1b[93mX-Frame-Options\x1b[0m'
 stricttransport = 'Missing security header: \x1b[91mStrict-Transport-Security\x1b[0m'
@@ -76,8 +77,11 @@ if __name__ == '__main__':
                 try:
                     output = cmd('./shcheck.py -d -i ' + x)
                     out = str(output)
+                    if error in out:
+                        print(green + '[+] ' + endc + x + 'Error code ' + yellow + '404' + endc)
+                        exit()
                     if xpoweredby in out:
-                        print(green + '[+] ' + endc + x + ' available header: ' + yellow + 'X-Powered-By' + endc)
+                        print(green + '[+] ' + endc + x + ' present header: ' + yellow + 'X-Powered-By' + endc)
                         write_file(x, 'X-Powered-By')
                     if xframe in out:
                         print(green + '[+] ' + endc + x + ' is missing header: ' + yellow + 'X-Frame-Options' + endc)
