@@ -19,6 +19,11 @@ git clone https://github.com/EmpireProject/Empire.git
 git clone https://github.com/cddmp/enum4linux-ng.git
 git clone https://github.com/RUB-NDS/PRET.git
 git clone https://github.com/ropnop/kerbrute.git
+
+#special
+git clone --depth 1 https://github.com/v1s1t0r1sh3r3/airgeddon.git
+cd /opt/airgeddon && bash airgeddon.sh
+cd /opt
 ln -s /opt /root/tools
 
 #docker
