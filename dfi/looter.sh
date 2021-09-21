@@ -66,6 +66,8 @@ mkdir -p /root/output/loot/intern/eol/ssh
 awk '/\+.*OpenSSH/ {print$7,$2}' /root/output/msf/ssh.txt | sed 's/:22/ /g' | sort -u > /root/output/loot/intern/eol/ssh/openssh_version.txt
 mkdir -p /root/output/loot/intern/eol/windows
 awk '/running Windows 200/ {print}' /root/output/msf/smb.txt | cut -c18- | sed 's/:... //' | sort -u > /root/output/loot/intern/eol/windows/windows_versions.txt
+mkdir -p /root/output/loot/intern/eol/ssh_depricated
+awk '/\-1.99/ {print$2}' /root/output/msf/ssh.txt |cut -d : -f 1 | sort -u > /root/output/loot/intern/eol/ssh_depricated/hosts.txt
 
 ### TELNET
 mkdir -p /root/output/loot/intern/telnet
