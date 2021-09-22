@@ -51,9 +51,10 @@ else
 fi
 
 ### SNMP
-mkdir -p /root/output/loot/intern/snmp
-awk '/Login Successful.*read-write/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/snmp/hosts_default_community_rw.txt
-awk '/Login Successful/ {print$2}' /root/output/msf/snmp.txt  | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/snmp/hosts_default_community_ro.txt
+mkdir -p /root/output/loot/intern/snmp/community_string
+awk '/Login Successful.*read-write/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/snmp/community_string/hosts_default_community_rw.txt
+awk '/Login Successful/ {print$2}' /root/output/msf/snmp.txt  | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt
+mkdir -p /root/output/loot/intern/snmp/unencrypted
 
 ### FTP
 mkdir -p /root/output/loot/intern/ftp/anonymous
@@ -65,7 +66,7 @@ awk '/FTP Banner/ {print$2}' /root/output/msf/ftp.txt | cut -d ":" -f 1 | sort -
 mkdir -p /root/output/loot/intern/eol/ssh
 awk '/\+.*OpenSSH/ {print$7,$2}' /root/output/msf/ssh.txt | sed 's/:22/ /g' | sort -u > /root/output/loot/intern/eol/ssh/openssh_version.txt
 mkdir -p /root/output/loot/intern/eol/windows
-awk '/running Windows 200/ {print}' /root/output/msf/smb.txt | cut -c18- | sed 's/:... //' | sort -u > /root/output/loot/intern/eol/windows/windows_versions.txt
+grep 'running Windows 200\|running Windows 7\|running Windows XP\|running Windows Vista\|running Windows 8 ' /root/output/msf/smb.txt | cut -c18- | sed 's/:... //' | sort -u > /root/output/loot/intern/eol/windows/windows_versions.txt
 mkdir -p /root/output/loot/intern/eol/ssh_depricated
 awk '/\-1.99/ {print$2}' /root/output/msf/ssh.txt |cut -d : -f 1 | sort -u > /root/output/loot/intern/eol/ssh_depricated/hosts.txt
 
@@ -83,6 +84,8 @@ awk '/signatures:opt/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | so
 mkdir -p /root/output/loot/intern/smb/anonymous_enumeration
 awk '/(\(DISK\)|\(IPC\)|\(PRINTER\))/{print}' /root/output/msf/smb.txt | cut -c18- | sed 's/:... //' | sort -u > /root/output/loot/intern/smb/anonymous_enumeration/smb_shares.txt
 awk '/Found user:/ {print$2,$6,$7,$8,$9}' /root/output/msf/smb.txt | sort -u > /root/output/loot/intern/smb/anonymous_enumeration/users.txt
+mkdir -p /root/output/loot/intern/smb/permission_management
+mkdir -p /root/output/loot/intern/smb/sensitive_information
 
 ### Database
 mkdir -p /root/output/loot/intern/database/mssql/login
@@ -122,10 +125,10 @@ awk '/Vulnerable/ {print$2}' /root/output/msf/ntp.txt | cut -d ":" -f 1  | sort 
 ### AD
 mkdir -p /root/output/loot/intern/ad/netbios
 awk '/NetBIOS/ {print$5}' /root/output/msf/udp_scan.txt | cut -d ":" -f 1  | sort -u > /root/output/loot/intern/ad/netbios/hosts.txt
-mkdir -p /root/output/loot/intern/ad/asreproast
-mkdir -p /root/output/loot/intern/ad/delegation
-mkdir -p /root/output/loot/intern/ad/kerberoasting
-mkdir -p /root/output/loot/intern/ad/krbtgt
+mkdir -p /root/output/loot/intern/ad/kerberos/asreproast
+mkdir -p /root/output/loot/intern/ad/kerberos/delegation
+mkdir -p /root/output/loot/intern/ad/kerberos/kerberoasting
+mkdir -p /root/output/loot/intern/ad/kerberos/krbtgt
 mkdir -p /root/output/loot/intern/ad/laps
 mkdir -p /root/output/loot/intern/ad/netsession
 mkdir -p /root/output/loot/intern/ad/ntlm_auth
@@ -135,6 +138,8 @@ mkdir -p /root/output/loot/intern/ad/quota
 ### DNS
 mkdir -p /root/output/loot/intern/dns/amplification
 awk '/x Amplification/ {print$2}' /root/output/msf/dns.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/dns/amplification/hosts.txt
+mkdir -p /root/output/loot/intern/dns/tunnel
+mkdir -p /root/output/loot/intern/dns/zone_transfer
 
 ### IPMI
 mkdir -p /root/output/loot/intern/ipmi/hashdump
@@ -143,10 +148,10 @@ mkdir -p /root/output/loot/intern/ipmi/zero_cipher
 awk '/VULNERABLE/ {print$2}' /root/output/msf/ipmi.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/ipmi/zero_cipher/hosts.txt
 
 ### MAIL
-mkdir -p /root/output/loot/intern/mail/imap
-awk '/\+.*:143/ {print$2}' /root/output/msf/mail.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/mail/imap/hosts.txt
-mkdir -p /root/output/loot/intern/mail/pop3
-awk '/\+.*:110/ {print$2}' /root/output/msf/mail.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/mail/pop3/hosts.txt
+mkdir -p /root/output/loot/intern/mail/imap/unencrypted
+awk '/\+.*:143/ {print$2}' /root/output/msf/mail.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/mail/imap/unencrypted/hosts.txt
+mkdir -p /root/output/loot/intern/mail/pop3/unencrypted
+awk '/\+.*:110/ {print$2}' /root/output/msf/mail.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/mail/pop3/unencrypted/hosts.txt
 mkdir -p /root/output/loot/intern/mail/smtp/open_relay
 awk '/Potential open SMTP relay/ {print$2}' /root/output/msf/mail.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/mail/smtp/open_relay/hosts.txt
 mkdir -p /root/output/loot/intern/mail/smtp/sender_restriction
@@ -182,11 +187,23 @@ mkdir -p /root/output/loot/intern/voip/h323
 mkdir -p /root/output/loot/intern/voip/sip
 mkdir -p /root/output/loot/intern/voip/rtp
 
+### LDAP
+mkdir -p /root/output/loot/intern/ldap/signing
+
 ### Creds
 mkdir -p /root/output/loot/intern/creds/bmc
 mkdir -p /root/output/loot/intern/creds/network
 mkdir -p /root/output/loot/intern/creds/phone
 mkdir -p /root/output/loot/intern/creds/printer
 mkdir -p /root/output/loot/intern/creds/ups
+mkdir -p /root/output/loot/intern/creds/san
+
+### Web
+mkdir -p /root/output/loot/intern/web/httpd
+mkdir -p /root/output/loot/intern/web/iis
+mkdir -p /root/output/loot/intern/web/tomcat
+mkdir -p /root/output/loot/intern/web/jboss
+mkdir -p /root/output/loot/intern/web/services
+mkdir -p /root/output/loot/intern/web/index
 
 exit 0
