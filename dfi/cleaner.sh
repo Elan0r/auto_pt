@@ -18,5 +18,8 @@ rm /root/.bash_history
 rm /root/*.log
 rm /root/*.txt
 rm /root/bettercap.history
+rm /root/arp.cache
+rm /root/*.restore
+rm /root/*.pcap
 
 echo "! > CLEAN!"
