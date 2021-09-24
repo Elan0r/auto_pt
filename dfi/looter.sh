@@ -117,6 +117,8 @@ mkdir -p /root/output/loot/intern/rdp/bluekeep
 awk '/vulnerable.*MS_T120/ {print$2}' /root/output/msf/rdp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rdp/bluekeep/hosts.txt
 mkdir -p /root/output/loot/intern/rdp/nla
 awk '/.*open.*Requires NLA: No/ {print$1}' /root/output/msf/rdp.txt | sort -u > /root/output/loot/intern/rdp/nla/hosts.txt
+mkdir -p /root/output/loot/intern/rdp/ms12-020
+awk '/The target is vulnerable.$/{print$2}' /root/output/msf/rdp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rdp/ms12-20/hosts.txt
 
 ### NTP
 mkdir -p /root/output/loot/intern/ntp/amplification
