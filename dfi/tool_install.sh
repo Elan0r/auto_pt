@@ -3,7 +3,7 @@ figlet ProSecToolz
 echo '! > Tools go to /opt + ln -s to /root/tools'
 
 #APT
-apt install docker.io python3-pip libpcap-dev yersinia -y
+apt install docker.io python3-pip libpcap-dev yersinia golang -y
 #PIP3!
 pip3 install Cython python-libpcap bloodhound
 
