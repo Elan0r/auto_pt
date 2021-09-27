@@ -54,7 +54,7 @@ fi
 mkdir -p /root/output/loot/intern/snmp/community_string
 awk '/Login Successful.*read-write/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/snmp/community_string/hosts_default_community_rw.txt
 awk '/Login Successful/ {print$2}' /root/output/msf/snmp.txt  | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt
-mkdir -p /root/output/loot/intern/snmp/unencrypted
+mkdir -p /root/output/loot/intern/snmp/v1_v2c
 
 ### FTP
 mkdir -p /root/output/loot/intern/ftp/anonymous
