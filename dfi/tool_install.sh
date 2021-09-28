@@ -31,6 +31,7 @@ export PATH=$PATH:$GOPATH/bin
 #GIT
 #git clone https://gitlab-ci-token:ZGA2PFZZyut_zXevuPAR@gitlab.com/pspt/hacking.git
 cd /opt/hacking
+git stash
 git pull
 cd /opt
 git clone https://github.com/topotam/PetitPotam.git
