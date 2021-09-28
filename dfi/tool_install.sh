@@ -29,8 +29,10 @@ export PATH=$PATH:$GOPATH/bin
 
 
 #GIT
+#git clone https://gitlab-ci-token:ZGA2PFZZyut_zXevuPAR@gitlab.com/pspt/hacking.git
+cd /opt/hacking
+git pull
 cd /opt
-git clone https://gitlab-ci-token:ZGA2PFZZyut_zXevuPAR@gitlab.com/pspt/hacking.git
 git clone https://github.com/topotam/PetitPotam.git
 git clone https://github.com/dmaasland/proxyshell-poc.git
 git clone https://github.com/Shadow0ps/CVE-2021-21974.git
