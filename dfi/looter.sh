@@ -164,6 +164,11 @@ mkdir -p /root/output/loot/intern/mail/smtp/unencrypted_auth
 mkdir -p /root/output/loot/intern/ssdp/amplification
 awk '/Vulnerable to SSDP/ {print$2}' /root/output/msf/ssdp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/ssdp/amplification/hosts.txt
 
+### Printer
+mkdir -p /root/output/loot/intern/printer/extract
+awk '/User=/{print}' /root/output/msf/printer.txt | cut -c18- > /root/output/loot/intern/extract/hosts.txt
+mkdir -p /root/output/loot/intern/printer/access
+
 ### MITM
 mkdir -p /root/output/loot/intern/mitm/arp
 mkdir -p /root/output/loot/intern/mitm/stp
