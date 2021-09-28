@@ -3,9 +3,11 @@ figlet ProSecToolz
 echo '! > Tools go to /opt + ln -s to /root/tools'
 
 #APT
-apt install docker.io python3-pip libpcap-dev yersinia golang -y
+apt update
+apt install crackmapexec responder metasploit-framework docker.io python3-pip libpcap-dev yersinia golang -y
 #PIP3!
 pip3 install Cython python-libpcap bloodhound
+pip3 install --upgrade ldap3
 
 #GIT
 cd /opt
@@ -30,4 +32,18 @@ ln -s /opt /root/tools
 docker pull empireproject/empire
 git clone https://github.com/byt3bl33d3r/ItWasAllADream.git
 cd /opt/ItWasAllADream && docker build -t itwasalladream .
+
+#go env
+if [ -d /opt/go ]; then
+    echo '! > GO Folder Exist!'
+else  
+    mkdir /opt/go
+fi
+
+if grep -Fxq 'export PATH=$PATH:$GOPATH/bin' /root/.zshrc; then
+      echo -e ''
+else
+      echo -e '\nexport GOPATH=/opt/go' >> /root/.zshrc
+      echo -e '\nexport PATH=$PATH:$GOPATH/bin' >> /root/.zshrc
+fi
 exit 0
