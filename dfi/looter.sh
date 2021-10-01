@@ -181,6 +181,10 @@ mkdir -p /root/output/loot/intern/mitm/routing
 mkdir -p /root/output/loot/intern/mitm/wpad
 
 ### Network
+mkdir -p /root/output/loot/intern/egress_filter
+if [ -s /root/output/nmap/egress.nmap ]; then
+cp /root/output/nmap/egress.nmap /root/output/loot/intern/egress_filter/
+fi
 mkdir -p /root/output/loot/intern/network/broadcast_ping
 mkdir -p /root/output/loot/intern/network/cdp
 mkdir -p /root/output/loot/intern/network/dtp
