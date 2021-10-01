@@ -16,6 +16,13 @@ else
     mkdir -p /root/output/nmap /root/output/list
 fi
 
+#nmap portquiz.net -> egress filter
+if [ -s root/output/nmap/egress.nmap ]; then
+    echo '! > Egress Filter Test already Done!'
+else
+    nmap -oA /root/output/nmap/egress portquiz.net &
+fi
+
 #NMAP PE SCAN
 if [ -s /root/output/list/ipup.txt ]; then
     echo '! >> nmap PE already Done!'
