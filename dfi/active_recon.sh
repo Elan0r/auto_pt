@@ -17,7 +17,7 @@ else
 fi
 
 #nmap portquiz.net -> egress filter
-if [ -s root/output/nmap/egress.nmap ]; then
+if [ -s /root/output/nmap/egress.nmap ]; then
     echo '! > Egress Filter Test already Done!'
 else
     nmap -oA /root/output/nmap/egress portquiz.net &
