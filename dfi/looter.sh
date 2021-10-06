@@ -193,6 +193,16 @@ mkdir -p /root/output/loot/intern/network/lldp
 mkdir -p /root/output/loot/intern/network/stp
 mkdir -p /root/output/loot/intern/network/vtp
 
+###VMware
+mkdir -p /root/output/loot/intern/vmware/vsan
+awk '/The target is vulnerable. System property user.name/ {print$2}' /root/output/msf/vmware.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/vmware/vsan/hosts.txt
+mkdir -p /root/output/loot/intern/vmware/vmdir
+#missing AWK
+mkdir -p /root/output/loot/intern/vmware/ova
+awk '/The target is vulnerable. Unauthenticated endpoint access granted./ {print$2}' /root/output/msf/vmware.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/vmware/ova/hosts.txt
+mkdir -p /root/output/loot/intern/vmware/vrops
+#missing AWK
+
 ### VoIP
 mkdir -p /root/output/loot/intern/voip/h323
 mkdir -p /root/output/loot/intern/voip/sip
