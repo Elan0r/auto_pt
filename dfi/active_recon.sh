@@ -20,7 +20,7 @@ fi
 if [ -s /root/output/nmap/egress.nmap ]; then
     echo '! > Egress Filter Test already Done!'
 else
-    nmap -oA /root/output/nmap/egress portquiz.net &
+    nmap -e eth0 -oA /root/output/nmap/egress portquiz.net &
 fi
 
 #NMAP PE SCAN
