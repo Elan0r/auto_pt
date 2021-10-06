@@ -9,7 +9,7 @@ apt update
 apt install crackmapexec responder metasploit-framework docker.io python3-pip libpcap-dev yersinia golang python3-venv texlive eyewitness -y
 
 #PIP3
-pip3 install --upgrade ldap3 Cython python-libpcap bloodhound pyx scapy
+pip3 install --upgrade ldap3 Cython python-libpcap bloodhound pyx scapy mitm6
 
 #go env
 if [ -d /opt/go ]; then
