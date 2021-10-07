@@ -6,10 +6,10 @@ ln -s /opt /root/tools
 
 #APT
 apt update
-apt install crackmapexec responder metasploit-framework docker.io python3-pip libpcap-dev yersinia golang python3-venv texlive eyewitness -y
+apt install crackmapexec responder metasploit-framework docker.io python3-pip libpcap-dev yersinia golang texlive eyewitness -y
 
 #PIP3
-pip3 install --upgrade ldap3 Cython python-libpcap bloodhound pyx scapy mitm6
+pip3 install --upgrade ldap3 Cython python-libpcap bloodhound pyx scapy mitm6 impacket minikerberos
 
 #go env
 if [ -d /opt/go ]; then
@@ -154,10 +154,18 @@ else
     git clone https://github.com/ExAndroidDev/impacket.git
     cd impacket
     git checkout ntlmrelayx-adcs-attack
-    python3 -m venv impacket
-    source impacket/bin/activate
-    pip install .
-    deactivate
+    python3 setup.py install
+fi
+#PKINIT for PetitPotam
+if [ -d /opt/PKINITtools ]; then
+    cd /opt/PKINITtools
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/dirkjanm/PKINITtools.git
+    cd /opt/PKINITtools
+    pip3 install --upgrade -r requirements.txt
 fi
 #airgeddon
 if [ -d /opt/airgeddon ]; then
