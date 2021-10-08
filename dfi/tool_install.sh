@@ -6,7 +6,7 @@ ln -s /opt /root/tools
 
 #APT
 apt update
-apt install crackmapexec responder metasploit-framework docker.io python3-pip libpcap-dev yersinia golang texlive eyewitness -y
+apt install bettercap crackmapexec responder metasploit-framework docker.io python3-pip libpcap-dev yersinia golang texlive eyewitness -y
 
 #PIP3
 pip3 install --upgrade ldap3 Cython python-libpcap bloodhound pyx scapy mitm6 impacket minikerberos
