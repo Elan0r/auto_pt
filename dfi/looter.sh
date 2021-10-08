@@ -131,18 +131,22 @@ mkdir -p /root/output/loot/intern/ad/kerberos/asreproast
 mkdir -p /root/output/loot/intern/ad/kerberos/delegation
 mkdir -p /root/output/loot/intern/ad/kerberos/kerberoasting
 mkdir -p /root/output/loot/intern/ad/kerberos/krbtgt
+mkdir -p /root/output/loot/intern/ad/kerberos/enumeration
 mkdir -p /root/output/loot/intern/ad/laps
 mkdir -p /root/output/loot/intern/ad/netsession
 mkdir -p /root/output/loot/intern/ad/ntlm_auth
 mkdir -p /root/output/loot/intern/ad/passpol
 mkdir -p /root/output/loot/intern/ad/quota
 mkdir -p /root/output/loot/intern/ad/description
+mkdir -p /root/output/loot/intern/ad/gpp_password
+mkdir -p /root/output/loot/intern/ad/iam
 
 ### DNS
 mkdir -p /root/output/loot/intern/dns/amplification
 awk '/x Amplification/ {print$2}' /root/output/msf/dns.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/dns/amplification/hosts.txt
 mkdir -p /root/output/loot/intern/dns/tunnel
 mkdir -p /root/output/loot/intern/dns/zone_transfer
+mkdir -p /root/output/loot/intern/dns/filter
 
 ### IPMI
 mkdir -p /root/output/loot/intern/ipmi/hashdump
@@ -160,6 +164,7 @@ awk '/Potential open SMTP relay/ {print$2}' /root/output/msf/mail.txt | cut -d "
 mkdir -p /root/output/loot/intern/mail/smtp/sender_restriction
 mkdir -p /root/output/loot/intern/mail/smtp/starttls
 mkdir -p /root/output/loot/intern/mail/smtp/unencrypted_auth
+mkdir -p /root/output/loot/intern/mail/smtp/rdns
 
 ### SSDP
 mkdir -p /root/output/loot/intern/ssdp/amplification
@@ -227,5 +232,10 @@ mkdir -p /root/output/loot/intern/web/tomcat
 mkdir -p /root/output/loot/intern/web/jboss
 mkdir -p /root/output/loot/intern/web/services
 mkdir -p /root/output/loot/intern/web/index
+mkdir -p /root/output/loot/intern/web/php
+mkdir -p /root/output/loot/intern/web/iis_tilde
+
+### SSH
+mkdir -p /root/output/loot/intern/ssh/root_login
 
 exit 0
