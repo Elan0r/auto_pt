@@ -136,6 +136,7 @@ mkdir -p /root/output/loot/intern/ad/netsession
 mkdir -p /root/output/loot/intern/ad/ntlm_auth
 mkdir -p /root/output/loot/intern/ad/passpol
 mkdir -p /root/output/loot/intern/ad/quota
+mkdir -p /root/output/loot/intern/ad/description
 
 ### DNS
 mkdir -p /root/output/loot/intern/dns/amplification
