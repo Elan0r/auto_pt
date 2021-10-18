@@ -16,8 +16,6 @@ echo 'workspace -a ' $WS >> /root/input/msf/workspace.txt
 echo 'workspace ' $WS >> /root/input/msf/ws.txt
 echo 'db_import /root/output/nmap/service.xml' >> /root/input/msf/workspace.txt
 
-chmod +x /opt/hacking/dfi/*.sh
-
 tmux rename-window 'AUTO_PT'
 
 echo "Start auto_PT" > /root/output/runtime.txt
