@@ -6,7 +6,7 @@ first start <b>passive_recon.sh</b> for netdiscover, PCredz and 5 min TCPdump in
 this should run the whole test to gather all Credz -> beware it's <b>dfitmux.conf</b>!<br>
 <small>maybe not compatible with iTerm tmux integration.</small><br><br>
 enter <b>tmux a</b>, create a new window and start <b>auto_pt.sh</b>.<br>
-Auto_PT creates runtime.txt for Performance and Evidence in case of an Incident.<br>
+Auto_PT creates runtime.txt for Performance and Evidence in case of an Incident. Mind the <b>local</b> time!<br>
 Auto_PT requests Workspace for MSF.<br>
 Auto_PT "Modules":<br>
 active_recon: <br>
