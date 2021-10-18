@@ -1,8 +1,18 @@
 #!/bin/bash
+apt install figlet -y
 figlet ProSecToolz
 echo '! > Tools go to /opt + ln -s to /root/tools'
 
-ln -s /opt /root/tools
+if  [ -h /root/tools ]; then
+    echo '! > Tools Link ok'
+else    
+    if [ -d /root/tools ]; then
+        mv /root/tools /root/tools_old
+        ln -s /opt /root/tools
+    else
+        ln -s /opt /root/tools
+    fi
+fi
 
 #APT
 apt update
