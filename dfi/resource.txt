@@ -127,8 +127,8 @@ sleep 5
 echo "smtp_relay - SMTP Server e-mail accept check"
 use auxiliary/scanner/smtp/smtp_relay
 services -u -p 25 -R
-set MAILFROM d.fink@prosec-networks.com
-set MAILTO d.fink@prosec-networks.com
+set MAILFROM pt@prosec-networks.com
+set MAILTO pt@prosec-networks.com
 set EXTENDED true
 run
 sleep 5
