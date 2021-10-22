@@ -84,6 +84,14 @@ else
     cd /opt
     git clone https://github.com/maxpl0it/CVE-2020-1350-DoS.git
 fi
+#SIGRed RCE
+if [ -d /opt/SIGRed_RCE_PoC ]; then
+    cd /opt/SIGRed_RCE_PoC
+    git stash
+    git pull
+else
+    cd /opt
+    git clonehttps://github.com/chompie1337/SIGRed_RCE_PoC
 #PCredz
 if [ -d /opt/PCredz ]; then
     cd /opt/PCredz
