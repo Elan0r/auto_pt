@@ -226,6 +226,10 @@ mkdir -p /root/output/loot/intern/creds/ups
 mkdir -p /root/output/loot/intern/creds/san
 
 ### Web
+mkdir -p /root/output/loot/intern/web/iis_bypass
+grep -B 1'You can bypass auth' /root/output/msf/web.txt > /root/output/loot/intern/web/iis_bypass/hosts.txt
+mkdir -p /root/output/loot/intern/web/ms15-034
+awk '/The target is vulnerable/{print$2}' /root/output/msf/web.txt | cut -d ":" -f 1 | sort -u > mkdir -p /root/output/loot/intern/web/ms15-034/hosts.txt
 mkdir -p /root/output/loot/intern/web/httpd
 mkdir -p /root/output/loot/intern/web/iis
 mkdir -p /root/output/loot/intern/web/tomcat
