@@ -118,7 +118,7 @@ awk '/vulnerable.*MS_T120/ {print$2}' /root/output/msf/rdp.txt | cut -d ":" -f 1
 mkdir -p /root/output/loot/intern/rdp/nla
 awk '/.*open.*Requires NLA: No/ {print$1}' /root/output/msf/rdp.txt | sort -u > /root/output/loot/intern/rdp/nla/hosts.txt
 mkdir -p /root/output/loot/intern/rdp/ms12-020
-awk '/The target is vulnerable.$/{print$2}' /root/output/msf/rdp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rdp/ms12-20/hosts.txt
+awk '/The target is vulnerable.$/{print$2}' /root/output/msf/rdp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rdp/ms12-020/hosts.txt
 
 ### NTP
 mkdir -p /root/output/loot/intern/ntp/amplification
@@ -172,7 +172,7 @@ awk '/Vulnerable to SSDP/ {print$2}' /root/output/msf/ssdp.txt | cut -d ":" -f 1
 
 ### Printer
 mkdir -p /root/output/loot/intern/printer/extract
-awk '/User=/{print}' /root/output/msf/printer.txt | cut -c18- > /root/output/loot/intern/extract/hosts.txt
+awk '/User=/{print}' /root/output/msf/printer.txt | cut -c18- > /root/output/loot/intern/printer/extract/hosts.txt
 mkdir -p /root/output/loot/intern/printer/access
 
 ### MITM
