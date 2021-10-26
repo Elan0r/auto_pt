@@ -24,6 +24,6 @@ tmux send 'netdiscover -L -i eth0 | tee -a /root/output/netdiscover' ENTER
 tmux split-window
 tmux send 'python3 /opt/PCredz/Pcredz -i eth0 -c' ENTER
 tmux split-window
-tmux send 'timeout 300 tcpdump -i eth0 -w /root/output/loot/passive.pcap' ENTER
+tmux send 'timeout 300 tcpdump -i eth0 -w /root/output/loot/passive.pcap && exit' ENTER
 echo '! >'
 echo '! > tmux a ;if you have the dfitmux.conf xD'
