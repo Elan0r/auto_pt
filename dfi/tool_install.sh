@@ -38,7 +38,7 @@ export GOPATH=/opt/go
 export PATH=$PATH:$GOPATH/bin
 
 #GIT
-/cd /opt
+cd /opt
 #PSN Toolz
 if [ -d /opt/hacking ]; then
     cd /opt/hacking
