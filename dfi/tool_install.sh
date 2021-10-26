@@ -1,8 +1,9 @@
 #!/bin/bash
-apt install figlet -y
+apt -qq install figlet -y > /dev/null
 figlet ProSecToolz
+echo '! > '
 echo '! > Tools go to /opt + ln -s to /root/tools'
-
+echo '! > '
 if  [ -h /root/tools ]; then
     echo '! > Tools Link ok'
 else    
@@ -15,8 +16,8 @@ else
 fi
 
 #APT
-apt update
-apt install bettercap crackmapexec responder metasploit-framework docker.io python3-pip libpcap-dev yersinia golang texlive eyewitness -y
+apt -qq update
+apt -qq install bettercap crackmapexec responder metasploit-framework docker.io python3-pip libpcap-dev yersinia golang texlive eyewitness -y
 
 #PIP3
 pip3 install --upgrade ldap3 Cython python-libpcap bloodhound pyx scapy mitm6 impacket minikerberos
@@ -197,5 +198,7 @@ else
     cd /opt/airgeddon
     bash airgeddon.sh
 fi
-
+echo '! > '
+echo '! > Tools go to /opt!'
+echo '! > '
 exit 0
