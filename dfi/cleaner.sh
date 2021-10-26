@@ -2,6 +2,7 @@
 
 figlet ProSecClean
 echo '! > Cleaning all!'
+msfdb start
 msfconsole -qx 'workspace -D; exit'
 
 rm -r /root/input
