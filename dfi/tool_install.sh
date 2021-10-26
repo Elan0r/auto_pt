@@ -92,6 +92,7 @@ if [ -d /opt/SIGRed_RCE_PoC ]; then
 else
     cd /opt
     git clonehttps://github.com/chompie1337/SIGRed_RCE_PoC
+fi
 #PCredz
 if [ -d /opt/PCredz ]; then
     cd /opt/PCredz
