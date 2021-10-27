@@ -337,7 +337,7 @@ sleep 5
 spool /root/output/msf/web.txt
 echo "IIS Auth Bypass"
 use auxiliary/admin/http/iis_auth_bypass
-services -S IIS
+services -S IIS -R
 run
 sleep 5
 
