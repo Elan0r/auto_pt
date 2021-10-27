@@ -346,8 +346,22 @@ use auxiliary/scanner/http/ms15_034_http_sys_memory_dump
 services -p 80 -R
 check
 
-spool off
+spool /root/output/msf/vnc.txt
+echo "VNC Versions"
+use auxiliary/scanner/vnc/vnc_none_auth
+services -p 5900 -R
+run
+sleep 5
 
+echo "VNC Sweep"
+use auxiliary/scanner/vnc/vnc_login
+set blank_passwords true
+services -p 5900 -R
+run
+sleep 5
+
+
+spool off
 
 hosts -S Windows -c name,address -o /root/output/msf/zerohosts.txt
 hosts -o /root/output/list/msf_hosts.txt
