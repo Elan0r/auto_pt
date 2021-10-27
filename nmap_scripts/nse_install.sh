@@ -1,4 +1,4 @@
-#!/in/bash
+#!/bin/bash
 
 cp /opt/hacking/nmap_scripts/*.nse /usr/share/nmap/scripts/
 
