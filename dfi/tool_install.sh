@@ -142,9 +142,9 @@ fi
 
 #Go
 cd /opt
-go install github.com/ropnop/kerbrute
-go install github.com/ropnop/go-windapsearch
-go install github.com/sensepost/gowitness
+go install github.com/ropnop/kerbrute@latest
+go install github.com/ropnop/go-windapsearch@latest
+go install github.com/sensepost/gowitness@latest
 
 #docker
 #Empire Docker
