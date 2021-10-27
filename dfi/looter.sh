@@ -174,6 +174,7 @@ awk '/Vulnerable to SSDP/ {print$2}' /root/output/msf/ssdp.txt | cut -d ":" -f 1
 mkdir -p /root/output/loot/intern/printer/extract
 awk '/User=/{print}' /root/output/msf/printer.txt | cut -c18- > /root/output/loot/intern/printer/extract/hosts.txt
 mkdir -p /root/output/loot/intern/printer/access
+cp /root/output/list/msf_*_printer /root/output/loot/intern/printer/access
 
 ### MITM
 mkdir -p /root/output/loot/intern/mitm/arp
@@ -187,9 +188,9 @@ mkdir -p /root/output/loot/intern/mitm/routing
 mkdir -p /root/output/loot/intern/mitm/wpad
 
 ### Network
-mkdir -p /root/output/loot/intern/egress_filter
+mkdir -p /root/output/loot/intern/network/egress_filtering
 if [ -s /root/output/nmap/egress.nmap ]; then
-cp /root/output/nmap/egress.nmap /root/output/loot/intern/egress_filter/
+cp /root/output/nmap/egress.nmap /root/output/loot/intern/network/egress_filtering/
 fi
 mkdir -p /root/output/loot/intern/network/icmp
 mkdir -p /root/output/loot/intern/network/cdp
