@@ -368,6 +368,6 @@ hosts -S Windows -c name,address -o /root/output/msf/zerohosts.txt
 hosts -o /root/output/list/msf_hosts.txt
 services -o /root/output/list/msf_services.txt
 hosts -S printer -o /root/output/list/msf_hosts_printer.txt
-services -S -o /root/output/list/msf_services_printer.txt
+services -S printer -o /root/output/list/msf_services_printer.txt
 
 exit
