@@ -53,6 +53,12 @@ date >> /root/output/runtime.txt
 echo "! > grab the loot!"
 /opt/hacking/dfi/looter.sh
 
+echo "Start Finding Counter" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
+
+echo "! > Count the Loot!"
+/opt/hacking/dfi/counter.sh
+
 echo '! > PT Done xD'
 
 echo "Finish PT" >> /root/output/runtime.txt
