@@ -55,6 +55,7 @@ mkdir -p /root/output/loot/intern/snmp/community_string
 awk '/Login Successful.*read-write/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/snmp/community_string/hosts_default_community_rw.txt
 awk '/Login Successful/ {print$2}' /root/output/msf/snmp.txt  | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt
 mkdir -p /root/output/loot/intern/snmp/v1_v2c
+cp /root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt /root/output/loot/intern/snmp/v1_v2c/hosts.txt
 
 ### FTP
 mkdir -p /root/output/loot/intern/ftp/anonymous
@@ -64,7 +65,7 @@ awk '/FTP Banner/ {print$2}' /root/output/msf/ftp.txt | cut -d ":" -f 1 | sort -
 
 ### EOL
 mkdir -p /root/output/loot/intern/eol/ssh
-awk '/\+.*OpenSSH/ {print$7,$2}' /root/output/msf/ssh.txt | sed 's/:22/ /g' | sort -u > /root/output/loot/intern/eol/ssh/openssh_version.txt
+awk '/\+.*OpenSSH/ {print$7,$2}' /root/output/msf/ssh.txt | sed 's/:22/ /g' |  sort -u | grep -v '_8.' > /root/output/loot/intern/eol/ssh/openssh_version.txt
 mkdir -p /root/output/loot/intern/eol/windows
 grep 'running Windows 200\|running Windows 7\|running Windows XP\|running Windows Vista\|running Windows 8\|running Windows 9' /root/output/msf/smb.txt | cut -c18- | sed 's/:... //' | sort -u > /root/output/loot/intern/eol/windows/windows_versions.txt
 mkdir -p /root/output/loot/intern/eol/ssh_depricated
@@ -174,7 +175,7 @@ awk '/Vulnerable to SSDP/ {print$2}' /root/output/msf/ssdp.txt | cut -d ":" -f 1
 mkdir -p /root/output/loot/intern/printer/extract
 awk '/User=/{print}' /root/output/msf/printer.txt | cut -c18- > /root/output/loot/intern/printer/extract/hosts.txt
 mkdir -p /root/output/loot/intern/printer/access
-cp /root/output/list/msf_*_printer /root/output/loot/intern/printer/access
+cp /root/output/list/msf_*_printer.txt /root/output/loot/intern/printer/access
 
 ### MITM
 mkdir -p /root/output/loot/intern/mitm/arp
