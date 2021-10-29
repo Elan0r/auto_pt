@@ -176,6 +176,7 @@ mkdir -p /root/output/loot/intern/printer/extract
 awk '/User=/{print}' /root/output/msf/printer.txt | cut -c18- > /root/output/loot/intern/printer/extract/hosts.txt
 mkdir -p /root/output/loot/intern/printer/access
 cp /root/output/list/msf_*_printer.txt /root/output/loot/intern/printer/access
+awk '/:9100/{print$2}' /root/output/msf/printer.txt | grep -v file: | cut -d : -f 1 | sort -u > /root/output/loot/intern/printer/access/hosts.txt
 
 ### MITM
 mkdir -p /root/output/loot/intern/mitm/arp
