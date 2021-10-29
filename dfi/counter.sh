@@ -186,5 +186,12 @@ wc -l /root/output/loot/intern/dns/amplification/hosts.txt >> /root/output/loot/
 cat /root/output/loot/intern/dns/amplification/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
+echo "Devices" >> /root/output/loot/intern/findings.txt
+tail -n +2 /root/output/list/msf_hosts.txt | wc -l >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+echo "Services" >> /root/output/loot/intern/findings.txt
+tail -n +2 /root/output/list/msf_services.txt | wc -l >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+
 echo "Done"
 exit 0
