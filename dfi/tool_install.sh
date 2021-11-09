@@ -139,7 +139,15 @@ else
     cd /opt
     git clone https://github.com/ropnop/kerbrute.git
 fi
-
+#NSE default Creds
+if [ -d /opt/nndefaccts ]; then
+    cd /opt/nndefaccts
+    git stash
+    git pull
+else
+    cd /opt
+    https://github.com/nnposter/nndefaccts.git
+fi
 #Go
 cd /opt
 go install github.com/ropnop/kerbrute@latest
