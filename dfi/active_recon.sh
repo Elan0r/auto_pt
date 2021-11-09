@@ -34,6 +34,14 @@ else
     echo ''
 fi
 
+#default-creds
+if [ -s /root/output/nmap/egress.nmap ]; then
+    echo '! > Egress Filter Test already Done!'
+else
+    nmap -e eth0 -oA /root/output/nmap/default-creds -iL /root/output/list/ipup.txt -p 80,443,8080,8443 --script http-default-accounts --script-args http-default-accounts.fingerprintfile=/opt/nndefaccts/http-default-accounts-fingerprints-nndefaccts.lua > /dev/null 2>&1 &
+fi
+
+
 if [ -s /root/output/nmap/service.gnmap ]; then
     echo '! >> SERVICE nmap already Done!'
 else
