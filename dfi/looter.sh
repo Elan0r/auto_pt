@@ -227,6 +227,7 @@ mkdir -p /root/output/loot/intern/creds/phone
 mkdir -p /root/output/loot/intern/creds/printer
 mkdir -p /root/output/loot/intern/creds/ups
 mkdir -p /root/output/loot/intern/creds/san
+grep '|' -B 6 /root/output/nmap/default-creds.nmap > /root/output/loot/intern/creds/creds.txt
 
 ### Web
 mkdir -p /root/output/loot/intern/web/iis_bypass
