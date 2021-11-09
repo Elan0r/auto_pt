@@ -16,7 +16,7 @@ else
     mkdir -p /root/output/nmap /root/output/list
 fi
 
-#nmap portquiz.net -> egress filter
+#NMAP portquiz.net -> egress filter
 if [ -s /root/output/nmap/egress.nmap ]; then
     echo '! > Egress Filter Test already Done!'
 else
@@ -34,14 +34,14 @@ else
     echo ''
 fi
 
-#default-creds
-if [ -s /root/output/nmap/egress.nmap ]; then
-    echo '! > Egress Filter Test already Done!'
+#NMAP default-creds
+if [ -s /root/output/nmap/default-creds.nmap ]; then
+    echo '! > Default-Creds test already done!'
 else
     nmap -e eth0 -oA /root/output/nmap/default-creds -iL /root/output/list/ipup.txt -p 80,443,8080,8443 --script http-default-accounts --script-args http-default-accounts.fingerprintfile=/opt/nndefaccts/http-default-accounts-fingerprints-nndefaccts.lua > /dev/null 2>&1 &
 fi
 
-
+#NMAP Service Scan
 if [ -s /root/output/nmap/service.gnmap ]; then
     echo '! >> SERVICE nmap already Done!'
 else
