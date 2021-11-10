@@ -13,9 +13,18 @@ else
 	echo -e '! > Folder OK!'
 fi
 
+if [ ! -d /opt/shcheck ]
+then
+	echo -e '! > shcheck not in /opt/shcheck'
+	exit 1
+else
+	echo -e '! > shcheck OK!'
+fi
+
 for i in $(cat $file)
 do
 	echo -e "Server: $i" | tee $folder/header_$i.txt
 	python3 /opt/shcheck/shcheck.py -ixkd http://$i | tee -a $folder/header_$i.txt
 	python3 /opt/shcheck/shcheck.py -ixkd https://$i | tee -a $folder/header_$i.txt
 done
+exit 0
