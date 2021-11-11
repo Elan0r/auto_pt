@@ -10,35 +10,19 @@ else
     #echo '! > Folder Created!'
 fi
 
-if [ -f /root/output/list/zero.txt ]; then
-    echo '! > list zero.txt available!'
-else
+nbtscan -e -f /root/output/list/ipup.txt > /root/output/list/nbtscan.txt
 
-    if [ -s /root/input/msf/ws.txt ]; then
-        echo '! >Workspace already set!'
-    else
-        read -p "Enter Workspace Name: " WS
-        echo 'workspace ' $WS > /root/input/msf/ws.txt
-    fi
-    
-    echo 'hosts -S Windows -c name,address -o /root/output/msf/zerohosts.txt' > /root/input/msf/zerohosts.txt
-    echo 'exit' >> /root/input/msf/zerohosts.txt
-    
-    msfconsole -qx "resource /root/input/msf/ws.txt resource /root/input/msf/zerohosts.txt"
-    awk '/"/ {print}' /root/output/msf/zerohosts.txt | grep -v '""' | cut -d '"' -f 2,4 | sed 's/"/ /' > /root/output/list/zero.txt
-fi
-
-if [ -s /root/output/list/zero.txt ]; then
-    echo '! > list zero.txt has hosts!'
+if [ -s /root/output/list/nbtscan.txt ]; then
+    echo '! > list nbtscan.txt has hosts!'
 else
     echo '! > no HOSTS!'
     exit 1
 fi
 
-printf '%sspool /root/output/msf/zerologon.txt\necho "ZeroLogon"\nuse auxiliary/admin/dcerpc/cve_2020_1472_zerologon\n' > /root/input/msf/zerologon.txt
-awk '// {printf"\nset nbname "$1"\nset rhosts "$2"\ncheck\n"}' /root/output/list/zero.txt >> /root/input/msf/zerologon.txt
-printf '%s\nexit\n' >> /root/input/msf/zerologon.txt
-msfconsole -qx "resource /root/input/msf/ws.txt resource /root/input/msf/zerologon.txt" > /dev/null
-echo '! > Check Done!'
+printf '%sspool /root/output/msf/zerologon.txt\necho "ZeroLogon"\nuse auxiliary/admin/dcerpc/cve_2020_1472_zerologon\n' > /root/input/msf/zerocheck.txt
+awk '// {printf"\nset nbname "$2"\nset rhosts "$1"\ncheck\nsleep 2\n"}' /root/output/list/nbtscan.txt >> /root/input/msf/zerocheck.txt
+printf '%s\nexit\n' >> /root/input/msf/zerocheck.txt
+msfconsole -qx "resource /root/input/msf/ws.txt resource /root/input/msf/zerocheck.txt" > /dev/null
+echo '! > Zerologon Check Done!'
 
 exit 0
