@@ -148,6 +148,15 @@ else
     cd /opt
     https://github.com/nnposter/nndefaccts.git
 fi
+#UNICORN
+if [ -d /opt/unicorn ]; then
+    cd /opt/unicorn
+    git stash
+    git pull
+else
+    cd /opt
+    https://github.com/trustedsec/unicorn.git
+fi
 #Go
 cd /opt
 go install github.com/ropnop/kerbrute@latest
@@ -174,9 +183,12 @@ fi
 #Special
 #impacket ADCS
 if [ -d /opt/impacket ]; then
-    cd /opt/impacket
-    git stash
-    git pull
+    rm -r /opt/impacket
+    cd /opt
+    git clone https://github.com/ExAndroidDev/impacket.git
+    cd impacket
+    git checkout ntlmrelayx-adcs-attack
+    python3 setup.py install
 else
     cd /opt
     git clone https://github.com/ExAndroidDev/impacket.git
