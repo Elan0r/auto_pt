@@ -2,10 +2,12 @@ fast alles geklaut von <b>CHO</b> <br>
 <br>
 First try of automating PT as good as possible -> as Failsave as Possible<br>
 <br>
-first start <b>passive_recon.sh</b> for netdiscover, PCredz and 5 min TCPdump in tmux <br>
-this should run the whole test to gather all Credz -> beware it's <b>dfitmux.conf</b>!<br>
+Install all requirements + X via <b>tool-install</b><br>
+<br>
+First start <b>passive_recon.sh</b> for netdiscover (passive!), PCredz and 5 min TCPdump in tmux <br>
+PCredz should run during the whole test to gather all Credz -> beware it's started in <b>dfitmux.conf</b>!<br>
 <small>maybe not compatible with iTerm tmux integration.</small><br><br>
-enter <b>tmux a</b>, create a new window and start <b>auto_pt.sh</b>.<br>
+enter <b>tmux a</b>, create a new window (crtl b + c) and start <b>auto_pt.sh</b>.<br>
 Auto_PT creates runtime.txt for Performance and Evidence in case of an Incident. Mind the <b>local</b> time!<br>
 Auto_PT requests Workspace for MSF.<br>
 Auto_PT "Modules":<br>
