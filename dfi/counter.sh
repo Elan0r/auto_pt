@@ -92,8 +92,8 @@ cat  /root/output/loot/intern/ssdp/amplification/hosts.txt | cut -d . -f 1,2,3 |
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "Minolta_Password_Extract" >> /root/output/loot/intern/findings.txt
-wc -l /root/output/loot/intern/ssdp/amplification/hosts.txt >> /root/output/loot/intern/findings.txt
-cat  /root/output/loot/intern/ssdp/amplification/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/printer/extract/hosts.txt >> /root/output/loot/intern/findings.txt
+cat  /root/output/loot/intern/printer/extract/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "SNMP_V1V2" >> /root/output/loot/intern/findings.txt
