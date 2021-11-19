@@ -211,6 +211,8 @@ mkdir -p /root/output/loot/intern/vmware/ova
 awk '/The target is vulnerable. Unauthenticated endpoint access granted./ {print$2}' /root/output/msf/vmware.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/vmware/ova/hosts.txt
 mkdir -p /root/output/loot/intern/vmware/vrops
 #missing AWK
+mkdir -p /root/output/loot/intern/vmware/ceip
+awk '/CEIP is fully enabled/ {print$2}' /root/output/msf/vmware.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/vmware/ceip/hosts.txt
 
 ### VoIP
 mkdir -p /root/output/loot/intern/voip/h323
