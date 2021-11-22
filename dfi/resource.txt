@@ -154,6 +154,11 @@ services -u -p 23 -R
 run
 sleep 5
 
+auxiliary/scanner/telnet/telnet_login
+services -u -p 23 -R
+run
+sleep 5
+
 echo "lantronix_telnet_version - Detect Lantronix telnet services"
 use auxiliary/scanner/telnet/lantronix_telnet_version
 services -u -p 9999 -R
