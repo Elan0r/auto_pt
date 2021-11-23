@@ -146,7 +146,7 @@ if [ -d /opt/nndefaccts ]; then
     git pull
 else
     cd /opt
-    https://github.com/nnposter/nndefaccts.git
+    git clone https://github.com/nnposter/nndefaccts.git
 fi
 #UNICORN
 if [ -d /opt/unicorn ]; then
@@ -155,7 +155,7 @@ if [ -d /opt/unicorn ]; then
     git pull
 else
     cd /opt
-    https://github.com/trustedsec/unicorn.git
+    git clone https://github.com/trustedsec/unicorn.git
 fi
 #Go
 cd /opt
@@ -218,6 +218,7 @@ else
     cd /opt/airgeddon
     bash airgeddon.sh
 fi
+/opp/hacking/nmap_scripts/nse_install.sh
 echo '! > '
 echo '! > Tools go to /opt!'
 echo '! > '
