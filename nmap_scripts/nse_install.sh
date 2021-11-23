@@ -17,4 +17,4 @@ cp /opt/nmap-vulners/http-vulners-regex.json /usr/share/nmap/nselib/data/
 cp /opt/nmap-vulners/http-vulners-paths.txt /usr/share/nmap/nselib/data/
 nmap --script-updatedb
 
-exit0
+exit 0
