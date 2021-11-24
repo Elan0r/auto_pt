@@ -218,7 +218,7 @@ else
     cd /opt/airgeddon
     bash airgeddon.sh
 fi
-/opp/hacking/nmap_scripts/nse_install.sh
+/opt/hacking/nmap_scripts/nse_install.sh
 echo '! > '
 echo '! > Tools go to /opt!'
 echo '! > '
