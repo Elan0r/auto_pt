@@ -92,7 +92,7 @@ if [ -d /opt/SIGRed_RCE_PoC ]; then
     git pull
 else
     cd /opt
-    git clonehttps://github.com/chompie1337/SIGRed_RCE_PoC
+    git clone https://github.com/chompie1337/SIGRed_RCE_PoC
 fi
 #PCredz
 if [ -d /opt/PCredz ]; then
