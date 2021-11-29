@@ -154,7 +154,8 @@ services -u -p 23 -R
 run
 sleep 5
 
-auxiliary/scanner/telnet/telnet_login
+echo "Telnet Login"
+use auxiliary/scanner/telnet/telnet_login
 services -u -p 23 -R
 run
 sleep 5
