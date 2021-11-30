@@ -201,6 +201,8 @@ mkdir -p /root/output/loot/intern/network/hps
 mkdir -p /root/output/loot/intern/network/lldp
 mkdir -p /root/output/loot/intern/network/stp
 mkdir -p /root/output/loot/intern/network/vtp
+mkdir -p /root/output/loot/intern/network/client_isolation
+mkdir -p /root/output/loot/intern/network/host-based_firewall
 
 ###VMware
 mkdir -p /root/output/loot/intern/vmware/vsan
