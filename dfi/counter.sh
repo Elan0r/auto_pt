@@ -137,8 +137,8 @@ cat /root/output/loot/intern/web/ilo/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "ZeroLogon" >> /root/output/loot/intern/findings.txt
-wc -l /root/output/loot/intern/rpc/zerologon/hosts.txt >> /root/output/loot/intern/findings.txt
-cat /root/output/loot/intern/rpc/zerologon/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/rpc/zero_logon/hosts.txt >> /root/output/loot/intern/findings.txt
+cat /root/output/loot/intern/rpc/zero_logon/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "NTP_Amp" >> /root/output/loot/intern/findings.txt
@@ -176,7 +176,7 @@ wc -l /root/output/loot/intern/web/iis_bypass/hosts.txt >> /root/output/loot/int
 cat /root/output/loot/intern/web/iis_bypass/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
-echo "SSE_Depricated" >> /root/output/loot/intern/findings.txt
+echo "SSH_Depricated" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/eol/ssh_depricated/hosts.txt >> /root/output/loot/intern/findings.txt
 cat /root/output/loot/intern/eol/ssh_depricated/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
