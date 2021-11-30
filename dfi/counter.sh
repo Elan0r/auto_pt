@@ -102,8 +102,8 @@ cat  /root/output/loot/intern/snmp/v1_v2c/hosts.txt | cut -d . -f 1,2,3 |sort -u
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "RPC_Portmap" >> /root/output/loot/intern/findings.txt
-wc -l /root/output/loot/intern/rpc/portmaper/hosts.txt >> /root/output/loot/intern/findings.txt
-cat  /root/output/loot/intern/rpc/portmaper/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/rpc/portmapper/hosts.txt >> /root/output/loot/intern/findings.txt
+cat  /root/output/loot/intern/rpc/portmapper/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "Printer_access" >> /root/output/loot/intern/findings.txt
