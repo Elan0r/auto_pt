@@ -99,8 +99,8 @@ mkdir -p /root/output/loot/intern/database/mysql/login
 awk '/LOGIN FAILED.*\(Incorrect: Access/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/database/mysql/login/hosts.txt
 
 ### RPC
-mkdir -p /root/output/loot/intern/rpc/portmaper
-awk '/\+.*SunRPC/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/portmaper/hosts.txt
+mkdir -p /root/output/loot/intern/rpc/portmapper
+awk '/\+.*SunRPC/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/portmapper/hosts.txt
 mkdir -p /root/output/loot/intern/rpc/endpointmap
 awk '/Endpoint Mapper (.*services)/ {print$1}' /root/output/msf/rpc.txt | sort -u > /root/output/loot/intern/rpc/endpointmap/hosts.txt
 mkdir -p /root/output/loot/intern/rpc/fuzzing
