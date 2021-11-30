@@ -296,6 +296,13 @@ services -p 623 -u -R
 run
 sleep 5
 
+spool /root/output/msf/ilo.txt
+echo "HP Lights-Out Bypass"
+use auxiliary/admin/hp/hp_ilo_create_admin_account
+hosts -S iLO -R
+check
+sleep-5
+
 spool /root/output/msf/ntp.txt
 echo "NTP Monlist"
 use scanner/ntp/ntp_monlist
