@@ -233,7 +233,7 @@ mkdir -p /root/output/loot/intern/creds/ups
 mkdir -p /root/output/loot/intern/creds/san
 grep '|' -B 6 /root/output/nmap/default-creds.nmap > /root/output/loot/intern/creds/creds.txt
 
-mkdir -p /root/ouput/loot/intern/web/ilo
+mkdir -p /root/output/loot/intern/web/ilo
 awk '/The target is vulnerable/{print$2}' /root/output/msf/ilo.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/web/ilo/hosts.txt
 
 ### Web
