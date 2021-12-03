@@ -145,6 +145,12 @@ services -u -p 110 -R
 run
 sleep 5
 
+echo "exchange_proxylogon - Proxylogon Check"
+use auxiliary/scanner/http/exchange_proxylogon
+services -u -p 587 -S Exchange -R
+run
+sleep 5
+
 spool /root/output/msf/telnet.txt
 echo "####TELNET####"
 
