@@ -23,4 +23,6 @@ rm /root/arp.cache
 rm /root/*.restore
 rm /root/*.pcap
 
+chattr -i /etc/resolv.conf
+
 echo "! > CLEAN!"
