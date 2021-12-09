@@ -24,5 +24,6 @@ rm /root/*.restore
 rm /root/*.pcap
 
 chattr -i /etc/resolv.conf
+rm /etc/resolv.conf.dhclient-new.* 
 
 echo "! > CLEAN!"
