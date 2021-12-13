@@ -160,6 +160,26 @@ else
     cd /opt
     git clone https://github.com/trustedsec/unicorn.git
 fi
+#noPAC / Sam_the_Admin CVE-2021-42278 and CVE-2021-42287 
+if [ -d /opt/sam-the-admin ]; then
+    cd /opt/sam-the-admin
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/WazeHell/sam-the-admin
+fi
+#byt3bl33der log4jcheck
+if [ -d /opt/log4jcheck ]; then
+    cd /opt/log4jcheck
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://gist.github.com/46661bc206d323e6770907d259e009b6.git
+    mv 46661bc206d323e6770907d259e009b6 log4jcheck
+fi
+
 #Go
 cd /opt
 go install github.com/ropnop/kerbrute@latest
