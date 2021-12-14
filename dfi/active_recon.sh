@@ -59,6 +59,15 @@ awk '/88\/open/ {print$2}' /root/output/nmap/service.gnmap  | sort -u > /root/ou
 awk '/445\/open/ {print$2}' /root/output/nmap/service.gnmap  | sort -u > /root/output/list/smb_open.txt
 awk '/443\/open/ {print$2}' /root/output/nmap/service.gnmap  | sort -u > /root/output/list/ssl_open.txt
 
+#sslscan 4 wak cipher
+if [ -s /root/output/msf/sslscan.txt ]; then
+   echo '! >> SSL Scan already Done'
+else
+    echo '! > Checking Weak Ciphers'
+    sslscan --targets=/root/output/list/ssl_open.txt > /root/output/msf/sslscan.txt &
+fi
+
+
 if [ -s /root/output/list/smb_sign_off.txt ]; then
    echo '! >> RELAY LIST EXISTS'
 else
