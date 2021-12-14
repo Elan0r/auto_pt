@@ -249,6 +249,10 @@ mkdir -p /root/output/loot/intern/web/services
 mkdir -p /root/output/loot/intern/web/index
 mkdir -p /root/output/loot/intern/web/php
 mkdir -p /root/output/loot/intern/web/iis_tilde
+mkdir -p /root/output/loot/intern/web/ssl
+grep -B 6 'TLSv1.1.*enabled' /root/output/msf/sslscan.txt > /root/output/loot/intern/web/ssl/prototls.txt
+grep -B 4 'SSLv3.*enabled' /root/output/msf/sslscan.txt > /root/output/loot/intern/web/ssl/protossl.txt
+cat /root/output/loot/intern/web/ssl/proto*.txt | awk '/Testing/ {print$4}' | sort -u > /root/output/loot/intern/web/ssl/hosts.txt
 
 ### SSH
 mkdir -p /root/output/loot/intern/ssh/root_login
