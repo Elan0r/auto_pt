@@ -76,6 +76,11 @@ wc -l /root/output/loot/intern/rpc/fuzzing/hosts.txt >> /root/output/loot/intern
 cat  /root/output/loot/intern/rpc/fuzzing/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
+echo "Weak_Cipher" >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/web/ssl/hosts.txt >> /root/output/loot/intern/findings.txt
+cat  /root/output/loot/intern/web/ssl/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+
 echo "MSSQL_login" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/database/mssql/login/hosts.txt >> /root/output/loot/intern/findings.txt
 cat  /root/output/loot/intern/database/mssql/login/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
