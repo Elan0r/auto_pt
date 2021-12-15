@@ -61,6 +61,11 @@ wc -l /root/output/loot/intern/ftp/anonymous/hosts.txt >> /root/output/loot/inte
 cat  /root/output/loot/intern/ftp/anonymous/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
+echo "SSH Root password login" >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/ssh/root_login/hosts.txt >> /root/output/loot/intern/findings.txt
+cat  /root/output/loot/intern/ssh/root_login/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+
 echo "FTP_Unencrypted" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/ftp/unencrypted/hosts.txt >> /root/output/loot/intern/findings.txt
 cat  /root/output/loot/intern/ftp/unencrypted/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
