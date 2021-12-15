@@ -256,5 +256,6 @@ cat /root/output/loot/intern/web/ssl/proto*.txt | awk '/Testing/ {print$4}' | so
 
 ### SSH
 mkdir -p /root/output/loot/intern/ssh/root_login
+grep -B 11 'password' /root/output/nmap/ssh.nmap > /root/output/loot/intern/ssh/root_login/login.txt
 
 exit 0
