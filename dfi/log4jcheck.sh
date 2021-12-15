@@ -27,7 +27,7 @@ fi
 for i in $(cat $file)
 do
 	echo -e "Server: $i" | tee $folder/jog4j_$i.txt
-	python3 /opt/log4jcheck/log4j_rce_check.py http://$i | tee -a $folder/log4j_$i.txt
-	python3 /opt/log4jcheck/log4j_rce_check.py https://$i | tee -a $folder/log4j_$i.txt
+	python3 /opt/log4jcheck/log4j_rce_check.py --timeout 3 http://$i | tee -a $folder/log4j_$i.txt
+	python3 /opt/log4jcheck/log4j_rce_check.py --timeout 3 https://$i | tee -a $folder/log4j_$i.txt
 done
 exit 0
