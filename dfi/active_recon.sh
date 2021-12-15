@@ -73,7 +73,7 @@ if [ -s /root/output/nmap/ssh.nmap ]; then
    echo '! >> SSH ROOT login Scan already Done'
 else
     echo '! > Checking SSH Root login'
-    nmap -Pn -p 22 --script ssh-auth-methods --script-args="ssh.user=root" -iL /root/output/list/ssh_open.txt -oN ssh2.nmap &
+    nmap -Pn -p 22 --script ssh-auth-methods --script-args="ssh.user=root" -iL /root/output/list/ssh_open.txt -oN /root/output/nmap/ssh.nmap &
 fi
 
 if [ -s /root/output/list/smb_sign_off.txt ]; then
