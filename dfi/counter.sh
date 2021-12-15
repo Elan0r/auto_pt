@@ -106,6 +106,16 @@ wc -l /root/output/loot/intern/snmp/v1_v2c/hosts.txt >> /root/output/loot/intern
 cat  /root/output/loot/intern/snmp/v1_v2c/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
+echo "POP3" >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/mail/pop3/unencrypted/hosts.txt >> /root/output/loot/intern/findings.txt
+cat  /root/output/loot/intern/mail/pop3/unencrypted/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+
+echo "IMAP" >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/mail/imap/unencrypted/hosts.txt >> /root/output/loot/intern/findings.txt
+cat  /root/output/loot/intern/mail/imap/unencrypted/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+
 echo "RPC_Portmap" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/rpc/portmapper/hosts.txt >> /root/output/loot/intern/findings.txt
 cat  /root/output/loot/intern/rpc/portmapper/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
