@@ -179,6 +179,15 @@ else
     git clone https://gist.github.com/46661bc206d323e6770907d259e009b6.git
     mv 46661bc206d323e6770907d259e009b6 log4jcheck
 fi
+#certi.py
+if [ -d /opt/certi ]; then
+    cd /opt/certi
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/zer1t0/certi.git
+fi
 
 #Go
 cd /opt
@@ -204,21 +213,6 @@ else
 fi
 
 #Special
-#impacket ADCS
-if [ -d /opt/impacket ]; then
-    rm -r /opt/impacket
-    cd /opt
-    git clone https://github.com/ExAndroidDev/impacket.git
-    cd impacket
-    git checkout ntlmrelayx-adcs-attack
-    python3 setup.py install
-else
-    cd /opt
-    git clone https://github.com/ExAndroidDev/impacket.git
-    cd impacket
-    git checkout ntlmrelayx-adcs-attack
-    python3 setup.py install
-fi
 #PKINIT for PetitPotam
 if [ -d /opt/PKINITtools ]; then
     cd /opt/PKINITtools
