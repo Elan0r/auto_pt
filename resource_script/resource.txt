@@ -1,7 +1,5 @@
-workspace XXX
-mkdir /tmp/msf
 setg THREADS 150
-spool /tmp/msf/udp_scan.txt
+spool /root/output/msf/udp_scan.txt
 echo "####ADDITIONAL CHECKS####"
 
 echo "udp_probe - Detect common UDP services using sequential probes"
@@ -16,7 +14,7 @@ hosts -R
 run
 sleep 5
 
-spool /tmp/msf/dns.txt
+spool /root/output/msf/dns.txt
 echo "####DNS####"
 
 echo "DNS Amplification Scanner"
@@ -24,7 +22,7 @@ use auxiliary/scanner/dns/dns_amp
 hosts -R
 run
 sleep 5
-spool /tmp/msf/snmp.txt
+spool /root/output/msf/snmp.txt
 echo "####SNMP####"
 
 echo "snmp_login - This module logs in to SNMP devices using common community names"
@@ -33,7 +31,7 @@ services -u -p 161 -R
 set VERSION all
 run
 sleep 5
-spool /tmp/msf/ftp.txt
+spool /root/output/msf/ftp.txt
 echo "####FTP####"
 
 echo "ftp_version - Detect FTP Version - Set password for username"
@@ -48,7 +46,7 @@ use auxiliary/scanner/ftp/anonymous
 services -u -p 21 -R
 run
 sleep 5
-spool /tmp/msf/sql.txt
+spool /root/output/msf/sql.txt
 echo "####SQL####"
 
 echo "mssql_ping - This module simply queries the MSSQL instance for information"
@@ -58,7 +56,7 @@ run
 sleep 5
 
 echo "mssql_login"
-use scanner/mssql/mssql_login
+use auxiliary/scanner/mssql/mssql_login
 services -u -p 1433 -R
 set PASSWORD pass
 run
@@ -88,7 +86,7 @@ services -p 5432 -u -R
 run
 sleep 5
 
-spool /tmp/msf/smb.txt
+spool /root/output/msf/smb.txt
 echo "####SMB####"
 
 echo "smb_version - Display version information about each system"
@@ -129,7 +127,7 @@ services -u -p 445 -R
 run
 sleep 5
 
-spool /tmp/msf/mail.txt
+spool /root/output/msf/mail.txt
 echo "####MAIL####"
 
 echo "smtp_version - SMTP Banner Grabber"
@@ -138,14 +136,14 @@ services -u -p 25 -R
 run
 sleep 5
 
-#echo "smtp_relay - SMTP Server e-mail accept check"
-#use auxiliary/scanner/smtp/smtp_relay
-#services -u -p 25 -R
-#set MAILFROM sender@prosec-networks.com
-#set MAILTO recipient@prosec-networks.com
-#set EXTENDED true
-#run
-#sleep 5
+echo "smtp_relay - SMTP Server e-mail accept check"
+use auxiliary/scanner/smtp/smtp_relay
+services -u -p 25 -R
+set MAILFROM pt@prosec-networks.com
+set MAILTO pt@prosec-networks.com
+set EXTENDED true
+run
+sleep 5
 
 echo "smtp_enum - Enum valid SMTP users"
 use auxiliary/scanner/smtp/smtp_enum
@@ -172,11 +170,23 @@ services -u -p 110 -R
 run
 sleep 5
 
-spool /tmp/msf/telnet.txt
+echo "exchange_proxylogon - Proxylogon Check"
+use auxiliary/scanner/http/exchange_proxylogon
+services -u -p 587 -S Exchange -R
+run
+sleep 5
+
+spool /root/output/msf/telnet.txt
 echo "####TELNET####"
 
 echo "telnet_version - Detect telnet services"
 use auxiliary/scanner/telnet/telnet_version
+services -u -p 23 -R
+run
+sleep 5
+
+echo "Telnet Login"
+use auxiliary/scanner/telnet/telnet_login
 services -u -p 23 -R
 run
 sleep 5
@@ -193,7 +203,7 @@ services -u -p 23 -R
 run
 sleep 5
 
-spool /tmp/msf/ssh.txt
+spool /root/output/msf/ssh.txt
 echo "####SSH####"
 
 echo "ssh_version - Detect SSH VERSION"
@@ -202,17 +212,11 @@ services -u -s ssh -R
 run
 sleep 5
 
-spool /tmp/msf/printer.txt
+spool /root/output/msf/printer.txt
 echo "####PRINTER####"
 
 echo "printer_list_dir - This module lists a directory on a set of printers using the Printer Job Language (PJL) protocol"
 use auxiliary/scanner/printer/printer_list_dir
-services -u -p 9100 -R
-run
-sleep 5
-
-echo "printer_ready_message - Printer Status Grabber"
-use auxiliary/scanner/printer/printer_ready_message
 services -u -p 9100 -R
 run
 sleep 5
@@ -223,8 +227,18 @@ services -u -p 9100 -R
 run
 sleep 5
 
-spool /tmp/msf/vmware.txt
-echo "####VM#####"
+echo "Konica Minolta PW extractor"
+use auxiliary/gather/konica_minolta_pwd_extract
+set passwd 12345678
+services -u -p 50001 -R
+run
+sleep 5
+set passwd 1234567812345678
+run
+sleep 5
+
+spool /root/output/msf/vmware.txt
+echo "####VMware#####"
 
 echo "esx_fingerprint - VMware ESX_ESXi Version Info via web API"
 use auxiliary/scanner/vmware/esx_fingerprint
@@ -257,13 +271,20 @@ check
 sleep 5
 
 echo "VMware vRealize Operations (vROps) Manager SSRF RCE"
-use exploit/linux/http/vmware_vrops_mgr_ssrf_rce 
+use exploit/linux/http/vmware_vrops_mgr_ssrf_rce
 hosts -S vmware -R
 set srvport 8081
 check
 sleep 5
 
-spool /tmp/msf/rdp.txt
+echo "VMware vCenter Server Analytics (CEIP) Service File Upload"
+use exploit/linux/http/vmware_vcenter_analytics_file_upload
+hosts -S vCenter -R
+set srvport 8081
+check
+sleep 5
+
+spool /root/output/msf/rdp.txt
 echo "####RDP####"
 
 echo "RDP Scanner"
@@ -284,16 +305,7 @@ services -u -p 3389 -R
 run
 sleep 5
 
-spool /tmp/msf/http.txt
-echo "####HTTP/HTTPS####"
-
-echo "HTTP SSL Certificate Information"
-use auxiliary/scanner/http/ssl
-services -u -p 443 -R
-run
-sleep 5
-
-spool /tmp/msf/ipmi.txt
+spool /root/output/msf/ipmi.txt
 echo "####IPMI####"
 
 echo "IPMI Information Discovery"
@@ -310,23 +322,34 @@ sleep 5
 
 echo "IPMI Hashdump"
 use scanner/ipmi/ipmi_dumphashes
-set OUTPUT_HASHCAT_FILE /tmp/msf/ipmi_hashcat
+set OUTPUT_HASHCAT_FILE /root/output/loot/hashes/ipmi_hashcat
 services -p 623 -u -R
 run
 sleep 5
 
-spool /tmp/msf/ntp.txt
+spool /root/output/msf/ilo.txt
+echo "####HP iLO####"
+echo "HP Lights-Out Bypass"
+use auxiliary/admin/hp/hp_ilo_create_admin_account
+hosts -S iLO -R
+check
+sleep 5
+
+spool /root/output/msf/ntp.txt
+echo "####NTP####"
 echo "NTP Monlist"
 use scanner/ntp/ntp_monlist
 services -p 123 -u -R
 run
 sleep 5
 
-spool /tmp/msf/rpc.txt
+spool /root/output/msf/rpc.txt
 echo "RPC Endpoint Mapper"
 use auxiliary/scanner/dcerpc/endpoint_mapper
 services -p 135 -u -R
 run
+sleep 5
+services -p 135 -u
 sleep 5
 
 echo "SunRPC Portmapper"
@@ -334,13 +357,74 @@ use auxiliary/scanner/misc/sunrpc_portmapper
 services -p 111 -u -R
 run
 sleep 5
+services -p 111 -u
+sleep 5
 
-spool /tmp/msf/ldap.txt
+echo "Portmap Amplification"
+use auxiliary/scanner/portmap/portmap_amp
+services -p 111 -u -R
+run
+sleep 5
+
+spool /root/output/msf/ldap.txt
+echo "####LDAP####"
 echo "LDAP Hashdump"
 use auxiliary/gather/ldap_hashdump
 services -p 636 -u -R
 run
 sleep 5
+
+spool /root/output/msf/ssdp.txt
+echo "####SSDP####"
+echo "SSDP Amp"
+use auxiliary/scanner/upnp/ssdp_amp
+hosts -R
+run
+sleep 5
+
+spool /root/output/msf/web.txt
+echo "####WEB####"
+echo "HTTP SSL Certificate Information"
+use auxiliary/scanner/http/ssl
+services -u -p 443 -R
+run
+sleep 5
+
+echo "IIS Auth Bypass"
+use auxiliary/admin/http/iis_auth_bypass
+services -S IIS -R
+run
+sleep 5
+
+echo "http.sys mem dump ms15-034"
+use auxiliary/scanner/http/ms15_034_http_sys_memory_dump
+services -p 80 -R
+check
+
+spool /root/output/msf/vnc.txt
+echo "####VNC####"
+echo "VNC Versions"
+use auxiliary/scanner/vnc/vnc_none_auth
+services -p 5900 -R
+run
+sleep 5
+
+echo "VNC Sweep"
+use auxiliary/scanner/vnc/vnc_login
+set blank_passwords true
+services -p 5900 -R
+run
+sleep 5
+
 spool off
+
+echo "####Outputs####"
+
+hosts -o /root/output/list/msf_hosts.txt
+services -o /root/output/list/msf_services.txt
+hosts -S printer -o /root/output/list/msf_hosts_printer.txt
+services -S printer -o /root/output/list/msf_services_printer.txt
+db_export -f xml /root/output/msf/db_export.xml
+db_export -f pwdump /root/output/msf/pwdump.xml
 
 exit
