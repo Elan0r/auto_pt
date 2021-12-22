@@ -37,7 +37,7 @@ fi
 
 msfdb init
 echo '! > Start Metasploit Framework'
-msfconsole -qx "resource /root/input/msf/workspace.txt resource /opt/hacking/dfi/resource.txt" > /dev/null
+msfconsole -qx "resource /root/input/msf/workspace.txt resource /opt/hacking/resource_script/resource.txt" > /dev/null
 echo '! > MSF Done!'
 
 exit 0
