@@ -21,7 +21,7 @@ CME open SMB<br>
 create relay_lists -> manual use with Impacket<br>
 <br>
 <b>autosploit:</b><br>
-Metasploit ressource.txt in <b>hackin/resource_script/</b> Folder<br>
+Metasploit ressource.txt in <b>hacking/resource_script/</b> Folder<br>
 <br>
 <b>zerocheck:</b><br>
 Zerologon check with MSF, NetBIOS with nbtscan<br>
