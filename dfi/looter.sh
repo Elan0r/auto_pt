@@ -134,7 +134,7 @@ mkdir -p /root/output/loot/intern/ad/kerberos/kerberoasting
 mkdir -p /root/output/loot/intern/ad/kerberos/krbtgt
 mkdir -p /root/output/loot/intern/ad/kerberos/enumeration
 mkdir -p /root/output/loot/intern/ad/laps
-mkdir -p /root/output/loot/intern/ad/netsession
+mkdir -p /root/output/loot/intern/ad/session
 mkdir -p /root/output/loot/intern/ad/ntlm_auth
 mkdir -p /root/output/loot/intern/ad/passpol
 mkdir -p /root/output/loot/intern/ad/quota
@@ -202,7 +202,9 @@ mkdir -p /root/output/loot/intern/network/lldp
 mkdir -p /root/output/loot/intern/network/stp
 mkdir -p /root/output/loot/intern/network/vtp
 mkdir -p /root/output/loot/intern/network/client_isolation
+cp /root/output/nmap/service.nmap /root/output/loot/intern/network/client_isolation
 mkdir -p /root/output/loot/intern/network/host-based_firewall
+cp /root/output/nmap/service.nmap /root/output/loot/intern/network/host-based_firewall
 
 ###VMware
 mkdir -p /root/output/loot/intern/vmware/vsan
