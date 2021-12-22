@@ -160,14 +160,23 @@ else
     cd /opt
     git clone https://github.com/trustedsec/unicorn.git
 fi
-#noPAC / Sam_the_Admin CVE-2021-42278 and CVE-2021-42287 
+#Sam_the_Admin CVE-2021-42278 and CVE-2021-42287 
 if [ -d /opt/sam-the-admin ]; then
     cd /opt/sam-the-admin
     git stash
     git pull
 else
     cd /opt
-    git clone https://github.com/WazeHell/sam-the-admin
+    git clone https://github.com/WazeHell/sam-the-admin.git
+fi
+#noPAC CVE-2021-42278 and CVE-2021-42287
+if [ -d /opt/noPac ]; then
+    cd /opt/noPac
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/Ridter/noPac.git
 fi
 #byt3bl33der log4jcheck
 if [ -d /opt/log4jcheck ]; then
