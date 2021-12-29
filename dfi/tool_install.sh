@@ -178,16 +178,6 @@ else
     cd /opt
     git clone https://github.com/Ridter/noPac.git
 fi
-#byt3bl33der log4jcheck
-if [ -d /opt/log4jcheck ]; then
-    cd /opt/log4jcheck
-    git stash
-    git pull
-else
-    cd /opt
-    git clone https://gist.github.com/46661bc206d323e6770907d259e009b6.git
-    mv 46661bc206d323e6770907d259e009b6 log4jcheck
-fi
 #certi.py
 if [ -d /opt/certi ]; then
     cd /opt/certi
@@ -196,6 +186,17 @@ if [ -d /opt/certi ]; then
 else
     cd /opt
     git clone https://github.com/zer1t0/certi.git
+fi
+#PKINIT
+if [ -d /opt/PKINITtools ]; then
+    cd /opt/PKINITtools
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/dirkjanm/PKINITtools.git
+    cd /opt/PKINITtools
+    pip3 install --upgrade -r requirements.txt
 fi
 
 #Go
@@ -222,17 +223,7 @@ else
 fi
 
 #Special
-#PKINIT for PetitPotam
-if [ -d /opt/PKINITtools ]; then
-    cd /opt/PKINITtools
-    git stash
-    git pull
-else
-    cd /opt
-    git clone https://github.com/dirkjanm/PKINITtools.git
-    cd /opt/PKINITtools
-    pip3 install --upgrade -r requirements.txt
-fi
+
 #airgeddon
 if [ -d /opt/airgeddon ]; then
     cd /opt/airgeddon
