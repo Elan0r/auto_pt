@@ -72,8 +72,8 @@ mkdir -p /root/output/loot/intern/eol/ssh_depricated
 awk '/\-1.99/ {print$2}' /root/output/msf/ssh.txt |cut -d : -f 1 | sort -u > /root/output/loot/intern/eol/ssh_depricated/hosts.txt
 
 ### TELNET
-mkdir -p /root/output/loot/intern/telnet
-awk '/\+.*:23/ {print$2}' /root/output/msf/telnet.txt  | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/telnet/hosts.txt
+mkdir -p /root/output/loot/intern/telnet/unencrypted
+awk '/\+.*:23/ {print$2}' /root/output/msf/telnet.txt  | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/telnet/unencrypted/hosts.txt
 
 ### SMB
 mkdir -p /root/output/loot/intern/smb/eternal_blue
