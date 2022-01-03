@@ -17,6 +17,9 @@ nmap -> Egress<br>
 nmap -> IP Up Hosts<br>
 nmap -> default Creds<br>
 nmap -> Service scan<br>
+create Service lists -> for other toolz<br>
+sslscan -> weak Ciphers <br>
+nmap - Root login check - needs recheck!<br>
 CME open SMB<br>
 create relay_lists -> manual use with Impacket<br>
 <br>
