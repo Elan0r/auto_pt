@@ -22,8 +22,8 @@ cat  /root/output/loot/intern/ad/netbios/hosts.txt | cut -d . -f 1,2,3 |sort -u 
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "Telnet" >> /root/output/loot/intern/findings.txt
-wc -l /root/output/loot/intern/telnet/hosts.txt >> /root/output/loot/intern/findings.txt
-cat  /root/output/loot/intern/telnet/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/telnet/unencrypted/hosts.txt >> /root/output/loot/intern/findings.txt
+cat  /root/output/loot/intern/telnet/unencrypted/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "IPMI_Cipher" >> /root/output/loot/intern/findings.txt
