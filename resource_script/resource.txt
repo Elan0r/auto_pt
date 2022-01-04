@@ -401,17 +401,6 @@ set SSL true
 run
 sleep 5
 
-echo "IIS shortname Scanner/Tilde Character"
-use auxiliary/scanner/http/iis_shortname_scanner
-services -p 80 -S Microsoft -R
-check
-sleep 5
-services -p 443 -S Microsoft -R
-set rport 443
-set SSL true
-check
-sleep 5
-
 echo "http.sys mem dump ms15-034"
 use auxiliary/scanner/http/ms15_034_http_sys_memory_dump
 services -p 80 -S Microsoft -R
@@ -421,6 +410,22 @@ services -p 443 -S Microsoft -R
 set rport 443
 set SSL true
 check
+sleep 5
+
+spool /root/output/msf/iis_tilde.txt
+echo "IIS shortname Scanner/Tilde Character"
+use auxiliary/scanner/http/iis_shortname_scanner
+services -p 80 -S Microsoft -R
+check
+sleep 5
+run
+sleep 5
+services -p 443 -S Microsoft -R
+set rport 443
+set SSL true
+check
+sleep 5
+run
 sleep 5
 
 spool /root/output/msf/vnc.txt
