@@ -196,6 +196,11 @@ wc -l /root/output/loot/intern/web/iis_bypass/hosts.txt >> /root/output/loot/int
 cat /root/output/loot/intern/web/iis_bypass/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
+echo "IIS_Tilde/Shortname" >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/web/iis_tilde/hosts.txt >> /root/output/loot/intern/findings.txt
+cat /root/output/loot/intern/web/iis_tilde/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+
 echo "SSH_Depricated" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/eol/ssh_depricated/hosts.txt >> /root/output/loot/intern/findings.txt
 cat /root/output/loot/intern/eol/ssh_depricated/hosts.txt | cut -d . -f 1,2,3 |sort -u >> /root/output/loot/intern/findings.txt
