@@ -187,6 +187,7 @@ sleep 5
 
 echo "Telnet Login"
 use auxiliary/scanner/telnet/telnet_login
+set BlANK_PASSWORDS true
 services -u -p 23 -R
 run
 sleep 5
