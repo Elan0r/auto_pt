@@ -160,14 +160,14 @@ else
     cd /opt
     git clone https://github.com/trustedsec/unicorn.git
 fi
-#Sam_the_Admin CVE-2021-42278 and CVE-2021-42287 
-if [ -d /opt/sam-the-admin ]; then
-    cd /opt/sam-the-admin
+#SPachine CVE-2021-42278 
+if [ -d /opt/Pachine ]; then
+    cd /opt/Pachine
     git stash
     git pull
 else
     cd /opt
-    git clone https://github.com/WazeHell/sam-the-admin.git
+    git clone https://github.com/ly4k/Pachine.git
 fi
 #noPAC CVE-2021-42278 and CVE-2021-42287
 if [ -d /opt/noPac ]; then
