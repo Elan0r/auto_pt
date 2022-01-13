@@ -252,10 +252,10 @@ mkdir -p /root/output/loot/intern/web/index
 mkdir -p /root/output/loot/intern/web/php
 mkdir -p /root/output/loot/intern/web/iis_tilde
 awk '/The target is vulnerable/{print$2}' /root/output/msf/iis_tilde.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/web/iis_tilde/hosts.txt
-mkdir -p /root/output/loot/intern/web/ssl
-grep -B 6 'TLSv1.1.*enabled' /root/output/msf/sslscan.txt > /root/output/loot/intern/web/ssl/prototls.txt
-grep -B 4 'SSLv3.*enabled' /root/output/msf/sslscan.txt > /root/output/loot/intern/web/ssl/protossl.txt
-awk '/Testing/ {print$4}' /root/output/loot/intern/web/ssl/proto*.txt | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | sort -u > /root/output/loot/intern/web/ssl/hosts.txt
+mkdir -p /root/output/loot/intern/web/tls
+grep -B 6 'TLSv1.1.*enabled' /root/output/msf/sslscan.txt > /root/output/loot/intern/web/tls/prototls.txt
+grep -B 4 'SSLv3.*enabled' /root/output/msf/sslscan.txt > /root/output/loot/intern/web/tls/protossl.txt
+awk '/Testing/ {print$4}' /root/output/loot/intern/web/tls/proto*.txt | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | sort -u > /root/output/loot/intern/web/tls/hosts.txt
 
 ### SSH
 mkdir -p /root/output/loot/intern/ssh/root_login
