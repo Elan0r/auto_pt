@@ -255,7 +255,7 @@ awk '/The target is vulnerable/{print$2}' /root/output/msf/iis_tilde.txt | cut -
 mkdir -p /root/output/loot/intern/web/ssl
 grep -B 6 'TLSv1.1.*enabled' /root/output/msf/sslscan.txt > /root/output/loot/intern/web/ssl/prototls.txt
 grep -B 4 'SSLv3.*enabled' /root/output/msf/sslscan.txt > /root/output/loot/intern/web/ssl/protossl.txt
-cat /root/output/loot/intern/web/ssl/proto*.txt | awk '/Testing/ {print$4}' | sort -u > /root/output/loot/intern/web/ssl/hosts.txt
+awk '/Testing/ {print$4}' /root/output/loot/intern/web/ssl/proto*.txt | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | sort -u > /root/output/loot/intern/web/ssl/hosts.txt
 
 ### SSH
 mkdir -p /root/output/loot/intern/ssh/root_login
