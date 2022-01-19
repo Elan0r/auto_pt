@@ -10,6 +10,13 @@ else
     #echo '! > Folder Created!'
 fi
 
+if [ -s /root/input/ipint.txt ]; then
+    echo '! > IPs OK '
+else
+    echo "! >> ipint.txt is missing in /root/input/ipint.txt."
+	exit 1
+fi
+
 read -p "Enter Workspace Name: " WS
 echo 'workspace -d ' $WS > /root/input/msf/workspace.txt
 echo 'workspace -a ' $WS >> /root/input/msf/workspace.txt
