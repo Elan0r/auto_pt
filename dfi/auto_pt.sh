@@ -66,7 +66,7 @@ date >> /root/output/runtime.txt
 echo "! > Count the Loot!"
 /opt/hacking/dfi/counter.sh
 
-echo '! > PT Done xD'
+figlet 'Auto PT Done'
 
 echo "Finish PT" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
