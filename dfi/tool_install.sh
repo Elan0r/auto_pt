@@ -15,6 +15,9 @@ else
     fi
 fi
 
+#CME Cleaning
+rm -r /root/.cme
+
 #APT
 apt -qq update
 apt -qq install bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip libpcap-dev yersinia golang eyewitness enum4linux -y
