@@ -201,6 +201,15 @@ else
     cd /opt/PKINITtools
     pip3 install --upgrade -r requirements.txt
 fi
+#LDAP Scan Tool
+if [ -d /opt/LdapRelayScan ]; then
+    cd /opt/LdapRelayScan
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/zyn3rgy/LdapRelayScan.git
+fi
 
 #Go
 cd /opt
