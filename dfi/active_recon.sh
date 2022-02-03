@@ -29,6 +29,10 @@ if [ -s /root/output/list/ipup.txt ]; then
     echo '! >> nmap PE already Done!'
 else
     echo '! > NMAP PE Scan    FAST'
+
+echo "Start PE Scan" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
+
     nmap -e eth0 -PE -sn -n --max-retries 2 -oA /root/output/nmap/pe -iL /root/input/ipint.txt > /dev/null 2>&1
     #Piping the IP-Addresses of the Targets to a file
     awk '/Up/ {print$2}' /root/output/nmap/pe.gnmap | sort -u > /root/output/list/ipup.txt
@@ -47,10 +51,12 @@ fi
 if [ -s /root/output/nmap/service.gnmap ]; then
     echo '! >> SERVICE nmap already Done!'
 else
-    #NMAP SSV SC Alles
-    echo '! > NMAP SSV SC   SLOW!'
+    echo '! > NMAP SSVC   SLOW!'
 
-    nmap -e eth0 -sSV -sC -Pn -oA /root/output/nmap/service -iL /root/output/list/ipup.txt > /dev/null 2>&1
+echo "Start Service Scan" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
+
+    nmap -e eth0 -sSVC -Pn -oA /root/output/nmap/service -iL /root/output/list/ipup.txt > /dev/null 2>&1
     echo ''
 fi
 
@@ -82,8 +88,12 @@ if [ -s /root/output/list/smb_sign_off.txt ]; then
    echo '! >> RELAY LIST EXISTS'
 else
     echo '! > BUILDING CME SMB RELAY LIST'
+
+echo "Start CME build Relay List" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
+
     #Using Crackmap to Check which of the IP's with 445 open have Signing:false
-    crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt > /root/output/cme_beauty.txt
+    crackmapexec smb /root/output/list/smb_open.txt --gen-relay-list /root/output/list/smb_sign_off.txt > /root/output/cme_beauty.txt 2>&1
 fi
 
 #Create Relay LISTs
