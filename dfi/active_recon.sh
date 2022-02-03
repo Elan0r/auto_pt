@@ -20,6 +20,7 @@ fi
 if [ -s /root/output/nmap/egress.nmap ]; then
     echo '! > Egress Filter Test already Done!'
 else
+    echo '! > Egress Filter Background Job start!'
     nmap -e eth0 -oA /root/output/nmap/egress portquiz.net > /dev/null 2>&1 &
 fi
 
@@ -38,6 +39,7 @@ fi
 if [ -s /root/output/nmap/default-creds.nmap ]; then
     echo '! > Default-Creds test already done!'
 else
+    echo '! > Default-Creds Background Job start!'
     nmap -e eth0 -oA /root/output/nmap/default-creds -iL /root/output/list/ipup.txt -p 80,443,8080,8443 --script http-default-accounts --script-args http-default-accounts.fingerprintfile=/opt/nndefaccts/http-default-accounts-fingerprints-nndefaccts.lua > /dev/null 2>&1 &
 fi
 
@@ -62,10 +64,10 @@ awk '/22\/open/ {print$2}' /root/output/nmap/service.gnmap  | sort -u > /root/ou
 
 #sslscan 4 weak cipher
 if [ -s /root/output/msf/sslscan.txt ]; then
-   echo '! >> SSL Scan already Done'
+   echo '! >> SSL Scan already Done.'
 else
-    echo '! > Checking Weak Ciphers'
-    sslscan --targets=/root/output/list/ssl_open.txt > /root/output/msf/sslscan.txt &
+    echo '! > Weak Ciphers Background Job start!'
+    sslscan --targets=/root/output/list/ssl_open.txt > /root/output/msf/sslscan.txt 2>&1 &
 fi
 
 #Root login check
@@ -73,7 +75,7 @@ if [ -s /root/output/nmap/ssh.nmap ]; then
    echo '! >> SSH ROOT login Scan already Done'
 else
     echo '! > Checking SSH Root login'
-    nmap -Pn -p 22 --script ssh-auth-methods --script-args="ssh.user=root" -iL /root/output/list/ssh_open.txt -oN /root/output/nmap/ssh.nmap > /dev/null &
+    nmap -Pn -p 22 --script ssh-auth-methods --script-args="ssh.user=root" -iL /root/output/list/ssh_open.txt -oN /root/output/nmap/ssh.nmap > /dev/null 2>&1 &
 fi
 
 if [ -s /root/output/list/smb_sign_off.txt ]; then
