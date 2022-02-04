@@ -82,8 +82,8 @@ cat  /root/output/loot/intern/rpc/fuzzing/hosts.txt | cut -d . -f 1,2,3 | sort -
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "PS-TN-2020-0057 Weak_Cipher" >> /root/output/loot/intern/findings.txt
-wc -l /root/output/loot/intern/web/ssl/hosts.txt >> /root/output/loot/intern/findings.txt
-cat  /root/output/loot/intern/web/ssl/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/web/tls/hosts.txt >> /root/output/loot/intern/findings.txt
+cat  /root/output/loot/intern/web/tls/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "PS-TN-2020-0063 MSSQL_login" >> /root/output/loot/intern/findings.txt
