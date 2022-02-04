@@ -138,7 +138,7 @@ echo "" >> /root/output/loot/intern/findings.txt
 
 echo "PS-TN-2021-0072 Endpointmap" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/rpc/endpointmap/hosts.txt >> /root/output/loot/intern/findings.txt
-cat /root/output/loot/intern/rpc/endpointmap/hosts.txt | cut -d . -f 1,2,3 |sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+cat /root/output/loot/intern/rpc/endpointmap/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "PS-TN-2021-0073 RPC_Portmap" >> /root/output/loot/intern/findings.txt
