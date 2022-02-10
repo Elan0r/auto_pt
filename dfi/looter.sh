@@ -141,6 +141,8 @@ mkdir -p /root/output/loot/intern/ad/quota
 mkdir -p /root/output/loot/intern/ad/description
 mkdir -p /root/output/loot/intern/ad/gpp_password
 mkdir -p /root/output/loot/intern/ad/iam
+mkdir -p /root/output/loot/intern/ad/adcs
+mkdir -p /root/output/loot/intern/ad/rights
 
 ### DNS
 mkdir -p /root/output/loot/intern/dns/amplification
@@ -201,6 +203,7 @@ mkdir -p /root/output/loot/intern/network/hps
 mkdir -p /root/output/loot/intern/network/lldp
 mkdir -p /root/output/loot/intern/network/stp
 mkdir -p /root/output/loot/intern/network/vtp
+mkdir -p /root/output/loot/intern/network/trunk
 mkdir -p /root/output/loot/intern/network/client_isolation
 cp /root/output/nmap/service.nmap /root/output/loot/intern/network/client_isolation
 mkdir -p /root/output/loot/intern/network/host-based_firewall
@@ -225,6 +228,7 @@ mkdir -p /root/output/loot/intern/voip/rtp
 
 ### LDAP
 mkdir -p /root/output/loot/intern/ldap/signing
+mkdir -p /root/output/loot/intern/ldap/nopac
 
 ### Creds
 mkdir -p /root/output/loot/intern/creds/bmc
