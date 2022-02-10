@@ -210,6 +210,15 @@ else
     cd /opt
     git clone https://github.com/zyn3rgy/LdapRelayScan.git
 fi
+#LDAP Domain Dump
+if [ -d /opt/ldapdomaindump ]; then
+    cd /opt/ldapdomaindump
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/dirkjanm/ldapdomaindump.git
+fi
 
 #Go
 cd /opt
