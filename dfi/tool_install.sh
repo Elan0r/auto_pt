@@ -26,7 +26,7 @@ apt -qq install bettercap crackmapexec nbtscan responder metasploit-framework do
 searchsploit -u
 
 #PIP3
-pip3 install ldap3 Cython python-libpcap bloodhound pyx scapy mitm6 impacket minikerberos
+pip3 install --upgrade ldap3 Cython python-libpcap bloodhound pyx scapy mitm6 impacket minikerberos
 
 #go env
 if [ -d /opt/go ]; then
