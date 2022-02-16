@@ -219,6 +219,26 @@ else
     cd /opt
     git clone https://github.com/dirkjanm/ldapdomaindump.git
 fi
+#webclientservicescanner
+if [ -d /opt/WebclientServiceScanner ]; then
+    cd /opt/WebclientServiceScanner
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/Hackndo/WebclientServiceScanner.git
+    cd /opt/WebclientServiceScanner
+    python3 ./setup.py install
+fi
+#krbrelayx
+if [ -d /opt/krbrelayx ]; then
+    cd /opt/krbrelayx
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/dirkjanm/krbrelayx.git
+fi
 
 #Go
 cd /opt
