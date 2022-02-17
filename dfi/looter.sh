@@ -141,8 +141,10 @@ mkdir -p /root/output/loot/intern/ad/quota
 mkdir -p /root/output/loot/intern/ad/description
 mkdir -p /root/output/loot/intern/ad/gpp_password
 mkdir -p /root/output/loot/intern/ad/iam
+mkdir -p /root/output/loot/intern/ad/iam/local_admin
 mkdir -p /root/output/loot/intern/ad/adcs
-mkdir -p /root/output/loot/intern/ad/rights
+mkdir -p /root/output/loot/intern/ad/iam/rights
+mkdir -p /root/output/loot/intern/ad/iam/gmsa
 
 ### DNS
 mkdir -p /root/output/loot/intern/dns/amplification
