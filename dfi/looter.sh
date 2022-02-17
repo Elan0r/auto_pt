@@ -266,6 +266,6 @@ awk '/Testing/ {print$4}' /root/output/loot/intern/web/tls/proto*.txt | sed "s,\
 ### SSH
 mkdir -p /root/output/loot/intern/ssh/root_login
 grep -B 11 'password' /root/output/nmap/ssh.nmap > /root/output/loot/intern/ssh/root_login/login.txt
-awk 'Nmap scan' /root/output/loot/intern/ssh/root_login/login.txt | sort -u > /root/output/loot/intern/ssh/root_login/hosts.txt
+awk '/ for / {print$5}' /root/output/loot/intern/ssh/root_login/login.txt | sort -u > /root/output/loot/intern/ssh/root_login/hosts.txt
 
 exit 0
