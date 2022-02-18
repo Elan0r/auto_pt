@@ -20,7 +20,7 @@ tmux rename-window 'Passive-Recon'
 figlet -w 90 ProSecPassiveRecon > /dev/pts/1
 figlet -w 90 ProSecPassiveRecon > /dev/pts/0
 
-tmux send 'netdiscover -p -L -i eth0 | tee -a /root/output/netdiscover' ENTER
+tmux send 'netdiscover -p -L -i eth0 | tee -a /root/output/netdiscover.txt' ENTER
 tmux split-window
 tmux send 'python3 /opt/PCredz/Pcredz -i eth0 -ctv' ENTER
 tmux split-window
