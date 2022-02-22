@@ -247,6 +247,8 @@ if [ -d /opt/Certipy ]; then
 else
     cd /opt
     git clone https://github.com/ly4k/Certipy.git
+    cd /opt/Certipy
+    python3 setup.py install
 fi
 
 #Go
