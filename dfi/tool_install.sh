@@ -239,6 +239,15 @@ else
     cd /opt
     git clone https://github.com/dirkjanm/krbrelayx.git
 fi
+#Certipy 2.0
+if [ -d /opt/Certipy ]; then
+    cd /opt/Certipy
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/ly4k/Certipy.git
+fi
 
 #Go
 cd /opt
