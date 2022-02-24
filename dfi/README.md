@@ -51,3 +51,6 @@ My tmux Config, some kind of special.<br>
 <br>
 <b>zshrc</b><br>
 my .zshrc, Kali 2020.4 with "seperate command line".<br>
+<br>
+<b>customqueries</b>
+Custom Bloodhound 4.1 queries. File goes to ~/Library/Application Support/bloodhound<br>
