@@ -1,4 +1,5 @@
 fast alles geklaut von <b>CHO</b> <br>
+<code>Hello fellas, or as we say in Germany: “Hallo Freunde der fettfreien Leberwurst.”</code><br>
 <br>
 First try of automating PT as good as possible -> as Failsave as Possible<br>
 <br>
