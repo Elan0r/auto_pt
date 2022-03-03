@@ -10,6 +10,9 @@ else
     echo '! > Folder Created!'
 fi
 
+echo "Start lootcollector" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
+
 ### PCreds
 if [ -z '$(ls -A /opt/PCredz/logs)' ]; then
    echo '! >'
