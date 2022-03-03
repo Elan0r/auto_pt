@@ -10,6 +10,9 @@ else
     #echo '! > Folder Created!'
 fi
 
+echo "Start zerocheck" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
+
 nbtscan -e -f /root/output/list/ipup.txt > /root/output/list/nbtscan.txt
 
 if [ -s /root/output/list/nbtscan.txt ]; then
