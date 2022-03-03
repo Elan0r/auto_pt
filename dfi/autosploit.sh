@@ -35,6 +35,9 @@ else
    echo 'SHD_MANAGER' > /usr/share/metasploit-framework/data/wordlists/ipmi_users.txt
 fi
 
+echo "Start autosploit" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
+
 msfdb init
 echo '! > Start Metasploit Framework'
 msfconsole -qx "resource /root/input/msf/workspace.txt /opt/hacking/resource_script/resource.txt" > /dev/null
