@@ -22,6 +22,7 @@ use auxiliary/scanner/dns/dns_amp
 hosts -R
 run
 sleep 5
+
 spool /root/output/msf/snmp.txt
 echo "####SNMP####"
 
@@ -31,6 +32,7 @@ services -u -p 161 -R
 set VERSION all
 run
 sleep 5
+
 spool /root/output/msf/ftp.txt
 echo "####FTP####"
 
@@ -46,6 +48,7 @@ use auxiliary/scanner/ftp/anonymous
 services -u -p 21 -R
 run
 sleep 5
+
 spool /root/output/msf/sql.txt
 echo "####SQL####"
 
@@ -330,6 +333,7 @@ sleep 5
 
 spool /root/output/msf/ilo.txt
 echo "####HP iLO####"
+
 echo "HP Lights-Out Bypass"
 use auxiliary/admin/hp/hp_ilo_create_admin_account
 hosts -S iLO -R
@@ -338,6 +342,7 @@ sleep 5
 
 spool /root/output/msf/ntp.txt
 echo "####NTP####"
+
 echo "NTP Monlist"
 use scanner/ntp/ntp_monlist
 services -p 123 -u -R
@@ -369,6 +374,7 @@ sleep 5
 
 spool /root/output/msf/ldap.txt
 echo "####LDAP####"
+
 echo "LDAP Hashdump"
 use auxiliary/gather/ldap_hashdump
 services -p 636 -u -R
@@ -377,6 +383,7 @@ sleep 5
 
 spool /root/output/msf/ssdp.txt
 echo "####SSDP####"
+
 echo "SSDP Amp"
 use auxiliary/scanner/upnp/ssdp_amp
 hosts -R
@@ -385,6 +392,7 @@ sleep 5
 
 spool /root/output/msf/web.txt
 echo "####WEB####"
+
 echo "HTTP SSL Certificate Information"
 use auxiliary/scanner/http/ssl
 services -u -p 443 -R
@@ -431,6 +439,7 @@ sleep 5
 
 spool /root/output/msf/vnc.txt
 echo "####VNC####"
+
 echo "VNC Versions"
 use auxiliary/scanner/vnc/vnc_none_auth
 services -p 5900 -R
@@ -446,8 +455,10 @@ sleep 5
 
 spool /root/output/msf/log4j.txt
 echo "####Log4Shell####"
+
 date >> /root/output/runtime.txt
 echo "####Log4Shell####" >> /root/output/runtime.txt
+
 use auxiliary/scanner/http/log4shell_scanner
 set srvhost eth0
 services -p 80 -R
