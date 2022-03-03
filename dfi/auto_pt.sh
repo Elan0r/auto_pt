@@ -30,38 +30,23 @@ date >> /root/output/runtime.txt
 echo '! > Start Active Recon'
 /opt/hacking/dfi/active_recon.sh
 
-echo "Start autosploit" >> /root/output/runtime.txt
-date >> /root/output/runtime.txt
-
 echo '! > Start Metasploit'
 /opt/hacking/dfi/autosploit.sh
-
-echo "Start zerocheck" >> /root/output/runtime.txt
-date >> /root/output/runtime.txt
 
 echo '! > Start Zerocheck'
 /opt/hacking/dfi/zerocheck.sh
 
-echo "Start fast_relay" >> /root/output/runtime.txt
-date >> /root/output/runtime.txt
+echo '! > Start Log4Check'
+/opt/hacking/dfi/log4check.sh
 
 echo '! > Start Relay'
 /opt/hacking/dfi/fast_relay.sh
 
-echo "Start Eyewitness" >> /root/output/runtime.txt
-date >> /root/output/runtime.txt
-
 echo '! > make some Screens'
 /opt/hacking/dfi/eyewitness.sh
 
-echo "Start lootcollector" >> /root/output/runtime.txt
-date >> /root/output/runtime.txt
-
 echo "! > grab the loot!"
 /opt/hacking/dfi/looter.sh
-
-echo "Start Finding Counter" >> /root/output/runtime.txt
-date >> /root/output/runtime.txt
 
 echo "! > Count the Loot!"
 /opt/hacking/dfi/counter.sh
@@ -70,3 +55,5 @@ figlet 'Auto PT Done'
 
 echo "Finish PT" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
+
+exit 0
