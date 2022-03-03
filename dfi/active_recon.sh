@@ -16,6 +16,9 @@ else
     mkdir -p /root/output/nmap /root/output/list
 fi
 
+echo "Start ActiveRecon" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
+
 #NMAP portquiz.net -> egress filter
 if [ -s /root/output/nmap/egress.nmap ]; then
     echo '! > Egress Filter Test already Done!'
