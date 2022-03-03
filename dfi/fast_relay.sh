@@ -20,6 +20,9 @@ else
     mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot /root/output/msf
 fi
 
+echo "Start fast_relay" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
+
 #NMAP PE SCAN
 if [ -s /root/output/list/ipup.txt ]; then
 	echo '! > nmap PE already done'
