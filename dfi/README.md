@@ -30,6 +30,9 @@ Metasploit ressource.txt in <b>hacking/resource_script/</b> Folder<br>
 <b>zerocheck:</b><br>
 Zerologon check with MSF, NetBIOS with nbtscan<br>
 <br>
+<b>log4check:</b><br>
+Log4J Log4Shell check with MSF, resource log4j.txt in <b>hacking/resource_script/</b> Folder<br>
+<br>
 <b>fast_relay:</b><br>
 5 min responder and relay vs SMB.<br>
 <br>
