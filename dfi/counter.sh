@@ -1,6 +1,9 @@
 #!/bin/bash
 figlet -w 94 ProSecCounter
 
+echo "Start Finding Counter" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
+
 echo "PS-TN-2020-0005 smb_signing" > /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/smb/smb_signing/hosts.txt >> /root/output/loot/intern//findings.txt
 cat  /root/output/loot/intern/smb/smb_signing/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
