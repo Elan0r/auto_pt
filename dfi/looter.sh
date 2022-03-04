@@ -271,4 +271,8 @@ mkdir -p /root/output/loot/intern/ssh/root_login
 grep -B 11 'password' /root/output/nmap/ssh.nmap > /root/output/loot/intern/ssh/root_login/login.txt
 awk '/ for / {print$5}' /root/output/loot/intern/ssh/root_login/login.txt | sort -u > /root/output/loot/intern/ssh/root_login/hosts.txt
 
+### Monitoring
+mkdir -p /root/output/loot/intern/monitoring/ids_ips
+
+
 exit 0
