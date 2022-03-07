@@ -252,7 +252,7 @@ sleep 5
 
 echo "VMware vRealize Operations (vROps) Manager SSRF RCE"
 use exploit/linux/http/vmware_vrops_mgr_ssrf_rce
-hosts -S vmware -R
+services S vmware -R
 set srvport 8081
 check
 sleep 5
@@ -332,7 +332,7 @@ echo "####HP iLO####"
 
 echo "HP Lights-Out Bypass"
 use auxiliary/admin/hp/hp_ilo_create_admin_account
-hosts -S iLO -R
+services -S iLO -R
 check
 sleep 5
 
