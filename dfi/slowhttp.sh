@@ -19,9 +19,9 @@ then
 else
 	echo -e '! > Folder OK!'
 fi
-time=10
+
 echo -e ''
-read -p 'Test Time in SECONDS (10 is default) : ' time
+read -p 'Test Time in SECONDS (10 could be OK) : ' time
 
 for i in $(cat $file) 
 do 
