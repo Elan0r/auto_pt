@@ -149,6 +149,11 @@ wc -l /root/output/loot/intern/rpc/portmapper/hosts.txt >> /root/output/loot/int
 cat  /root/output/loot/intern/rpc/portmapper/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
+echo "PS-TN-2022-0007 Lantronix" >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/creds/lantronix/hosts.txt >> /root/output/loot/intern/findings.txt
+cat  /root/output/loot/intern/creds/lantronix/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+
 echo "PS-TN-2020-0010 BlueKeep" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/rdp/bluekeep/hosts.txt >> /root/output/loot/intern/findings.txt
 cat /root/output/loot/intern/rdp/bluekeep/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
