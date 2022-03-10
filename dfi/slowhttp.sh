@@ -3,21 +3,33 @@ figlet ProSecSlowHTTP
 
 echo -e ''
 read -p 'File with Domains for SlowHTTP (no http/https): ' file
-if [ -s $file ]; then
-    echo '! > FILE OK '
-else
-    echo "! >> NO File"
+if [ -z "$file" ];
+then
+	echo -e '! > set File!'
 	exit 1
+else
+	if [ -s $file ]; then
+    	echo '! > FILE OK '
+	else
+   		echo "! >> NO File"
+		exit 1
+	fi
 fi
 
 echo -e ''
 read -p 'Where to save? (no end / ): ' folder
-if [ ! -d $folder ]
+if [ -z "$folder" ];
 then
-	mkdir -p $folder
-	echo -e '! > Folder Created at '$folder
+	echo -e '! > set Folder!'
+	exit 1
 else
-	echo -e '! > Folder OK!'
+	if [ ! -d $folder ]
+	then
+		mkdir -p $folder
+		echo -e '! > Folder Created at '$folder
+	else
+		echo -e '! > Folder OK!'
+	fi
 fi
 
 echo -e ''
