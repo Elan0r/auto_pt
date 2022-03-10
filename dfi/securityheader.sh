@@ -5,6 +5,13 @@ read -p 'File with Domains/IPs for Headercheck (no http/https): ' file
 echo -e ''
 read -p 'Where to save?: ' folder
 
+if [ -s $file ]; then
+    echo '! > FILE OK '
+else
+    echo "! >> NO File"
+	exit 1
+fi
+
 if [ ! -d $folder ]
 then
 	mkdir -p $folder
