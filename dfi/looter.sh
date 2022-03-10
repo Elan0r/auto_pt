@@ -236,6 +236,9 @@ mkdir -p /root/output/loot/intern/ldap/signing
 mkdir -p /root/output/loot/intern/ldap/nopac
 
 ### Creds
+mkdir -p /root/output/loot/intern/creds/lantronix
+grep -B 3 'Press Enter for Setup Mode' /root/output/msf/telnet.txt > /root/output/loot/intern/creds/lantronix/raw.txt
+awk '/\+/{print$2}' /root/output/loot/intern/creds/lantronix/raw.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/creds/lantronix/hosts.txt
 mkdir -p /root/output/loot/intern/creds/bmc
 mkdir -p /root/output/loot/intern/creds/network
 mkdir -p /root/output/loot/intern/creds/phone
