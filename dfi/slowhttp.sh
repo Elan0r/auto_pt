@@ -21,7 +21,14 @@ else
 fi
 
 echo -e ''
-read -p 'Test Time in SECONDS (10 could be OK) : ' time
+read -p 'Test Time in SECONDS (default 10) : ' time
+if [ -z "$time" ];
+then
+	time=10
+	echo -e '! > Time = '$time
+else
+	echo -e '! > Time = '$time
+fi
 
 for i in $(cat $file) 
 do 
