@@ -1,6 +1,6 @@
 #!/bin/bash
 apt -qq install figlet -y > /dev/null
-figlet ProSecToolz
+figlet ProSecBoxToolz
 echo '! > '
 echo '! > Tools go to /opt + ln -s to /root/tools'
 echo '! > '
