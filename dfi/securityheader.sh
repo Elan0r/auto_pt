@@ -2,28 +2,44 @@
 figlet -w 105 ProSecSecurityHeader
 echo -e ''
 read -p 'File with Domains/IPs for Headercheck (no http/https): ' file
-echo -e ''
-read -p 'Where to save?: ' folder
 
-if [ -s $file ]; then
-    echo '! > FILE OK '
-else
-    echo "! >> NO File"
+if [ -z "$file" ];
+then
+	echo -e '! > set File!'
 	exit 1
+else
+	if [ -s $file ]; then
+  		echo '! > FILE OK '
+	else
+	    echo "! >> NO File"
+		exit 1
+	fi
 fi
 
-if [ ! -d $folder ]
+echo -e ''
+read -p 'Where to save?: ' folder
+if [ -z "$folder" ];
 then
-	mkdir -p $folder
-	echo -e '! > Folder Created at '$folder
+	echo -e '! > set Folder!'
+	exit 1
 else
-	echo -e '! > Folder OK!'
+	if [ ! -d $folder ]
+	then
+		mkdir -p $folder
+		echo -e '! > Folder Created at '$folder
+	else
+		echo -e '! > Folder OK!'
+	fi
 fi
 
 if [ ! -d /opt/shcheck ]
 then
 	echo -e '! > shcheck not in /opt/shcheck'
-	exit 1
+	echo -e '! > Installing ...'
+	cd /opt
+	git clone https://github.com/santoru/shcheck.git
+	cd /opt/shcheck
+	python3 setup.py install
 else
 	echo -e '! > shcheck OK!'
 fi
