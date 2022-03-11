@@ -142,7 +142,7 @@ mkdir -p /root/output/loot/intern/ad/session
 mkdir -p /root/output/loot/intern/ad/ntlm_auth
 mkdir -p /root/output/loot/intern/ad/passpol
 mkdir -p /root/output/loot/intern/ad/quota
-mkdir -p /root/output/loot/intern/ad/description
+mkdir -p /root/output/loot/intern/ad/user_description
 mkdir -p /root/output/loot/intern/ad/gpp_password
 mkdir -p /root/output/loot/intern/ad/iam
 mkdir -p /root/output/loot/intern/ad/iam/local_admin
