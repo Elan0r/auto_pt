@@ -47,7 +47,7 @@ if [ -s /root/output/nmap/default-creds.nmap ]; then
     echo '! > Default-Creds test already done!'
 else
     echo '! > Default-Creds Background Job start!'
-    nmap -e eth0 -oA /root/output/nmap/default-creds -iL /root/output/list/ipup.txt -p 80,443,8080,8443 --script http-default-accounts --script-args http-default-accounts.fingerprintfile=/opt/nndefaccts/http-default-accounts-fingerprints-nndefaccts.lua > /dev/null 2>&1 &
+    nmap -e eth0 -n -oA /root/output/nmap/default-creds -iL /root/output/list/ipup.txt -p 80,443,8080,8443 --script http-default-accounts --script-args http-default-accounts.fingerprintfile=/opt/nndefaccts/http-default-accounts-fingerprints-nndefaccts.lua > /dev/null 2>&1 &
 fi
 
 #NMAP Service Scan
@@ -59,7 +59,7 @@ else
 echo "Start Service Scan" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 
-    nmap -e eth0 -sSVC -Pn -oA /root/output/nmap/service -iL /root/output/list/ipup.txt > /dev/null 2>&1
+    nmap -e eth0 -sSVC -n -Pn -oA /root/output/nmap/service -iL /root/output/list/ipup.txt > /dev/null 2>&1
     echo ''
 fi
 
