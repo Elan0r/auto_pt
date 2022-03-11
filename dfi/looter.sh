@@ -136,6 +136,7 @@ mkdir -p /root/output/loot/intern/ad/kerberos/delegation
 mkdir -p /root/output/loot/intern/ad/kerberos/kerberoasting
 mkdir -p /root/output/loot/intern/ad/kerberos/krbtgt
 mkdir -p /root/output/loot/intern/ad/kerberos/enumeration
+mkdir -p /root/output/loot/intern/ad/kerberos/passwd_spray
 mkdir -p /root/output/loot/intern/ad/laps
 mkdir -p /root/output/loot/intern/ad/session
 mkdir -p /root/output/loot/intern/ad/ntlm_auth
@@ -146,6 +147,9 @@ mkdir -p /root/output/loot/intern/ad/gpp_password
 mkdir -p /root/output/loot/intern/ad/iam
 mkdir -p /root/output/loot/intern/ad/iam/local_admin
 mkdir -p /root/output/loot/intern/ad/adcs
+mkdir -p /root/output/loot/intern/ad/adcs/esc8
+mkdir -p /root/output/loot/intern/ad/adcs/esc2
+mkdir -p /root/output/loot/intern/ad/adcs/esc1
 mkdir -p /root/output/loot/intern/ad/iam/rights
 mkdir -p /root/output/loot/intern/ad/iam/gmsa
 
