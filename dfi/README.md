@@ -68,3 +68,9 @@ my .zshrc, Kali 2020.4 with "seperate command line" and 💀.<br>
 <br>
 <b>customqueries</b><br>
 Custom Bloodhound 4.1 queries. File goes to ~/Library/Application Support/bloodhound<br>
+Additional queries when using the backend for exports "like" <b>plumhound</b><br>
+Accessible via <code>http://127.0.0.1:7474/browser/</code><br>
+<br>
+<code>MATCH (u:User) return u.name, u.displayname, u.description</code> for username + description<br>
+<code>MATCH (c:Computer) WHERE c.haslaps=FALSE RETURN c.name, c.haslaps</code> for Computer without LAPS<br>
+<code>MATCH (c:Computer)-[:MemberOf]->(t:Group) WHERE t.name =~ "(?i)DOMÄNENCONTROLLER.*" RETURN c.name</code> for all DCs (german Domain) <small>(for cme or other tools)</small><br>
