@@ -31,16 +31,16 @@ CME open SMB<br>
 create relay_lists -> manual use with Impacket<br>
 <br>
 <b>autosploit:</b><br>
-Metasploit <code>ressource.txt</code> in <code>/opt/hacking/resource_script/</code> Folder<br>
+<b>Metasploit-framework</b> <code>ressource.txt</code> in <code>/opt/hacking/resource_script/</code> Folder<br>
 <br>
 <b>zerocheck:</b><br>
-Zerologon check with MSF, NetBIOS with nbtscan<br>
+Zerologon check with <b>MSF</b>, NetBIOS with <b>nbtscan</b><br>
 <br>
 <b>log4check:</b><br>
-Log4J Log4Shell check with MSF, resource <code>log4j.txt</code> in <code>/opt/hacking/resource_script/</code> Folder<br>
+Log4J Log4Shell check with <b>MSF</b>, resource <code>log4j.txt</code> in <code>/opt/hacking/resource_script/</code> Folder<br>
 <br>
 <b>fast_relay:</b><br>
-5 min responder and relay vs <code>/root/output/list/smb_sign_off.txt</code>.<br>
+5 min <b>responder</b> and <b>impacket-ntlmrelayx</b> vs <code>/root/output/list/smb_sign_off.txt</code>.<br>
 <br>
 <b>looter:</b><br>
 collect the loot, create internal Folders for "Automater"<br>
@@ -64,15 +64,16 @@ reads file to check Domains for slowhttp creates html + csv for Screens + Proof.
 <b>Additional Files</b><br>
 <br>
 <b>dfitmux.conf</b><br>
-My tmux Config, some kind of special, used in passive_recon.<br>
+My <b>tmux</b> Config, some kind of special, used in passive_recon.<br>
 <br>
 <b>zshrc</b><br>
-my .zshrc, Kali 2020.4 with "seperate command line" and 💀.<br>
+my <code>.zshrc</code>, Kali 2020.4 with "seperate command line" and 💀.<br>
 <br>
 <b>customqueries</b><br>
-Custom Bloodhound 4.1 queries. File goes to <code>\~/Library/Application Support/bloodhound</code><br>
+Custom <b>Bloodhound</b> 4.1 queries. File goes to <code>\~/Library/Application Support/bloodhound</code><br>
+<br>
 Additional queries when using the backend for exports "_like_" <b>plumhound</b><br>
-Accessible via <code>http://127.0.0.1:7474/browser/</code><br>
+Accessible via <code>http://127.0.0.1:7474/browser/</code> or <b>Neo4j Browser</b><br>
 <br>
 <code>MATCH (u:User) return u.name, u.displayname, u.description</code> for username + description<br>
 <code>MATCH (c:Computer) WHERE c.haslaps=FALSE RETURN c.name, c.haslaps</code> for Computer without LAPS<br>
