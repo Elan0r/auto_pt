@@ -19,16 +19,16 @@ enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_p
 <b>Auto_PT</b> "Modules":<br>
 <br>
 <b>active_recon:</b><br>
-nmap <code>/root/input/ipint.txt</code> -> Scope!<br>
-nmap -> Egress<br>
-nmap -> IP Up Hosts<br>
-nmap -> default Creds<br>
-nmap -> Service scan<br>
+<b>nmap</b> <code>/root/input/ipint.txt</code> -> Scope!<br>
+<b>nmap</b> -> Egress-filter<br>
+<b>nmap</b> -> IP Up Hosts<br>
+<b>nmap</b> -> default Creds<br>
+<b>nmap</b> -> Service scan<br>
 create Service lists -> for other toolz<br>
-sslscan -> weak Ciphers <br>
-nmap - Root login check - needs recheck!<br>
-CME open SMB<br>
-create relay_lists -> manual use with Impacket<br>
+<b>sslscan</b> -> weak Ciphers <br>
+<b>nmap</b> -> Root login check - needs recheck!<br>
+<b>CME</b> -> <code>smb_sign_off.txt</code><br>
+create <code>relay_lists</code> -> manual use with <b>impacket-ntlmrelayx</b><br>
 <br>
 <b>autosploit:</b><br>
 <b>Metasploit-framework</b> <code>ressource.txt</code> in <code>/opt/hacking/resource_script/</code> Folder<br>
