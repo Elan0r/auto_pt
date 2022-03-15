@@ -256,7 +256,7 @@ awk '/The target is vulnerable/{print$2}' /root/output/msf/ilo.txt | cut -d ":" 
 
 ### Web
 mkdir -p /root/output/loot/intern/web/iis_bypass
-grep -B 1 'You can bypass auth' /root/output/msf/web.txt > /root/output/loot/intern/web/iis_bypass/hosts.txt
+grep -B 1 'You can bypass auth' /root/output/msf/web.txt | awk '/against/ {print$5}' | sort -u > /root/output/loot/intern/web/iis_bypass/hosts.txt
 mkdir -p /root/output/loot/intern/web/ms15-034
 awk '/The target is vulnerable/{print$2}' /root/output/msf/web.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/web/ms15-034/hosts.txt
 mkdir -p /root/output/loot/intern/web/httpd
