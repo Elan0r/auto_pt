@@ -7,6 +7,7 @@ First try of automating PT as good as possible -> as Failsave as Possible<br>
 download this Repository to <code>/opt</code> via git clone <small>(full command is in 1Password with Token or via dfi)</small><br>
 Install all requirements + X via <b>tool-install.sh</b> in <code>/opt/hacking/dfi</code><br>
 <br>
+<b>intended usage</b><br>
 First start <b>passive_recon.sh</b> for netdiscover (passive!), PCredz and 5 min TCPdump in tmux <br>
 PCredz should run during the whole test to gather all Credz -> beware it's started in <b>dfitmux.conf</b>!<br>
 <small>maybe not compatible with iTerm tmux integration.</small><br><br>
