@@ -18,7 +18,7 @@ enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_p
 <b>Auto_PT</b> requests Workspace for <b>MSF</b>.<br>
 <br>
 <h2><details><summary><b>Auto_PT</b> "Modules":</summary></h2>
-    <h3><b>active_recon:</b></h3><br>
+    <b>active_recon:</b><br>
     <b>nmap</b> <code>/root/input/ipint.txt</code> -> Scope!<br>
     <b>nmap</b> -> Egress-filter<br>
     <b>nmap</b> -> IP Up Hosts<br>
