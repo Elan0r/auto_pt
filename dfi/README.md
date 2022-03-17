@@ -17,7 +17,7 @@ enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_p
 <b>Auto_PT</b> creates <code>/root/output/runtime.txt</code> for <i>Performance and Evidence</i> in case of an <i>Incident</i>. Mind the <b>local</b> time!<br>
 <b>Auto_PT</b> requests Workspace for <b>MSF</b>.<br>
 <br>
-<h2><details><summary><b>Auto_PT</b> "Modules":</summary></h2>
+<details><summary><h2><b>Auto_PT</b> "Modules":</h2></summary>
     <b>active_recon:</b><br>
     <b>nmap</b> <code>/root/input/ipint.txt</code> -> Scope!<br>
     <b>nmap</b> -> Egress-filter<br>
