@@ -63,13 +63,13 @@ enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_p
 </details>
 <br>
 <details><summary><h2>Additional Files</h2></summary>
-    <h3>dfitmux.conf</h3><br>
+    <h3>dfitmux.conf</h3>
     <b></b>My <b>tmux</b> Config, some kind of special, used in passive_recon.<br>
 <br>
-    <h3>zshrc</b><br>
+    <h3>zshrc</h3>
     <b></b>my <code>.zshrc</code>, Kali 2020.4 with "seperate command line" and 💀.<br>
 <br>
-    <h3>customqueries</h3><br>
+    <h3>customqueries</h3>
     <b></b>Custom <b>Bloodhound</b> 4.1 queries. File goes to <code>\~/Library/Application Support/bloodhound</code><br>
 <br>
     <b></b>Additional queries when using the backend for exports "_like_" <b>plumhound</b><br>
