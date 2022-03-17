@@ -19,7 +19,7 @@ enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_p
 <br>
 <details><summary><h2><b>Auto_PT</b> "Modules":</h2></summary>
     <h3><b>active_recon:</b></h3><br>
-    <b>nmap</b> <code>/root/input/ipint.txt</code> -> Scope!<br>
+    <b>nmap</b><code>/root/input/ipint.txt</code> -> Scope!<br>
     <b>nmap</b> -> Egress-filter<br>
     <b>nmap</b> -> IP Up Hosts<br>
     <b>nmap</b> -> default Creds<br>
@@ -27,20 +27,20 @@ enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_p
     <b></b>create Service lists -> for other toolz<br>
     <b>sslscan</b> -> weak Ciphers <br>
     <b>nmap</b> -> Root login check - needs recheck!<br>
-    <b>CME</b> -> <code>smb_sign_off.txt</code><br>
-    <b></b>create <code>relay_lists</code> -> manual use with <b>impacket-ntlmrelayx</b><br>
+    <b>CME</b> -><code>smb_sign_off.txt</code><br>
+    <b></b>create<code>relay_lists</code> -> manual use with<b>impacket-ntlmrelayx</b><br>
 <br>
     <h3><b>autosploit:</b></h3><br>
-    <b>Metasploit-framework</b> <code>ressource.txt</code> in <code>/opt/hacking/resource_script/</code> Folder<br>
+    <b>Metasploit-framework</b><code>ressource.txt</code> in<code>/opt/hacking/resource_script/</code> Folder<br>
 <br>
     <h3><b>zerocheck:</b></h3><br>
-    <b></b>Zerologon check with <b>MSF</b>, NetBIOS with <b>nbtscan</b><br>
+    <b></b>Zerologon check with<b>MSF</b>, NetBIOS with<b>nbtscan</b><br>
 <br>
     <h3><b>log4check:</b></h3><br>
-    <b></b>Log4J Log4Shell check with <b>MSF</b>, resource <code>log4j.txt</code> in <code>/opt/hacking/resource_script/</code> Folder<br>
+    <b></b>Log4J Log4Shell check with<b>MSF</b>, resource<code>log4j.txt</code> in<code>/opt/hacking/resource_script/</code> Folder<br>
 <br>
     <h3><b>fast_relay:</b></h3><br>
-    <b></b>5 min <b>responder</b> and <b>impacket-ntlmrelayx</b> vs <code>/root/output/list/smb_sign_off.txt</code>.<br>
+    <b></b>5 min<b>responder</b> and<b>impacket-ntlmrelayx</b> vs<code>/root/output/list/smb_sign_off.txt</code>.<br>
 <br>
     <h3><b>looter:</b></h3><br>
     <b></b>collect the loot, create internal Folders for "Automater"<br>
