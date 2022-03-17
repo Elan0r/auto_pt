@@ -62,7 +62,7 @@ enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_p
     <b></b>reads file to check Domains for slowhttp creates html + csv for Screens + Proof.<br>
 </details>
 <br>
-<details><summary><b>Additional Files</b></summary>
+<details><summary><h2><b>Additional Files</b>/h2></summary>
     <h3><b>dfitmux.conf</b></h3><br>
     <b></b>My <b>tmux</b> Config, some kind of special, used in passive_recon.<br>
 <br>
