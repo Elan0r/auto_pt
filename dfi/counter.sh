@@ -224,6 +224,16 @@ wc -l /root/output/loot/intern/vmware/ceip/hosts.txt >> /root/output/loot/intern
 cat /root/output/loot/intern/vmware/ceip/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
+echo "PS-TN-2022-0005 VMWARE_Log4Shell" >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/vmware/log4shell/hosts.txt >> /root/output/loot/intern/findings.txt
+cat /root/output/loot/intern/vmware/log4shell/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+
+echo "TBD Log4Shell" >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/web/log4shell/hosts.txt >> /root/output/loot/intern/findings.txt
+cat /root/output/loot/intern/web/log4shell/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+
 echo "PS-TN-2021-0029 DNS_Amp" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/dns/amplification/hosts.txt >> /root/output/loot/intern/findings.txt
 cat /root/output/loot/intern/dns/amplification/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
