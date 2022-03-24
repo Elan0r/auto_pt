@@ -57,7 +57,7 @@ for i in $(ls $folder/header_*.txt)
 do 
 	awk 'NR==1 || /Server/' $i >> $folder/tmpserver.txt
 done
-grep -B1 'IIS\|Apache/' $folder/tmpserver.txt > $folder/server.txt
+grep -B1 'IIS\|Apache/\|nginx/' $folder/tmpserver.txt > $folder/server.txt
 
 #X-Powered-By
 for i in $(ls $folder/header_*.txt)
@@ -78,20 +78,20 @@ for i in $(ls $folder/header_*.txt)
 do 
 	awk 'NR==1 || /Strict-Transport/' $i >> $folder/tmphsts.txt
 done
-grep -B1 'Missing' $folder/tmpxss.txt > $folder/hsts.txt
+grep -B1 'Missing' $folder/tmphsts.txt > $folder/hsts.txt
 
 #Content-Security
 for i in $(ls $folder/header_*.txt)
 do 
 	awk 'NR==1 || /Content-Security/' $i >> $folder/tmpcsp.txt
 done
-grep -B1 'Missing' $folder/tmpxss.txt > $folder/csp.txt
+grep -B1 'Missing' $folder/tmpcsp.txt > $folder/csp.txt
 
 #X-Frame Options
 for i in $(ls $folder/header_*.txt)
 do 
 	awk 'NR==1 || /X-Frame/' $i >> $folder/tmpxframe.txt
 done
-grep -B1 'Missing' $folder/tmpxss.txt > $folder/x-frame.txt
+grep -B1 'Missing' $folder/tmpxframe.txt > $folder/x-frame.txt
 
 exit 0
