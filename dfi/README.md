@@ -4,6 +4,8 @@ fast alles geklaut von <b>CHO</b> <br>
 <br>
 First try of automating PT as good as possible -> as Failsave as Possible<br>
 <br>
+The extern Tools were moved to <code>hacking/extern/</code>.<br>
+<br>
 <b>Installation</b><br>
 download this Repository to <code>/opt</code> via <b>git clone</b> <small>(full command is in 1Password with Token or via dfi)</small><br>
 Install all requirements + X via <b>tool-install.sh</b> in <code>/opt/hacking/dfi</code><br>
