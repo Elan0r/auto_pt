@@ -10,6 +10,10 @@ The extern Tools were moved to <code>hacking/extern/</code>.<br>
 download this Repository to <code>/opt</code> via <b>git clone</b> <small>(full command is in 1Password with Token or via dfi)</small><br>
 Install all requirements + X via <b>tool-install.sh</b> in <code>/opt/hacking/dfi</code><br>
 <br>
+<b>Updating</b><br>
+in the folder <code>/opt/hacking/</code> do <b>git pull</b>, than run <b>tool_install.sh</b>.<br>
+This updates all Tools.<br>
+<br>
 <b>intended usage</b><br>
 First start <b>passive_recon.sh</b> for <b>netdiscover</b> (passive!), <b>PCredz</b> and 5 min <b>TCPdump</b> in tmux.<br>
 <b>PCredz</b> should run during the whole test to gather all Credz -> beware it's started in <b>tmux</b> with <code>/opt/hacking/dfi/dfitmux.conf</code>!<br>
