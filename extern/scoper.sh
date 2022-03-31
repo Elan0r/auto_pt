@@ -2,7 +2,7 @@
 figlet -w 96 ProSecScoper
 
 echo -e ''
-read -p 'File with Domains for Scope Check (no http/https): ' file
+read -e -p 'File with Domains for Scope Check (no http/https): ' file
 if [ -z "$file" ];
 then
 	echo -e '! > set File!'
@@ -17,7 +17,7 @@ else
 fi
 
 echo -e ''
-read -p 'Where to save? (no end / ): ' folder
+read -e -p 'Where to save? (no end / ): ' folder
 if [ -z "$folder" ];
 then
 	echo -e '! > set Folder!'
