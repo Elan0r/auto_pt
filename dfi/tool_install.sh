@@ -20,7 +20,7 @@ rm -r /root/.cme
 
 #APT
 apt -qq update
-apt -qq install bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip libpcap-dev yersinia golang eyewitness enum4linux ipmitool -y
+apt -qq install tmux bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip libpcap-dev yersinia golang eyewitness enum4linux ipmitool -y
 
 #SearchSploit
 searchsploit -u
@@ -64,15 +64,6 @@ else
     cd /opt
     git clone https://github.com/topotam/PetitPotam.git
 fi
-#Proxyshell
-if [ -d /opt/proxyshell-poc ]; then
-    cd /opt/proxyshell-poc
-    git stash
-    git pull
-else
-    cd /opt
-    git clone https://github.com/dmaasland/proxyshell-poc.git
-fi
 #ESXi OpenSLP heap-overflow
 if [ -d /opt/CVE-2021-21974 ]; then
     cd /opt/CVE-2021-21974
@@ -81,15 +72,6 @@ if [ -d /opt/CVE-2021-21974 ]; then
 else
     cd /opt
     git clone https://github.com/Shadow0ps/CVE-2021-21974.git
-fi
-#SIGRed
-if [ -d /opt/CVE-2020-1350-DoS ]; then
-    cd /opt/CVE-2020-1350-DoS
-    git stash
-    git pull
-else
-    cd /opt
-    git clone https://github.com/maxpl0it/CVE-2020-1350-DoS.git
 fi
 #SIGRed RCE
 if [ -d /opt/SIGRed_RCE_PoC ]; then
@@ -108,15 +90,6 @@ if [ -d /opt/PCredz ]; then
 else
     cd /opt
     git clone https://github.com/lgandx/PCredz.git
-fi
-#Empire
-if [ -d /opt/Empire ]; then
-    cd /opt/Empire
-    git stash
-    git pull
-else
-    cd /opt
-    git clone https://github.com/EmpireProject/Empire.git
 fi
 #Enum4linux NG
 if [ -d /opt/enum4linux-ng ]; then
@@ -163,7 +136,7 @@ else
     cd /opt
     git clone https://github.com/trustedsec/unicorn.git
 fi
-#SPachine CVE-2021-42278 
+#Pachine CVE-2021-42278 
 if [ -d /opt/Pachine ]; then
     cd /opt/Pachine
     git stash
@@ -258,9 +231,6 @@ go install github.com/ropnop/go-windapsearch@latest
 go install github.com/sensepost/gowitness@latest
 
 #docker
-#Empire Docker
-cd /opt/Empire
-    docker pull empireproject/empire
 #Printnightmare Check
 if [ -d /opt/ItWasAllADream ]; then
     cd /opt/ItWasAllADream
