@@ -39,6 +39,9 @@ echo '! > Start Zerocheck'
 echo '! > Start Log4Check'
 /opt/hacking/dfi/log4check.sh
 
+echo '! > Start RPC 0 Check'
+/opt/hacking/dfi/rpc0.sh
+
 echo '! > Start Relay'
 /opt/hacking/dfi/fast_relay.sh
 
