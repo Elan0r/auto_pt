@@ -1,7 +1,7 @@
 #!/bin/bash
 figlet -w 105 ProSecSecurityHeader
 echo -e ''
-read -p 'File with Domains/IPs for Headercheck (no http/https): ' file
+read -e -p 'File with Domains/IPs for Headercheck (no http/https): ' file
 
 if [ -z "$file" ];
 then
@@ -17,7 +17,7 @@ else
 fi
 
 echo -e ''
-read -p 'Where to save?: ' folder
+read -e -p 'Where to save?: ' folder
 if [ -z "$folder" ];
 then
 	echo -e '! > set Folder!'
