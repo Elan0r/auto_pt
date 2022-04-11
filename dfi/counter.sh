@@ -164,6 +164,11 @@ wc -l /root/output/loot/intern/smb/eternal_blue/hosts.txt >> /root/output/loot/i
 cat /root/output/loot/intern/smb/eternal_blue/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
+echo "PS-TN-2020-0031 Heartbleed" >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/web/tls/heartbleed/hosts.txt >> /root/output/loot/intern/findings.txt
+cat /root/output/loot/intern/web/tls/heartbleed/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+
 echo "PS-TN-2020-0040 HP iLO Bypass" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/web/ilo/hosts.txt >> /root/output/loot/intern/findings.txt
 cat /root/output/loot/intern/web/ilo/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt

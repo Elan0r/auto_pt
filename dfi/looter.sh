@@ -274,6 +274,9 @@ mkdir -p /root/output/loot/intern/web/tls
 grep -B 6 'TLSv1.1.*enabled' /root/output/msf/sslscan.txt > /root/output/loot/intern/web/tls/prototls.txt
 grep -B 4 'SSLv3.*enabled' /root/output/msf/sslscan.txt > /root/output/loot/intern/web/tls/protossl.txt
 awk '/Testing/ {print$4}' /root/output/loot/intern/web/tls/proto*.txt | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | sort -u > /root/output/loot/intern/web/tls/hosts.txt
+mkdir -p /root/output/loot/intern/web/tls/heartbleed
+grep -v 'not vulnerable' /root/output/msf/sslscan.txt | grep -B 22 vulnerable | grep Connected |cut -d ' ' -f 3 > /root/output/loot/intern/web/tls/heartbleed/hosts.txt
+grep -v 'not vulnerable' /root/output/msf/sslscan.txt | grep -B 22 vulnerable > /root/output/loot/intern/web/tls/heartbleed/raw.txt
 mkdir -p /root/output/loot/intern/web/log4shell
 awk '/Log4Shell found/{print}' /root/output/msf/log4j.txt | grep -v 'vsphere' | awk '//{print$2}' | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/web/log4shell/hosts.txt
 
