@@ -268,6 +268,7 @@ mkdir -p /root/output/loot/intern/web/jboss
 mkdir -p /root/output/loot/intern/web/services
 mkdir -p /root/output/loot/intern/web/index
 mkdir -p /root/output/loot/intern/web/php
+mkdir -p /root/output/loot/intern/web/nginx
 mkdir -p /root/output/loot/intern/web/iis_tilde
 awk '/The target is vulnerable/{print$2}' /root/output/msf/iis_tilde.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/web/iis_tilde/hosts.txt
 mkdir -p /root/output/loot/intern/web/tls
