@@ -1,4 +1,4 @@
-## Social Engineering BCC Inserter
+## Social Engineering EML Inserter
 - Dieses Skript ermögtlicht das Automatisierte Einfügen von Mails aus einer Liste in die EML Header "Bcc:" & "To:" hierbei muss ausgewählt werdne wie viele Mails per Header erwünscht sind.
 - Anschließend werden alle erstellten EML Dateien gezippt.
 
