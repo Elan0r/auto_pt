@@ -46,8 +46,28 @@ echo 'db_import '$FOLDER'/output/nmap/service.xml' >> $FOLDER/output/msf/workspa
 
 nmap -sSV -n -Pn --max-retries 5 -oA $FOLDER/output/nmap/service -iL $HOSTS  > /dev/null 2>&1
 
-sed -e "s%spool /root%spool $FOLDER%g" $RES > $FOLDER/output/msf/tmp.txt
-sed -e "s%services.*%set rhosts file:$HOSTS%g" $FOLDER/output/msf/tmp.txt  > $FOLDER/output/msf/resource.txt
+#MSF Resource File
+printf '%ssetg THREADS 150\nset VERBOSE true\n' > $FOLDER/output/msf/resource.txt
+#log4shell
+printf '%s\nspool '$FOLDER'/output/msf/log4j.txt\necho "log4j"\nuse auxiliary/scanner/http/log4shell_scanner\n' >> $FOLDER/output/msf/resource.txt
+awk '// {printf"\nset rhosts "$1"\nset vhost "$1"\nset rport 80\nrun\nsleep 5\nset rport 8080\nrun\nsleep 5\nset ssl true\nset rport 443\nrun\nsleep5\nset rport 8443\n"}' $HOSTS >> $FOLDER/output/msf/resource.txt
+#proxyshell
+printf '%s\nspool '$FOLDER'/output/msf/mail.txt\necho "ProxyShell"\nuse auxiliary/scanner/http/exchange_proxylogon\n' >> $FOLDER/output/msf/resource.txt
+awk '// {printf"\nset rhosts "$1"\nset vhost "$1"\nrun\nsleep 5\n"}' $HOSTS >> $FOLDER/output/msf/resource.txt
+#IIS_Bypass
+printf '%s\nspool '$FOLDER'/output/msf/web.txt\necho "IIS_Auth_Bypass"\nuse auxiliary/admin/http/iis_auth_bypass\n' >> $FOLDER/output/msf/resource.txt
+awk '// {printf"\nset rhosts "$1"\nset vhost "$1"\nrun\nsleep 5\n"}' $HOSTS >> $FOLDER/output/msf/resource.txt
+#IIS_ms15-034
+printf '%s\necho "IIS_ms15_034"\nuse auxiliary/admin/http/iis_auth_bypass\n' >> $FOLDER/output/msf/resource.txt
+awk '// {printf"\nset rhosts "$1"\nset vhost "$1"\nrun\nsleep 5\n"}' $HOSTS >> $FOLDER/output/msf/resource.txt
+#IIS_Internal_IP
+printf '%s\necho "IIS_Internal_IP"\nuse auxiliary/scanner/http/iis_internal_ip\n' >> $FOLDER/output/msf/resource.txt
+awk '// {printf"\nset rhosts "$1"\nset vhost "$1"\nrun\nsleep 5\n"}' $HOSTS >> $FOLDER/output/msf/resource.txt
+#iis_tilde
+printf '%s\nspool '$FOLDER'/output/msf/iis_tilde.txt\necho "IIS_Tilde"\nuse auxiliary/scanner/http/iis_shortname_scanner\n' >> $FOLDER/output/msf/resource.txt
+awk '// {printf"\nset rhosts "$1"\nset vhost "$1"\nset rport 80\nrun\nsleep 5\nset ssl true\nset rport 443\nrun\nsleep 5\n"}' $HOSTS >> $FOLDER/output/msf/resource.txt
+#MSF Resource File End
+printf '%s\nspool off\nexit\n' >> /$folder/output/msf/resource.txt
 
 msfdb init
 msfconsole -qx "resource "$FOLDER"/output/msf/workspace.txt "$FOLDER"/output/msf/resource.txt"
