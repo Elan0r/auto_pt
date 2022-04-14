@@ -2,13 +2,6 @@
 
 figlet -w 95 ProSecExtAutoSploit
 
-read -e -p 'Path to Resource_script "extern.txt" from hacking Repo: ' RES
-if [ -z $RES ]
-then
-    echo '! > extern.txt missing here: '$RES
-    exit 1
-fi
-
 read -e -p 'File with Domains for MSF run (no http/https): ' HOSTS
 if [ -z $HOSTS ]
 then
