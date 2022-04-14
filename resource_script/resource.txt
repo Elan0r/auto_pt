@@ -345,6 +345,8 @@ run
 sleep 5
 
 spool /root/output/msf/rpc.txt
+echo "####RPC####"
+
 echo "RPC Endpoint Mapper"
 use auxiliary/scanner/dcerpc/endpoint_mapper
 services -p 135 -u -R

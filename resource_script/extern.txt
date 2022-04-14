@@ -1,0 +1,123 @@
+setg THREADS 150
+spool /root/output/msf/log4j.txt
+echo "####Log4Shell####"
+
+date >> /root/output/runtime.txt
+echo "####Log4Shell####" >> /root/output/runtime.txt
+
+use auxiliary/scanner/http/log4shell_scanner
+set srvhost eth0
+services -p 80 -R
+run
+sleep 5
+
+date >> /root/output/runtime.txt
+echo "Log4j Port 8080 NoSSL" >> /root/output/runtime.txt
+echo "Log4j Port 8080 NoSSL"
+set rport 8080
+services -p 8080 -R
+run
+sleep 5
+
+date >> /root/output/runtime.txt
+echo "Log4j Port 8080 SSL" >> /root/output/runtime.txt
+echo "Log4j Port 8080 SSL"
+services -p 8080 -R
+set ssl true
+run
+sleep 5
+
+date >> /root/output/runtime.txt
+echo "Log4j Port 443" >> /root/output/runtime.txt
+echo "Log4j Port 443"
+set rport 443
+set ssl true
+services -p 443 -R
+run
+sleep 5
+
+date >> /root/output/runtime.txt
+echo "Log4j Port 8443" >> /root/output/runtime.txt
+echo "Log4j Port 8443"
+set rport 8443
+set ssl true
+services -p 8443 -R
+run
+sleep 5
+date >> /root/output/runtime.txt
+echo "Log4j DONE" >> /root/output/runtime.txt
+
+spool /root/output/msf/ftp.txt
+echo "####FTP####"
+
+echo "ftp_version - Detect FTP Version - Set password for username"
+use auxiliary/scanner/ftp/ftp_version
+services -u -p 21 -R
+set FTPPASS ProSec_Networks
+run
+sleep 5
+
+echo "anonymous - Detect anonymous read_write FTP server access"
+use auxiliary/scanner/ftp/anonymous
+services -u -p 21 -R
+run
+sleep 5
+
+spool /root/output/msf/mail.txt
+echo "####MAIL####"
+
+echo "exchange_proxylogon - Proxylogon Check"
+use auxiliary/scanner/http/exchange_proxylogon
+services -u -p 587 -S Exchange -R
+run
+sleep 5
+
+spool /root/output/msf/web.txt
+echo "####WEB####"
+
+echo "HTTP SSL Certificate Information"
+use auxiliary/scanner/http/ssl
+services -u -p 443 -R
+run
+sleep 5
+
+echo "IIS Auth Bypass"
+use auxiliary/admin/http/iis_auth_bypass
+services -p 80 -S Microsoft -R
+run
+sleep 5
+services -p 443 -S Microsoft -R
+set rport 443
+set SSL true
+run
+sleep 5
+
+echo "http.sys mem dump ms15-034"
+use auxiliary/scanner/http/ms15_034_http_sys_memory_dump
+services -p 80 -S Microsoft -R
+check
+sleep 5
+services -p 443 -S Microsoft -R
+set rport 443
+set SSL true
+check
+sleep 5
+
+spool /root/output/msf/iis_tilde.txt
+echo "IIS shortname Scanner/Tilde Character"
+use auxiliary/scanner/http/iis_shortname_scanner
+services -p 80 -S Microsoft -R
+check
+sleep 5
+run
+sleep 5
+services -p 443 -S Microsoft -R
+set rport 443
+set SSL true
+check
+sleep 5
+run
+sleep 5
+
+spool off
+exit
