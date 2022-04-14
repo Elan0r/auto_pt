@@ -46,7 +46,8 @@ echo 'db_import '$FOLDER'/output/nmap/service.xml' >> $FOLDER/output/msf/workspa
 
 nmap -sSV -n -Pn --max-retries 5 -oA $FOLDER/output/nmap/service -iL $HOSTS
 
-sed -e "s%spool /root%spool $FOLDER%g" $RES > $FOLDER/output/msf/resource.txt
+sed -e "s%spool /root%spool $FOLDER%g" $RES > $FOLDER/output/msf/tmp.txt
+sed -e "s%services.*%set rhosts file:$HOSTS" $FOLDER/output/msf/tmp.txt  > $FOLDER/output/msf/resource.txt
 
 msfdb init
 msfconsole -qx "resource "$FOLDER"/output/msf/workspace.txt "$FOLDER"/output/msf/resource.txt"  > /dev/null 2>&1

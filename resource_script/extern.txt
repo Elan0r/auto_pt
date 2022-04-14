@@ -1,4 +1,5 @@
 setg THREADS 150
+setg verbose true
 spool /root/output/msf/log4j.txt
 echo "####Log4Shell####"
 
@@ -92,6 +93,16 @@ set SSL true
 check
 sleep 5
 
+echo "IIS Internal IP disclosure"
+use auxiliary/scanner/http/iis_internal_ip
+services -p 80 -S Microsoft -R
+run
+sleep 5
+set ssl true
+set rport 443
+run
+sleep 5
+
 spool /root/output/msf/iis_tilde.txt
 echo "IIS shortname Scanner/Tilde Character"
 use auxiliary/scanner/http/iis_shortname_scanner
@@ -107,6 +118,8 @@ check
 sleep 5
 run
 sleep 5
+
+
 
 spool off
 exit
