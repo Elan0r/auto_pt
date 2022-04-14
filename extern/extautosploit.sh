@@ -17,7 +17,7 @@ then
 fi
 
 read -e -p 'Where to save? (no end / ) will create "output" folder inside: ' FOLDER
-if [ [ -z $FOLDER ] || [ $FOLDER == "." ] || [ $FOLDER == "./" ] ]
+if [ -z $FOLDER ] || ( $FOLDER == "." ) || ( $FOLDER == "./" ) 
 then
 	FOLDER=$PWD
     echo -e '! > Folder is '$FOLDER
