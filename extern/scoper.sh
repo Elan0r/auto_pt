@@ -37,7 +37,7 @@ do
   theHarvester -d $i -n -c -b all | tee -a $folder/harvest_$i.txt
 done
 #Hosts for Scope
-awk '/\[*\] Hosts found:/,(0 || /\[*\]/&&!/\[*\] Hosts/)' $folder/harvest_*.txt | grep -v '\[*\] Starting' | sed '/Hosts found:/d2g' > $folder/hosts.txt
+awk '/\[*\] Hosts found:/,(0 || /\[*\]/&&!/\[*\] Hosts/)' $folder/harvest_*.txt | grep -v '\[*\] ' | grep -v '\-\-\-' > $folder/hosts.txt
 #grep ':[0-9]\{1,3\}' $folder/hosts.txt | cut -d : -f 2 | sort -u > $folder/host_ip.txt
 grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' $folder/hosts.txt | sort -u > $folder/host_ip.txt
 
