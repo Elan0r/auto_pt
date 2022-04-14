@@ -64,7 +64,7 @@ awk '// {printf"\nset rhosts "$1"\nset vhost "$1"\nset rport 80\nrun\nsleep 5\ns
 #FTP
 printf '%s\nspool '$FOLDER'/output/ext_msf/ftp.txt\necho "FTP"\nuse auxiliary/scanner/ftp/anonymous\nservices -u -p 21 -R\nrun\nsleep 5\n' >> $FOLDER/output/ext_msf/resource.txt
 #MSF Resource File End
-printf '%s\nspool off\nexit\n' >> $folder/output/ext_msf/resource.txt
+printf '%s\nspool off\nexit\n' >> $FOLDER/output/ext_msf/resource.txt
 
 msfdb init
 msfconsole -qx "resource "$FOLDER"/output/ext_msf/workspace.txt "$FOLDER"/output/ext_msf/resource.txt"
