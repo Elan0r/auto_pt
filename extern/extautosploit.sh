@@ -44,13 +44,13 @@ echo 'workspace -d ' $WS > $FOLDER/output/msf/workspace.txt
 echo 'workspace -a ' $WS >> $FOLDER/output/msf/workspace.txt
 echo 'db_import '$FOLDER'/output/nmap/service.xml' >> $FOLDER/output/msf/workspace.txt
 
-nmap -sSV -n -Pn --max-retries 5 -oA $FOLDER/output/nmap/service -iL $HOSTS
+nmap -sSV -n -Pn --max-retries 5 -oA $FOLDER/output/nmap/service -iL $HOSTS  > /dev/null 2>&1
 
 sed -e "s%spool /root%spool $FOLDER%g" $RES > $FOLDER/output/msf/tmp.txt
-sed -e "s%services.*%set rhosts file:$HOSTS" $FOLDER/output/msf/tmp.txt  > $FOLDER/output/msf/resource.txt
+sed -e "s%services.*%set rhosts file:$HOSTS%g" $FOLDER/output/msf/tmp.txt  > $FOLDER/output/msf/resource.txt
 
 msfdb init
-msfconsole -qx "resource "$FOLDER"/output/msf/workspace.txt "$FOLDER"/output/msf/resource.txt"  > /dev/null 2>&1
+msfconsole -qx "resource "$FOLDER"/output/msf/workspace.txt "$FOLDER"/output/msf/resource.txt"
 
 echo 'looting'
 
