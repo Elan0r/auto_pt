@@ -2,7 +2,6 @@ setg THREADS 150
 spool /root/output/msf/log4j.txt
 echo "####Log4Shell####"
 
-date >> /root/output/runtime.txt
 echo "####Log4Shell####" >> /root/output/runtime.txt
 
 use auxiliary/scanner/http/log4shell_scanner
@@ -11,7 +10,6 @@ services -p 80 -R
 run
 sleep 5
 
-date >> /root/output/runtime.txt
 echo "Log4j Port 8080 NoSSL" >> /root/output/runtime.txt
 echo "Log4j Port 8080 NoSSL"
 set rport 8080
@@ -19,7 +17,6 @@ services -p 8080 -R
 run
 sleep 5
 
-date >> /root/output/runtime.txt
 echo "Log4j Port 8080 SSL" >> /root/output/runtime.txt
 echo "Log4j Port 8080 SSL"
 services -p 8080 -R
@@ -27,7 +24,6 @@ set ssl true
 run
 sleep 5
 
-date >> /root/output/runtime.txt
 echo "Log4j Port 443" >> /root/output/runtime.txt
 echo "Log4j Port 443"
 set rport 443
@@ -36,7 +32,6 @@ services -p 443 -R
 run
 sleep 5
 
-date >> /root/output/runtime.txt
 echo "Log4j Port 8443" >> /root/output/runtime.txt
 echo "Log4j Port 8443"
 set rport 8443
@@ -44,7 +39,7 @@ set ssl true
 services -p 8443 -R
 run
 sleep 5
-date >> /root/output/runtime.txt
+
 echo "Log4j DONE" >> /root/output/runtime.txt
 
 spool /root/output/msf/ftp.txt
@@ -74,12 +69,6 @@ sleep 5
 
 spool /root/output/msf/web.txt
 echo "####WEB####"
-
-echo "HTTP SSL Certificate Information"
-use auxiliary/scanner/http/ssl
-services -u -p 443 -R
-run
-sleep 5
 
 echo "IIS Auth Bypass"
 use auxiliary/admin/http/iis_auth_bypass
