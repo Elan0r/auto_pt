@@ -10,16 +10,16 @@ then
 fi
 
 read -e -p 'File with Domains for MSF run (no http/https): ' HOSTS
-if [ -z $HOSTS]
+if [ -z $HOSTS ]
 then
     echo 'supply File!'
     exit 1
 fi
 
 read -e -p 'Where to save? (no end / ) will create "output" folder inside: ' FOLDER
-if [ -z "$FOLDER" ] || [ "$FOLDER" == "." ] || [ "$FOLDER" == "./" ];
+if [ -z $FOLDER ] || [ $FOLDER == "." ] || [ $FOLDER == "./" ]
 then
-	folder=$PWD
+	FOLDER=$PWD
     echo -e '! > Folder is '$FOLDER
 else
 	if [ ! -d $FOLDER ]
