@@ -17,7 +17,7 @@ else
 fi
 
 echo -e ''
-read -e -p 'Where to save?: ' folder
+read -e -p 'Where to save? (no end / ): ' folder
 if [ -z "$folder" ];
 then
 	echo -e '! > set Folder!'
