@@ -67,7 +67,7 @@ printf '%s\nspool '$FOLDER'/output/ext_msf/ftp.txt\necho "FTP"\nuse auxiliary/sc
 printf '%s\nspool off\nexit\n' >> $FOLDER/output/ext_msf/resource.txt
 
 msfdb init
-msfconsole -qx "resource "$FOLDER"/output/ext_msf/workspace.txt "$FOLDER"/output/ext_msf/resource.txt"
+msfconsole -qx "resource "$FOLDER"/output/ext_msf/workspace.txt "$FOLDER"/output/ext_msf/resource.txt"  > /dev/null 2>&1
 
 echo 'looting'
 
