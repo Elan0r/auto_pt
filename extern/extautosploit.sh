@@ -33,6 +33,8 @@ then
     echo 'Workspace will be '$WS
 fi
 
+read -p "Enter External IP: " IP
+
 echo 'workspace -d ' $WS > $FOLDER/output/ext_msf/workspace.txt
 echo 'workspace -a ' $WS >> $FOLDER/output/ext_msf/workspace.txt
 echo 'db_import '$FOLDER'/output/nmap/ext_service.xml' >> $FOLDER/output/ext_msf/workspace.txt
@@ -40,7 +42,7 @@ echo 'db_import '$FOLDER'/output/nmap/ext_service.xml' >> $FOLDER/output/ext_msf
 nmap -sSVC -n -Pn --max-retries 5 -oA $FOLDER/output/nmap/ext_service -iL $HOSTS  > /dev/null 2>&1
 
 #MSF Resource File
-printf '%ssetg THREADS 150\nsetg VERBOSE true\n' > $FOLDER/output/ext_msf/resource.txt
+printf '%ssetg THREADS 150\nsetg VERBOSE true\nsetg SRVHOST '$IP'\n' > $FOLDER/output/ext_msf/resource.txt
 #log4shell
 printf '%s\nspool '$FOLDER'/output/ext_msf/log4j.txt\necho "log4j"\nuse auxiliary/scanner/http/log4shell_scanner\n' >> $FOLDER/output/ext_msf/resource.txt
 awk '// {printf"\nset rhosts "$1"\nset vhost "$1"\nset rport 80\nrun\nsleep 5\nset rport 8080\nrun\nsleep 5\nset ssl true\nset rport 443\nrun\nsleep5\nset rport 8443\n"}' $HOSTS >> $FOLDER/output/ext_msf/resource.txt
@@ -62,7 +64,7 @@ awk '// {printf"\nset rhosts "$1"\nset vhost "$1"\nset rport 80\nrun\nsleep 5\ns
 #FTP
 printf '%s\nspool '$FOLDER'/output/ext_msf/ftp.txt\necho "FTP"\nuse auxiliary/scanner/ftp/anonymous\nservices -u -p 21 -R\nrun\nsleep 5\n' >> $FOLDER/output/ext_msf/resource.txt
 #MSF Resource File End
-printf '%s\nspool off\nexit\n' >> /$folder/output/ext_msf/resource.txt
+printf '%s\nspool off\nexit\n' >> $folder/output/ext_msf/resource.txt
 
 msfdb init
 msfconsole -qx "resource "$FOLDER"/output/ext_msf/workspace.txt "$FOLDER"/output/ext_msf/resource.txt"
