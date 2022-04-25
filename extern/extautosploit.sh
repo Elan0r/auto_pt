@@ -45,7 +45,7 @@ nmap -sSVC -n -Pn --max-retries 5 -oA $FOLDER/output/nmap/ext_service -iL $HOSTS
 printf '%ssetg THREADS 150\nsetg VERBOSE true\nsetg SRVHOST '$IP'\n' > $FOLDER/output/ext_msf/resource.txt
 #log4shell
 printf '%s\nspool '$FOLDER'/output/ext_msf/log4j.txt\necho "log4j"\nuse auxiliary/scanner/http/log4shell_scanner\n' >> $FOLDER/output/ext_msf/resource.txt
-awk '// {printf"\nset rhosts "$1"\nset vhost "$1"\nset rport 80\nrun\nsleep 5\nset rport 8080\nrun\nsleep 5\nset ssl true\nset rport 443\nrun\nsleep5\nset rport 8443\n"}' $HOSTS >> $FOLDER/output/ext_msf/resource.txt
+awk '// {printf"\nset rhosts "$1"\nset vhost "$1"\nset rport 80\nset ssl false\nrun\nsleep 5\nset rport 8080\nrun\nsleep 5\nset ssl true\nset rport 443\nrun\nsleep5\nset rport 8443\n"}' $HOSTS >> $FOLDER/output/ext_msf/resource.txt
 #proxyshell
 printf '%s\nspool '$FOLDER'/output/ext_msf/mail.txt\necho "ProxyShell"\nuse auxiliary/scanner/http/exchange_proxylogon\n' >> $FOLDER/output/ext_msf/resource.txt
 awk '// {printf"\nset rhosts "$1"\nset vhost "$1"\nrun\nsleep 5\n"}' $HOSTS >> $FOLDER/output/ext_msf/resource.txt
