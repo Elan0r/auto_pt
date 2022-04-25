@@ -229,6 +229,11 @@ cd /opt
 go install github.com/ropnop/kerbrute@latest
 go install github.com/ropnop/go-windapsearch@latest
 go install github.com/sensepost/gowitness@latest
+go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+
+#nuclei
+nuclei -update
+nuclei -update-templates
 
 #docker
 #Printnightmare Check
