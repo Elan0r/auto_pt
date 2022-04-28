@@ -7,6 +7,8 @@ msfconsole -qx 'workspace -D; exit'
 
 rm -r /root/input
 rm -r /root/output
+rm -r /root/output*
+rm -r /root/customer
 rm -r /root/.cme
 rm -r /usr/share/responder/logs
 rm -r /opt/PCredz/logs
@@ -24,7 +26,6 @@ rm /root/arp.cache
 rm /root/*.restore
 rm /root/*.pcap
 rm /root/*.json
-
 
 chattr -i /etc/resolv.conf
 rm /etc/resolv.conf.dhclient-new.* 
