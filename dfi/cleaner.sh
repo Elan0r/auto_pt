@@ -12,6 +12,7 @@ rm -r /usr/share/responder/logs
 rm -r /opt/PCredz/logs
 mkdir /opt/PCredz/logs
 rm -r /root/.msf4/loot
+rm -r /root/dump
 rm /opt/PCredz/CredentialDump-Session.log
 rm /root/.msf4/history
 rm /root/.zsh_history
@@ -22,6 +23,8 @@ rm /root/bettercap.history
 rm /root/arp.cache
 rm /root/*.restore
 rm /root/*.pcap
+rm /root/*.json
+
 
 chattr -i /etc/resolv.conf
 rm /etc/resolv.conf.dhclient-new.* 
