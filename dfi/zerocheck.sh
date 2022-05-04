@@ -13,29 +13,6 @@ fi
 echo "Start zerocheck" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 
-###NBTScan paused
-#nbtscan -e -f /root/output/list/ipup.txt > /root/output/list/nbtscan.txt
-#if [ -s /root/output/list/nbtscan.txt ]; then
-#    echo '! > list nbtscan.txt has hosts!'
-#else
-#    echo '! > no HOSTS!'
-#    exit 1
-#fi
-###MSF Resource File
-#printf '%sspool /root/output/msf/zerologon.txt\necho "ZeroLogon"\nuse auxiliary/admin/dcerpc/cve_2020_1472_zerologon\n' > /root/input/msf/zerocheck.txt
-#awk '// {printf"\nset nbname "$2"\nset rhosts "$1"\ncheck\nsleep 2\n"}' /root/output/list/nbtscan.txt >> /root/input/msf/zerocheck.txt
-#printf '%s\nexit\n' >> /root/input/msf/zerocheck.txt
-
-#NEW with NMAP
-awk '{if (/ 53\/open/ && / 88\/open/ && / 445\/open/) print$2}' /root/output/nmap/service.gnmap > /root/output/list/dc_ip.txt
-
-for i in $(cat /root/output/list/dc_ip.txt)
-do
-    nslookup $i >> /root/output/list/dc_fqdn.txt
-done    
-
-awk '/name/ {print$4}' /root/output/list/dc_fqdn.txt | cut -d '.' -f 1 | tr [:lower:] [:upper:] > /root/output/list/dc_nbt.txt
-
 #MSF Resource File
 printf '%sspool /root/output/msf/zerologon.txt\necho "ZeroLogon"\nuse auxiliary/admin/dcerpc/cve_2020_1472_zerologon\n' > /root/input/msf/zerocheck.txt
 paste /root/output/list/dc_ip.txt /root/output/list/dc_nbt.txt | awk '// {printf"\nset nbname "$2"\nset rhosts "$1"\ncheck\nsleep 5\n"}' >> /root/input/msf/zerocheck.txt
