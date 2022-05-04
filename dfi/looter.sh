@@ -144,6 +144,8 @@ mkdir -p /root/output/loot/intern/ad/passpol
 mkdir -p /root/output/loot/intern/ad/quota
 mkdir -p /root/output/loot/intern/ad/user_description
 mkdir -p /root/output/loot/intern/ad/gpp_password
+mkdir -p /root/output/loot/intern/ad/gpp_autologin
+mkdir -p /root/output/loot/intern/ad/remote_login_local_admin
 mkdir -p /root/output/loot/intern/ad/iam
 mkdir -p /root/output/loot/intern/ad/iam/local_admin
 mkdir -p /root/output/loot/intern/ad/adcs
@@ -199,12 +201,11 @@ mkdir -p /root/output/loot/intern/mitm/llmnr
 mkdir -p /root/output/loot/intern/mitm/nbt
 mkdir -p /root/output/loot/intern/mitm/routing
 mkdir -p /root/output/loot/intern/mitm/wpad
+mkdir -p /root/output/loot/intern/mitm/mdns
 
 ### Network
 mkdir -p /root/output/loot/intern/network/egress_filtering
-if [ -s /root/output/nmap/egress.nmap ]; then
 cp /root/output/nmap/egress.nmap /root/output/loot/intern/network/egress_filtering/
-fi
 mkdir -p /root/output/loot/intern/network/icmp
 mkdir -p /root/output/loot/intern/network/cdp
 mkdir -p /root/output/loot/intern/network/dtp
@@ -214,6 +215,7 @@ mkdir -p /root/output/loot/intern/network/stp
 mkdir -p /root/output/loot/intern/network/vtp
 mkdir -p /root/output/loot/intern/network/trunk
 mkdir -p /root/output/loot/intern/network/client_isolation
+mkdir -p /root/output/loot/intern/network/other_protocols
 cp /root/output/nmap/service.nmap /root/output/loot/intern/network/client_isolation
 mkdir -p /root/output/loot/intern/network/host-based_firewall
 cp /root/output/nmap/service.nmap /root/output/loot/intern/network/host-based_firewall
@@ -274,7 +276,7 @@ awk '/The target is vulnerable/{print$2}' /root/output/msf/iis_tilde.txt | cut -
 mkdir -p /root/output/loot/intern/web/tls
 grep -B 6 'TLSv1.1.*enabled' /root/output/msf/sslscan.txt > /root/output/loot/intern/web/tls/prototls.txt
 grep -B 4 'SSLv3.*enabled' /root/output/msf/sslscan.txt > /root/output/loot/intern/web/tls/protossl.txt
-cp /root/output/msf/sslscan.txt root/output/loot/intern/web/tls/sslscan.txt
+cp /root/output/msf/sslscan.txt root/output/loot/intern/web/tls/
 awk '/Testing/ {print$4}' /root/output/loot/intern/web/tls/proto*.txt | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | sort -u > /root/output/loot/intern/web/tls/hosts.txt
 mkdir -p /root/output/loot/intern/web/tls/heartbleed
 grep -v 'not vulnerable' /root/output/msf/sslscan.txt | grep -B 22 vulnerable | grep Connected |cut -d ' ' -f 3 > /root/output/loot/intern/web/tls/heartbleed/hosts.txt
