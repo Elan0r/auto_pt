@@ -225,14 +225,12 @@ else
 fi
 #PassTheCert
 if [ -d /opt/PassTheCert ]; then
-    cd /opt/Certipy
+    cd /opt/PassTheCert
     git stash
     git pull
 else
     cd /opt
     git clone https://github.com/AlmondOffSec/PassTheCert.git
-    cd /opt/Certipy
-    python3 setup.py install
 fi
 
 #Go
