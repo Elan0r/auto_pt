@@ -223,6 +223,17 @@ else
     cd /opt/Certipy
     python3 setup.py install
 fi
+#PassTheCert
+if [ -d /opt/PassTheCert ]; then
+    cd /opt/Certipy
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/AlmondOffSec/PassTheCert.git
+    cd /opt/Certipy
+    python3 setup.py install
+fi
 
 #Go
 cd /opt
