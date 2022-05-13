@@ -1,6 +1,6 @@
 #!/bin/bash
 figlet ProSecAutoPT
-echo ''
+echo 'version 1.0'
 
 if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot -a -d /root/output/msf ]; then
     echo '! > Folder Exist!'
