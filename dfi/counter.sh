@@ -199,6 +199,11 @@ wc -l /root/output/loot/intern/vmware/vsan/hosts.txt >> /root/output/loot/intern
 cat /root/output/loot/intern/vmware/vsan/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
+echo "PS-TN-2022-000X VMWARE_VMDIR" >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/vmware/vmdir/hosts.txt >> /root/output/loot/intern/findings.txt
+cat /root/output/loot/intern/vmware/vmdir/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+
 echo "PS-TN-2021-0062 SSH_eol" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/eol/ssh/openssh_version.txt >> /root/output/loot/intern/findings.txt
 cat /root/output/loot/intern/eol/ssh/openssh_version.txt | cut -d " " -f 2 | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
