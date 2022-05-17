@@ -168,6 +168,7 @@ if [ -d /opt/PKINITtools ]; then
     cd /opt/PKINITtools
     git stash
     git pull
+    pip3 install --upgrade -r requirements.txt 
 else
     cd /opt
     git clone https://github.com/dirkjanm/PKINITtools.git
@@ -179,9 +180,12 @@ if [ -d /opt/LdapRelayScan ]; then
     cd /opt/LdapRelayScan
     git stash
     git pull
+    pip3 install --upgrade -r requirements.txt 
 else
     cd /opt
     git clone https://github.com/zyn3rgy/LdapRelayScan.git
+    cd /opt/LdapRelayScan
+    pip3 install --upgrade -r requirements.txt 
 fi
 #LDAP Domain Dump
 if [ -d /opt/ldapdomaindump ]; then
