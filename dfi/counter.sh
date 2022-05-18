@@ -249,6 +249,11 @@ wc -l /root/output/loot/intern/dns/amplification/hosts.txt >> /root/output/loot/
 cat /root/output/loot/intern/dns/amplification/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
+echo "PS-TN-2022-00XX MongoDB Login" >> /root/output/loot/intern/findings.txt
+wc -l /root/output/loot/intern/database/mongodb/login/hosts.txt >> /root/output/loot/intern/findings.txt
+cat /root/output/loot/intern/database/mongodb/login/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+echo "" >> /root/output/loot/intern/findings.txt
+
 echo "Devices" >> /root/output/loot/intern/findings.txt
 tail -n +2 /root/output/list/msf_hosts.txt | wc -l >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt

@@ -100,6 +100,8 @@ mkdir -p /root/output/loot/intern/database/mssql/browser
 awk '/ServerName.*=/ {print$2}' /root/output/msf/sql.txt | sed 's/\:/''/g' | sort -u > /root/output/loot/intern/database/mssql/browser/hosts.txt
 mkdir -p /root/output/loot/intern/database/mysql/login
 awk '/LOGIN FAILED.*\(Incorrect: Access/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/database/mysql/login/hosts.txt
+mkdir -p /root/output/loot/intern/database/mongodb/login
+awk '/doesn'\''t use authentication/ {print$2}' /root/output/msf/nosql.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/database/mongodb/login/hosts.txt
 
 ### RPC
 mkdir -p /root/output/loot/intern/rpc/portmapper
