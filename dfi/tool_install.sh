@@ -221,6 +221,7 @@ if [ -d /opt/Certipy ]; then
     cd /opt/Certipy
     git stash
     git pull
+    python3 setup.py install
 else
     cd /opt
     git clone https://github.com/ly4k/Certipy.git
