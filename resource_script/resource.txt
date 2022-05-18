@@ -89,6 +89,15 @@ services -p 5432 -u -R
 run
 sleep 5
 
+spool /root/output/msf/nosql.txt
+echo "####NoSQL####"
+
+echo "MongoDB login scanner"
+use auxiliary/scanner/mongodb/mongodb_login
+hosts -R
+run
+sleep 5
+
 spool /root/output/msf/smb.txt
 echo "####SMB####"
 
