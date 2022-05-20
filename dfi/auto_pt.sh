@@ -1,6 +1,6 @@
 #!/bin/bash
 figlet ProSecAutoPT
-echo 'version 1.0'
+echo 'version 1.1 - MongoDB update'
 
 if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot -a -d /root/output/msf ]; then
     echo '! > Folder Exist!'
