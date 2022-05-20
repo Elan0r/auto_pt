@@ -378,6 +378,12 @@ services -p 111 -u -R
 run
 sleep 5
 
+echo "nfsmounts"
+use auxiliary/scanner/nfs/nfsmount
+services -p 111 -u -R
+run
+sleep 5
+
 spool /root/output/msf/ldap.txt
 echo "####LDAP####"
 
@@ -455,6 +461,12 @@ sleep 5
 echo "VNC Sweep"
 use auxiliary/scanner/vnc/vnc_login
 set blank_passwords true
+services -p 5900 -R
+run
+sleep 5
+
+echo "VNC Apple Vuln"
+use auxiliary/scanner/vnc/ard_root_pw
 services -p 5900 -R
 run
 sleep 5
