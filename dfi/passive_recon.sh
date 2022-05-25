@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot -a -d /root/output/msf ]; then
+if [ -d /root/output/loot -a -d /root/input ]; then
     echo '! > Folder Exist!'
 else    
     #Creating Output Folders
-    mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot /root/output/msf
+    mkdir -p  /root/output/loot /root/input
     #echo '! > Folder Created!'
 fi
 

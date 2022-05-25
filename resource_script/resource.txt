@@ -476,7 +476,7 @@ spool off
 echo "####Outputs####"
 
 hosts -o /root/output/list/msf_hosts.txt
-services -o /root/output/list/msf_services.txt
+services -o /root/output/list/msf_services.csv
 hosts -S printer -o /root/output/list/msf_hosts_printer.txt
 services -S printer -o /root/output/list/msf_services_printer.txt
 db_export -f xml /root/output/msf/db_export.xml

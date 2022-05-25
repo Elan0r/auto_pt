@@ -9,14 +9,6 @@ else
     exit 1
 fi
 
-if [ -d /root/input/msf -a -d /root/output/loot -a -d /root/output/msf -a -d /root/output/loot/hashes -a -d /root/output/list ]; then
-    echo '! > Folder Exist!'
-else    
-    #Creating Output Folders
-    mkdir -p /root/input/msf /root/output/loot /root/output/msf /root/output/loot/hashes /root/output/list
-    #echo '! > Folder Created!'
-fi
-
 if [ -s /root/input/msf/workspace.txt ]; then
     echo 'Workspace already set!'
 else

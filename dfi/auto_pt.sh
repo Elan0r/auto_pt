@@ -1,14 +1,6 @@
 #!/bin/bash
 figlet ProSecAutoPT
-echo 'version 1.1 - MongoDB update'
-
-if [ -d /root/output/nmap -a -d /root/output/list -a -d /root/input/msf -a -d /root/output/loot -a -d /root/output/msf ]; then
-    echo '! > Folder Exist!'
-else    
-    #Creating Output Folders
-    mkdir -p /root/output/nmap /root/output/list /root/input/msf /root/output/loot /root/output/msf
-    #echo '! > Folder Created!'
-fi
+echo 'version 1.2 - folder.sh'
 
 if [ -s /root/input/ipint.txt ]; then
     echo '! > IPs OK '
@@ -16,6 +8,9 @@ else
     echo "! >> ipint.txt is missing in /root/input/ipint.txt."
 	exit 1
 fi
+
+#Create all folder
+/opt/hacking/dfi/folder.sh
 
 read -p "Enter Workspace Name: " WS
 echo 'workspace -d ' $WS > /root/input/msf/workspace.txt

@@ -9,13 +9,6 @@ else
 	exit 1
 fi
 
-if [ -d /root/output/nmap -a -d /root/output/list ]; then
-    echo '! > Folder Exist!'
-else    
-    #Creating Output Folders
-    mkdir -p /root/output/nmap /root/output/list
-fi
-
 echo "Start ActiveRecon" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 

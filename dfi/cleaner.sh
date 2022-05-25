@@ -26,6 +26,8 @@ rm /root/arp.cache
 rm /root/*.restore
 rm /root/*.pcap
 rm /root/*.json
+rm /root/*.pfx
+rm /root/*.ccache
 
 chattr -i /etc/resolv.conf
 rm /etc/resolv.conf.dhclient-new.* 
