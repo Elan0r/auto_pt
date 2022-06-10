@@ -71,7 +71,7 @@ for i in $(ls $folder/header_*.txt)
 do 
 	awk 'NR==1 || /X-XSS/' $i >> $folder/tmpxss.txt
 done
-grep -B1 'Missing' $folder/tmpxss.txt | sort -u | sed -r 's/Server: //' > $folder/xss.txt
+cat $folder/tmpxss.txt | sed -e 's/\x1b\[[0-9;]*m//g' | grep -B1 'Missing\|\(Value: 0\)'  | sort -u | sed -r 's/Server: //' > $folder/xss.txt
 
 #Strict-Transport
 for i in $(ls $folder/header_*.txt)

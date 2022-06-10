@@ -75,6 +75,7 @@ awk '/:5432.*Incorrect/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | 
 awk '/ServerName.*=/ {print$2}' /root/output/msf/sql.txt | sed 's/\:/''/g' | sort -u > /root/output/loot/intern/database/mssql/browser/hosts.txt
 awk '/LOGIN FAILED.*\(Incorrect: Access/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/database/mysql/login/hosts.txt
 awk '/doesn'\''t use authentication/ {print$2}' /root/output/msf/nosql.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/database/mongodb/login/hosts.txt
+awk '/Login Successful/ {print}' /root/output/msf/sql.txt > /root/output/loot/intern/creds/database.txt
 
 ### RPC
 awk '/\+.*SunRPC/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/portmapper/hosts.txt
