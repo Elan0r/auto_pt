@@ -1,6 +1,6 @@
 #!/bin/bash
 figlet ProSecAutoPT
-echo 'version 1.2 - folder.sh'
+echo 'version 1.3'
 
 if [ -s /root/input/ipint.txt ]; then
     echo '! > IPs OK '
