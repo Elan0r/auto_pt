@@ -195,7 +195,6 @@
 				}
 			]
 		},
-		[
     {
       "name": "Find ALL Shortest Paths to Domain Admins",
 			"category": "User",
