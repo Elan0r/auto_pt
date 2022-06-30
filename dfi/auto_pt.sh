@@ -1,6 +1,6 @@
 #!/bin/bash
 figlet ProSecAutoPT
-echo 'version 1.4'
+echo 'version 1.4 '
 
 if [ -s /root/input/ipint.txt ]; then
     echo '! > IPs OK '
