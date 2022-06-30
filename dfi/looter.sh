@@ -75,7 +75,8 @@ awk '/:5432.*Incorrect/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | 
 awk '/ServerName.*=/ {print$2}' /root/output/msf/sql.txt | sed 's/\:/''/g' | sort -u > /root/output/loot/intern/database/mssql/browser/hosts.txt
 awk '/LOGIN FAILED.*\(Incorrect: Access/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/database/mysql/login/hosts.txt
 awk '/doesn'\''t use authentication/ {print$2}' /root/output/msf/nosql.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/database/mongodb/login/hosts.txt
-awk '/Login Successful/ {print}' /root/output/msf/sql.txt > /root/output/loot/intern/creds/database.txt
+awk '/Login Successful/ {print}' /root/output/msf/sql.txt > /root/output/loot/intern/creds/postgresql.txt
+awk '/Success:/ {print}' /root/output/msf/sql.txt > /root/output/loot/intern/creds/mysql.txt
 
 ### RPC
 awk '/\+.*SunRPC/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/portmapper/hosts.txt
@@ -83,6 +84,8 @@ awk '/Endpoint Mapper (.*services)/ {print$1}' /root/output/msf/rpc.txt | sort -
 awk '/\*.*(LRPC|TCP|PIPE)/{print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/fuzzing/hosts.txt
 awk '/Vulnerable to Portmap/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/amplification/hosts.txt
 awk '/The target is vulnerable/ {print$2}' /root/output/msf/zerologon.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/zero_logon/hosts.txt
+awk '/NFS Export/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/nfs/hosts.txt
+awk '/NFS Export/ {print}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/nfs/raw.txt
 
 ### RDP
 awk '/vulnerable.*MS_T120/ {print$2}' /root/output/msf/rdp.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rdp/bluekeep/hosts.txt

@@ -28,6 +28,8 @@ rm /root/*.pcap
 rm /root/*.json
 rm /root/*.pfx
 rm /root/*.ccache
+rm /root/sessionresume*
+rm /root/*.zip
 
 chattr -i /etc/resolv.conf
 rm /etc/resolv.conf.dhclient-new.* 
