@@ -24,6 +24,9 @@ enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_p
 <b>Auto_PT</b> requests Workspace for <b>MSF</b>.<br>
 <br>
 <details><summary><h2>Auto_PT "Modules":</h2></summary>
+    <h3>folder:</h3>
+    <b>creates all (sub)folders in <code>/root/input/</code> and <code>/root/output/</code></b><br>
+<br>
     <h3>active_recon:</h3>
     <b>nmap</b><code>/root/input/ipint.txt</code> -> Scope!<br>
     <b>nmap</b> -> Egress-filter<br>
