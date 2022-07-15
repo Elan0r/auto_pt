@@ -1,0 +1,167 @@
+{
+  "autosploit": {
+    "protocol": {
+      "udp": {
+        "port": ["*"],
+        "msf": {
+          "auxiliary/scanner/discovery/udp_sweep": {}
+        }
+      },
+      "ftp": {
+        "port": [21],
+        "msf": {
+          "auxiliary/scanner/ftp/ftp_version": {},
+          "auxiliary/scanner/ftp/anonymous": {}
+        }
+      },
+      "telnet": {
+        "port": [23],
+        "msf": {
+          "auxiliary/scanner/telnet/telnet_version": {},
+          "auxiliary/scanner/telnet/telnet_login": {},
+          "auxiliary/scanner/telnet/lantronix_telnet_version": {},
+          "auxiliary/scanner/telnet/telnet_ruggedcom": {}
+        }
+      },
+      "http": {
+        "port": [80, 443],
+        "msf": {
+          "auxiliary/scanner/http/exchange_proxylogon": {},
+          "auxiliary/scanner/http/ssl": {},
+          "auxiliary/scanner/http/ms15_034_http_sys_memory_dump": {},
+          "auxiliary/scanner/http/iis_shortname_scanner": {},
+          "auxiliary/admin/http/iis_auth_bypass": {}
+        }
+      },
+      "dns": {
+        "port": [53],
+        "msf": {
+          "auxiliary/scanner/dns/dns_amp": {}
+        }
+      },
+      "snmp": {
+        "port": [161, 162],
+        "msf": {
+          "auxiliary/scanner/snmp/snmp_login": {}
+        }
+      },
+      "smtp": {
+        "port": [25, 465],
+        "msf": {
+          "auxiliary/scanner/smtp/smtp_version": {},
+          "auxiliary/scanner/smtp/smtp_relay": {},
+          "auxiliary/scanner/smtp/smtp_enum": {},
+          "auxiliary/scanner/smtp/smtp_ntlm_domain": {}
+        }
+      },
+      "mssql": {
+        "port": [1433, 1434],
+        "msf": {
+          "auxiliary/scanner/mssql/mssql_ping": {},
+          "auxiliary/scanner/mssql/mssql_login": {},
+          "auxiliary/scanner/mysql/mysql_version": {}
+        }
+      },
+      "mysql": {
+        "port": [3306],
+        "msf": {
+          "scanner/mysql/mysql_login": {}
+        }
+      },
+      "ipmi": {
+        "port": [623],
+        "msf": {
+          "auxiliary/scanner/ipmi/ipmi_version": {},
+          "auxiliary/scanner/ipmi/ipmi_cipher_zero": {},
+          "scanner/ipmi/ipmi_dumphashes": {}
+        }
+      },
+      "smb": {
+        "port": [139, 445],
+        "msf": {
+          "auxiliary/scanner/smb/smb_version": {},
+          "auxiliary/scanner/smb/smb_enumshares": {},
+          "auxiliary/scanner/smb/smb_enumusers": {},
+          "auxiliary/scanner/smb/smb_enumusers_domain": {},
+          "auxiliary/scanner/smb/smb_lookupsid": {},
+          "auxiliary/scanner/smb/smb_ms17_010": {}
+        }
+      },
+      "rdp": {
+        "port": [3389],
+        "msf": {
+          "auxiliary/scanner/rdp/rdp_scanner": {},
+          "auxiliary/scanner/rdp/ms12_020_check": {},
+          "auxiliary/scanner/rdp/cve_2019_0708_bluekeep": {}
+        }
+      },
+      "dcerpc": {
+        "port": [135],
+        "msf": {
+          "auxiliary/scanner/dcerpc/endpoint_mapper": {},
+          "scanner/dcerpc/tcp_dcerpc_auditor": {}
+        }
+      },
+      "ldap": {
+        "port": [636, 3269],
+        "msf": {
+          "auxiliary/gather/ldap_hashdump": {},
+          "auxiliary/admin/ldap/vmware_vcenter_vmdir_auth_bypass": {
+            "USERNAME": "admin",
+            "PASSWORD": "admin"
+          }
+        }
+      },
+      "ssh": {
+        "port": [22],
+        "msf": {
+          "auxiliary/scanner/ssh/ssh_version": {}
+        }
+      },
+      "imap": {
+        "port": [143, 993],
+        "msf": {
+          "auxiliary/scanner/imap/imap_version": {}
+        }
+      },
+      "pop3": {
+        "port": [110, 995],
+        "msf": {
+          "auxiliary/scanner/pop3/pop3_version": {}
+        }
+      },
+      "ntp": {
+        "port": [123],
+        "msf": {
+          "scanner/ntp/ntp_monlist": {},
+          "scanner/ntp/ntp_peer_list_dos": {},
+          "scanner/ntp/ntp_peer_list_sum_dos": {},
+          "scanner/ntp/ntp_req_nonce_dos": {},
+          "scanner/ntp/ntp_unsettrap_dos": {},
+          "scanner/ntp/ntp_reslist_dos": {}
+        }
+      },
+      "vnc": {
+        "port": [5900],
+        "msf": {
+          "auxiliary/scanner/vnc/vnc_none_auth": {},
+          "auxiliary/scanner/vnc/vnc_login": {}
+        }
+      },
+      "printer": {
+        "port": [9100],
+        "msf": {
+          "auxiliary/scanner/printer/printer_version_info": {},
+          "auxiliary/scanner/printer/printer_list_dir": {}
+        }
+      },
+      "postgres": {
+        "port": [5432],
+        "msf": {
+          "auxiliary/scanner/postgres/postgres_version": {},
+          "scanner/postgres/postgres_login": {}
+        }
+      }
+    }
+  }
+}
