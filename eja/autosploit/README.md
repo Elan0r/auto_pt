@@ -7,12 +7,11 @@ pip install simple-term-menu
 ```json
 "protocol": {
     "port": [1337, 4444],
-        "msf": {
-            "module01": {},
-            "module02": {
-                "OPTION": "VALUE",
-                "OPTION": "VALUE"
-            }
+    "msf": {
+        "module01": {},
+        "module02": {
+            "OPTION": "VALUE",
+            "OPTION": "VALUE"
         }
     }
 }
