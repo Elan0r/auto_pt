@@ -104,12 +104,10 @@ if __name__ == "__main__":
     # Main Execution
     user_input = input(f"{info} Are you sure you want to Execute? [y/n]: ")
     if user_input.lower() == "y":
-        # execute()
-        """
+        execute()
         try:
             os.system("rm resource.txt")
         except Exception as E:
             print(error, E)
-        """
     else:
         exit("Leaving..")
