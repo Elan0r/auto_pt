@@ -199,7 +199,8 @@ sleep 5
 
 echo "Telnet Login"
 use auxiliary/scanner/telnet/telnet_login
-set BlANK_PASSWORDS true
+set blank_passwords true
+set userpass_file /usr/share/metasploit-framework/data/wordlists/default_userpass_for_services_unhash.txt
 services -u -p 23 -R
 run
 sleep 5
