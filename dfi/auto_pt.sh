@@ -1,6 +1,6 @@
 #!/bin/bash
 figlet ProSecAutoPT
-echo 'version 1.4 '
+echo 'version 1.5 '
 
 if [ -s /root/input/ipint.txt ]; then
     echo '! > IPs OK '
@@ -40,14 +40,14 @@ echo '! > Start RPC 0 Check'
 echo '! > Start Relay'
 /opt/hacking/dfi/fast_relay.sh
 
-echo '! > make some Screens'
-/opt/hacking/dfi/eyewitness.sh
-
 echo "! > grab the loot!"
 /opt/hacking/dfi/looter.sh
 
 echo "! > Count the Loot!"
 /opt/hacking/dfi/counter.sh
+
+echo '! > make some Screens'
+/opt/hacking/dfi/eyewitness.sh
 
 figlet 'Auto PT Done'
 

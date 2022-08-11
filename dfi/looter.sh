@@ -81,7 +81,6 @@ awk '/Success:/ {print}' /root/output/msf/sql.txt > /root/output/loot/intern/cre
 ### RPC
 awk '/\+.*SunRPC/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/portmapper/hosts.txt
 awk '/Endpoint Mapper (.*services)/ {print$1}' /root/output/msf/rpc.txt | sort -u > /root/output/loot/intern/rpc/endpointmap/hosts.txt
-awk '/\*.*(LRPC|TCP|PIPE)/{print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/fuzzing/hosts.txt
 awk '/Vulnerable to Portmap/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/amplification/hosts.txt
 awk '/The target is vulnerable/ {print$2}' /root/output/msf/zerologon.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/zero_logon/hosts.txt
 awk '/NFS Export/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/rpc/nfs/hosts.txt
