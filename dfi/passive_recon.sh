@@ -1,12 +1,7 @@
 #!/bin/bash
 
-if [ -d /root/output/loot -a -d /root/input ]; then
-    echo '! > Folder Exist!'
-else    
-    #Creating Output Folders
-    mkdir -p  /root/output/loot /root/input
-    #echo '! > Folder Created!'
-fi
+#create Folders
+/opt/hacking/dfi/folder.sh
 
 if [ -d /opt/PCredz/logs ]; then
     echo '! > Logfolder OK.'
