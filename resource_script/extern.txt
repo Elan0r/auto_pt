@@ -71,6 +71,12 @@ sleep 5
 spool /root/output/msf/web.txt
 echo "####WEB####"
 
+cho "HTTP SSL Certificate Information"
+use auxiliary/scanner/http/ssl
+services -u -p 443 -R
+run
+sleep 5
+
 echo "IIS Auth Bypass"
 use auxiliary/admin/http/iis_auth_bypass
 services -p 80 -S Microsoft -R
@@ -96,6 +102,8 @@ sleep 5
 echo "IIS Internal IP disclosure"
 use auxiliary/scanner/http/iis_internal_ip
 services -p 80 -S Microsoft -R
+set rport 80
+set SSL false
 run
 sleep 5
 set ssl true
@@ -107,6 +115,8 @@ spool /root/output/msf/iis_tilde.txt
 echo "IIS shortname Scanner/Tilde Character"
 use auxiliary/scanner/http/iis_shortname_scanner
 services -p 80 -S Microsoft -R
+set rport 80
+set SSL false
 check
 sleep 5
 run
@@ -128,4 +138,5 @@ sleep 5
 
 
 spool off
+sessions -K
 exit

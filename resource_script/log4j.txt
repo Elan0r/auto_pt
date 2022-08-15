@@ -51,4 +51,5 @@ date >> /root/output/runtime.txt
 echo "Log4j DONE" >> /root/output/runtime.txt
 
 spool off
+sessions -K
 exit

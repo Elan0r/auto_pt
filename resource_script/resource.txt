@@ -460,6 +460,18 @@ sleep 5
 run
 sleep 5
 
+echo "IIS Internal IP disclosure"
+use auxiliary/scanner/http/iis_internal_ip
+services -p 80 -S Microsoft -R
+set rport 80
+set SSL false
+run
+sleep 5
+set ssl true
+set rport 443
+run
+sleep 5
+
 spool /root/output/msf/vnc.txt
 echo "####VNC####"
 
