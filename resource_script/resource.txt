@@ -484,6 +484,9 @@ sleep 5
 
 spool off
 
+echo "####Kill all Sessions####"
+sessions -K
+
 echo "####Outputs####"
 
 hosts -o /root/output/list/msf_hosts.txt
