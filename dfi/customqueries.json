@@ -195,6 +195,16 @@
 				}
 			]
 		},
+		{
+			"name": "Find non Domain Admins with local Admin rights",
+			"category": "User",
+			"queryList": [
+				{
+					"final": true,
+					"query": "MATCH p=(m:User)-[r:AdminTo]->(n:Computer) where m.admincount = false Return p"
+				}
+			]
+		},
     {
       "name": "Find ALL Shortest Paths to Domain Admins",
 			"category": "User",
