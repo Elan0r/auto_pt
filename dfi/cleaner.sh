@@ -20,6 +20,7 @@ rm /root/.msf4/history
 rm /root/.zsh_history
 rm /root/.bash_history
 rm /root/*.log
+rm /root/*.ntds
 rm /root/*.txt
 rm /root/bettercap.history
 rm /root/arp.cache
