@@ -17,16 +17,16 @@ else
 fi
 
 echo -e ''
-read -e -p 'Where to save? (no end / ): ' folder
+read -e -p 'Where to save? (no end / ; will create header folder inside): ' folder
 if [ -z "$folder" ];
 then
 	echo -e '! > set Folder!'
 	exit 1
 else
-	if [ ! -d $folder ]
+	if [ ! -d $folder/header ]
 	then
-		mkdir -p $folder
-		echo -e '! > Folder Created at '$folder
+		mkdir -p $folder/header
+		echo -e '! > Folder Created at '$folder'/header'
 	else
 		echo -e '! > Folder OK!'
 	fi
@@ -46,52 +46,52 @@ fi
 
 for i in $(cat $file)
 do
-	echo -e "Server: $i" | tee $folder/header_$i.txt
-	python3 /opt/shcheck/shcheck.py -ixkd http://$i | tee -a $folder/header_$i.txt
-	python3 /opt/shcheck/shcheck.py -ixkd https://$i | tee -a $folder/header_$i.txt
+	echo -e "Server: $i" | tee $folder/header/header_$i.txt
+	python3 /opt/shcheck/shcheck.py -ixkd http://$i | tee -a $folder/header/header_$i.txt
+	python3 /opt/shcheck/shcheck.py -ixkd https://$i | tee -a $folder/header/header_$i.txt
 done
 
 #looting for findings & Automater
 #Server disclosure
-for i in $(ls $folder/header_*.txt)
+for i in $(ls $folder/header/header_*.txt)
 do 
-	awk 'NR==1 || /Server/' $i >> $folder/tmpserver.txt
+	awk 'NR==1 || /Server/' $i >> $folder/header/tmpserver.txt
 done
-grep -B1 'IIS\|Apache/\|nginx/' $folder/tmpserver.txt | sed -r 's/Server: //' > $folder/server.txt
+grep -B1 'IIS\|Apache/\|nginx/' $folder/header/tmpserver.txt | sed -r 's/Server: //' > $folder/header/server.txt
 
 #X-Powered-By
-for i in $(ls $folder/header_*.txt)
+for i in $(ls $folder/header/header_*.txt)
 do 
-	awk 'NR==1 || /X-Powered/' $i >> $folder/tmpxpwr.txt
+	awk 'NR==1 || /X-Powered/' $i >> $folder/header/tmpxpwr.txt
 done
-grep -B1 'Value' $folder/tmpxpwr.txt | sed -r 's/Server: //' > $folder/x-powered.txt
+grep -B1 'Value' $folder/header/tmpxpwr.txt | sed -r 's/Server: //' > $folder/header/x-powered.txt
 
 #X-XSS
-for i in $(ls $folder/header_*.txt)
+for i in $(ls $folder/header/header_*.txt)
 do 
-	awk 'NR==1 || /X-XSS/' $i >> $folder/tmpxss.txt
+	awk 'NR==1 || /X-XSS/' $i >> $folder/header/tmpxss.txt
 done
-cat $folder/tmpxss.txt | sed -e 's/\x1b\[[0-9;]*m//g' | grep -B1 'Missing\|\(Value: 0\)'  | sort -u | sed -r 's/Server: //' > $folder/xss.txt
+cat $folder/header/tmpxss.txt | sed -e 's/\x1b\[[0-9;]*m//g' | grep -B1 'Missing\|\(Value: 0\)'  | sort -u | sed -r 's/Server: //' > $folder/header/xss.txt
 
 #Strict-Transport
-for i in $(ls $folder/header_*.txt)
+for i in $(ls $folder/header/header_*.txt)
 do 
-	awk 'NR==1 || /Strict-Transport/' $i >> $folder/tmphsts.txt
+	awk 'NR==1 || /Strict-Transport/' $i >> $folder/header/tmphsts.txt
 done
-grep -B1 'Missing' $folder/tmphsts.txt | sort -u | sed -r 's/Server: //' > $folder/hsts.txt
+grep -B1 'Missing' $folder/header/tmphsts.txt | sort -u | sed -r 's/Server: //' > $folder/header/hsts.txt
 
 #Content-Security
-for i in $(ls $folder/header_*.txt)
+for i in $(ls $folder/header/header_*.txt)
 do 
-	awk 'NR==1 || /Content-Security/' $i >> $folder/tmpcsp.txt
+	awk 'NR==1 || /Content-Security/' $i >> $folder/header/tmpcsp.txt
 done
-grep -B1 'Missing' $folder/tmpcsp.txt | sort -u | sed -r 's/Server: //' > $folder/csp.txt
+grep -B1 'Missing' $folder/header/tmpcsp.txt | sort -u | sed -r 's/Server: //' > $folder/header/csp.txt
 
 #X-Frame Options
-for i in $(ls $folder/header_*.txt)
+for i in $(ls $folder/header/header_*.txt)
 do 
-	awk 'NR==1 || /X-Frame/' $i >> $folder/tmpxframe.txt
+	awk 'NR==1 || /X-Frame/' $i >> $folder/header/tmpxframe.txt
 done
-grep -B1 'Missing' $folder/tmpxframe.txt | sort -u | sed -r 's/Server: //' > $folder/x-frame.txt
+grep -B1 'Missing' $folder/header/tmpxframe.txt | sort -u | sed -r 's/Server: //' > $folder/header/x-frame.txt
 
 exit 0
