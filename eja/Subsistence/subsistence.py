@@ -25,7 +25,7 @@ user_agent = {'User-Agent': 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 
 security_headers = [
     'X-Frame-Options',
     'Strict-Transport-Security',
-    'X-XXS-Protection',
+    'X-XSS-Protection',
     'Content-Security-Policy'
 ]
 
@@ -83,20 +83,21 @@ def write(header, output, art):
 
 def get_head(url):
     info_headers = []
-    missing_headers = []
+    found_sec_headers = []
     r = requests.get(url, timeout=args.timeout, verify=False, headers=user_agent)
     if r:
         print(pos, f'[{url}]: {green}{r.status_code}{endc}')
         for x, y in r.headers.items():
-            if x in information_headers:
+            # print(f'{x} // {y}')
+            if str(x) in information_headers:
                 print(info, f'[{x}]: {y}')
                 write(x, f'{url}: {y}', 'information_disclosure')
                 info_headers.append(x)
-        for x in security_headers:
-            if x not in info_headers:
-                missing_headers.append(x)
-                print(query, f'[Missing Security Header]:', x)
+            if str(x) in security_headers:
+                found_sec_headers.append(x)
+        missing_headers = list(set(security_headers)^set(found_sec_headers))
         for x in missing_headers:
+            print(query, f'[Missing Security Header]:', x)
             write(x, url, 'security')
     else:
         print(error, f'[{url}]: {red}{r}{endc}')
