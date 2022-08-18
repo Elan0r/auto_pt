@@ -17,16 +17,16 @@ else
 fi
 
 echo -e ''
-read -e -p 'Where to save? (no end / ): ' folder
+read -e -p 'Where to save? (no end / ; will create slowhttp folder inside): ' folder
 if [ -z "$folder" ];
 then
 	echo -e '! > set Folder!'
 	exit 1
 else
-	if [ ! -d $folder ]
+	if [ ! -d $folder/slowhttp ]
 	then
-		mkdir -p $folder
-		echo -e '! > Folder Created at '$folder
+		mkdir -p $folder/slowhttp
+		echo -e '! > Folder Created at '$folder/slowhttp
 	else
 		echo -e '! > Folder OK!'
 	fi
@@ -44,7 +44,7 @@ fi
 
 for i in $(cat $file) 
 do 
-slowhttptest -l $time -g -o $folder/$i -u https://$i -c 9999 -r 2000 -b 240
+slowhttptest -l $time -g -o $folder/slowhttp/$i -u https://$i -c 9999 -r 2000 -b 240
 sleep 5 
 done
 
