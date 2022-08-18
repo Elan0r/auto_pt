@@ -24,7 +24,7 @@ else
 	fi
 fi
 
-mkdir -p $FOLDER/output/ext_msf $FOLDER/output/nmap $FOLDER/output/loot/extern
+mkdir -p $FOLDER/output/ext_msf $FOLDER/output/nmap $FOLDER/output/loot/extern $FOLDER/output/nuclei
 
 read -p "Enter Workspace Name (will delete if exists): " WS
 if [ -z $WS ]
@@ -68,6 +68,12 @@ printf '%s\nspool off\nexit\n' >> $FOLDER/output/ext_msf/resource.txt
 
 msfdb init
 msfconsole -qx "resource "$FOLDER"/output/ext_msf/workspace.txt "$FOLDER"/output/ext_msf/resource.txt"  > /dev/null 2>&1
+
+#nuclei scanner
+go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+nuclei -update
+nuclei -ut
+nuclei -l $HOSTS -o $FOLDER/output/nuclei/nuclei.txt -headless -project $FOLDER/output/nuclei
 
 echo 'looting'
 
