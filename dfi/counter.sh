@@ -219,7 +219,7 @@ wc -l /root/output/loot/intern/web/ms15-034/hosts.txt >> /root/output/loot/inter
 cat /root/output/loot/intern/web/ms15-034/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
-echo "PS-TW-2021-0010 IIS_Bypass" >> /root/output/loot/intern/findings.txt
+echo "PS-TW-2022-0002 IIS_Bypass" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/web/iis_bypass/hosts.txt >> /root/output/loot/intern/findings.txt
 cat /root/output/loot/intern/web/iis_bypass/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt

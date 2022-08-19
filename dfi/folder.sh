@@ -62,6 +62,7 @@ mkdir -p /root/output/loot/intern/ad/adcs/esc2
 mkdir -p /root/output/loot/intern/ad/adcs/esc1
 mkdir -p /root/output/loot/intern/ad/iam/rights
 mkdir -p /root/output/loot/intern/ad/iam/gmsa
+mkdir -p /root/output/loot/intern/ad/iam/password
 mkdir -p /root/output/loot/intern/dns/amplification
 mkdir -p /root/output/loot/intern/dns/tunnel
 mkdir -p /root/output/loot/intern/dns/zone_transfer
