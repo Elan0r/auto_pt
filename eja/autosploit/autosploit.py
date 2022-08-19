@@ -87,7 +87,7 @@ if __name__ == "__main__":
         var_service = menu_selection(data)
         # Write Resource Init
         f = open("resource.txt", "w")
-        f.write(f"workspace {args.WORKSPACE}")
+        f.write(f"workspace {args.WORKSPACE}\n")
         f.write("setg THREADS 150\n")
         # Create Main Output Folder
         os.mkdir("output")
