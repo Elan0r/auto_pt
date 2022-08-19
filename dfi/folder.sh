@@ -119,6 +119,7 @@ mkdir -p /root/output/loot/intern/creds/phone
 mkdir -p /root/output/loot/intern/creds/printer
 mkdir -p /root/output/loot/intern/creds/ups
 mkdir -p /root/output/loot/intern/creds/san
+mkdir -p /root/output/loot/intern/creds/web
 mkdir -p /root/output/loot/intern/web/ilo
 mkdir -p /root/output/loot/intern/web/iis_bypass
 mkdir -p /root/output/loot/intern/web/ms15-034
