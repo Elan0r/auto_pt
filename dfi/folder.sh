@@ -43,7 +43,7 @@ mkdir -p /root/output/loot/intern/ad/kerberos/asreproast
 mkdir -p /root/output/loot/intern/ad/kerberos/delegation
 mkdir -p /root/output/loot/intern/ad/kerberos/kerberoasting
 mkdir -p /root/output/loot/intern/ad/kerberos/krbtgt
-mkdir -p /root/output/loot/intern/ad/kerberos/enumeration
+mkdir -p /root/output/loot/intern/ad/kerberos/user_enum
 mkdir -p /root/output/loot/intern/ad/kerberos/passwd_spray
 mkdir -p /root/output/loot/intern/ad/laps
 mkdir -p /root/output/loot/intern/ad/session
