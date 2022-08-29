@@ -26,13 +26,9 @@ parser.add_argument('-t', '--target-file',
                     required=True)
 parser.add_argument('-c', '--command',
                     dest='command',
-                    help='Command which will be Executed containing "%PLACEHOLDER" to be Replaced with the Target.',
+                    help='Command which will be Executed containing "#PLACEHOLDER" to be Replaced with the Target.',
                     action='store',
                     required=True)
-parser.add_argument('-q', '--quiet',
-                    help='Supress Command Line Output excluding the executed Command.',
-                    action='store',
-                    required=False)
 args = parser.parse_args()
 
 
@@ -52,9 +48,10 @@ def parse(file):
 def execute(cmd, lst):
     for target in lst:
         try:
-            exec_cmd = cmd.replace('%PLACEHOLDER', target)
-            print(blue + "[#] Executing:" + endc, exec_cmd)
-            os.system(exec_cmd)
+            exec_cmd = cmd.replace('#PLACEHOLDER', target)
+            stripped_cmd = exec_cmd.replace('\n', '')
+            print(blue + "[#] Executing:" + endc, stripped_cmd)
+            os.system(stripped_cmd)
         except Exception as E:
             print(red + '[x] Failed to Execute Command:' + endc, E)
 
@@ -62,9 +59,12 @@ def execute(cmd, lst):
 if __name__ == '__main__':
     # Usage Example
     print(blue + '[EXAMPLE]:' + green, './repeater.py' +
-          purple, '-t' + yellow, 'TARGETS.txt' +
-          purple, '-c' + yellow, '"nmap -sSV -Pn %PLACEHOLDER"', endc)
+          purple, '-t' + yellow, 'targets.txt' +
+          purple, '-c' + yellow, '"nmap -sSV #PLACEHOLDER -Pn"', endc)
     # Parse Target File
     target_lst = parse(file=args.target_file)
     # Execute Command & Insert Targets
-    execute(cmd=str(args.command), lst=target_lst)
+    try:
+        execute(cmd=str(args.command), lst=target_lst)
+    except KeyboardInterrupt:
+        exit()
