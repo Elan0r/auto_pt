@@ -1,3 +1,5 @@
+## Benutzung:
+```
 usage: repeater.py [-h] -t TARGET_FILE -c COMMAND
 
 optional arguments:
@@ -6,3 +8,5 @@ optional arguments:
                         Target File containing Targets IPs / URLs for Command Execution.
   -c COMMAND, --command COMMAND
                         Command which will be Executed containing "#PLACEHOLDER" to be Replaced with the Target.
+```
+
