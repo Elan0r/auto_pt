@@ -39,6 +39,8 @@ echo 'workspace -d ' $WS > $FOLDER/output/ext_msf/workspace.txt
 echo 'workspace -a ' $WS >> $FOLDER/output/ext_msf/workspace.txt
 echo 'db_import '$FOLDER'/output/nmap/ext_service.xml' >> $FOLDER/output/ext_msf/workspace.txt
 
+echo 'Start Nmap'
+
 nmap -sSVC -n -Pn --max-retries 5 -oA $FOLDER/output/nmap/ext_service -iL $HOSTS  > /dev/null 2>&1
 
 #MSF Resource File
@@ -66,8 +68,12 @@ printf '%s\nspool '$FOLDER'/output/ext_msf/ftp.txt\necho "FTP"\nuse auxiliary/sc
 #MSF Resource File End
 printf '%s\nspool off\nexit\n' >> $FOLDER/output/ext_msf/resource.txt
 
+echo 'Start Metasploit'
+
 msfdb init
 msfconsole -qx "resource "$FOLDER"/output/ext_msf/workspace.txt "$FOLDER"/output/ext_msf/resource.txt"  > /dev/null 2>&1
+
+echo 'Start nuclei'
 
 #nuclei scanner
 go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
