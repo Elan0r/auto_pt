@@ -24,7 +24,7 @@ fi
 if grep -Fxq SHD_MANAGER /usr/share/metasploit-framework/data/wordlists/ipmi_users.txt; then
    echo '! > SHD_Manager exists'
 else
-   echo 'SHD_MANAGER' > /usr/share/metasploit-framework/data/wordlists/ipmi_users.txt
+   echo 'SHD_MANAGER' >> /usr/share/metasploit-framework/data/wordlists/ipmi_users.txt
 fi
 
 echo "Start autosploit" >> /root/output/runtime.txt
