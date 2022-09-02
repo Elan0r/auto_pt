@@ -7,7 +7,7 @@ echo "####Log4Shell####" >> /root/output/runtime.txt
 
 use auxiliary/scanner/http/log4shell_scanner
 set srvhost eth0
-services -p 80 -R
+services -p 80 -u -R
 set rport 80
 set ssl false
 run
@@ -17,7 +17,7 @@ date >> /root/output/runtime.txt
 echo "Log4j Port 8080 NoSSL" >> /root/output/runtime.txt
 echo "Log4j Port 8080 NoSSL"
 set rport 8080
-services -p 8080 -R
+services -p 8080 -u -R
 set ssl false
 run
 sleep 5
@@ -25,7 +25,7 @@ sleep 5
 date >> /root/output/runtime.txt
 echo "Log4j Port 8080 SSL" >> /root/output/runtime.txt
 echo "Log4j Port 8080 SSL"
-services -p 8080 -R
+services -p 8080 -u -R
 set ssl true
 run
 sleep 5
@@ -35,7 +35,7 @@ echo "Log4j Port 443" >> /root/output/runtime.txt
 echo "Log4j Port 443"
 set rport 443
 set ssl true
-services -p 443 -R
+services -p 443 -u -R
 run
 sleep 5
 
@@ -44,7 +44,7 @@ echo "Log4j Port 8443" >> /root/output/runtime.txt
 echo "Log4j Port 8443"
 set rport 8443
 set ssl true
-services -p 8443 -R
+services -p 8443 -u -R
 run
 sleep 5
 date >> /root/output/runtime.txt

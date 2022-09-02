@@ -96,6 +96,8 @@ mkdir -p $FOLDER/output/loot/extern/web/ms15-034
 awk '/The target is vulnerable/{print$2}' $FOLDER/output/ext_msf/web.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/web/ms15-034/hosts.txt
 mkdir -p $FOLDER/output/loot/extern/web/iis_tilde
 awk '/The target is vulnerable/{print$2}' $FOLDER/output/ext_msf/iis_tilde.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/web/iis_tilde/hosts.txt
+mkdir -p $FOLDER/output/loot/extern/web/internal_ip
+awk '/Found Internal IP/{print$}' $FOLDER/output/ext_msf/web.txt > $FOLDER/output/loot/extern/web/internal_ip/hosts.txt
 
 ### log4shell
 mkdir -p $FOLDER/output/loot/extern/web/log4shell
