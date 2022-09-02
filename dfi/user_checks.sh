@@ -8,10 +8,10 @@ DNS must be working for bloodhound!
 
 Options:
   -u              Username -> Required
-  -p              Password  (provide pass OR nthash)
-  -H              NT Hash (provide pass OR nthash)
-  -d              domain
-  -ip             IP Domain Controller
+  -p              Password -> provide pass OR nthash
+  -H              NT Hash -> provide pass OR nthash
+  -d              domain -> required
+  -ip             IP Domain Controller -> required
   -h              this help
 "
 
