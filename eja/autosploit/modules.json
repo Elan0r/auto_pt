@@ -155,6 +155,14 @@
           "auxiliary/scanner/printer/printer_list_dir": {}
         }
       },
+      "konica": {
+        "port": [50001],
+        "msf": {
+          "auxiliary/gather/konica_minolta_pwd_extract": {
+            "passwd": "12345678"
+          }
+        }
+      },
       "postgres": {
         "port": [5432],
         "msf": {
