@@ -2,7 +2,8 @@
 figlet -w 84 ProSecUserChecks
 echo "pre Alpha - not working"
 exit 0
-function show_help {
+
+show_help () {
 echo "HINT: Special Characters should be escaped better use ''"
 echo "DNS must be working for bloodhound!"
 echo ""
@@ -15,10 +16,11 @@ echo "  -ip             IP Domain Controller -> required"
 echo "  -h              this help"
 exit 0
 }
+
 OPTIND=1
-while getopts "u:p:H:d:ip:" flag
+while getopts "u:p:H:d:ip:" opt
 do
-    case "${flag}" in
+    case "$opt" in
         u)
           USER=${OPTARG}
           echo ${OPTIND}
@@ -44,7 +46,7 @@ do
           OPTIND=1
         ;;
         *)
-           show_help
+          show_help
         ;;
     esac
 done
