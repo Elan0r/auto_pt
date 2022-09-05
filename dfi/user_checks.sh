@@ -71,7 +71,7 @@ if [ -z $IP ]
 then 
     show_help
 fi
-if [ -z $DOM ]
+if [ -z $DOM ]
 then 
     show_help
 fi
