@@ -1,7 +1,8 @@
  #!/bin/bash
 figlet -w 84 ProSecUserChecks
 echo "pre Alpha - not working"
-exit 0
+
+unset USER HASH PASS DOM IP
 
 show_help () {
 echo "HINT: Special Characters should be escaped better use ''"
@@ -25,6 +26,10 @@ do
           USER=${OPTARG}
           echo ${OPTIND}
         ;;
+        (p)
+          PASS=${OPTARG}
+          echo ${OPTIND}
+        ;;
         (H)
           HASH=${OPTARG}
           echo ${OPTIND}
@@ -46,6 +51,14 @@ do
         ;;
     esac
 done
+
+echo $USER
+echo $PASS
+echo $HASH
+echo $DOM
+echo $IP
+
+exit 0
 
 shift "$((OPTIND - 1))"
 [ "$1" = "--" ] && shift
@@ -128,10 +141,10 @@ then
     crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M nopac | tee -a /root/output/loot/intern/ldap/nopac/$IP.txt
 
  # petitpotam
-    crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M petitpotam | tee -a /root/output/loot/intern/rpc/petit_potam
+    crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M petitpotam | tee -a /root/output/loot/intern/rpc/petit_potam
 
  # sessions
-    crackmapexec smb $IP -u $USER -H $HASH -d $DOM --sessions | tee -a /root/output/loot/intern/ad/session/$IP_sessions.txt
+    crackmapexec smb $IP -u $USER -H $HASH -d $DOM --sessions | tee -a /root/output/loot/intern/ad/session/$IP_sessions.txt
 
  # ldap signing
     python3 /opt/LdapRelayScan/LdapRelayScan.py -u $USER -nthash $HASH -dc-ip $IP -method BOTH > /root/output/loot/intern/ldap/signing/signig.txt
