@@ -54,7 +54,7 @@ done
 shift $((OPTIND-1))
 [ "$1" = "--" ] && shift
 
-if [ -z $USER ] || [ -z $IP ] || [ -z $DOM ]
+if [ -z $USER -a -z $IP -a -z $DOM ]
 then 
     show_help
 fi
