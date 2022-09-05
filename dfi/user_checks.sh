@@ -50,13 +50,16 @@ done
 shift "$((OPTIND - 1))"
 [ "$1" = "--" ] && shift
 
-if [[ -z $USER || -z $IP || -z $DOM ]]
+if [ -z $USER ]
 then 
     show_help
 fi
-
-if [ -z $PASS ] && [ -z $HASH ]
-then
+if [ -z $IP ]
+then 
+    show_help
+fi
+if [ -z $DOM ]
+then 
     show_help
 fi
 
