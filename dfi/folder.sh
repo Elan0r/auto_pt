@@ -63,7 +63,7 @@ mkdir -p /root/output/loot/intern/ad/iam/local_admin
 mkdir -p /root/output/loot/intern/ad/iam/rights
 mkdir -p /root/output/loot/intern/ad/iam/gmsa
 mkdir -p /root/output/loot/intern/ad/iam/password
-mkdir -p /root/output/loot/intern/ad/iam/name_as_pass
+mkdir -p /root/output/loot/intern/ad/iam/username_as_pass
 mkdir -p /root/output/loot/intern/dns/amplification
 mkdir -p /root/output/loot/intern/dns/tunnel
 mkdir -p /root/output/loot/intern/dns/zone_transfer

