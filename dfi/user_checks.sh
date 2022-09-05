@@ -12,46 +12,42 @@ echo "  -u              Username -> Required"
 echo "  -p              Password -> provide pass OR nthash"
 echo "  -H              NT Hash -> provide pass OR nthash"
 echo "  -d              domain -> required"
-echo "  -ip             IP Domain Controller -> required"
+echo "  -i             IP Domain Controller -> required"
 echo "  -h              this help"
 exit 0
 }
 
 OPTIND=1
-while getopts "u:p:H:d:ip:" opt
+while getopts u:p:H:d:i: opt
 do
     case "$opt" in
-        u)
+        (u)
           USER=${OPTARG}
           echo ${OPTIND}
         ;;
-        p)
-          PASS=${OPTARG}
-          echo ${OPTIND}
-        ;;
-        H)
+        (H)
           HASH=${OPTARG}
           echo ${OPTIND}
         ;;
-        d)
+        (d)
           DOM=${OPTARG}
           echo ${OPTIND}
         ;;
-        ip)
+        (i)
           IP=${OPTARG}
           echo ${OPTIND}
         ;;
-        u|p|H|d|ip)
+        (u|p|H|d|i)
           shift 2
           OPTIND=1
         ;;
-        *)
+        (*)
           show_help
         ;;
     esac
 done
 
-shift $((OPTIND-1))
+shift "$((OPTIND - 1))"
 [ "$1" = "--" ] && shift
 
 if [ -z $USER -a -z $IP -a -z $DOM ]
