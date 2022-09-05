@@ -2,7 +2,7 @@
 figlet -w 84 ProSecUserChecks
 echo "pre Alpha - not working"
 exit 0
-function usage {
+function show_help {
 echo "HINT: Special Characters should be escaped better use ''"
 echo "DNS must be working for bloodhound!"
 echo ""
@@ -42,9 +42,9 @@ do
         u|p|H|d|ip)
           shift 2
           OPTIND=1
-        ;; 
-        *) 
-           usage
+        ;;
+        *)
+           show_help
         ;;
     esac
 done
@@ -54,12 +54,12 @@ shift $((OPTIND-1))
 
 if [ -z $USER ] || [ -z $IP ] || [ -z $DOM ]
 then 
-    usage
+    show_help
 fi
 
 if [ -z $PASS ] && [ -z $HASH ]
 then
-    usage
+    show_help
 fi
 
 # get DC_FQDN
