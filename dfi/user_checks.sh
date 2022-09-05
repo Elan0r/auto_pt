@@ -2,42 +2,64 @@
 figlet -w 84 ProSecUserChecks
 echo "pre Alpha - not working"
 exit 0
-usage="
-HINT: Special Characters should be escaped better use ''
-DNS must be working for bloodhound!
-
-Options:
-  -u              Username -> Required
-  -p              Password -> provide pass OR nthash
-  -H              NT Hash -> provide pass OR nthash
-  -d              domain -> required
-  -ip             IP Domain Controller -> required
-  -h              this help
-"
-
-while getopts u:p:H:d:ip:h: flag
+function usage {
+echo "HINT: Special Characters should be escaped better use ''"
+echo "DNS must be working for bloodhound!"
+echo ""
+echo "Options:"
+echo "  -u              Username -> Required"
+echo "  -p              Password -> provide pass OR nthash"
+echo "  -H              NT Hash -> provide pass OR nthash"
+echo "  -d              domain -> required"
+echo "  -ip             IP Domain Controller -> required"
+echo "  -h              this help"
+exit 0
+}
+OPTIND=1
+while getopts "u:p:H:d:ip:" flag
 do
     case "${flag}" in
-        h)
-           echo "$usage"
-        u) USER=${OPTARG};;
-        p) PASS=${OPTARG};;
-        H) HASH=${OPTARG};;
-        d) DOM=${OPTARG};;
-        ip) IP=${OPTARG};;
+        u)
+          USER=${OPTARG}
+          echo ${OPTIND}
+        ;;
+        p)
+          PASS=${OPTARG}
+          echo ${OPTIND}
+        ;;
+        H)
+          HASH=${OPTARG}
+          echo ${OPTIND}
+        ;;
+        d)
+          DOM=${OPTARG}
+          echo ${OPTIND}
+        ;;
+        ip)
+          IP=${OPTARG}
+          echo ${OPTIND}
+        ;;
+        u|p|H|d|ip)
+          shift 2
+          OPTIND=1
+        ;; 
+        *) 
+           usage
+        ;;
     esac
 done
 
+shift $((OPTIND-1))
+[ "$1" = "--" ] && shift
+
 if [ -z $USER ] || [ -z $IP ] || [ -z $DOM ]
 then 
-    echo "$usage"
-    exit 1
+    usage
 fi
 
 if [ -z $PASS ] && [ -z $HASH ]
 then
-    echo "$usage"
-    exit 1
+    usage
 fi
 
 # get DC_FQDN
