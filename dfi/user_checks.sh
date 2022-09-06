@@ -1,7 +1,6 @@
  #!/bin/bash
 figlet -w 84 ProSecUserChecks
-echo "pre Alpha - not working"
-
+echo "CME is still buggy u need to press ENTER sometimes!"
 unset USER HASH PASS DOM IP FQDN
 
 show_help () {
