@@ -108,7 +108,7 @@ then
   echo "Sessions" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # sessions
-   crackmapexec smb $IP -u $USER -p $PASS -d $DOM --sessions >> /root/output/loot/intern/ad/session/sessions_$FQDN.txt
+   crackmapexec smb /root/output/list/smb_open.txt -u $USER -p $PASS -d $DOM --sessions >> /root/output/loot/intern/ad/session/sessions_$DOM.txt
 
   echo "ASRep" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
@@ -187,7 +187,7 @@ echo 'HASH is untested'
   echo "Sessions" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # sessions
-   crackmapexec smb $IP -u $USER -H $HASH -d $DOM --sessions >> /root/output/loot/intern/ad/session/sessions_$FQDN.txt
+   crackmapexec smb /root/output/list/smb_open.txt -u $USER -H $HASH -d $DOM --sessions >> /root/output/loot/intern/ad/session/sessions_$FQDN.txt
 
   echo "ASRep" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
