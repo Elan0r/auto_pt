@@ -3,7 +3,7 @@ setg BLANK_PASSWORDS true
 setg BRUTEFORCE_SPEED 5
 setg VERBOSE true
 setg DB_ALL_CREDS true
-
+echo "auto_PT 1.6"
 spool /root/output/msf/udp_scan.txt
 echo "####ADDITIONAL CHECKS####"
 
@@ -480,6 +480,19 @@ set SSL true
 check
 sleep 5
 
+echo "IIS Internal IP disclosure"
+use auxiliary/scanner/http/iis_internal_ip
+services -u -p 80 -S Microsoft -R
+set rport 80
+set SSL false
+run
+sleep 5
+services -u -p 443 -S Microsoft -R
+set ssl true
+set rport 443
+run
+sleep 5
+
 spool /root/output/msf/iis_tilde.txt
 echo "IIS shortname Scanner/Tilde Character"
 use auxiliary/scanner/http/iis_shortname_scanner
@@ -493,19 +506,6 @@ set rport 443
 set SSL true
 check
 sleep 5
-run
-sleep 5
-
-echo "IIS Internal IP disclosure"
-use auxiliary/scanner/http/iis_internal_ip
-services -u -p 80 -S Microsoft -R
-set rport 80
-set SSL false
-run
-sleep 5
-services -u -p 443 -S Microsoft -R
-set ssl true
-set rport 443
 run
 sleep 5
 

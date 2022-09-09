@@ -136,6 +136,20 @@ services -p 443 -u -R
 check
 sleep 5
 
+spool /root/output/msf/rpc.txt
+echo "SunRPC Portmapper"
+use auxiliary/scanner/misc/sunrpc_portmapper
+services -p 111 -u -R
+run
+sleep 5
+services -p 111 -u
+sleep 5
+
+echo "Portmap Amplification"
+use auxiliary/scanner/portmap/portmap_amp
+services -p 111 -u -R
+run
+sleep 5
 
 spool off
 sessions -K
