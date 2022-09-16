@@ -1,14 +1,15 @@
 #!/bin/bash
 figlet ProSecSlowHTTP
-
+echo 'version 1.1'
 echo -e ''
-read -e -p 'File with Domains for SlowHTTP (no http/https): ' file
-if [ -z "$file" ];
+
+read -e -p 'File with Domains for SlowHTTP (no http/https): ' HOSTS
+if [ -z "$HOSTS" ];
 then
 	echo -e '! > set File!'
 	exit 1
 else
-	if [ -s $file ]; then
+	if [ -s $HOSTS ]; then
     	echo '! > FILE OK '
 	else
    		echo "! >> NO File"
@@ -17,16 +18,19 @@ else
 fi
 
 echo -e ''
-read -e -p 'Where to save? (no end / ; will create slowhttp folder inside): ' folder
-if [ -z "$folder" ];
+read -e -p 'Where to save?; will create output/slowhttp folder inside: ' RFOLDER
+
+FOLDER=$(echo $RFOLDER | sed 's:/*$::')
+
+if [[ -z $FOLDER || $FOLDER == "." ]] 
 then
-	echo -e '! > set Folder!'
-	exit 1
+	FOLDER=$PWD
+    echo -e '! > Folder is '$FOLDER
 else
-	if [ ! -d $folder/slowhttp ]
+	if [ ! -d $FOLDER/output/slowhttp ]
 	then
-		mkdir -p $folder/slowhttp
-		echo -e '! > Folder Created at '$folder/slowhttp
+		mkdir -p $FOLDER/output/slowhttp
+		echo -e '! > Folder Created at '$FOLDER/output/slowhttp
 	else
 		echo -e '! > Folder OK!'
 	fi
@@ -42,9 +46,9 @@ else
 	echo -e '! > Time = '$time
 fi
 
-for i in $(cat $file) 
+for i in $(cat $HOSTS) 
 do 
-slowhttptest -l $time -g -o $folder/slowhttp/$i -u https://$i -c 9999 -r 2000 -b 240
+slowhttptest -l $time -g -o $FOLDER/output/slowhttp/$i -u https://$i -c 9999 -r 2000 -b 240
 sleep 5 
 done
 

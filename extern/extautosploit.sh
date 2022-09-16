@@ -1,28 +1,41 @@
 #!/bin/bash
-
 figlet -w 95 ProSecExtAutoSploit
 echo 'version 1.1'
+echo -e ''
+
 read -e -p 'File with Domains for MSF run (no http/https): ' HOSTS
-if [ -z $HOSTS ]
+if [ -z "$HOSTS" ];
 then
-    echo 'supply File!'
-    exit 1
+	echo -e '! > set File!'
+	exit 1
+else
+	if [ -s $HOSTS ]; then
+    	echo '! > FILE OK '
+	else
+   		echo "! >> NO File"
+		exit 1
+	fi
 fi
 
-read -e -p 'Where to save? (no end / ) will create "output" folder inside: ' FOLDER
-if [[ -z $FOLDER || $FOLDER == "." || $FOLDER == "./" ]] 
+echo -e ''
+read -e -p 'Where to save? will create "output" folder inside: ' RFOLDER
+
+FOLDER=$(echo $RFOLDER | sed 's:/*$::')
+
+if [[ -z $FOLDER || $FOLDER == "." ]] 
 then
 	FOLDER=$PWD
     echo -e '! > Folder is '$FOLDER
 else
-	if [ ! -d $FOLDER ]
+	if [ ! -d $FOLDER/output ]
 	then
-		mkdir -p $FOLDER
+		mkdir -p $FOLDER/output
 		echo -e '! > Folder Created at '$FOLDER
 	else
 		echo -e '! > Folder OK!'
 	fi
 fi
+
 
 mkdir -p $FOLDER/output/ext_msf $FOLDER/output/nmap $FOLDER/output/loot/extern $FOLDER/output/nuclei
 
@@ -99,13 +112,13 @@ awk '/FTP Banner/ {print$2}' $FOLDER/output/ext_msf/ftp.txt | cut -d ":" -f 1 | 
 mkdir -p $FOLDER/output/loot/extern/web/iis_bypass
 grep -B 1 'You can bypass auth' $FOLDER/output/ext_msf/web.txt | awk '/against/ {print$5}' | sort -u > $FOLDER/output/loot/extern/web/iis_bypass/hosts.txt
 mkdir -p $FOLDER/output/loot/extern/web/ms15-034
-awk '/The target is vulnerable/{print$2}' $FOLDER/output/ext_msf/web.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/web/ms15-034/hosts.txt
+awk '/The target is vulnerable/ {print$2}' $FOLDER/output/ext_msf/web.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/web/ms15-034/hosts.txt
 mkdir -p $FOLDER/output/loot/extern/web/iis_tilde
-awk '/The target is vulnerable/{print$2}' $FOLDER/output/ext_msf/iis_tilde.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/web/iis_tilde/hosts.txt
+awk '/The target is vulnerable/ {print$2}' $FOLDER/output/ext_msf/iis_tilde.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/web/iis_tilde/hosts.txt
 mkdir -p $FOLDER/output/loot/extern/web/internal_ip
-awk '/Found Internal IP/{print$}' $FOLDER/output/ext_msf/web.txt > $FOLDER/output/loot/extern/web/internal_ip/hosts.txt
+awk '/Found Internal IP/ {print}' $FOLDER/output/ext_msf/web.txt > $FOLDER/output/loot/extern/web/internal_ip/hosts.txt
 mkdir -p $FOLDER/output/loot/extern/rpc/portmap
-awk '/\+.*SunRPC/ {print$2}' $FOLDER/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/rpc/portmapper/hosts.txt
+awk '/\+.*SunRPC/ {print$2}' $FOLDER/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/rpc/portmap/hosts.txt
 mkdir -p $FOLDER/output/loot/extern/rpc/amplification
 awk '/Vulnerable to Portmap/ {print$2}' $FOLDER/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/rpc/amplification/hosts.txt
 ### log4shell

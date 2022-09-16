@@ -1,14 +1,15 @@
 #!/bin/bash
 figlet -w 96 ProSecScoper
-
+echo 'version 1.1'
 echo -e ''
-read -e -p 'File with Domains for Scope Check (no http/https): ' file
-if [ -z "$file" ];
+
+read -e -p 'File with Domains for Scope Check (no http/https): ' HOSTS
+if [ -z "$HOSTS" ];
 then
 	echo -e '! > set File!'
 	exit 1
 else
-	if [ -s $file ]; then
+	if [ -s $HOSTS ]; then
     	echo '! > FILE OK '
 	else
    		echo "! >> NO File"
@@ -17,35 +18,38 @@ else
 fi
 
 echo -e ''
-read -e -p 'Where to save? (no end / ): ' folder
-if [ -z "$folder" ];
+read -e -p 'Where to save?;will create output/harvest folder inside: ' RFOLDER
+
+FOLDER=$(echo $RFOLDER | sed 's:/*$::')
+
+if [[ -z $FOLDER || $FOLDER == "." ]] 
 then
-	echo -e '! > set Folder!'
-	exit 1
+	FOLDER=$PWD
+    echo -e '! > Folder is '$FOLDER
 else
-	if [ ! -d $folder ]
+	if [ ! -d $FOLDER/output/harvest ]
 	then
-		mkdir -p $folder
-		echo -e '! > Folder Created at '$folder
+		mkdir -p $FOLDER/output/harvest
+		echo -e '! > Folder Created at '$FOLDER'/output/harvest'
 	else
 		echo -e '! > Folder OK!'
 	fi
 fi
 
-for i in $(cat $file)
+for i in $(cat $HOSTS)
 do
-  theHarvester -d $i -n -c -b all | tee -a $folder/harvest_$i.txt
+  theHarvester -d $i -n -c -b all | tee -a $FOLDER/output/harvest/$i.txt
 done
 #Hosts for Scope
-awk '/\[*\] Hosts found:/,(0 || /\[*\]/&&!/\[*\] Hosts/)' $folder/harvest_*.txt | grep -v '\[*\] ' | grep -v '\-\-\-' > $folder/hosts.txt
-#grep ':[0-9]\{1,3\}' $folder/hosts.txt | cut -d : -f 2 | sort -u > $folder/host_ip.txt
-grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' $folder/hosts.txt | sort -u > $folder/host_ip.txt
+awk '/\[*\] Hosts found:/,(0 || /\[*\]/&&!/\[*\] Hosts/)' $FOLDER/output/harvest/*.txt | grep -v '\[*\] ' | grep -v '\-\-\-' > $FOLDER/output/harvest/hosts.txt
+#grep ':[0-9]\{1,3\}' $FOLDER/output/harvest/hosts.txt | cut -d : -f 2 | sort -u > $FOLDER/output/harvest/host_ip.txt
+grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' $FOLDER/output/harvest/hosts.txt | sort -u > $FOLDER/output/harvest/host_ip.txt
 
 #Emails
-awk '/\[*\] Emails found:/,/\[*\]/&&!/\[*\] Emails/' $folder/harvest_*.txt | grep -v '\[*\].*Hosts' > $folder/emails.txt
+awk '/\[*\] Emails found:/,/\[*\]/&&!/\[*\] Emails/' $FOLDER/output/harvest/*.txt | grep -v '\[*\].*Hosts' > $FOLDER/output/harvest/emails.txt
 
 #Trello
 
-awk '/\[*\] Trello URLs found:/,/\[*\]/&&!/\[*\] Trello/' $folder/harvest_*.txt | grep -v '\[*\].*IPs' > $folder/trello.txt
+awk '/\[*\] Trello URLs found:/,/\[*\]/&&!/\[*\] Trello/' $FOLDER/output/harvest/*.txt | grep -v '\[*\].*IPs' > $FOLDER/output/harvest/trello.txt
 
 exit 0
