@@ -118,9 +118,9 @@ awk '/The target is vulnerable/ {print$2}' $FOLDER/output/ext_msf/iis_tilde.txt 
 mkdir -p $FOLDER/output/loot/extern/web/internal_ip
 awk '/Found Internal IP/ {print}' $FOLDER/output/ext_msf/web.txt > $FOLDER/output/loot/extern/web/internal_ip/hosts.txt
 mkdir -p $FOLDER/output/loot/extern/rpc/portmap
-awk '/\+.*SunRPC/ {print$2}' $FOLDER/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/rpc/portmap/hosts.txt
+awk '/\+.*SunRPC/ {print$2}' $FOLDER/output/ext_msf/rpc.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/rpc/portmap/hosts.txt
 mkdir -p $FOLDER/output/loot/extern/rpc/amplification
-awk '/Vulnerable to Portmap/ {print$2}' $FOLDER/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/rpc/amplification/hosts.txt
+awk '/Vulnerable to Portmap/ {print$2}' $FOLDER/output/ext_msf/rpc.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/rpc/amplification/hosts.txt
 ### log4shell
 mkdir -p $FOLDER/output/loot/extern/web/log4shell
 awk '/Log4Shell found/{print$2}' $FOLDER/output/ext_msf/log4j.txt | cut -d ":" -f 1 | sort -u > $FOLDER/output/loot/extern/web/log4shell/hosts.txt
