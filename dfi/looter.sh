@@ -102,7 +102,7 @@ awk '/x Amplification/ {print$2}' /root/output/msf/dns.txt | cut -d ":" -f 1 | s
 
 ### IPMI
 awk '/Hash found/ {print$2}' /root/output/msf/ipmi.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/ipmi/hashdump/hosts.txt
-awk '/VULNERABLE/ {print$2}' /root/output/msf/ipmi.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/ipmi/zero_cipher/hosts.txt
+awk '/- VULNERABLE/ {print$2}' /root/output/msf/ipmi.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/ipmi/zero_cipher/hosts.txt
 
 ### MAIL
 awk '/\+.*:143/ {print$2}' /root/output/msf/mail.txt | cut -d ":" -f 1 | sort -u > /root/output/loot/intern/mail/imap/unencrypted/hosts.txt
