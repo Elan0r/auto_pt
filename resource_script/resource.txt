@@ -79,6 +79,7 @@ sleep 5
 echo "mysql_login"
 use scanner/mysql/mysql_login
 services -u -p 3306 -u -R
+set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
 run
 sleep 5
 
@@ -91,6 +92,7 @@ sleep 5
 echo "postgresql_login"
 use scanner/postgres/postgres_login
 services -u -p 5432 -u -R
+set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
 run
 sleep 5
 
@@ -107,6 +109,7 @@ sleep 5
 echo "CouchDB login scanner"
 use auxiliary/scanner/couchdb/couchdb_login
 hosts -u -p 5984 -u -R
+set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
 run
 set SSL true
 set rport 6984
