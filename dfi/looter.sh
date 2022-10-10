@@ -56,7 +56,7 @@ awk '/FTP Banner/ {print$2}' /root/output/msf/ftp.txt | cut -d ":" -f 1 | sort -
 
 ### EOL
 awk '/\+.*OpenSSH/ {print$7,$2}' /root/output/msf/ssh.txt | sed 's/:22/ /g' |  sort -u | grep -v '_8.' > /root/output/loot/intern/eol/ssh/openssh_version.txt
-grep 'running Windows 200\|running Windows 7\|running Windows XP\|running Windows Vista\|running Windows 8\|running Windows 9' /root/output/msf/smb.txt | cut -c18- | sed 's/:... //' | sort -u > /root/output/loot/intern/eol/windows/windows_versions.txt
+grep 'running Windows 200\|running Windows 7\|running Windows XP\|running Windows Vista\|running Windows 8\|running Windows 9' /root/output/msf/smb.txt | cut -c5- | sed 's/:... //' | sort -u > /root/output/loot/intern/eol/windows/windows_versions.txt
 awk '/\-1.99/ {print$2}' /root/output/msf/ssh.txt |cut -d : -f 1 | sort -u > /root/output/loot/intern/eol/ssh_depricated/hosts.txt
 
 ### TELNET
