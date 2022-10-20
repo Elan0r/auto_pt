@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # IMPORT
 import os
+import shutil
 import json
 import argparse
-from simple_term_menu import TerminalMenu
+import sys
+from datetime import datetime
 
 # Var
 option_db = []
@@ -23,11 +25,6 @@ info = yellow + '[i]' + endc
 module = blue + '[→]' + endc
 executing = green + '[~$]:' + endc
 
-# Args
-parser = argparse.ArgumentParser(description='Autosploit Version 1.1.0')
-parser.add_argument('WORKSPACE', type=str, help='workspace to scan via resource')
-args = parser.parse_args()
-
 
 # Modules
 def parse(database):
@@ -45,69 +42,95 @@ def execute():
     os.system(cmd)
 
 
-def generate_resource(protocol, db):
-    ports_lst = db["autosploit"]["protocol"][protocol]["port"]
-    modules = db["autosploit"]["protocol"][protocol]["msf"]
-    os.mkdir(f"output/{protocol}")
+def generate_resource(db, protocol, out):
+    ports_lst = db['autosploit']['protocol'][protocol]['port']
+    modules = db['autosploit']['protocol'][protocol]['msf']
+    os.mkdir(f'{out}/msf/{protocol}')
     if len(ports_lst) >= 1:
         ports_str = ','.join(str(e) for e in ports_lst)
     else:
         ports_str = ports_lst[0]
     for current, optional_args in modules.items():
-        f.write(f"spool {os.getcwd()}/output/{protocol}/{current.replace('/', '_')}.txt\n")
-        f.write(f"echo '#### {current} ####'\n")
-        f.write(f"use {current}\n")
-        f.write(f"services -p {ports_str} -u -R\n")
+        f.write(f'spool {os.getcwd()}/{out}/msf/{protocol}/{current.replace("/", "_")}.txt\n')
+        f.write(f'echo "$(date) - Executed Module ({current})" >> {os.getcwd()}/{out}/runtime.log\n')
+        f.write(f'use {current}\n')
+        f.write(f'services -p {ports_str} -u -R\n')
         if optional_args:
             for opt, val in optional_args.items():
-                f.write(f"set {opt} {val}\n")
-        f.write("run\n")
-        f.write("back\n")
+                f.write(f'set {opt} {val}\n')
+        f.write('run\n')
+        f.write('sleep 1\n')
 
 
-def menu_selection(db):
-    option_db.append("[ EVERYTHING ]")
-    for x in db["autosploit"]["protocol"].keys():
-        option_db.append(x)
-    terminal_menu = TerminalMenu(option_db)
-    menu_entry_index = terminal_menu.show()
-    if menu_entry_index == 0:
-        option_db.pop(0)
-        return True
-    else:
-        msf_protocol = option_db[menu_entry_index]
-        return msf_protocol
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
+    # Parse JSON
     try:
-        # Parse JSON
-        data = parse("modules.json")
-        # Main Menu
-        var_service = menu_selection(data)
-        # Write Resource Init
-        f = open("resource.txt", "w")
-        f.write(f"workspace {args.WORKSPACE}\n")
-        f.write("setg THREADS 150\n")
-        # Create Main Output Folder
-        os.mkdir("output")
-        # Generate Resource
-        if var_service is True:
-            for var_srvc in option_db:
-                generate_resource(db=data, protocol=var_srvc)
-        else:
-            generate_resource(db=data, protocol=var_service)
-        f.close()
+        data = parse('modules.json')
+        for x in data['autosploit']['protocol'].keys():
+            option_db.append(x)
     except Exception as E:
-        print(f"{error} ERROR: {E}")
-        exit()
-    # Main Execution
-    user_input = input(f"{info} Are you sure you want to Execute? [y/n]: ")
-    if user_input.lower() == "y":
-        execute()
-        try:
-            os.system("rm resource.txt")
-        except Exception as E:
-            print(error, E)
+        print(error, f'Unable to parse modules.json: {E}')
+        sys.exit()
+    # Args
+    parser = argparse.ArgumentParser(description='Autosploit Version 1.1.0')
+    parser.add_argument('-w', type=str, dest='workspace', help='workspace to scan via resource', required=True)
+    parser.add_argument('-p', type=str, dest='protocol', choices=option_db, nargs='+', help='limit scant to given protocol')
+    args = parser.parse_args()
+    # Write Resource Init
+    f = open('resource.txt', 'w')
+    f.write(f'workspace {args.workspace}\n')
+    f.write('setg THREADS 150\n')
+    f.write('setg BLANK_PASSWORDS true\n')
+    f.write('setg BRUTEFORCE_SPEED 5\n')
+    f.write('setg VERBOSE true\n')
+    f.write('setg DB_ALL_CREDS true\n')
+    f.write(f'echo "$(date) - Autosploit Started!" >> output_{args.workspace}/runtime.log\n')
+    # Create Main Output Folder
+    foldername = f'output_{args.workspace}'
+    try:
+        os.mkdir(f'{foldername}')
+        os.mkdir(f'{foldername}/msf')
+        os.mkdir(f'{foldername}/list')
+        print(info, 'Output Folders Created..')
+    except FileExistsError:
+        user_input = input(f'{info} Output Folder already Exists. Do you want to Delete it? [y/n]: ')
+        if user_input.lower() == 'y':
+            shutil.rmtree(foldername)
+            os.mkdir(f'{foldername}')
+            os.mkdir(f'{foldername}/msf')
+            os.mkdir(f'{foldername}/list')
+            print(info, 'Output Folders Created..')
+        else:
+            exit('Leaving..')
+    except Exception as E:
+        print(E)
+    # Generate Resource
+    if args.protocol:
+        for selection in args.protocol:
+            generate_resource(db=data, protocol=selection, out=foldername)
     else:
-        exit("Leaving..")
+        for selection in option_db:
+            generate_resource(db=data, protocol=selection, out=foldername)
+    # Export Lists
+    f.write('spool off\n')
+    f.write('sessions -K\n')
+    f.write(f'hosts -o {foldername}/list/msf_hosts.txt\n')
+    f.write(f'services -o {foldername}/list/msf_services.csv\n')
+    f.write(f'hosts -S printer -o {foldername}/list/msf_hosts_printer.txt\n')
+    f.write(f'services -S printer -o {foldername}/list/msf_services_printer.txt\n')
+    f.write(f'db_export -f xml {foldername}/list/db_export.xml\n')
+    f.write(f'db_export -f pwdump {foldername}/list/pwdump.xml\n')
+    f.close()
+    # Main Execution
+    user_input = input(f'{info} Are you sure you want to Execute? [y/n]: ')
+    if user_input.lower() == 'y':
+        # Getting the current date and time
+        dt = datetime.now()
+        ts = datetime.timestamp(dt)
+        print(executing, f'Autosploit Started: {dt} ({ts})')
+        # Execute Resource script
+        execute()
+        if os.path.isfile('resource.txt'):
+            os.remove('resource.txt')
+    else:
+        exit('Leaving..')

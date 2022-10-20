@@ -4,7 +4,8 @@
       "udp": {
         "port": ["*"],
         "msf": {
-          "auxiliary/scanner/discovery/udp_sweep": {}
+          "auxiliary/scanner/discovery/udp_sweep": {},
+          "auxiliary/scanner/discovery/udp_probe": {}
         }
       },
       "ftp": {
@@ -30,7 +31,8 @@
           "auxiliary/scanner/http/ssl": {},
           "auxiliary/scanner/http/ms15_034_http_sys_memory_dump": {},
           "auxiliary/scanner/http/iis_shortname_scanner": {},
-          "auxiliary/admin/http/iis_auth_bypass": {}
+          "auxiliary/admin/http/iis_auth_bypass": {},
+          "auxiliary/scanner/vmware/esx_fingerprint": {}
         }
       },
       "dns": {
@@ -42,7 +44,9 @@
       "snmp": {
         "port": [161, 162],
         "msf": {
-          "auxiliary/scanner/snmp/snmp_login": {}
+          "auxiliary/scanner/snmp/snmp_login": {
+            "VERSION": "all"
+          }
         }
       },
       "smtp": {
@@ -106,6 +110,7 @@
         "port": [636, 3269],
         "msf": {
           "auxiliary/gather/ldap_hashdump": {},
+          "auxiliary/gather/vmware_vcenter_vmdir_ldap": {},
           "auxiliary/admin/ldap/vmware_vcenter_vmdir_auth_bypass": {
             "USERNAME": "admin",
             "PASSWORD": "admin"
@@ -116,6 +121,12 @@
         "port": [22],
         "msf": {
           "auxiliary/scanner/ssh/ssh_version": {}
+        }
+      },
+      "rsh": {
+        "port": [514],
+        "msf": {
+          "auxiliary/scanner/rservices/rsh_login": {}
         }
       },
       "imap": {
@@ -145,7 +156,15 @@
         "port": [5900],
         "msf": {
           "auxiliary/scanner/vnc/vnc_none_auth": {},
-          "auxiliary/scanner/vnc/vnc_login": {}
+          "auxiliary/scanner/vnc/vnc_login": {
+            "blank_passwords": "true"
+          }
+        }
+      },
+      "ssdp": {
+        "port": [1900],
+        "msf": {
+          "auxiliary/scanner/upnp/ssdp_amp": {}
         }
       },
       "printer": {
@@ -158,9 +177,7 @@
       "konica": {
         "port": [50001],
         "msf": {
-          "auxiliary/gather/konica_minolta_pwd_extract": {
-            "passwd": "12345678"
-          }
+          "auxiliary/gather/konica_minolta_pwd_extract": {}
         }
       },
       "postgres": {
