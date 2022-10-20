@@ -1,2 +1,0 @@
-msfconsole -qx 'workspace -D; exit'
-docker rm -f $(docker ps -a -q)

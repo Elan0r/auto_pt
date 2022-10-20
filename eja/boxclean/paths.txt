@@ -1,9 +1,0 @@
-/root/.cme/logs
-/root/.cme/workspace
-/usr/share/responder/logs
-/root/tools/PCredz/logs
-/root/.zsh_history
-/usr/share/customers
-/root/.mysql_history
-/root/.viminfo
-/root/.bash_history
