@@ -122,7 +122,7 @@ awk '/:9100/{print$2}' /root/output/msf/printer.txt | grep -v file: | cut -d : -
 ### Network
 cp /root/output/nmap/egress.nmap /root/output/loot/intern/network/egress_filtering/
 cp /root/output/nmap/service.nmap /root/output/loot/intern/network/client_isolation
-cd /root/output/list/msf_services.csv /root/output/loot/intern/network/segmentation_segregation
+cp /root/output/list/msf_services.csv /root/output/loot/intern/network/segmentation_segregation
 cp /root/output/nmap/service.nmap /root/output/loot/intern/network/host-based_firewall
 
 ###VMware
