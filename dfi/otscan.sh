@@ -2,19 +2,15 @@
 
 figlet -w 87 ProSecOTScan
 
-if [ -s /root/input/ipint.txt ]; then
+if [ -s /root/input/ipot.txt ]; then
     echo '! > IPs OK '
 else
-    echo "! >> ipint.txt is missing in /root/input/ipint.txt."
+    echo "! >> ipot.txt is missing in /root/input/ipot.txt."
 	exit 1
 fi
 
-echo "Start OTScan" >> /root/output/runtime.txt
+echo "Update OTScan" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
-
-date >> /root/output/runtime.txt
-mkdir -p /root/output/list/ot
-mkdir -p /root/output/nmap/ot
 
 wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/proconos-info.nse -O /usr/share/nmap/scripts/proconos-info.nse
 wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/pcworx-info.nse -O /usr/share/nmap/scripts/pcworx-info.nse
@@ -22,6 +18,8 @@ wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/BACnet-discov
 wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/codesys-v2-discover.nse -O /usr/share/nmap/scripts/codesys-v2-discover.nse
 nmap --script-updatedb
 
+echo "Start OT discover" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 
 nmap -Pn -sT --scan-delay 1s --max-parallelism 1 -p 80,102,443,502,530,593,789,1089-1091,1200,1911,1962,2222,2404,2455,4000,4840,4843,4911,9600,19999,20000,20547,34962-34964,34980,4481,46823,44824,55000-55003 -oA /root/output/nmap/ot/discover 
 -iL /root/output/list/ipup.txt
@@ -39,6 +37,9 @@ awk '/1962\/open/ {print$2}' /root/output/nmap/ot/discover.gnmap | sort -u > /ro
 awk '/46824\/open/ {print$2}' /root/output/nmap/ot/discover.gnmap | sort -u > /root/output/list/ot/hmi.txt
 awk '/1200\/open/ {print$2}' /root/output/nmap/ot/discover.gnmap | sort -u > /root/output/list/ot/codesys.txt
 awk '/2455\/open/ {print$2}' /root/output/nmap/ot/discover.gnmap | sort -u >> /root/output/list/ot/codesys.txt
+
+echo "Start OTScan" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 
 nmap -Pn -sT -p 46824 -iL /root/output/list/ot/hmi.txt -oA /root/output/nmap/ot/hmi
 nmap -PN -sT -p 102 --script s7-info -iL /root/output/list/ot/simatic.txt -oA /root/output/nmap/ot/simatic
