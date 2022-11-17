@@ -56,7 +56,7 @@ mkdir -p /root/output/loot/intern/ad/remote_login_local_admin
 mkdir -p /root/output/loot/intern/ad/adcs/esc8
 mkdir -p /root/output/loot/intern/ad/adcs/esc2
 mkdir -p /root/output/loot/intern/ad/adcs/esc1
-mkdir -p /root/output/loot/intern/ad/iam/local_admin
+mkdir -p /root/output/loot/intern/ad/local_admin
 mkdir -p /root/output/loot/intern/ad/iam/rights
 mkdir -p /root/output/loot/intern/ad/iam/gmsa
 mkdir -p /root/output/loot/intern/ad/iam/password
@@ -98,6 +98,7 @@ mkdir -p /root/output/loot/intern/network/vtp
 mkdir -p /root/output/loot/intern/network/trunk
 mkdir -p /root/output/loot/intern/network/client_isolation
 mkdir -p /root/output/loot/intern/network/other_protocols
+mkdir -p /root/output/loot/intern/network/clear_text
 mkdir -p /root/output/loot/intern/network/segmentation_segregation
 mkdir -p /root/output/loot/intern/network/host-based_firewall
 mkdir -p /root/output/loot/intern/vmware/vsan
