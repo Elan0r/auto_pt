@@ -85,6 +85,38 @@
       ]
     },
 		{
+      "name": "Shortest paths from owned objects to High Value Targets (5 hops)",
+      "category": "Admin Hunter",
+      "queryList": [
+				{
+          "final": true,
+          "query": "MATCH p=shortestPath((n {owned:true})-[:MemberOf|HasSession|AdminTo|AllExtendedRights|AddMember|ForceChangePassword|GenericAll|GenericWrite|Owns|WriteDacl|WriteOwner|CanRDP|ExecuteDCOM|AllowedToDelegate|ReadLAPSPassword|Contains|GpLink|AddAllowedToAct|AllowedToAct|SQLAdmin|ReadGMSAPassword|HasSIDHistory|CanPSRemote*1..5]->(m {highvalue:true})) WHERE NOT n=m RETURN p",
+          "allowCollapse": true
+        }
+			]
+    },
+    {
+      "name": "Most exploitable paths from owned objects to High Value Targets (5 hops)",
+      "category": "Admin Hunter",
+      "queryList": [
+				{
+          "final": true,
+          "query": "MATCH p=allShortestPaths((n {owned:true})-[:MemberOf|AdminTo|AllExtendedRights|AddMember|ForceChangePassword|GenericAll|GenericWrite|Owns|WriteDacl|WriteOwner|ExecuteDCOM|AllowedToDelegate|ReadLAPSPassword|Contains|GpLink|AddAllowedToAct|AllowedToAct|SQLAdmin|ReadGMSAPassword|HasSIDHistory*1..5]->(m {highvalue:true})) WHERE NOT n=m RETURN p",
+          "allowCollapse": true
+        }
+			]
+    },
+    {
+      "name": "Next steps (5 hops) from owned objects",
+      "category": "Admin Hunter",
+      "queryList": [
+				{
+          "final": true,
+          "query": "MATCH p=shortestPath((c {owned: true})-[*1..5]->(s)) WHERE NOT c = s RETURN p"
+				}
+			]
+		},
+		{
 			"name": "List all High Valued Targets",
 			"category": "Domain",
 			"queryList": [
@@ -267,7 +299,7 @@
     },
 		{
 			"name": "Find what groups can RDP",
-			"category": "Group",
+			"category": "Permissions",
 			"queryList": [
 				{
 					"final": true,
@@ -287,7 +319,7 @@
 		},
 		{
 			"name": "Find groups that have local admin rights (HEAVY)",
-			"category": "Group",
+			"category": "Permissions",
 			"queryList": [
 				{
 					"final": true,
@@ -362,6 +394,16 @@
 				{
 					"final": true,
 					"query": "MATCH p=(u:User)-[:AllowedToDelegate]->(c:Computer) RETURN p"
+				}
+			]
+		},
+		{
+			"name": "Constrained Delegation systems",
+			"category": "Kerberos",
+			"queryList": [
+				{
+					"final": true,
+					"query": "MATCH p=(u)-[:AllowedToDelegate]->(c) RETURN p"
 				}
 			]
 		},
@@ -442,6 +484,16 @@
 				{
 					"final": true,
 					"query": "MATCH p=(n:User)-[r:MemberOf*1..]->(m:Group {highvalue:true}) RETURN p"
+				}
+			]
+		},
+		{
+			"name": "List all High Valued Targets",
+			"category": "Domain",
+			"queryList": [
+				{
+					"final": true,
+					"query": "MATCH (m) WHERE m.highvalue=TRUE RETURN m"
 				}
 			]
 		},
@@ -622,13 +674,53 @@
 			]
 		},
 		{
-			"name": "Return All Azure Users and their Groups",
+			"name": "Return All Azure Users and their Groups (Warning: Heavy)",
 			"category": "Azure",
 			"queryList": [
 				{
 					"final": true,
-					"query": "MATCH p=(m:AZUser)-[r:MemberOf]->(n) WHERE NOT m.objectid CONTAINS 'S-1-5' RETURN p"
+					"query": "MATCH p=(m:AZUser)-[r:AZMemberOf*1..]->(n) WHERE NOT m.objectid CONTAINS 'S-1-5' RETURN p"
 				}
+			]
+		},
+		{
+			"name": "Return GUEST Azure Users and their Groups",
+			"category": "Azure",
+			"queryList": [
+				{
+					"final": true,
+					"query": "MATCH p=(m:AZUser)-[r:AZMemberOf*1..]->(n) WHERE NOT m.objectid CONTAINS 'S-1-5' AND m.userprincipalname=~ '(?i).*#EXT#.*' RETURN p"
+				}
+			]
+		},
+		{
+			"name": "Return All Azure Users and their Admin Roles",
+			"category": "Azure",
+			"queryList": [
+				{
+					"final": true,
+					"query": "MATCH p=(n)-[:AZHasRole|AZMemberOf*1..]->(:AZRole) RETURN p"
+				}
+			]
+		},
+		{
+			"name": "Return All Azure Users and their owned Devices (Warning: Heavy)",
+			"category": "Azure",
+			"queryList": [
+				{
+					"final": true,
+					"query": "MATCH p=(d:AZDevice)<-[r1:AZOwns]->(m:AZUser) RETURN p"
+				}
+			]
+		},
+		{
+			"name": "Return All Azure Admins and their owned Devices",
+			"category": "Azure",
+			"queryList": [
+				{
+          "final": true,
+          "query": "MATCH p=(d:AZDevice)<-[r1:AZOwns]->(m:AZUser)<-[r2:AZHasRole]->(n) RETURN p"
+        }
 			]
 		},
 		{
@@ -658,6 +750,26 @@
 				{
 					"final": true,
 					"query": "MATCH p = (n)-[r:AZOwns]->(g:AZApp) RETURN p"
+				}
+			]
+		},
+		{
+			"name": "Find the Shortest path to a high value target from an owned object",
+			"category": "Azure",
+			"queryList": [
+				{
+					"final": true,
+					"query": "MATCH p=shortestPath((g {owned:true})-[*1..]->(n {highvalue:true})) WHERE  g<>n return p"
+				}
+			]
+		},
+		{
+			"name": "Find the Shortest path to a unconstrained delegation system from an owned object",
+			"category": "Azure",
+			"queryList": [
+				{
+					"final": true,
+					"query": "MATCH (n) MATCH p=shortestPath((n)-[*1..]->(m:Computer {unconstraineddelegation: true})) WHERE NOT n=m AND n.owned = true RETURN p"
 				}
 			]
 		},
