@@ -1,8 +1,5 @@
-fast alles geklaut von <b>CHO</b> <br>
-<code>Hello fellas, or as we say in Germany: “Hallo Freunde der fettfreien Leberwurst.”</code><br>
-<small>stolen from <b>LuemmelSec</b><br></small>
-<br>
 First try of automating PT as good as possible -> as Failsave as Possible<br>
+v1.6<br>
 <br>
 The extern Tools were moved to <code>hacking/extern/</code>.<br>
 <br>
@@ -40,22 +37,22 @@ enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_p
     <b></b>create<code>relay_lists</code> -> manual use with<b>impacket-ntlmrelayx</b><br>
 <br>
     <h3>autosploit:</h3>
-    <b>Metasploit-framework</b><code>ressource.txt</code> in<code>/opt/hacking/resource_script/</code> Folder<br>
+    <b>Metasploit-framework</b><code>ressource.txt</code> in<code>/opt/hacking/resource_script/</code> Folder.<br>
 <br>
     <h3>zerocheck:</h3>
-    <b></b>Zerologon check with<b>MSF</b>, NetBIOS with<b>nbtscan</b><br>
+    <b></b>Zerologon check with<b>MSF</b>, NetBIOS with<b>nbtscan</b>.<br>
 <br>
     <h3>log4check:</h3>
-    <b></b>Log4J Log4Shell check with<b>MSF</b>, resource<code>log4j.txt</code> in<code>/opt/hacking/resource_script/</code> Folder<br>
+    <b></b>Log4J Log4Shell check with<b>MSF</b>, resource<code>log4j.txt</code> in<code>/opt/hacking/resource_script/</code> Folder.<br>
 <br>
     <h3>fast_relay:</h3>
     <b></b>5 min<b>responder</b> and<b>impacket-ntlmrelayx</b> vs<code>/root/output/list/smb_sign_off.txt</code>.<br>
 <br>
     <h3>looter:</h3>
-    <b></b>collect the loot, create internal Folders for "Automater"<br>
+    <b></b>Collect the loot, move files to internal folders for "Automater".<br>
 <br>
     <h3>counter:</h3>
-    <b></b>counts the findings and grabs the subnets in <code>/root/output/loot/intern/findings.txt</code><br>
+    <b></b>Counts the findings and grabs the subnets in <code>/root/output/loot/intern/findings.txt</code>.<br>
 <br>
     <h3>Auto_PT DONE!</h3>
     <b></b>copy your<code>output</code> folder to your local machine for further investigation.<br>
@@ -65,6 +62,18 @@ enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_p
 </details>
 <br>
 <details><summary><h2>Additional Files</h2></summary>
+    <h3>user_checks:</h3>
+    <b></b>All CME checks LdapRelayScan and BH + Certipy dump with obtained user + PW OR Hash.<br>
+    <b></b>Make sure DNS is working as expected!<br>
+    <b></b>CME: GPP_Password, GPP_Autologin, Username=PW, get Passpol, nopac, PetitPotam (unauthenticated), SMBSessions, ASRep, Kerberoasting, MAQ.<br>
+    <b></b>CME ldapchecks may be broken.<br>
+    <b></b>All Checks generates files in the related <code>output/loot/intern</code> folder.<br>
+    <b></b>Findings.txt will <b>NOT</b> be updated.<br>
+    <b></b>Use -h for Help.<br>
+<br>
+    <h3>otscan:</h3>
+    <b></b>somem Nmap scans for OT Systems, just information gathering.<br>
+<br>
     <h3>dfitmux.conf</h3>
     <b></b>My <b>tmux</b> Config, some kind of special, used in passive_recon.<br>
 <br>
@@ -72,13 +81,11 @@ enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_p
     <b></b>my <code>.zshrc</code>, Kali 2020.4 with "seperate command line" and 💀.<br>
 <br>
     <h3>customqueries</h3>
-    <b></b>Custom <b>Bloodhound</b> 4.1 queries. File goes to <code>\~/Library/Application Support/bloodhound</code><br>
+    <b></b>Custom <b>Bloodhound</b> 4.1 queries. File goes to <code>\~/Library/Application Support/bloodhound</code>.<br>
 <br>
-    <b></b>Additional queries when using the backend for exports "_like_" <b>plumhound</b><br>
-    <b></b>Accessible via <code>http://127.0.0.1:7474/browser/</code> or <b>Neo4j Browser</b><br>
+    <b></b>Additional queries when using the backend for exports "_like_" <b>plumhound</b>.<br>
+    <b></b>Accessible via <code>http://127.0.0.1:7474/browser/</code> or <b>Neo4j Browser</b>.<br>
 <br>
-    <code>MATCH (u:User) return u.name, u.displayname, u.description</code> for username + description<br>
-    <code>MATCH (c:Computer) WHERE c.haslaps=FALSE RETURN c.name, c.haslaps</code> for Computer without LAPS<br>
-    <code>MATCH (c:Computer)-[:MemberOf]->(t:Group) WHERE t.name =~ "(?i)DOMÄNENCONTROLLER.*" RETURN c.name</code> for all DCs (german Domain) <small>(for <b>cme</b> or other tools)</small><br>
+    <b></b>All used Backend queries are in the Freshdesk <code>https://prosecnetworks.freshdesk.com/a/solutions/articles/77000524534</code>.<br>
 </details>
 <br>
