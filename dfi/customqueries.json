@@ -967,6 +967,26 @@
 			]
 		},
 		{
+			"name": "(Warning: edits the DB) Mark unconstrained delegation systems as high value targets",
+			"category": "Mark As High",
+			"queryList": [
+				{
+					"final": true,
+					"query": "MATCH (c1:Computer)-[:MemberOf*1..]->(g:Group) WHERE g.objectid ENDS WITH '-516' WITH COLLECT(c1.name) AS domainControllers MATCH (c2 {unconstraineddelegation:true}) WHERE NOT c2.name IN domainControllers SET c2.highvalue = true RETURN c2"
+				}
+			]
+		},
+		{
+			"name": "(Warning: edits the DB) Mark Domain Admins as high value targets",
+			"category": "Mark As High",
+			"queryList": [
+				{
+					"final": true,
+					"query": "MATCH p=(n:Group)<-[:MemberOf*1..]-(m) WHERE n.objectid =~ "(?i)S-1-5-.*-512" SET m.highvalue = true RETURN m"
+				}
+			]
+		},
+		{
 			"name": "Privileged kerberoastable users",
 			"category": "Kerberos",
 			"queryList": [
