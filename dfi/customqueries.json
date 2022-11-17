@@ -982,7 +982,7 @@
 			"queryList": [
 				{
 					"final": true,
-					"query": "MATCH p=(n:Group)<-[:MemberOf*1..]-(m) WHERE n.objectid =~ "(?i)S-1-5-.*-512" SET m.highvalue = true RETURN m"
+					"query": "MATCH p=(n:Group)<-[:MemberOf*1..]-(m) WHERE n.objectid =~ \"(?i)S-1-5-.*-512\" SET m.highvalue = true RETURN m"
 				}
 			]
 		},
