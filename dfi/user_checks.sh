@@ -1,6 +1,6 @@
  #!/bin/bash
 figlet -w 84 ProSecUserChecks
-echo "v0.1"
+echo "v0.5"
 echo "CME is still buggy u need to press ENTER sometimes!"
 unset USER HASH PASS DOM IP FQDN
 
@@ -89,6 +89,9 @@ then
    crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt
    grep '+' /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt > /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt
  # keep the raw file for screens and debugging
+   # BH owned User
+   awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt | cut -d : -f 2 | sort -u > /root/output/loot/intern/ad/iam/username_as_pass/owneduser.txt
+   for i in $(cat /root/output/loot/intern/ad/iam/username_as_pass/owneduser.txt); do echo "MATCH (n {name:'$i'}) SET n.owned=true;" >> /root/output/loot/intern/ad/iam/username_as_pass/bh_owned.txt ; done
 
   echo "Pass-Pol" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
@@ -146,7 +149,6 @@ fi
 
 if [ -z $PASS ]
 then
-echo 'HASH is untested'
  # use HASH
  export PYTHONUNBUFFERED=TRUE
   echo "GPP_Password" >> /root/output/runtime.txt
