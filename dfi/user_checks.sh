@@ -90,7 +90,7 @@ then
    grep '+' /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt > /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt
  # keep the raw file for screens and debugging
    # BH owned User
-   BHDOM=$(tr [:lower:] [:upper:] <<< $DOM)
+   BHDOM=${DOM^^}
    awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt | cut -d : -f 2 | sort -u | tr [:lower:] [:upper:] > /root/output/loot/intern/ad/iam/username_as_pass/owneduser.txt
    for i in $(cat /root/output/loot/intern/ad/iam/username_as_pass/owneduser.txt); do echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username_as_pass/bh_owned.txt ; done
 
@@ -172,7 +172,7 @@ then
    grep '+' /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt > /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt
  # keep the raw file for screens and debugging
    # BH owned User
-   BHDOM=$(tr [:lower:] [:upper:] <<< $DOM)
+   BHDOM=${DOM^^}
    awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt | cut -d : -f 2 | sort -u | tr [:lower:] [:upper:] > /root/output/loot/intern/ad/iam/username_as_pass/owneduser.txt
    for i in $(cat /root/output/loot/intern/ad/iam/username_as_pass/owneduser.txt); do echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username_as_pass/bh_owned.txt ; done
 
