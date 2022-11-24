@@ -1,6 +1,90 @@
 {
   "queries": [
     {
+      "name": "Domain Controller object ownership",
+      "category": "Mark As High",
+      "queryList": [
+        {
+          "final": true,
+          "query": "MATCH (g:Group) WHERE g.objectid ENDS WITH '-516' MATCH p = (n:Base)-[:Owns]->(c:Computer)-[:MemberOf*1..]->(g) RETURN p",
+          "allowCollapse": true
+        }
+      ]
+    },
+    {
+      "name": "(Warning: edits the DB) Mark unconstrained delegation systems as high value targets",
+      "category": "Mark As High",
+      "queryList": [
+        {
+          "final": true,
+          "query": "MATCH (c1:Computer)-[:MemberOf*1..]->(g:Group) WHERE g.objectid ENDS WITH '-516' WITH COLLECT(c1.name) AS domainControllers MATCH (c2 {unconstraineddelegation:true}) WHERE NOT c2.name IN domainControllers SET c2.highvalue = true RETURN c2"
+        }
+      ]
+    },
+    {
+      "name": "(Warning: edits the DB) Mark Groups with Admincount as high value targets",
+      "category": "Mark As High",
+      "queryList": [
+        {
+          "final": true,
+          "query": "MATCH p = (g:Group {admincount: True}) WHERE (g.highvalue) IS NULL OR g.highvalue = False SET g.highvalue = true RETURN g",
+          "allowCollapse": true
+        }
+      ]
+    },
+    {
+      "name": "(Warning: edits the DB) Mark Calculated Principals with DCSync Privileges as high.",
+      "category": "Mark As High",
+      "queryList": [
+        {
+          "final": false,
+          "title": "Select domain...",
+          "query": "MATCH (n:Domain) RETURN n.name ORDER BY n.name"
+        },
+        {
+          "final": true,
+          "query": "MATCH (n1)-[:MemberOf|GetChanges*1..]->(u:Domain {name:$result}) WITH n1,u MATCH (n1)-[:MemberOf|GetChangesAll*1..]->(u) WITH n1,u MATCH p = (n1)-[:MemberOf|GetChanges|GetChangesAll*1..]->(u) SET n1.highvalue = true RETURN p",
+          "allowCollapse": true
+        }
+      ]
+    },
+    {
+      "name": "(Warning: edits the DB) Mark any object that has inbound control over the domain as high.",
+      "category": "Mark As High",
+      "queryList": [
+        {
+          "final": false,
+          "title": "Select domain...",
+          "query": "MATCH (n:Domain) RETURN n.name ORDER BY n.name"
+        },
+        {
+          "final": true,
+          "query": "MATCH p=shortestPath((n)-[r1:MemberOf|AllExtendedRights|GenericAll|GenericWrite|WriteDacl|WriteOwner|Owns*1..]->(u:Domain {name:$result})) WHERE NOT n.name=u.domain SET n.highvalue = true RETURN p",
+          "allowCollapse": true
+        }
+      ]
+    },
+    {
+      "name": "(Warning: edits the DB) Mark Domain Admins as high value targets",
+      "category": "Mark As High",
+      "queryList": [
+        {
+          "final": true,
+          "query": "MATCH p=(n:Group)<-[:MemberOf*1..]-(m) WHERE n.objectid =~ \"(?i)S-1-5-.*-512\" SET m.highvalue = true RETURN m"
+        }
+      ]
+    },
+    {
+      "name": "(Warning: edits the DB) Mark Enterprise Admins as high value targets",
+      "category": "Mark As High",
+      "queryList": [
+        {
+          "final": true,
+          "query": "MATCH p=(n:Group)<-[:MemberOf*1..]-(m) WHERE n.objectid =~ \"(?i)S-1-5-.*-519\" SET m.highvalue = true RETURN m"
+        }
+      ]
+    },
+    {
       "name": "List all owned users",
       "category": "Owned",
       "queryList": [
@@ -85,6 +169,16 @@
       ]
     },
     {
+      "name": "Find all computer who can AllowedToAct or AllowToDelegate",
+      "category": "Kerberos",
+      "queryList": [
+        {
+          "final": true,
+          "query": "MATCH (m:Computer),(n {highvalue:true}),p=shortestPath((m)-[r*1..]->(n)) WHERE NONE (r IN relationships(p) WHERE type(r)= 'GetChanges') AND NONE (r in relationships(p) WHERE type(r)='GetChangesAll') AND NOT m=n RETURN p"
+        }
+      ]
+    },
+    {
       "name": "Shortest paths from owned objects to High Value Targets (5 hops)",
       "category": "Admin Hunter",
       "queryList": [
@@ -92,6 +186,16 @@
           "final": true,
           "query": "MATCH p=shortestPath((n {owned:true})-[:MemberOf|HasSession|AdminTo|AllExtendedRights|AddMember|ForceChangePassword|GenericAll|GenericWrite|Owns|WriteDacl|WriteOwner|CanRDP|ExecuteDCOM|AllowedToDelegate|ReadLAPSPassword|Contains|GpLink|AddAllowedToAct|AllowedToAct|SQLAdmin|ReadGMSAPassword|HasSIDHistory|CanPSRemote*1..5]->(m {highvalue:true})) WHERE NOT n=m RETURN p",
           "allowCollapse": true
+        }
+      ]
+    },
+    {
+      "name": "Find all computer or objects who can DCSync",
+      "category": "Admin Hunter",
+      "queryList": [
+        {
+          "final": true,
+          "query": "MATCH p=(n:Computer)-[r:DCSync]->() RETURN p"
         }
       ]
     },
@@ -148,11 +252,31 @@
     },
     {
       "name": "LAPS Passwords Readable by Owned Principals",
-      "category": "LAPS",
+      "category": "Admin Hunter",
+      "queryList": [
+        {
+          "final": true,
+          "query": "MATCH p = ()-[r1:MemberOf*1..]->(g:Group)-[r2:GenericAll]->(t:Computer {haslaps:true}) RETURN p"
+        }
+      ]
+    },
+    {
+      "name": "Find all computer or objects who can read LAPS Passwords",
+      "category": "Admin Hunter",
       "queryList": [
         {
           "final": true,
           "query": "MATCH p = (n {owned: true})-[r1:MemberOf*1..]->(g:Group)-[r2:GenericAll]->(t:Computer {haslaps:true}) RETURN p"
+        }
+      ]
+    },
+    {
+      "name": "Find all computer or objects who can read GMSA password (ReadGMSAPassword)",
+      "category": "Admin Hunter",
+      "queryList": [
+        {
+          "final": true,
+          "query": "MATCH p=()-[r:ReadGMSAPassword]->() RETURN p LIMIT 25"
         }
       ]
     },
@@ -484,16 +608,6 @@
         {
           "final": true,
           "query": "MATCH p=(n:User)-[r:MemberOf*1..]->(m:Group {highvalue:true}) RETURN p"
-        }
-      ]
-    },
-    {
-      "name": "List all High Valued Targets",
-      "category": "Domain",
-      "queryList": [
-        {
-          "final": true,
-          "query": "MATCH (m) WHERE m.highvalue=TRUE RETURN m"
         }
       ]
     },
@@ -956,37 +1070,6 @@
       ]
     },
     {
-      "name": "Domain Controller object ownership",
-      "category": "Mark As High",
-      "queryList": [
-        {
-          "final": true,
-          "query": "MATCH (g:Group) WHERE g.objectid ENDS WITH '-516' MATCH p = (n:Base)-[:Owns]->(c:Computer)-[:MemberOf*1..]->(g) RETURN p",
-          "allowCollapse": true
-        }
-      ]
-    },
-    {
-      "name": "(Warning: edits the DB) Mark unconstrained delegation systems as high value targets",
-      "category": "Mark As High",
-      "queryList": [
-        {
-          "final": true,
-          "query": "MATCH (c1:Computer)-[:MemberOf*1..]->(g:Group) WHERE g.objectid ENDS WITH '-516' WITH COLLECT(c1.name) AS domainControllers MATCH (c2 {unconstraineddelegation:true}) WHERE NOT c2.name IN domainControllers SET c2.highvalue = true RETURN c2"
-        }
-      ]
-    },
-    {
-      "name": "(Warning: edits the DB) Mark Domain Admins as high value targets",
-      "category": "Mark As High",
-      "queryList": [
-        {
-          "final": true,
-          "query": "MATCH p=(n:Group)<-[:MemberOf*1..]-(m) WHERE n.objectid =~ \"(?i)S-1-5-.*-512\" SET m.highvalue = true RETURN m"
-        }
-      ]
-    },
-    {
       "name": "Privileged kerberoastable users",
       "category": "Kerberos",
       "queryList": [
@@ -1003,7 +1086,7 @@
       "queryList": [
         {
           "final": true,
-          "query": "MATCH p = (g:Group {admincount: True}) WHERE NOT EXISTS(g.highvalue) OR g.highvalue = False RETURN g",
+          "query": "MATCH p = (g:Group {admincount: True}) WHERE (g.highvalue) IS NULL OR g.highvalue = False RETURN g",
           "allowCollapse": true
         }
       ]
