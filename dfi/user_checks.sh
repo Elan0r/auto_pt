@@ -91,8 +91,8 @@ then
  # keep the raw file for screens and debugging
    # BH owned User
    BHDOM2=$(echo $DOM | tr [:lower:] [:upper:])
-   awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt | cut -d : -f 2 | sort -u | tr [:lower:] [:upper:] > /root/output/loot/intern/ad/iam/username_as_pass/owneduser.txt
-   for i in $(cat /root/output/loot/intern/ad/iam/username_as_pass/owneduser.txt); do echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username_as_pass/bh_owned.txt ; done
+   awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt | cut -d : -f 2 | sort -u | tr [:lower:] [:upper:] > /root/output/loot/intern/ad/iam/username_as_pass/owneduser_$BHDOM.txt
+   for i in $(cat /root/output/loot/intern/ad/iam/username_as_pass/owneduser_$BHDOM.txt); do echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username_as_pass/bh_owned_$BHDOM.txt ; done
 
   echo "Pass-Pol" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
