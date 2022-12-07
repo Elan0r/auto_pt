@@ -67,10 +67,7 @@ awk '/22\/open/ {print$2}' /root/output/nmap/service.gnmap  | sort -u > /root/ou
 #DC LISTs
 awk '{if (/ 53\/open/ && / 88\/open/ && / 445\/open/) print$2}' /root/output/nmap/service.gnmap > /root/output/list/dc_ip.txt
 
-for i in $(cat /root/output/list/dc_ip.txt)
-do
-    nslookup $i >> /root/output/list/dc_fqdn.txt
-done    
+for i in $(cat /root/output/list/dc_ip.txt); do nslookup $i >> /root/output/list/dc_fqdn.txt ; done    
 
 awk '/name/ {print$4}' /root/output/list/dc_fqdn.txt | cut -d '.' -f 1 | tr [:lower:] [:upper:] > /root/output/list/dc_nbt.txt
 
