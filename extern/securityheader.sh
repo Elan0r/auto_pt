@@ -98,4 +98,7 @@ do
 done
 grep -B1 'Missing' $FOLDER/output/header/tmpxframe.txt | sort -u | sed -r 's/Server: //' > $FOLDER/output/header/x-frame.txt
 
+#tmp cleanup
+rm $FOLDER/output/header/tmp*
+
 exit 0
