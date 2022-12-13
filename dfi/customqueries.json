@@ -195,7 +195,7 @@
       "queryList": [
         {
           "final": true,
-          "query": "MATCH p=(n:Computer)-[r:DCSync]->() RETURN p"
+          "query": "MATCH p=(n)-[r:DCSync]->() RETURN p"
         }
       ]
     },
