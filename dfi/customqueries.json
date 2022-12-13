@@ -251,7 +251,7 @@
       ]
     },
     {
-      "name": "LAPS Passwords Readable by Owned Principals",
+      "name": "LAPS Passwords Readable by computer or objects",
       "category": "Admin Hunter",
       "queryList": [
         {
@@ -261,7 +261,7 @@
       ]
     },
     {
-      "name": "Find all computer or objects who can read LAPS Passwords",
+      "name": "LAPS Passwords Readable by Owned Principals",
       "category": "Admin Hunter",
       "queryList": [
         {
