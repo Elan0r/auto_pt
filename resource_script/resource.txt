@@ -8,12 +8,16 @@ spool /root/output/msf/udp_scan.txt
 echo "####ADDITIONAL CHECKS####"
 
 echo "udp_probe - Detect common UDP services using sequential probes"
+echo "MSF UDP Probe" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/discovery/udp_probe
 hosts -R
 run
 sleep 5
 
 echo "udp_sweep - Detect interesting UDP Services"
+echo "MSF UDP sweep" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/discovery/udp_sweep
 hosts -R
 run
@@ -23,6 +27,8 @@ spool /root/output/msf/dns.txt
 echo "####DNS####"
 
 echo "DNS Amplification Scanner"
+echo "MSF DNS Amp" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/dns/dns_amp
 hosts -R
 run
@@ -32,6 +38,8 @@ spool /root/output/msf/snmp.txt
 echo "####SNMP####"
 
 echo "snmp_login - This module logs in to SNMP devices using common community names"
+echo "MSF SNMP login" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/snmp/snmp_login
 services -u -p 161 -R
 set VERSION all
@@ -42,6 +50,8 @@ spool /root/output/msf/ftp.txt
 echo "####FTP####"
 
 echo "ftp_version - Detect FTP Version - Set password for username"
+echo "MSF FTP unencrypted" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/ftp/ftp_version
 services -u -p 21 -R
 set FTPPASS ProSec_Networks
@@ -49,6 +59,8 @@ run
 sleep 5
 
 echo "anonymous - Detect anonymous read_write FTP server access"
+echo "MSF FTP anonymous" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/ftp/anonymous
 services -u -p 21 -R
 run
@@ -58,12 +70,16 @@ spool /root/output/msf/sql.txt
 echo "####SQL####"
 
 echo "mssql_ping - This module simply queries the MSSQL instance for information"
+echo "MSF MSSQL ping" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/mssql/mssql_ping
 hosts -R
 run
 sleep 5
 
 echo "mssql_login"
+echo "MSF MSSQL login" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/mssql/mssql_login
 services -u -p 1433 -R
 set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
@@ -71,12 +87,16 @@ run
 sleep 5
 
 echo "mysql_version - Enumerates the version of MySQL servers"
+echo "MSF MySQL version" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/mysql/mysql_version
 services -u -p 3306 -R
 run
 sleep 5
 
 echo "mysql_login"
+echo "MSF MySQL login" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use scanner/mysql/mysql_login
 services -u -p 3306 -u -R
 set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
@@ -84,12 +104,16 @@ run
 sleep 5
 
 echo "postgres_version - Enumerates the version of PostgreSQL servers"
+echo "MSF PostgreSQL version" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/postgres/postgres_version
 services -u -p 5432 -R
 run
 sleep 5
 
 echo "postgresql_login"
+echo "MSF PostgreSQL login" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use scanner/postgres/postgres_login
 services -u -p 5432 -u -R
 set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
@@ -100,6 +124,8 @@ spool /root/output/msf/nosql.txt
 echo "####NoSQL####"
 
 echo "MongoDB login scanner"
+echo "MSF MongoDB login" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/mongodb/mongodb_login
 hosts -u -p 27017 -u -R
 set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
@@ -107,6 +133,8 @@ run
 sleep 5
 
 echo "CouchDB login scanner"
+echo "MSF CouchDB login" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/couchdb/couchdb_login
 hosts -u -p 5984 -u -R
 set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
@@ -121,12 +149,16 @@ spool /root/output/msf/smb.txt
 echo "####SMB####"
 
 echo "smb_version - Display version information about each system"
+echo "MSF SMB version" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/smb/smb_version
 hosts -R
 run
 sleep 5
 
 echo "smb_enumshares - This module determines what shares are provided by the SMB service"
+echo "MSF SMB shares" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/smb/smb_enumshares
 hosts -R
 set ShowFiles true
@@ -135,18 +167,24 @@ run
 sleep 5
 
 echo "smb_enumusers - Determine what local users exist via the SAM RPC service"
+echo "MSF SMB user" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/smb/smb_enumusers
 hosts -R
 run
 sleep 5
 
 echo "smb_enumusers_domain - Determine what domain users are logged into a remote system via DCERPC"
+echo "MSF SMB DomainUser" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/smb/smb_enumusers_domain
 hosts -R
 run
 sleep 5
 
 echo "smb_ms17_010 - Check for MS17-010 - DoublePulsar infection"
+echo "MSF SMB MS17-010" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/smb/smb_ms17_010
 services -u -p 445 -R
 run
@@ -156,12 +194,16 @@ spool /root/output/msf/mail.txt
 echo "####MAIL####"
 
 echo "smtp_version - SMTP Banner Grabber"
+echo "MSF SMTP Banner" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/smtp/smtp_version
 services -u -p 25 -R
 run
 sleep 5
 
 echo "smtp_relay - SMTP Server e-mail accept check"
+echo "MSF SMTP relay" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/smtp/smtp_relay
 services -u -p 25 -R
 set MAILFROM pt@prosec-networks.com
@@ -171,6 +213,8 @@ run
 sleep 5
 
 echo "smtp_enum - Enum valid SMTP users"
+echo "MSF SMTP user" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/smtp/smtp_enum
 services -u -p 25 -R
 set UNIXONLY false
@@ -178,24 +222,32 @@ run
 sleep 5
 
 echo "smtp_ntlm_domain - Extract the Windows domain name from an SMTP NTLM challenge"
+echo "MSF SMTP DomainUser" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/smtp/smtp_ntlm_domain
 services -u -p 25 -R
 run
 sleep 5
 
-echo "imap_version - IMAP4 Banner Grabber"
+echo "imap_version - IMAP4 version"
+echo "MSF IMAP4 version" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/imap/imap_version
 services -u -p 143 -R
 run
 sleep 5
 
-echo "pop3_version - POP3 Banner Grabber"
+echo "pop3_version - POP3 version"
+echo "MSF POP3 version" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/pop3/pop3_version
 services -u -p 110 -R
 run
 sleep 5
 
 echo "exchange_proxylogon - Proxylogon Check"
+echo "MSF SMTP ProxyLogon" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/http/exchange_proxylogon
 services -u -p 587 -S Exchange -R
 run
@@ -205,12 +257,16 @@ spool /root/output/msf/telnet.txt
 echo "####TELNET####"
 
 echo "telnet_version - Detect telnet services"
+echo "MSF TELNET version" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/telnet/telnet_version
 services -u -p 23 -R
 run
 sleep 5
 
 echo "Telnet Login"
+echo "MSF TELNET login" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/telnet/telnet_login
 set userpass_file /opt/hacking/dfi/default_userpass.txt
 set STOP_ON_SUCCESS true
@@ -219,12 +275,16 @@ run
 sleep 5
 
 echo "lantronix_telnet_version - Detect Lantronix telnet services"
+echo "MSF TELNET Lantronix version" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/telnet/lantronix_telnet_version
 services -u -p 9999 -R
 run
 sleep 5
 
 echo "telnet_ruggedcom - This module will calculate the password for the hard-coded hidden username factory in the ROS"
+echo "MSF TELNET Ruggedcom" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/telnet/telnet_ruggedcom
 services -u -p 23 -R
 run
@@ -234,12 +294,16 @@ spool /root/output/msf/ssh.txt
 echo "####SSH####"
 
 echo "ssh_version - Detect SSH VERSION"
+echo "MSF SSH version" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/ssh/ssh_version
 services -u -p 22 -R
 run
 sleep 5
 
 echo "SSH_Login - bruteforce logins"
+echo "MSF SSH login" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/ssh/ssh_login
 services -u -p 22 -R
 set userpass_file /opt/hacking/dfi/default_userpass.txt
@@ -251,6 +315,8 @@ spool /root/output/msf/rsh.txt
 echo "####RSH####"
 
 echo "rsh login scan"
+echo "MSF RSH login" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/rservices/rsh_login
 services -u -p 514 -R
 set userpass_file /opt/hacking/dfi/default_userpass.txt
@@ -262,18 +328,24 @@ spool /root/output/msf/printer.txt
 echo "####PRINTER####"
 
 echo "printer_list_dir - This module lists a directory on a set of printers using the Printer Job Language (PJL) protocol"
+echo "MSF PJL printer dir enum" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/printer/printer_list_dir
 services -u -p 9100 -R
 run
 sleep 5
 
 echo "printer_version_info - Printer Version Info via PJL"
+echo "MSF PJL Printer enum" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/printer/printer_version_info
 services -u -p 9100 -R
 run
 sleep 5
 
 echo "Konica Minolta PW extractor"
+echo "MSF Konica Minolta Pw Extractor" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/gather/konica_minolta_pwd_extract
 set passwd 12345678
 services -u -p 50001 -R
@@ -287,12 +359,16 @@ spool /root/output/msf/vmware.txt
 echo "####VMware#####"
 
 echo "esx_fingerprint - VMware ESX_ESXi Version Info via web API"
+echo "MSF ESX version" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/vmware/esx_fingerprint
 services -u -p 443 -R
 run
 sleep 5
 
 echo "VMware vRealize Operations (vROps) Manager SSRF RCE"
+echo "MSF ESX vROPS" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use exploit/linux/http/vmware_vrops_mgr_ssrf_rce
 services -S vmware -R
 set srvport 8444
@@ -300,35 +376,49 @@ check
 sleep 5
 
 echo "VMware vCenter Server Virtual SAN Health Check Plugin RCE"
+echo "MSF vCenter vSAN" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use exploit/linux/http/vmware_vcenter_vsan_health_rce
 services -S vCenter -R
 check
 sleep 5
 
 echo "VMware vCenter Server vmdir Information Disclosure && Auth Bypass"
+echo "MSF vCenter vmdir" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/gather/vmware_vcenter_vmdir_ldap
 services -S vCenter -R
 run
 sleep 5
 
 echo "VMware vCenter Server Unauthenticated OVA File Upload RCE"
+echo "MSF vCenter OVA upload" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use exploit/multi/http/vmware_vcenter_uploadova_rce
 services -S vCenter -R
 check
 sleep 5
 
 echo "VMware vCenter Server Analytics (CEIP) Service File Upload"
+echo "MSF vCenter CEIP" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use exploit/linux/http/vmware_vcenter_analytics_file_upload
 services -S vCenter -R
 set srvport 8083
 check
 sleep 5
 
+echo "VMware Workspace One CVE-2022-22954"
+echo "MSF VMware Workspace One check" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use exploit/linux/http/vmware_workspace_one_access_cve_2022_22954
 services -S vmware -R
 check
 sleep 5
 
+echo "VMware authd bruteforc"
+echo "MSF VMware vmauth login" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/vmware/vmauthd_login
 services -p 902 -u -R
 set userpass_file /opt/hacking/dfi/default_userpass.txt
@@ -340,18 +430,24 @@ spool /root/output/msf/rdp.txt
 echo "####RDP####"
 
 echo "RDP Scanner"
+echo "MSF RDP version" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/rdp/rdp_scanner
 hosts -R
 run
 sleep 5
 
 echo "MS12-020 Check"
+echo "MSF RDP MS20-012" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/rdp/ms12_020_check
 services -u -p 3389 -R
 run
 sleep 5
 
 echo "CVE-2019-708 aka Bluekeep"
+echo "MSF RDP Bluekeep" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/rdp/cve_2019_0708_bluekeep
 services -u -p 3389 -R
 run
@@ -361,18 +457,24 @@ spool /root/output/msf/ipmi.txt
 echo "####IPMI####"
 
 echo "IPMI Information Discovery"
+echo "MSF IPMI version" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/ipmi/ipmi_version
 hosts -R
 run
 sleep 5
 
 echo "IPMI Cipher Zero"
+echo "MSF IPMI cipher 0" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/ipmi/ipmi_cipher_zero
 services -p 623 -u -R
 run
 sleep 5
 
 echo "IPMI Hashdump"
+echo "MSF IPMI hashdump" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use scanner/ipmi/ipmi_dumphashes
 set OUTPUT_HASHCAT_FILE /root/output/loot/hashes/ipmi_hashcat
 services -p 623 -u -R
@@ -383,6 +485,8 @@ spool /root/output/msf/ilo.txt
 echo "####HP iLO####"
 
 echo "HP Lights-Out Bypass"
+echo "MSF HTTP HP iLo bypass" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/admin/hp/hp_ilo_create_admin_account
 services -S iLO -R
 check
@@ -392,6 +496,8 @@ spool /root/output/msf/ntp.txt
 echo "####NTP####"
 
 echo "NTP Monlist"
+echo "MSF NTP monlist" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use scanner/ntp/ntp_monlist
 services -p 123 -u -R
 run
@@ -401,6 +507,8 @@ spool /root/output/msf/rpc.txt
 echo "####RPC####"
 
 echo "RPC Endpoint Mapper"
+echo "MSF RPC endpointmapper" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/dcerpc/endpoint_mapper
 services -p 135 -u -R
 run
@@ -409,6 +517,8 @@ services -p 135 -u
 sleep 5
 
 echo "SunRPC Portmapper"
+echo "MSF RPC portmapper" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/misc/sunrpc_portmapper
 services -p 111 -u -R
 run
@@ -417,12 +527,16 @@ services -p 111 -u
 sleep 5
 
 echo "Portmap Amplification"
+echo "MSF RPC amp" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/portmap/portmap_amp
 services -p 111 -u -R
 run
 sleep 5
 
 echo "nfsmounts"
+echo "MSF RPC nfs mounts" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/nfs/nfsmount
 services -p 111 -u -R
 run
@@ -431,14 +545,17 @@ sleep 5
 spool /root/output/msf/ldap.txt
 echo "####LDAP####"
 
-echo "LDAP Hashdump 389"
+echo "LDAP Hashdump"
+echo "MSF LDAP hashdump" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/gather/ldap_hashdump
+set RPORT 389
+set SSL false
 services -p 389 -u -R
 run
 sleep 5
-
-echo "LDAP Hashdump 636"
-use auxiliary/gather/ldap_hashdump
+set SSL true
+set RPORT 636
 services -p 636 -u -R
 run
 sleep 5
@@ -447,6 +564,8 @@ spool /root/output/msf/ssdp.txt
 echo "####SSDP####"
 
 echo "SSDP Amp"
+echo "MSF SSDP amp" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/upnp/ssdp_amp
 hosts -R
 run
@@ -456,34 +575,42 @@ spool /root/output/msf/web.txt
 echo "####WEB####"
 
 echo "HTTP SSL Certificate Information"
+echo "MSF HTTP cert info" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/http/ssl
 services -u -p 443 -R
 run
 sleep 5
 
 echo "IIS Auth Bypass"
+echo "MSF HTTP IIS auth bypass" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/admin/http/iis_auth_bypass
 services -u -p 80 -S Microsoft -R
 run
 sleep 5
 services -u -p 443 -S Microsoft -R
-set rport 443
+set RPORT 443
 set SSL true
 run
 sleep 5
 
 echo "http.sys mem dump ms15-034"
+echo "MSF HTTP MS15-034" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/http/ms15_034_http_sys_memory_dump
 services -u -p 80 -S Microsoft -R
 check
 sleep 5
 services -u -p 443 -S Microsoft -R
-set rport 443
+set RPORT 443
 set SSL true
 check
 sleep 5
 
 echo "IIS Internal IP disclosure"
+echo "MSF HTTP IIS internal IP" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/http/iis_internal_ip
 services -u -p 80 -S Microsoft -R
 set rport 80
@@ -498,6 +625,8 @@ sleep 5
 
 spool /root/output/msf/iis_tilde.txt
 echo "IIS shortname Scanner/Tilde Character"
+echo "MSF HTTP IIS shortname" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/http/iis_shortname_scanner
 services -u -p 80 -S Microsoft -R
 check
@@ -516,12 +645,16 @@ spool /root/output/msf/vnc.txt
 echo "####VNC####"
 
 echo "VNC Versions"
+echo "MSF VNC version" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/vnc/vnc_none_auth
 services -u -p 5900 -R
 run
 sleep 5
 
 echo "VNC Sweep"
+echo "MSF VNC login" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/vnc/vnc_login
 set blank_passwords true
 services -u -p 5900 -R
@@ -529,12 +662,16 @@ run
 sleep 5
 
 echo "VNC Apple Vuln"
+echo "MSF VNC apple ard" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 use auxiliary/scanner/vnc/ard_root_pw
 services -u -p 5900 -R
 run
 sleep 5
 
 spool off
+echo "MSF finish" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
 
 echo "####Kill all Sessions####"
 sessions -K
