@@ -17,7 +17,7 @@ if [ -s /root/output/nmap/egress.nmap ]; then
     echo '! > Egress Filter Test already Done!'
 else
     echo '! > Egress Filter Background Job start!'
-    nmap -e eth0 -oA /root/output/nmap/egress portquiz.net > /dev/null 2>&1 &
+    nmap -e eth0 -oA /root/output/nmap/egress ports.team-prosec.com > /dev/null 2>&1 &
 fi
 
 #NMAP PE SCAN
