@@ -49,6 +49,9 @@ echo "! > Count the Loot!"
 echo '! > make some Screens'
 /opt/hacking/dfi/eyewitness.sh
 
+echo '! > loot and count default Pages'
+/opt/hacking/dfi/def_screen_looter.sh
+
 figlet 'Auto PT Done'
 
 echo "Finish PT" >> /root/output/runtime.txt

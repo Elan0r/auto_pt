@@ -60,6 +60,9 @@ enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_p
     <b></b>Make some Screens in <code>/root/output/screens</code>.<br>
     <b></b>If broken maybe <code>apt install chromium-driver</code> or <code>pip3 install 'selenium<4.0.0'</code>.<br>
 <br>
+    <h3>def_screen_looter:</h3>
+    <b></b>Looter for default Pages from Eyewitness sources.<br>
+<br>
     <h3>Auto_PT DONE!</h3>
     <b></b>copy your<code>output</code> folder to your local machine for further investigation.<br>
 
