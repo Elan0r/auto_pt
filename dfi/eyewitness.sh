@@ -8,6 +8,12 @@ else
     #Creating Output Folders
     mkdir -p /root/output/screens
 fi
+if [ -s /usr/lib/python3/dist-packages/selenium/webdriver/firefox/webdriver_prefs.json ]; then
+    echo '!> webdriver_prefs.json present!'
+else
+    cp /opt/hacking/dfi/webdriver_prefs.json /usr/lib/python3/dist-packages/selenium/webdriver/firefox/
+    echo '!> webdriver_prefs.json copied!'
+fi
 
 echo "Start Eyewitness" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
