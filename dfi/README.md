@@ -1,4 +1,5 @@
 Automating PT as good as possible -> as Failsave as Possible.<br>
+<small>will Check for 50+ Findings with output in Findings.txt, and more are possible through RAW files</small><br>
 v1.6<br>
 <br>
 The extern Tools were moved to <code>hacking/extern/</code>.<br>
