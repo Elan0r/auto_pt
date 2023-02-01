@@ -74,11 +74,23 @@ then
   date >> /root/output/runtime.txt
  # GPP password
    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_password >> /root/output/loot/intern/ad/gpp_password/pass_$DOM.txt
+   
+   awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_password/pass_$DOM.txt | sort -u > /root/output/loot/intern/ad/gpp_password/host.txt
+   if [ -s /root/output/loot/intern/ad/gpp_password/host.txt ]; then
+     echo "PS-TN-2020-0051 GPP_Password" >> /root/output/loot/intern/findings.txt
+     awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_password/pass_$DOM.txt | sort -u >> /root/output/loot/intern/findings.txt
+   fi
 
   echo "GPP_Autologin" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # GPP autologin
    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M gpp_autologin >> /root/output/loot/intern/ad/gpp_autologin/login_$DOM.txt
+   
+      awk '/Found credentials/ {print$2}' /root/output/loot/intern/ad/gpp_autologin/login_$DOM.txt | sort -u > /root/output/loot/intern/ad/gpp_autologin/host.txt
+   if [ -s /root/output/loot/intern/ad/gpp_autologin/host.txt ]; then
+     echo "PS-TN-2021-0002 GPP_Autologin" >> /root/output/loot/intern/findings.txt
+     awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_autologin/login_$DOM.txt | sort -u >> /root/output/loot/intern/findings.txt
+   fi
 
   echo "username_as_pass" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
