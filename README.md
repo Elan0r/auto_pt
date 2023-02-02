@@ -19,12 +19,13 @@ First start <b>passive_recon.sh</b> for <b>netdiscover</b> (passive!), <b>PCredz
 <br>
 <code>/root/input/ipint.txt</code> is needed as Scope <b>exit 1</b> if missing!<br>
 <small><code>dns_enum.sh</code> can create it, requests DNS Server for <b>nmap</b>.</small><br>
+enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_pt.sh</b>.<br>
 <br>
 <b>Auto_PT</b> creates <code>/root/output/runtime.txt</code> for <i>Performance and Evidence</i> in case of an <i>Incident</i>. Mind the <b>local</b> time!<br>
 <b>Auto_PT</b> requests Workspace for <b>MSF</b>.<br>
+<small><b>Auto_PT</b> may be stuck at Creating CME Relay list, this is a feature of CME, just press ENTER</small><br>
 <br>
 If <b>passive_recon.sh</b> is not/was not running and all "Modules" schould be run separately, first start <b>folder.sh</b> to create the required folders.<br>
-enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_pt.sh</b>.<br>
 <br>
 <details><summary><h2>Auto_PT "Modules":</h2></summary>
     <h3>folder:</h3>
