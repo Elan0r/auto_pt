@@ -228,6 +228,32 @@ else
     cd /opt
     git clone https://github.com/AlmondOffSec/PassTheCert.git
 fi
+#DFScoerce
+if [ -d /opt/DFSCoercet ]; then
+    cd /opt/DFSCoerce
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/Wh04m1001/DFSCoerce.git
+fi
+#sploutchy impacket
+if [ -d /opt/impacket-sploutchy ]; then
+    cd /opt/impacket-sploutchy
+    git stash
+    git pull
+else
+    cd /opt
+    git clone https://github.com/sploutchy/impacket /opt/impacket-sploutchy
+fi
+#CME Binary
+if [ -s /opt/cme_binary/cme ]; then
+    echo "CME binary existend"
+else
+    cd /opt
+    curl --create-dirs -O --output-dir /opt/cme_binary https://github.com/Porchetta-Industries/CrackMapExec/releases/download/v5.4.0/cme-ubuntu-latest-3.10.zip
+    unzip /opt/cme_binary/cme-ubuntu-latest-3.10.zip -d /opt/cme_binary
+fi
 
 #Go
 cd /opt
