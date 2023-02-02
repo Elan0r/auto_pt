@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp /opt/hacking/nmap_scripts/*.nse /usr/share/nmap/scripts/
+cp /opt/auto_pt/resources/*.nse /usr/share/nmap/scripts/
 
 #vulscan
 if [ -d /opt/nmap-vulners ]; then

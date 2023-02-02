@@ -46,15 +46,6 @@ export PATH=$PATH:$GOPATH/bin
 
 #GIT
 cd /opt
-#PSN Toolz
-if [ -d /opt/hacking ]; then
-    cd /opt/hacking
-    git stash
-    git pull
-else
-    cd /opt
-    git clone https://gitlab-ci-token:ZGA2PFZZyut_zXevuPAR@gitlab.com/pspt/hacking.git
-fi
 #Petit Potam
 if [ -d /opt/PetitPotam ]; then
     cd /opt/PetitPotam
@@ -276,7 +267,10 @@ else
     cd /opt/airgeddon
     bash airgeddon.sh
 fi
-/opt/hacking/nmap_scripts/nse_install.sh
+
+#Nmap scripts
+/opt/auto_pt/scripts/nse_install.sh
+
 echo '! > '
 echo '! > Tools go to /opt!'
 echo '! > '

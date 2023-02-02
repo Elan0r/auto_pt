@@ -5,7 +5,7 @@ figlet ProSecAutoSploit
 if [ -s /opt/hacking/resource_script/resource.txt ]; then
     echo '! > resource.txt check OK'
 else
-    echo '! > resource.txt missing here: opt/hacking/resource_script/'
+    echo '! > resource.txt missing here: /opt/auto_pt/resources/'
     exit 1
 fi
 
@@ -32,7 +32,7 @@ date >> /root/output/runtime.txt
 
 msfdb init
 echo '! > Start Metasploit Framework'
-msfconsole -qx "resource /root/input/msf/workspace.txt /opt/hacking/resource_script/resource.txt" > /dev/null
+msfconsole -qx "resource /root/input/msf/workspace.txt /opt/auto_pt/resources/resource.txt" > /dev/null
 echo '! > MSF Done!'
 
 exit 0

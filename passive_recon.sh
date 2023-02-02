@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #create Folders
-/opt/hacking/dfi/folder.sh
+/opt/auto_pt/folder.sh
 
 if [ -d /opt/PCredz/logs ]; then
     echo '! > Logfolder OK.'
@@ -9,7 +9,10 @@ else
      mkdir -p /opt/PCredz/logs
 fi
 
-tmux -f /opt/hacking/dfi/dfitmux.conf new-session -d
+echo "Start Passive Recon" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
+
+tmux -f /opt/auto_pt/resources/dfitmux.conf new-session -d
 tmux rename-window 'Passive-Recon'
 
 figlet -w 90 ProSecPassiveRecon > /dev/pts/1

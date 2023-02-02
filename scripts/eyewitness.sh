@@ -11,7 +11,7 @@ fi
 if [ -s /usr/lib/python3/dist-packages/selenium/webdriver/firefox/webdriver_prefs.json ]; then
     echo '!> webdriver_prefs.json present!'
 else
-    cp /opt/hacking/dfi/webdriver_prefs.json /usr/lib/python3/dist-packages/selenium/webdriver/firefox/
+    cp /opt/auto_pt/resources/webdriver_prefs.json /usr/lib/python3/dist-packages/selenium/webdriver/firefox/
     echo '!> webdriver_prefs.json copied!'
 fi
 

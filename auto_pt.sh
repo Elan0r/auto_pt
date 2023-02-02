@@ -10,7 +10,7 @@ else
 fi
 
 #Create all folder
-/opt/hacking/dfi/folder.sh
+/opt/auto_pt/scripts/folder.sh
 
 read -p "Enter Workspace Name: " WS
 echo 'workspace -d ' $WS > /root/input/msf/workspace.txt
@@ -18,39 +18,39 @@ echo 'workspace -a ' $WS >> /root/input/msf/workspace.txt
 echo 'workspace ' $WS > /root/input/msf/ws.txt
 echo 'db_import /root/output/nmap/service.xml' >> /root/input/msf/workspace.txt
 
-tmux rename-window 'AUTO_PT'
+tmux rename-window 'Auto_PT'
 
-echo "Start auto_PT" > /root/output/runtime.txt
+echo "Start Auto_PT" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 echo '! > Start Active Recon'
-/opt/hacking/dfi/active_recon.sh
+/opt/auto_pt/scripts/active_recon.sh
 
 echo '! > Start Metasploit'
-/opt/hacking/dfi/autosploit.sh
+/opt/auto_pt/scripts/autosploit.sh
 
 echo '! > Start Zerocheck'
-/opt/hacking/dfi/zerocheck.sh
+/opt/auto_pt/scripts/zerocheck.sh
 
 echo '! > Start Log4Check'
-/opt/hacking/dfi/log4check.sh
+/opt/auto_pt/scripts/log4check.sh
 
 echo '! > Start RPC 0 Check'
-/opt/hacking/dfi/rpc0.sh
+/opt/auto_pt/scripts/rpc0.sh
 
 echo '! > Start Relay'
-/opt/hacking/dfi/fast_relay.sh
+/opt/auto_pt/scripts/fast_relay.sh
 
 echo "! > grab the loot!"
-/opt/hacking/dfi/looter.sh
+/opt/auto_pt/scripts/looter.sh
 
 echo "! > Count the Loot!"
-/opt/hacking/dfi/counter.sh
+/opt/auto_pt/scripts/counter.sh
 
 echo '! > make some Screens'
-/opt/hacking/dfi/eyewitness.sh
+/opt/auto_pt/scripts/eyewitness.sh
 
 echo '! > loot and count default Pages'
-/opt/hacking/dfi/def_screen_looter.sh
+/opt/auto_pt/scripts/def_screen_looter.sh
 
 figlet 'Auto PT Done'
 
