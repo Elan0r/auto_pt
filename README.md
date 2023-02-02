@@ -9,7 +9,7 @@ download this Repository to <code>/opt</code> via <b>git clone</b> <small>(full 
 Install all requirements + X via <b>tool-install.sh</b> in <code>/opt/auto_pt</code>.<br>
 <br>
 <b>Updating</b><br>
-in the folder <code>/opt/hacking/</code> do <b>git pull</b>, than run <b>tool_install.sh</b>.<br>
+in the folder <code>/opt/auto_pt/</code> do <b>git pull</b>, than run <b>tool_install.sh</b>.<br>
 This updates all Tools.<br>
 <br>
 <b>intended usage</b><br>
@@ -20,6 +20,7 @@ First start <b>passive_recon.sh</b> for <b>netdiscover</b> (passive!), <b>PCredz
 If <b>passive_recon.sh</b> is not/was not running and all "Modules" schould be run separately, first start <b>folder.sh</b> to create the required folders.<br>
 enter <b>tmux a</b>, create a new window (<b>crtl b + c</b>) and start <b>auto_pt.sh</b>.<br>
 <code>/root/input/ipint.txt</code> is needed as Scope <b>exit 1</b> if missing!<br>
+<small><code>dns_enum.sh</code> can create it.</small><br>
 <b>Auto_PT</b> creates <code>/root/output/runtime.txt</code> for <i>Performance and Evidence</i> in case of an <i>Incident</i>. Mind the <b>local</b> time!<br>
 <b>Auto_PT</b> requests Workspace for <b>MSF</b>.<br>
 <br>
