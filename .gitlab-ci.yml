@@ -12,12 +12,12 @@ stages:
 
 # Not needed if .gitlab-ci-asdf-versions.yml is included...
 variables:
-  GL_ASDF_SHELLCHECK_VERSION: 1.58.3
+  GL_ASDF_SHELLCHECK_VERSION: master
   # Exclude vendor and files directories from validation
   COMMON_TASK_VALIDATIONS_EXCLUDES_REGEXP: '^\.(/vendor/|/files/)'
   # Any arguments for shellcheck
   SHELLCHECK_ARGS: --source-path=. --source-path=./scripts/ --external-sources
-  GL_ASDF_SHFMT_VERSION: 1.58.3
+  GL_ASDF_SHFMT_VERSION: master
 
 include:
   # Ensure that all shell-scripts are formatted according to a
