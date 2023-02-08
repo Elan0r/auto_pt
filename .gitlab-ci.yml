@@ -16,7 +16,13 @@ shell check:
     - shellcheck --version
   script:
     - shellcheck scripts/*.sh
-    - shellcheck *.sh
+shell check:
+  image: koalaman/shellcheck-alpine:stable
+  stage: test
+  before_script:
+    - shellcheck --version
+  script:
+    - shellcheck ./*.sh
 
 shfmt:
   image: mvdan/shfmt:v3.2.0-alpine
