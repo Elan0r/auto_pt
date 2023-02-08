@@ -5,6 +5,20 @@
 # Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+stages:
+  - validate
+  - release
+  - renovate_bot
+  - test
+
+include:
+  - local: .gitlab-ci-asdf-versions.yml
+  # This template should be included in all Infrastructure projects.
+  # It includes standard checks, gitlab-scanners, validations and release processes
+  # common to all projects using this template library.
+  # see https://gitlab.com/gitlab-com/gl-infra/common-ci-tasks/-/blob/main/templates/standard.md
+  - project: "gitlab-com/gl-infra/common-ci-tasks"
+    ref: v1.58.3  # renovate:managed
+    file: templates/standard.yml
 include:
 - template: Security/Secret-Detection.gitlab-ci.yml
-- template: templates/standard.yml
