@@ -38,7 +38,7 @@ cp /root/.cme/logs/* /root/output/loot/hashes/
 fi
 
 ### Metasploit
-if [ -z '$(ls -A /root/.msf4/loot)' ]; then
+if [ -z "$(ls -A /root/.msf4/loot)" ]; then
    echo '! > No MSF Loot!'
    echo '! >'
 else
