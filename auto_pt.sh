@@ -20,8 +20,8 @@ echo 'db_import /root/output/nmap/service.xml' >>/root/input/msf/workspace.txt
 
 tmux rename-window 'Auto_PT'
 
-echo 'Start Auto_PT' >> /root/output/runtime.txt
-date >> /root/output/runtime.txt
+echo 'Start Auto_PT' >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
 echo '! > Start Active Recon'
 /opt/auto_pt/scripts/active_recon.sh
 

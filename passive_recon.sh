@@ -9,14 +9,14 @@ else
      mkdir -p /opt/PCredz/logs
 fi
 
-echo "Start Passive Recon" >> /root/output/runtime.txt
-date >> /root/output/runtime.txt
+echo "Start Passive Recon" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
 
 tmux -f /opt/auto_pt/resources/dfitmux.conf new-session -d
 tmux rename-window 'Passive-Recon'
 
-figlet -w 90 ProSecPassiveRecon > /dev/pts/1
-figlet -w 90 ProSecPassiveRecon > /dev/pts/0
+figlet -w 90 ProSecPassiveRecon >/dev/pts/1
+figlet -w 90 ProSecPassiveRecon >/dev/pts/0
 
 tmux send 'netdiscover -p -L -i eth0 | tee -a /root/output/netdiscover.txt' ENTER
 tmux split-window
