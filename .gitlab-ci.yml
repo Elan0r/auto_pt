@@ -24,4 +24,4 @@ shfmt:
     - shfmt -version
   script:
     - shfmt -i 2 -ci -d scripts
-    - shfmt -i 2 -ci -d .
+    - shfmt -i 2 -ci
