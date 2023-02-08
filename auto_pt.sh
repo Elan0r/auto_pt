@@ -12,10 +12,10 @@ fi
 #Create all folder
 /opt/auto_pt/scripts/folder.sh
 
-read -p "Enter Workspace Name: " WS
-echo 'workspace -d ' $WS > /root/input/msf/workspace.txt
-echo 'workspace -a ' $WS >> /root/input/msf/workspace.txt
-echo 'workspace ' $WS > /root/input/msf/ws.txt
+read -r -p "Enter Workspace Name: " WS
+echo 'workspace -d ' "$WS" > /root/input/msf/workspace.txt
+echo 'workspace -a ' "$WS" >> /root/input/msf/workspace.txt
+echo 'workspace ' "$WS" > /root/input/msf/ws.txt
 echo 'db_import /root/output/nmap/service.xml' >> /root/input/msf/workspace.txt
 
 tmux rename-window 'Auto_PT'
