@@ -23,4 +23,4 @@ shfmt:
   before_script:
     - shfmt -version
   script:
-    - shfmt -i 2 -ci
+    - shfmt -i 2 -ci -d *
