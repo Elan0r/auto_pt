@@ -20,7 +20,8 @@ rm -r /root/.cme
 
 #APT
 apt -qq update
-apt -qq install tmux bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip libpcap-dev yersinia golang eyewitness enum4linux ipmitool -y
+apt -qq install tmux bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip yersinia golang eyewitness enum4linux ipmitool -y
+apt-get install libpcap-dev -y
 
 #SearchSploit
 searchsploit -u
