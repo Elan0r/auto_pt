@@ -121,6 +121,11 @@ then
  # petitpotam
    crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M petitpotam >> /root/output/loot/intern/rpc/petit_potam/petitpotam_$FQDN.txt
 
+ echo "DFScoerce" >> /root/output/runtime.txt
+  date >> /root/output/runtime.txt
+ # DFScoerce
+   crackmapexec smb $IP -u $USER -p $PASS -d $DOM -M dfscoerce >> /root/output/loot/intern/rpc/dfscoerce/dfscoerce_$FQDN.txt
+
   echo "Sessions" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # sessions
