@@ -6,7 +6,7 @@ echo "Start lootcollector" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 
 ### PCreds
-if [ -z '$(ls -A /opt/PCredz/logs)' ]; then
+if [ -z "$(ls -A /opt/PCredz/logs)" ]; then
    echo '! >'
    echo '! > No PCredz logs!'
    echo '! >'
@@ -14,7 +14,7 @@ else
 cp /opt/PCredz/logs/* /root/output/loot/hashes/
 fi
 
-if [ -z '$(ls -A /opt/PCredz/CredentialDump-Session.log)' ]; then
+if [ -z "$(ls -A /opt/PCredz/CredentialDump-Session.log)" ]; then
    echo '! > No PCredz Session!'
    echo '! >'
 else
@@ -22,7 +22,7 @@ cp /opt/PCredz/CredentialDump-Session.log /root/output/loot/hashes/
 fi
 
 ### Responder
-if [ -z '$(ls -A /usr/share/responder/logs/*.txt)' ]; then
+if [ -z "$(ls -A /usr/share/responder/logs/*.txt)" ]; then
    echo '! > No Responder Hashes!'
    echo '! >'
 else
@@ -30,7 +30,7 @@ cp /usr/share/responder/logs/*.txt /root/output/loot/hashes/
 fi
 
 ### CrackMapExec
-if [ -z '$(ls -A /root/.cme/logs)' ]; then
+if [ -z "$(ls -A /root/.cme/logs)" ]; then
    echo '! > No CME Logs!'
    echo '! >'
 else
@@ -116,8 +116,6 @@ awk '/Vulnerable to SSDP/ {print$2}' /root/output/msf/ssdp.txt | cut -d ":" -f 1
 awk '/User=/{print}' /root/output/msf/printer.txt | cut -c18- > /root/output/loot/intern/printer/extract/hosts.txt
 cp /root/output/list/msf_*_printer.txt /root/output/loot/intern/printer/access
 awk '/:9100/{print$2}' /root/output/msf/printer.txt | grep -v file: | cut -d : -f 1 | sort -u > /root/output/loot/intern/printer/access/hosts.txt
-
-
 
 ### Network
 cp /root/output/nmap/egress.nmap /root/output/loot/intern/network/egress_filtering/
