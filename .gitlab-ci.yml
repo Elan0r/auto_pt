@@ -5,38 +5,23 @@
 # Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
-#include:
-# template: Security/Secret-Detection.gitlab-ci.yml
-stages:
-  - validate
-
-# Not needed if .gitlab-ci-asdf-versions.yml is included...
-variables:
-  GL_ASDF_SHELLCHECK_VERSION: master
-  # Exclude vendor and files directories from validation
-  COMMON_TASK_VALIDATIONS_EXCLUDES_REGEXP: '^\.(/vendor/|/files/)'
-  # Any arguments for shellcheck
-  SHELLCHECK_ARGS: --source-path=. --source-path=./scripts/ --external-sources
-  GL_ASDF_SHFMT_VERSION: master
 
 include:
-  # Ensure that all shell-scripts are formatted according to a
-  # standard canonical format
-  # see https://gitlab.com/gitlab-com/gl-infra/common-ci-tasks/-/blob/main/shellcheck.md
-  - project: 'gitlab-com/gl-infra/common-ci-tasks'
-    ref: v1.58.3  # renovate:managed
-    file: shellcheck.yml
-  # Ensure that all shell-scripts are formatted according to a
-  # standard canonical format
-  - project: 'gitlab-com/gl-infra/common-ci-tasks'
-    ref: v1.58.3  # renovate:managed
-    file: shfmt.yml
-  # validate .editorconfig
-  # see https://gitlab.com/gitlab-com/gl-infra/common-ci-tasks/-/blob/main/editorconfig-check.md
-  - project: "gitlab-com/gl-infra/common-ci-tasks"
-    ref: v1.58.3  # renovate:managed
-    file: "editorconfig-check.yml"
-  # see https://gitlab.com/gitlab-com/gl-infra/common-ci-tasks/-/blob/main/gitlab-scanners.md
-  - project: 'gitlab-com/gl-infra/common-ci-tasks'
-    ref: v1.58.3  # renovate:managed
-    file: 'gitlab-scanners.yml'
+- template: Security/Secret-Detection.gitlab-ci.yml
+
+shell check:
+  image: koalaman/shellcheck-alpine:stable
+  stage: test
+  before_script:
+    - shellcheck --version
+  script:
+    - shellcheck scripts/*.sh
+    - shellcheck *.sh
+
+shfmt:
+  image: mvdan/shfmt:v3.2.0-alpine
+  stage: test
+  before_script:
+    - shfmt -version
+  script:
+    - shfmt -i 2 -ci -d
