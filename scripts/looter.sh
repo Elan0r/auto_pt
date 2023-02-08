@@ -47,7 +47,7 @@ fi
 
 ### SNMP
 awk '/Login Successful.*read-write/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/snmp/community_string/hosts_default_community_rw.txt
-awk '/Login Successful/ {print$2}' /root/output/msf/snmp.txt  | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt
+awk '/Login Successful/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt
 cp /root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt /root/output/loot/intern/snmp/v1_v2c/hosts.txt
 
 ### FTP
@@ -55,12 +55,12 @@ awk '/Anonymous READ/ {print$2}' /root/output/msf/ftp.txt | cut -d ":" -f 1 | so
 awk '/FTP Banner/ {print$2}' /root/output/msf/ftp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/ftp/unencrypted/hosts.txt
 
 ### EOL
-awk '/\+.*OpenSSH/ {print$7,$2}' /root/output/msf/ssh.txt | sed 's/:22/ /g' |  sort -u | grep -v '_8.' >/root/output/loot/intern/eol/ssh/openssh_version.txt
+awk '/\+.*OpenSSH/ {print$7,$2}' /root/output/msf/ssh.txt | sed 's/:22/ /g' | sort -u | grep -v '_8.' >/root/output/loot/intern/eol/ssh/openssh_version.txt
 grep 'running Windows 200\|running Windows 7\|running Windows XP\|running Windows Vista\|running Windows 8\|running Windows 9' /root/output/msf/smb.txt | cut -c5- | sed 's/:... //' | sort -u >/root/output/loot/intern/eol/windows/windows_versions.txt
-awk '/\-1.99/ {print$2}' /root/output/msf/ssh.txt |cut -d : -f 1 | sort -u >/root/output/loot/intern/eol/ssh_depricated/hosts.txt
+awk '/\-1.99/ {print$2}' /root/output/msf/ssh.txt | cut -d : -f 1 | sort -u >/root/output/loot/intern/eol/ssh_depricated/hosts.txt
 
 ### TELNET
-awk '/\+.*:23/ {print$2}' /root/output/msf/telnet.txt  | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/telnet/unencrypted/hosts.txt
+awk '/\+.*:23/ {print$2}' /root/output/msf/telnet.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/telnet/unencrypted/hosts.txt
 
 ### SMB
 awk '/VULNERABLE.*MS17-010/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/smb/eternal_blue/hosts.txt
@@ -92,10 +92,10 @@ awk '/.*open.*Requires NLA: No/ {print$1}' /root/output/msf/rdp.txt | sort -u >/
 awk '/The target is vulnerable.$/{print$2}' /root/output/msf/rdp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/rdp/ms12-020/hosts.txt
 
 ### NTP
-awk '/Vulnerable/ {print$2}' /root/output/msf/ntp.txt | cut -d ":" -f 1  | sort -u >/root/output/loot/intern/ntp/amplification/hosts.txt
+awk '/Vulnerable/ {print$2}' /root/output/msf/ntp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/ntp/amplification/hosts.txt
 
 ### AD
-awk '/NetBIOS/ {print$5}' /root/output/msf/udp_scan.txt | cut -d ":" -f 1  | sort -u >/root/output/loot/intern/ad/netbios/hosts.txt
+awk '/NetBIOS/ {print$5}' /root/output/msf/udp_scan.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/ad/netbios/hosts.txt
 
 ### DNS
 awk '/x Amplification/ {print$2}' /root/output/msf/dns.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/dns/amplification/hosts.txt
@@ -147,7 +147,7 @@ grep -B 6 'TLSv1.1.*enabled' /root/output/msf/sslscan.txt >/root/output/loot/int
 grep -B 4 'SSLv3.*enabled' /root/output/msf/sslscan.txt >/root/output/loot/intern/web/tls/protossl.txt
 cp /root/output/msf/sslscan.txt /root/output/loot/intern/web/tls/
 awk '/Testing/ {print$4}' /root/output/loot/intern/web/tls/proto*.txt | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | sort -u >/root/output/loot/intern/web/tls/hosts.txt
-grep -v 'not vulnerable' /root/output/msf/sslscan.txt | grep -B 22 vulnerable | grep Connected |cut -d ' ' -f 3 >/root/output/loot/intern/web/tls/heartbleed/hosts.txt
+grep -v 'not vulnerable' /root/output/msf/sslscan.txt | grep -B 22 vulnerable | grep Connected | cut -d ' ' -f 3 >/root/output/loot/intern/web/tls/heartbleed/hosts.txt
 grep -v 'not vulnerable' /root/output/msf/sslscan.txt | grep -B 22 vulnerable >/root/output/loot/intern/web/tls/heartbleed/raw.txt
 awk '/Log4Shell found/{print}' /root/output/msf/log4j.txt | grep -v 'vsphere' | awk '//{print$2}' | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/web/log4shell/hosts.txt
 
