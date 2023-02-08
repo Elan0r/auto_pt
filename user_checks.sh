@@ -103,7 +103,7 @@ if [ -z "$HASH" ]; then
   awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username/user_"$DOM".txt | cut -d : -f 2 | sort -u | tr '[:lower:]' '[:upper:]' >/root/output/loot/intern/ad/iam/username/owneduser_"$BHDOM".txt
 
   for i in $(cat /root/output/loot/intern/ad/iam/username/owneduser_"$BHDOM".txt); do
-    echo "MATCH (n) WHERE n.name = '"$i"@"$BHDOM"' SET n.owned=true RETURN n;" >>/root/output/loot/intern/ad/iam/username/bh_owned_"$BHDOM".txt
+    echo "MATCH (n) WHERE n.name = '""$i""@""$BHDOM""' SET n.owned=true RETURN n;" >>/root/output/loot/intern/ad/iam/username/bh_owned_"$BHDOM".txt
   done
 
   echo "Pass-Pol" >>/root/output/runtime.txt
@@ -161,7 +161,7 @@ if [ -z "$HASH" ]; then
   # bloodhound
   bloodhound-python -u "$USER" -p "$PASS" -d "$DOM" -dc "$FQDN" -w 50 -c all --zip
   certipy find -u "$USER" -p "$PASS" -target "$IP" -old-bloodhound
-  mv *.zip /root/output/loot/intern/ad
+  mv ./*.zip /root/output/loot/intern/ad
 
   # Python unbuffered reset to default
   unset PYTHONUNBUFFERED   
@@ -196,7 +196,7 @@ if [ -z "$PASS" ]; then
   awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username/user_"$DOM".txt | cut -d : -f 2 | sort -u | tr '[:lower:]' '[:upper:]' >/root/output/loot/intern/ad/iam/username/owneduser.txt
 
   for i in $(cat /root/output/loot/intern/ad/iam/username/owneduser.txt); do
-    echo "MATCH (n) WHERE n.name = '"$i"@"$BHDOM"' SET n.owned=true RETURN n;" >>/root/output/loot/intern/ad/iam/username/bh_owned.txt
+    echo "MATCH (n) WHERE n.name = '""$i""@""$BHDOM""' SET n.owned=true RETURN n;" >>/root/output/loot/intern/ad/iam/username/bh_owned.txt
   done
 
   echo "Pass-Pol" >>/root/output/runtime.txt
@@ -254,7 +254,7 @@ if [ -z "$PASS" ]; then
   # bloodhound
   bloodhound-python -u "$USER" --hashes aad3b435b51404eeaad3b435b51404ee:"$HASH" -d "$DOM" -dc "$FQDN" -w 50 -c all --zip
   certipy find -u "$USER" -hashes "$HASH" -target "$IP" -old-bloodhound
-  mv *.zip /root/output/loot/intern/ad
+  mv ./*.zip /root/output/loot/intern/ad
 
   # Python unbuffered reset to default
   unset PYTHONUNBUFFERED
