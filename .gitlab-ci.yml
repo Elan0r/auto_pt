@@ -12,7 +12,6 @@ stages:
   - test
 
 include:
-  - local: .gitlab-ci-asdf-versions.yml
   # This template should be included in all Infrastructure projects.
   # It includes standard checks, gitlab-scanners, validations and release processes
   # common to all projects using this template library.
@@ -20,5 +19,4 @@ include:
   - project: "gitlab-com/gl-infra/common-ci-tasks"
     ref: v1.58.3  # renovate:managed
     file: templates/standard.yml
-include:
-- template: Security/Secret-Detection.gitlab-ci.yml
+#- template: Security/Secret-Detection.gitlab-ci.yml
