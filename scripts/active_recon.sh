@@ -67,9 +67,9 @@ awk '/22\/open/ {print$2}' /root/output/nmap/service.gnmap  | sort -u >/root/out
 #DC LISTs
 awk '{if (/ 53\/open/ && / 88\/open/ && / 445\/open/) print$2}' /root/output/nmap/service.gnmap >/root/output/list/dc_ip.txt
 
-for i in $(cat /root/output/list/dc_ip.txt); do nslookup $i >>/root/output/list/dc_fqdn.txt ; done  
+for i in $(cat /root/output/list/dc_ip.txt); do nslookup "$i" >>/root/output/list/dc_fqdn.txt ; done  
 
-awk '/name/ {print$4}' /root/output/list/dc_fqdn.txt | cut -d '.' -f 1 | tr [:lower:] [:upper:] >/root/output/list/dc_nbt.txt
+awk '/name/ {print$4}' /root/output/list/dc_fqdn.txt | cut -d '.' -f 1 | tr '[:lower:]' '[:upper:]' >/root/output/list/dc_nbt.txt
 
 #sslscan 4 weak cipher
 if [ -s /root/output/msf/sslscan.txt ]; then
@@ -100,24 +100,20 @@ date >>/root/output/runtime.txt
 fi
 
 #Create Relay LISTs
-for i in $(cat /root/output/list/rpc_open.txt)
- do
-  echo rpc://$i >>/root/output/list/relay_rpc.txt
+for i in $(cat /root/output/list/rpc_open.txt); do
+  echo rpc://"$i" >>/root/output/list/relay_rpc.txt
 done
 
-for i in $(cat /root/output/list/ldap_open.txt)
- do
-  echo ldaps://$i >>/root/output/list/relay_ldap.txt
+for i in $(cat /root/output/list/ldap_open.txt); do
+  echo ldaps://"$i" >>/root/output/list/relay_ldap.txt
 done
 
-for i in $(cat /root/output/list/kerberos_open.txt)
- do
-  echo dcsync://$i >>/root/output/list/relay_dcsync.txt
+for i in $(cat /root/output/list/kerberos_open.txt); do
+  echo dcsync://"$i" >>/root/output/list/relay_dcsync.txt
 done
 
-for i in $(cat /root/output/list/smb_sign_off.txt)
- do
-  echo smb://$i >>/root/output/list/relay_smb.txt
+for i in $(cat /root/output/list/smb_sign_off.txt); do
+  echo smb://"$i" >>/root/output/list/relay_smb.txt
 done
 
 cat /root/output/list/relay* >/root/output/list/relay_all.txt

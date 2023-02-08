@@ -16,27 +16,27 @@ grep -l -e '<title>Apache Tomcat' /root/output/screens/source/*.txt | sed 's%.*[
 ### counter for findings.txt
 echo "PS-TN-2020-0018 IIS default page" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/web/iis/hosts.txt >> /root/output/loot/intern/findings.txt
-cat  /root/output/loot/intern/web/iis/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/web/iis/hosts.txt | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "PS-TN-2021-0031 JBOSS default page" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/web/jboss/hosts.txt >> /root/output/loot/intern/findings.txt
-cat  /root/output/loot/intern/web/jboss/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/web/jboss/hosts.txt | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "PS-TW-2021-0006 httpd default page" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/web/httpd/hosts.txt >> /root/output/loot/intern/findings.txt
-cat  /root/output/loot/intern/web/httpd/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/web/httpd/hosts.txt | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "PS-TW-2021-0008 nginx default page" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/web/nginx/hosts.txt >> /root/output/loot/intern/findings.txt
-cat  /root/output/loot/intern/web/nginx/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/web/nginx/hosts.txt | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
 echo "PS-TN-2020-0024 Tomcat default page" >> /root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/web/tomcat/hosts.txt >> /root/output/loot/intern/findings.txt
-cat  /root/output/loot/intern/web/tomcat/hosts.txt | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/web/tomcat/hosts.txt | sort -u | sed 's/$/.0\/24/' >> /root/output/loot/intern/findings.txt
 echo "" >> /root/output/loot/intern/findings.txt
 
 exit 0
