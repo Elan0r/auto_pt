@@ -3,10 +3,10 @@ figlet ProSecAutoPT
 echo 'version 1.6 '
 
 if [ -s /root/input/ipint.txt ]; then
-    echo '! > IPs OK '
+  echo '! > IPs OK '
 else
-    echo "! >> ipint.txt is missing in /root/input/ipint.txt."
-	exit 1
+  echo '! >> ipint.txt is missing in /root/input/ipint.txt.'
+  exit 1
 fi
 
 #Create all folder
@@ -20,7 +20,7 @@ echo 'db_import /root/output/nmap/service.xml' >>/root/input/msf/workspace.txt
 
 tmux rename-window 'Auto_PT'
 
-echo "Start Auto_PT" >> /root/output/runtime.txt
+echo 'Start Auto_PT' >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 echo '! > Start Active Recon'
 /opt/auto_pt/scripts/active_recon.sh
