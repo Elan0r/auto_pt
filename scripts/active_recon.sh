@@ -100,10 +100,26 @@ date >> /root/output/runtime.txt
 fi
 
 #Create Relay LISTs
-for i in $(cat /root/output/list/rpc_open.txt); do echo rpc://$i >> /root/output/list/relay_rpc.txt ; done
-for i in $(cat /root/output/list/ldap_open.txt); do echo ldaps://$i >> /root/output/list/relay_ldap.txt ; done 
-for i in $(cat /root/output/list/kerberos_open.txt); do echo dcsync://$i >> /root/output/list/relay_dcsync.txt ; done
-for i in $(cat /root/output/list/smb_sign_off.txt); do echo smb://$i >> /root/output/list/relay_smb.txt ; done
+for i in $(cat /root/output/list/rpc_open.txt)
+ do
+  echo rpc://$i >> /root/output/list/relay_rpc.txt
+done
+
+for i in $(cat /root/output/list/ldap_open.txt)
+ do
+  echo ldaps://$i >> /root/output/list/relay_ldap.txt
+done
+
+for i in $(cat /root/output/list/kerberos_open.txt)
+ do
+  echo dcsync://$i >> /root/output/list/relay_dcsync.txt
+done
+
+for i in $(cat /root/output/list/smb_sign_off.txt)
+ do
+  echo smb://$i >> /root/output/list/relay_smb.txt
+done
+
 cat /root/output/list/relay* > /root/output/list/relay_all.txt
 echo 'Done'
 

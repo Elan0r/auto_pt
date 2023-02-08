@@ -2,7 +2,7 @@
 figlet -w 84 ProSecUserChecks
 echo "v0.7"
 echo "CME is still buggy u need to press ENTER sometimes!"
-unset USER HASH PASS DOM IP FQDN
+unset USER HASH PASS DOM IP FQDN BHDOM
 
 show_help () {
 echo "HINT: Special Characters should be escaped better use ''"
@@ -13,7 +13,7 @@ echo "  -u              Username -> Required"
 echo "  -p              Password -> provide pass OR nthash"
 echo "  -H              NT Hash -> provide pass OR nthash"
 echo "  -d              domain -> required"
-echo "  -i             IP Domain Controller -> required"
+echo "  -i              IP Domain Controller -> required"
 echo "  -h              this help"
 exit 0
 }
@@ -65,6 +65,8 @@ fi
 
 # get DC_FQDN
 FQDN=$(nslookup $IP | awk '// {print$4}' | sed 's/.$//')
+# Domain all uppercase for BH query
+BHDOM=$(echo $DOM | tr [:lower:] [:upper:])
 
 if [ -z $HASH ]
 then
@@ -101,10 +103,13 @@ then
    crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username/raw_$DOM.txt
    grep '+' /root/output/loot/intern/ad/iam/username/raw_$DOM.txt > /root/output/loot/intern/ad/iam/username/user_$DOM.txt
  # keep the raw file for screens and debugging
-   # BH owned User
-   BHDOM2=$(echo $DOM | tr [:lower:] [:upper:])
+  # BH owned User
    awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username/user_$DOM.txt | cut -d : -f 2 | sort -u | tr [:lower:] [:upper:] > /root/output/loot/intern/ad/iam/username/owneduser_$BHDOM.txt
-   for i in $(cat /root/output/loot/intern/ad/iam/username/owneduser_$BHDOM.txt); do echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username/bh_owned_$BHDOM.txt ; done
+
+   for i in $(cat /root/output/loot/intern/ad/iam/username/owneduser_$BHDOM.txt)
+    do
+     echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username/bh_owned_$BHDOM.txt
+   done
 
   echo "Pass-Pol" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
@@ -193,10 +198,13 @@ then
    crackmapexec smb $IP -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >> /root/output/loot/intern/ad/iam/username/raw_$DOM.txt
    grep '+' /root/output/loot/intern/ad/iam/username/raw_$DOM.txt > /root/output/loot/intern/ad/iam/username/user_$DOM.txt
  # keep the raw file for screens and debugging
-   # BH owned User
-   BHDOM2=$(echo $DOM | tr [:lower:] [:upper:])
+  # BH owned User
    awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username/user_$DOM.txt | cut -d : -f 2 | sort -u | tr [:lower:] [:upper:] > /root/output/loot/intern/ad/iam/username/owneduser.txt
-   for i in $(cat /root/output/loot/intern/ad/iam/username/owneduser.txt); do echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username/bh_owned.txt ; done
+
+   for i in $(cat /root/output/loot/intern/ad/iam/username/owneduser.txt)
+    do
+     echo "MATCH (n) WHERE n.name = '$i@$BHDOM' SET n.owned=true RETURN n;" >> /root/output/loot/intern/ad/iam/username/bh_owned.txt
+   done
 
   echo "Pass-Pol" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
