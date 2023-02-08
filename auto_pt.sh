@@ -13,10 +13,10 @@ fi
 /opt/auto_pt/scripts/folder.sh
 
 read -r -p "Enter Workspace Name: " WS
-echo 'workspace -d ' "$WS" > /root/input/msf/workspace.txt
-echo 'workspace -a ' "$WS" >> /root/input/msf/workspace.txt
-echo 'workspace ' "$WS" > /root/input/msf/ws.txt
-echo 'db_import /root/output/nmap/service.xml' >> /root/input/msf/workspace.txt
+echo 'workspace -d ' "$WS" >/root/input/msf/workspace.txt
+echo 'workspace -a ' "$WS" >>/root/input/msf/workspace.txt
+echo 'workspace ' "$WS" >/root/input/msf/ws.txt
+echo 'db_import /root/output/nmap/service.xml' >>/root/input/msf/workspace.txt
 
 tmux rename-window 'Auto_PT'
 
@@ -54,7 +54,7 @@ echo '! > loot and count default Pages'
 
 figlet 'Auto PT Done'
 
-echo "Finish PT" >> /root/output/runtime.txt
-date >> /root/output/runtime.txt
+echo "Finish PT" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
 
 exit 0
