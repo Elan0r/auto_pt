@@ -5,18 +5,38 @@
 # Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+#include:
+# template: Security/Secret-Detection.gitlab-ci.yml
 stages:
   - validate
-  - release
-  - renovate_bot
-  - test
+
+# Not needed if .gitlab-ci-asdf-versions.yml is included...
+variables:
+  GL_ASDF_SHELLCHECK_VERSION: ...
+  # Exclude vendor and files directories from validation
+  COMMON_TASK_VALIDATIONS_EXCLUDES_REGEXP: '^\.(/vendor/|/files/)'
+  # Any arguments for shellcheck
+  SHELLCHECK_ARGS: --source-path=. --source-path=./test/ --source-path=./test/lib/ --source-path=./test/integration/ --external-sources
+  GL_ASDF_SHFMT_VERSION: ...
 
 include:
-  # This template should be included in all Infrastructure projects.
-  # It includes standard checks, gitlab-scanners, validations and release processes
-  # common to all projects using this template library.
-  # see https://gitlab.com/gitlab-com/gl-infra/common-ci-tasks/-/blob/main/templates/standard.md
+  # Ensure that all shell-scripts are formatted according to a
+  # standard canonical format
+  # see https://gitlab.com/gitlab-com/gl-infra/common-ci-tasks/-/blob/main/shellcheck.md
+  - project: 'gitlab-com/gl-infra/common-ci-tasks'
+    ref: v1.58.3  # renovate:managed
+    file: shellcheck.yml
+  # Ensure that all shell-scripts are formatted according to a
+  # standard canonical format
+  - project: 'gitlab-com/gl-infra/common-ci-tasks'
+    ref: v1.58.3  # renovate:managed
+    file: shfmt.yml
+  # validate .editorconfig
+  # see https://gitlab.com/gitlab-com/gl-infra/common-ci-tasks/-/blob/main/editorconfig-check.md
   - project: "gitlab-com/gl-infra/common-ci-tasks"
     ref: v1.58.3  # renovate:managed
-    file: templates/standard.yml
-#- template: Security/Secret-Detection.gitlab-ci.yml
+    file: "editorconfig-check.yml"
+  # see https://gitlab.com/gitlab-com/gl-infra/common-ci-tasks/-/blob/main/gitlab-scanners.md
+  - project: 'gitlab-com/gl-infra/common-ci-tasks'
+    ref: v1.58.3  # renovate:managed
+    file: 'gitlab-scanners.yml'
