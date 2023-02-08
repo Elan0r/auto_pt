@@ -31,6 +31,13 @@ shfmt:
     - shfmt -version
   script:
     - shfmt -i 2 -ci -d ./
+shfmt_edt:
+  image: mvdan/shfmt:v3.2.0-alpine
+  stage: test
+  before_script:
+    - shfmt -version
+  script:
+    - shfmt -i 2 -ci -w -d ./
 shfmt2:
   image: mvdan/shfmt:v3.2.0-alpine
   stage: test
@@ -38,3 +45,10 @@ shfmt2:
     - shfmt -version
   script:
     - shfmt -i 2 -ci -d scripts
+shfmt2_edt:
+  image: mvdan/shfmt:v3.2.0-alpine
+  stage: test
+  before_script:
+    - shfmt -version
+  script:
+    - shfmt -i 2 -ci -w -d scripts
