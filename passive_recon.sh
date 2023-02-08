@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #create Folders
-/opt/auto_pt/folder.sh
+/opt/auto_pt/scripts/folder.sh
 
 if [ -d /opt/PCredz/logs ]; then
     echo '! > Logfolder OK.'
