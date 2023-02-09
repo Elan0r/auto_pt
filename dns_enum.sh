@@ -5,6 +5,7 @@ echo "this could take some time!"
 
 #request Nameserver IP
 read -r -p "Customer INTERNAL DNS Server IP: " NS
+echo "DNSServer IP is: ""$NS"
 
 #Private IP range
 echo "10.0.0.0/8
