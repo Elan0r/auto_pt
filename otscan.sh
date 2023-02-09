@@ -22,7 +22,7 @@ echo "Start OT discover" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 
 nmap -Pn -sT --scan-delay 1s --max-parallelism 1 -p 80,102,443,502,530,593,789,1089-1091,1200,1911,1962,2222,2404,2455,4000,4840,4843,4911,9600,19999,20000,20547,34962-34964,34980,4481,46823,44824,55000-55003 -oA /root/output/nmap/ot/discover -iL /root/output/list/ipup.txt
-nmap -Pn -sU --scan-delay 1s --max-parallelism 1  -p 47808,44818 -oA /root/output/nmap/ot/discover.udp -iL /root/output/list/ipup.txt
+nmap -Pn -sU --scan-delay 1s --max-parallelism 1 -p 47808,44818 -oA /root/output/nmap/ot/discover.udp -iL /root/output/list/ipup.txt
 
 awk '/102\/open/ {print$2}' /root/output/nmap/ot/discover.gnmap | sort -u >/root/output/list/ot/simatic.txt
 awk '/502\/open/ {print$2}' /root/output/nmap/ot/discover.gnmap | sort -u >/root/output/list/ot/modbus.txt
