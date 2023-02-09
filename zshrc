@@ -267,4 +267,4 @@ export PATH="$PATH:/root/.local/bin"
 
 #GO PATH
 export GOPATH=/opt/go
-export PATH="$GOPATH/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
