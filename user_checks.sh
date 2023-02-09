@@ -137,10 +137,20 @@ if [ -z "$HASH" ]; then
   # DFScoerce
   crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" -M dfscoerce >>/root/output/loot/intern/rpc/dfscoerce/dfscoerce_"$FQDN".txt
 
+  echo "Shadowcoerce" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # DFScoerce
+  crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" -M shadowcoerce >>/root/output/loot/intern/rpc/shadowcoerce/shadowcoerce_"$FQDN".txt
+
   echo "Sessions" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # sessions
   crackmapexec smb /root/output/list/smb_open.txt -u "$USER" -p "$PASS" -d "$DOM" --sessions >>/root/output/loot/intern/ad/session/sessions_"$DOM".txt
+
+  echo "ntlmv1" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # sessions
+  crackmapexec smb /root/output/list/smb_open.txt -u "$USER" -p "$PASS" -d "$DOM" -M ntlmv1 >>/root/output/loot/intern/ad/ntlm_auth/ntlmv1_"$DOM".txt
 
   echo "ASRep" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -178,7 +188,6 @@ if [ -z "$HASH" ]; then
   unset PYTHONUNBUFFERED
   echo "Userchecks Done" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
-  exit 0
 fi
 
 if [ -z "$PASS" ]; then
@@ -240,10 +249,20 @@ if [ -z "$PASS" ]; then
   # DFScoerce
   crackmapexec smb "$IP" -u "$USER" -H "$HASH" -d "$DOM" -M dfscoerce >>/root/output/loot/intern/rpc/dfscoerce/dfscoerce_"$FQDN".txt
 
+  echo "Shadowcoerce" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # DFScoerce
+  crackmapexec smb "$IP" -u "$USER" --H "$HASH" -d "$DOM" -M shadowcoerce >>/root/output/loot/intern/rpc/shadowcoerce/shadowcoerce_"$FQDN".txt
+
   echo "Sessions" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # sessions
   crackmapexec smb /root/output/list/smb_open.txt -u "$USER" -H "$HASH" -d "$DOM" --sessions >>/root/output/loot/intern/ad/session/sessions_"$FQDN".txt
+
+  echo "ntlmv1" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # sessions
+  crackmapexec smb /root/output/list/smb_open.txt -u "$USER" -H "$HASH" -d "$DOM" -M ntlmv1 >>/root/output/loot/intern/ad/ntlm_auth/ntlmv1_"$DOM".txt
 
   echo "ASRep" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -281,6 +300,5 @@ if [ -z "$PASS" ]; then
   unset PYTHONUNBUFFERED
   echo "Userchecks Done" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
-  exit 0
 fi
 exit 0

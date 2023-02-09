@@ -32,6 +32,7 @@ mkdir -p /root/output/loot/intern/rpc/zero_logon
 mkdir -p /root/output/loot/intern/rpc/print_nightmare
 mkdir -p /root/output/loot/intern/rpc/petit_potam
 mkdir -p /root/output/loot/intern/rpc/dfscoerce
+mkdir -p /root/output/loot/intern/rpc/shadowcoerce
 mkdir -p /root/output/loot/intern/rpc/null_sessions
 mkdir -p /root/output/loot/intern/rpc/nfs
 mkdir -p /root/output/loot/intern/rdp/bluekeep
