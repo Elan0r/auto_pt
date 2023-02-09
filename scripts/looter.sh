@@ -18,7 +18,7 @@ if [ -z $(ls -A /opt/PCredz/CredentialDump-Session.log) ]; then
   echo '! > No PCredz Session!'
   echo '! >'
 else
-cp /opt/PCredz/CredentialDump-Session.log /root/output/loot/hashes/
+  cp /opt/PCredz/CredentialDump-Session.log /root/output/loot/hashes/
 fi
 
 ### Responder
@@ -26,7 +26,7 @@ if [ -z $(ls -A /usr/share/responder/logs/*.txt) ]; then
   echo '! > No Responder Hashes!'
   echo '! >'
 else
-cp /usr/share/responder/logs/*.txt /root/output/loot/hashes/
+  cp /usr/share/responder/logs/*.txt /root/output/loot/hashes/
 fi
 
 ### CrackMapExec
@@ -34,7 +34,7 @@ if [ -z $(ls -A /root/.cme/logs) ]; then
   echo '! > No CME Logs!'
   echo '! >'
 else
-cp /root/.cme/logs/* /root/output/loot/hashes/
+  cp /root/.cme/logs/* /root/output/loot/hashes/
 fi
 
 ### Metasploit

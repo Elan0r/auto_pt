@@ -5,10 +5,10 @@ figlet -w 104 ProSecLog4ShellCheck
 echo '! > Log4J check via ETH0!'
 
 if [ -s /opt/auto_pt/resources/log4j.txt ]; then
-    echo '! > Log4J resource OK!'
+  echo '! > Log4J resource OK!'
 else
-    echo '! > log4j.txt resource missing here: /opt/auto_pt/resources/ !'
-    exit 1
+  echo '! > log4j.txt resource missing here: /opt/auto_pt/resources/ !'
+  exit 1
 fi
 
 echo "Start MSF Log4Shell check" >>/root/output/runtime.txt

@@ -7,7 +7,7 @@ figlet ProSecBoxToolz
 echo '! > '
 echo '! > Tools go to /opt + ln -s to /root/tools'
 echo '! > '
-if  [ -h /root/tools ]; then
+if [ -h /root/tools ]; then
   echo '! > Tools Link ok'
 else
   if [ -d /root/tools ]; then

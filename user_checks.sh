@@ -6,7 +6,7 @@ echo "v0.8"
 echo "CME is still buggy u need to press ENTER sometimes!"
 unset USER HASH PASS DOM IP FQDN BHDOM
 
-show_help () {
+show_help() {
   echo "HINT: Special Characters should be escaped better use ''"
   echo "DNS must be working for bloodhound!"
   echo ""
@@ -23,26 +23,26 @@ show_help () {
 OPTIND=1
 while getopts u:p:H:d:i: opt; do
   case "$opt" in
-    (u)
+    u)
       USER=${OPTARG}
       ;;
-    (p)
+    p)
       PASS=${OPTARG}
       ;;
-    (H)
+    H)
       HASH=${OPTARG}
       ;;
-    (d)
+    d)
       DOM=${OPTARG}
       ;;
-    (i)
+    i)
       IP=${OPTARG}
       ;;
-    (u|p|H|d|i)
+    u | p | H | d | i)
       shift 2
       OPTIND=1
       ;;
-    (*)
+    *)
       show_help
       ;;
   esac
