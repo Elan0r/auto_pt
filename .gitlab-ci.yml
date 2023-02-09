@@ -9,14 +9,14 @@
 include:
 - template: Security/Secret-Detection.gitlab-ci.yml
 
-shell check:
+shell check scripts:
   image: koalaman/shellcheck-alpine:stable
   stage: test
   before_script:
     - shellcheck --version
   script:
     - shellcheck scripts/*.sh
-shell check2:
+shell check root:
   image: koalaman/shellcheck-alpine:stable
   stage: test
   before_script:
@@ -24,17 +24,17 @@ shell check2:
   script:
     - shellcheck ./*.sh
 
-shfmt:
-  image: mvdan/shfmt:v3.2.0-alpine
-  stage: test
-  before_script:
-    - shfmt -version
-  script:
-    - shfmt -i 2 -ci -d ./
-shfmt2:
+shfmt scripts:
   image: mvdan/shfmt:v3.2.0-alpine
   stage: test
   before_script:
     - shfmt -version
   script:
     - shfmt -i 2 -ci -d scripts
+shfmt root:
+  image: mvdan/shfmt:v3.2.0-alpine
+  stage: test
+  before_script:
+    - shfmt -version
+  script:
+    - shfmt -i 2 -ci -d ./
