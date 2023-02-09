@@ -48,15 +48,15 @@ do
 done
 
 shift "$((OPTIND - 1))"
-[ "$1" = "--" ] && shift
+[ $1 = "--" ] && shift
 
-if [ -z "$USER" ]; then 
+if [ -z $USER ]; then 
   show_help
 fi
-if [ -z "$IP" ]; then 
+if [ -z $IP ]; then 
   show_help
 fi
-if [ -z "$DOM" ]; then 
+if [ -z $DOM ]; then 
   show_help
 fi
 
@@ -65,7 +65,7 @@ FQDN=$(nslookup "$IP" | awk '// {print$4}' | sed 's/.$//')
 # Domain all uppercase for BH query
 BHDOM=$(echo "$DOM" | tr '[:lower:]' '[:upper:]')
 
-if [ -z "$HASH" ]; then
+if [ -z $HASH ]; then
   # Use Password
   export PYTHONUNBUFFERED=TRUE
   echo "GPP_Password" >>/root/output/runtime.txt
@@ -170,7 +170,7 @@ if [ -z "$HASH" ]; then
   exit 0
 fi
 
-if [ -z "$PASS" ]; then
+if [ -z $PASS ]; then
   # use HASH
   export PYTHONUNBUFFERED=TRUE
   echo "GPP_Password" >>/root/output/runtime.txt
