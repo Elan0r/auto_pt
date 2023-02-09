@@ -5,7 +5,12 @@ echo "this could take some time!"
 
 #request Nameserver IP
 read -r -p "Customer INTERNAL DNS Server IP: " NS
-echo "DNSServer IP is: ""$NS"
+if [[ $NS =~ ^[0-9]+(\.[0-9]+){3}$ ]]; then
+  echo "DNSServer IP is: ""$NS"
+else
+  echo "Wrong Format"
+  exit 1
+fi
 
 #Private IP range
 echo "10.0.0.0/8
