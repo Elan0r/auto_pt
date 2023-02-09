@@ -21,29 +21,24 @@ show_help() {
 }
 
 OPTIND=1
+# shellcheck disable=SC2221,SC2222
 while getopts u:p:H:d:i: opt; do
   case "$opt" in
-    # shellcheck disable=SC2221
     u)
       USER=${OPTARG}
       ;;
-    # shellcheck disable=SC2221
     p)
       PASS=${OPTARG}
       ;;
-    # shellcheck disable=SC2221
     H)
       HASH=${OPTARG}
       ;;
-    # shellcheck disable=SC2221
     d)
       DOM=${OPTARG}
       ;;
-    # shellcheck disable=SC2221
     i)
       IP=${OPTARG}
       ;;
-    # shellcheck disable=SC2222
     u | p | H | d | i)
       shift 2
       OPTIND=1
