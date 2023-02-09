@@ -1,4 +1,5 @@
 #!/bin/bash
+
 figlet ProSecDNSenum
 
 echo "this could take some time!"

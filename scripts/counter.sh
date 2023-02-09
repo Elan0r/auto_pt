@@ -1,4 +1,5 @@
 #!/bin/bash
+
 figlet -w 94 ProSecCounter
 
 echo "Start Finding Counter" >>/root/output/runtime.txt

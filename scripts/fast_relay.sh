@@ -1,11 +1,10 @@
 #!/bin/bash
 
 figlet ProSecFastRelay
-echo ''
 
 if [ -s /root/input/ipint.txt ]; then
   echo '! >ipint.txt exists.'
-else 
+else
   echo '! > ipint.txt missing in /root/input/ipint.txt.'
   exit 1
 fi

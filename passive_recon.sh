@@ -4,9 +4,9 @@
 /opt/auto_pt/scripts/folder.sh
 
 if [ -d /opt/PCredz/logs ]; then
-    echo '! > Logfolder OK.'
+  echo '! > Logfolder OK.'
 else
-     mkdir -p /opt/PCredz/logs
+  mkdir -p /opt/PCredz/logs
 fi
 
 echo "Start Passive Recon" >>/root/output/runtime.txt

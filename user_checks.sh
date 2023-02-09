@@ -1,62 +1,63 @@
 #!/bin/bash
+
 figlet -w 84 ProSecUserChecks
-echo "v0.7"
+echo "v0.8"
+
 echo "CME is still buggy u need to press ENTER sometimes!"
 unset USER HASH PASS DOM IP FQDN BHDOM
 
 show_help () {
-echo "HINT: Special Characters should be escaped better use ''"
-echo "DNS must be working for bloodhound!"
-echo ""
-echo "Options:"
-echo "  -u              Username -> Required"
-echo "  -p              Password -> provide pass OR nthash"
-echo "  -H              NT Hash -> provide pass OR nthash"
-echo "  -d              domain -> required"
-echo "  -i              IP Domain Controller -> required"
-echo "  -h              this help"
-exit 0
+  echo "HINT: Special Characters should be escaped better use ''"
+  echo "DNS must be working for bloodhound!"
+  echo ""
+  echo "Options:"
+  echo "  -u              Username -> Required"
+  echo "  -p              Password -> provide pass OR nthash"
+  echo "  -H              NT Hash -> provide pass OR nthash"
+  echo "  -d              domain -> required"
+  echo "  -i              IP Domain Controller -> required"
+  echo "  -h              this help"
+  exit 0
 }
 
 OPTIND=1
-while getopts u:p:H:d:i: opt
-do
-    case "$opt" in
-        (u)
-          USER=${OPTARG}
-        ;;
-        (p)
-          PASS=${OPTARG}
-        ;;
-        (H)
-          HASH=${OPTARG}
-        ;;
-        (d)
-          DOM=${OPTARG}
-        ;;
-        (i)
-          IP=${OPTARG}
-        ;;
-        (u|p|H|d|i)
-          shift 2
-          OPTIND=1
-        ;;
-        (*)
-          show_help
-        ;;
-    esac
+while getopts u:p:H:d:i: opt; do
+  case "$opt" in
+    (u)
+      USER=${OPTARG}
+      ;;
+    (p)
+      PASS=${OPTARG}
+      ;;
+    (H)
+      HASH=${OPTARG}
+      ;;
+    (d)
+      DOM=${OPTARG}
+      ;;
+    (i)
+      IP=${OPTARG}
+      ;;
+    (u|p|H|d|i)
+      shift 2
+      OPTIND=1
+      ;;
+    (*)
+      show_help
+      ;;
+  esac
 done
 
 shift "$((OPTIND - 1))"
 [ "$1" = "--" ] && shift
 
-if [ -z "$USER" ]; then 
+if [ -z "$USER" ]; then
   show_help
 fi
-if [ -z "$IP" ]; then 
+if [ -z "$IP" ]; then
   show_help
 fi
-if [ -z "$DOM" ]; then 
+if [ -z "$DOM" ]; then
   show_help
 fi
 
@@ -70,10 +71,10 @@ fi
 
 #check for valide NTHASH
 if [ ${#HASH} != 32 ]; then
-echo "Wrong hash Format, just NT HASH"
-exit 1
+  echo "Wrong hash Format, just NT HASH"
+  exit 1
 else
-echo "Hash looks valide"
+  echo "Hash looks valide"
 fi
 
 # get DC_FQDN
@@ -88,7 +89,7 @@ if [ -z "$HASH" ]; then
   date >>/root/output/runtime.txt
   # GPP password
   crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" -M gpp_password >>/root/output/loot/intern/ad/gpp_password/pass_"$DOM".txt
-   
+
   awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_password/pass_"$DOM".txt | sort -u >/root/output/loot/intern/ad/gpp_password/host.txt
   if [ -s /root/output/loot/intern/ad/gpp_password/host.txt ]; then
     echo "PS-TN-2020-0051 GPP_Password" >>/root/output/loot/intern/findings.txt
@@ -99,7 +100,7 @@ if [ -z "$HASH" ]; then
   date >>/root/output/runtime.txt
   # GPP autologin
   crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" -M gpp_autologin >>/root/output/loot/intern/ad/gpp_autologin/login_"$DOM".txt
-   
+
   awk '/Found credentials/ {print$2}' /root/output/loot/intern/ad/gpp_autologin/login_"$DOM".txt | sort -u >/root/output/loot/intern/ad/gpp_autologin/host.txt
   if [ -s /root/output/loot/intern/ad/gpp_autologin/host.txt ]; then
     echo "PS-TN-2021-0002 GPP_Autologin" >>/root/output/loot/intern/findings.txt
@@ -159,7 +160,7 @@ if [ -z "$HASH" ]; then
 
   echo "MAQ" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
-  # MAQ  
+  # MAQ
   crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M MAQ >>/root/output/loot/intern/ad/quota/maq_"$DOM".txt
 
   echo "LDAP Signing with CME" >>/root/output/runtime.txt
@@ -169,7 +170,7 @@ if [ -z "$HASH" ]; then
 
   echo "LDAP Signing LdapRelayScan" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
-  # ldap signing 
+  # ldap signing
   python3 /opt/LdapRelayScan/LdapRelayScan.py -u "$USER" -p "$PASS" -dc-ip "$IP" -method BOTH >>/root/output/loot/intern/ldap/signing/signig_"$DOM".txt
 
   echo "Bloodhound + Certipy OLD" >>/root/output/runtime.txt
@@ -180,7 +181,7 @@ if [ -z "$HASH" ]; then
   mv ./*.zip /root/output/loot/intern/ad
 
   # Python unbuffered reset to default
-  unset PYTHONUNBUFFERED   
+  unset PYTHONUNBUFFERED
   echo "Userchecks Done" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   exit 0
@@ -252,7 +253,7 @@ if [ -z "$PASS" ]; then
 
   echo "MAQ" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
-  # MAQ  
+  # MAQ
   crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M MAQ >>/root/output/loot/intern/ad/quota/maq_"$DOM".txt
 
   echo "LDAP Signing with CME" >>/root/output/runtime.txt
@@ -276,6 +277,6 @@ if [ -z "$PASS" ]; then
   unset PYTHONUNBUFFERED
   echo "Userchecks Done" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
-  exit 0    
+  exit 0
 fi
 exit 0

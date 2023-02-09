@@ -1,12 +1,15 @@
 #!/bin/bash
+
 apt -qq install figlet -y >/dev/null
+
 figlet ProSecBoxToolz
+
 echo '! > '
 echo '! > Tools go to /opt + ln -s to /root/tools'
 echo '! > '
 if  [ -h /root/tools ]; then
   echo '! > Tools Link ok'
-else  
+else
   if [ -d /root/tools ]; then
     mv /root/tools /root/tools_old
     ln -s /opt /root/tools
@@ -32,7 +35,7 @@ pip3 install --upgrade ldap3 Cython python-libpcap bloodhound pyx scapy mitm6 im
 #go env
 if [ -d /opt/go ]; then
   echo '! > GO Folder Exist!'
-else  
+else
   mkdir /opt/go
 fi
 
@@ -128,7 +131,7 @@ else
   cd /opt || ! echo "Failure"
   git clone https://github.com/trustedsec/unicorn.git
 fi
-#Pachine CVE-2021-42278 
+#Pachine CVE-2021-42278
 if [ -d /opt/Pachine ]; then
   cd /opt/Pachine || ! echo "Failure"
   git stash
@@ -160,7 +163,7 @@ if [ -d /opt/PKINITtools ]; then
   cd /opt/PKINITtools || ! echo "Failure"
   git stash
   git pull
-  pip3 install --upgrade -r requirements.txt 
+  pip3 install --upgrade -r requirements.txt
 else
   cd /opt || ! echo "Failure"
   git clone https://github.com/dirkjanm/PKINITtools.git
@@ -172,12 +175,12 @@ if [ -d /opt/LdapRelayScan ]; then
   cd /opt/LdapRelayScan || ! echo "Failure"
   git stash
   git pull
-  pip3 install --upgrade -r requirements.txt 
+  pip3 install --upgrade -r requirements.txt
 else
   cd /opt || ! echo "Failure"
   git clone https://github.com/zyn3rgy/LdapRelayScan.git
   cd /opt/LdapRelayScan || ! echo "Failure"
-  pip3 install --upgrade -r requirements.txt 
+  pip3 install --upgrade -r requirements.txt
 fi
 #LDAP Domain Dump
 if [ -d /opt/ldapdomaindump ]; then

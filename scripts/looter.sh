@@ -7,42 +7,42 @@ date >>/root/output/runtime.txt
 
 ### PCreds
 if [ -z $(ls -A /opt/PCredz/logs) ]; then
-   echo '! >'
-   echo '! > No PCredz logs!'
-   echo '! >'
+  echo '! >'
+  echo '! > No PCredz logs!'
+  echo '! >'
 else
-cp /opt/PCredz/logs/* /root/output/loot/hashes/
+  cp /opt/PCredz/logs/* /root/output/loot/hashes/
 fi
 
 if [ -z $(ls -A /opt/PCredz/CredentialDump-Session.log) ]; then
-   echo '! > No PCredz Session!'
-   echo '! >'
+  echo '! > No PCredz Session!'
+  echo '! >'
 else
 cp /opt/PCredz/CredentialDump-Session.log /root/output/loot/hashes/
 fi
 
 ### Responder
 if [ -z $(ls -A /usr/share/responder/logs/*.txt) ]; then
-   echo '! > No Responder Hashes!'
-   echo '! >'
+  echo '! > No Responder Hashes!'
+  echo '! >'
 else
 cp /usr/share/responder/logs/*.txt /root/output/loot/hashes/
 fi
 
 ### CrackMapExec
 if [ -z $(ls -A /root/.cme/logs) ]; then
-   echo '! > No CME Logs!'
-   echo '! >'
+  echo '! > No CME Logs!'
+  echo '! >'
 else
 cp /root/.cme/logs/* /root/output/loot/hashes/
 fi
 
 ### Metasploit
 if [ -z $(ls -A /root/.msf4/loot) ]; then
-   echo '! > No MSF Loot!'
-   echo '! >'
+  echo '! > No MSF Loot!'
+  echo '! >'
 else
-   cp /root/.msf4/loot/* /root/output/loot/
+  cp /root/.msf4/loot/* /root/output/loot/
 fi
 
 ### SNMP
@@ -64,7 +64,7 @@ awk '/\+.*:23/ {print$2}' /root/output/msf/telnet.txt | cut -d ":" -f 1 | sort -
 
 ### SMB
 awk '/VULNERABLE.*MS17-010/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/smb/eternal_blue/hosts.txt
-awk '/versions:1/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/smb/smb_v1/hosts.txt 
+awk '/versions:1/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/smb/smb_v1/hosts.txt
 awk '/signatures:opt/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/smb/smb_signing/hosts.txt
 awk '/(\(DISK\)|\(IPC\)|\(PRINTER\))/{print}' /root/output/msf/smb.txt | cut -c18- | sed 's/:... //' | sort -u >/root/output/loot/intern/smb/anonymous_enumeration/smb_shares.txt
 awk '/Found user:/ {print$2,$6,$7,$8,$9}' /root/output/msf/smb.txt | sort -u >/root/output/loot/intern/smb/anonymous_enumeration/users.txt

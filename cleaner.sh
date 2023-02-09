@@ -1,6 +1,7 @@
 #!/bin/bash
 
 figlet ProSecClean
+
 echo '! > Cleaning all!'
 msfdb start
 msfconsole -qx 'workspace -D; exit'
@@ -36,6 +37,6 @@ rm /root/sessionresume*
 rm /root/*.zip
 
 chattr -i /etc/resolv.conf
-rm /etc/resolv.conf.dhclient-new.* 
+rm /etc/resolv.conf.dhclient-new.*
 
 echo "! > CLEAN!"

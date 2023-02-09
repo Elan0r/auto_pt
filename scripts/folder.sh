@@ -4,7 +4,7 @@ mkdir -p /root/input/msf
 mkdir -p /root/output/msf
 mkdir -p /root/output/list/ot
 mkdir -p /root/output/nmap/ot
-mkdir -p /root/output/loot/hashes 
+mkdir -p /root/output/loot/hashes
 mkdir -p /root/output/loot/intern/snmp/community_string
 mkdir -p /root/output/loot/intern/snmp/v1_v2c
 mkdir -p /root/output/loot/intern/ftp/anonymous
