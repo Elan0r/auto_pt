@@ -6,7 +6,7 @@ echo "Start lootcollector" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 
 ### PCreds
-if [ -z $(ls -A /opt/PCredz/logs) ]; then
+if [ -z "$(ls -A /opt/PCredz/logs)" ]; then
   echo '! >'
   echo '! > No PCredz logs!'
   echo '! >'
@@ -14,7 +14,7 @@ else
   cp /opt/PCredz/logs/* /root/output/loot/hashes/
 fi
 
-if [ -z $(ls -A /opt/PCredz/CredentialDump-Session.log) ]; then
+if [ -z "$(ls -A /opt/PCredz/CredentialDump-Session.log)" ]; then
   echo '! > No PCredz Session!'
   echo '! >'
 else
@@ -22,7 +22,7 @@ else
 fi
 
 ### Responder
-if [ -z $(ls -A /usr/share/responder/logs/*.txt) ]; then
+if [ -z "$(ls -A /usr/share/responder/logs/*.txt)" ]; then
   echo '! > No Responder Hashes!'
   echo '! >'
 else
@@ -30,7 +30,7 @@ else
 fi
 
 ### CrackMapExec
-if [ -z $(ls -A /root/.cme/logs) ]; then
+if [ -z "$(ls -A /root/.cme/logs)" ]; then
   echo '! > No CME Logs!'
   echo '! >'
 else
@@ -38,7 +38,7 @@ else
 fi
 
 ### Metasploit
-if [ -z $(ls -A /root/.msf4/loot) ]; then
+if [ -z "$(ls -A /root/.msf4/loot)" ]; then
   echo '! > No MSF Loot!'
   echo '! >'
 else
