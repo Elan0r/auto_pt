@@ -48,16 +48,32 @@ do
 done
 
 shift "$((OPTIND - 1))"
-[ $1 = "--" ] && shift
+[ "$1" = "--" ] && shift
 
-if [ -z $USER ]; then 
+if [ -z "$USER" ]; then 
   show_help
 fi
-if [ -z $IP ]; then 
+if [ -z "$IP" ]; then 
   show_help
 fi
-if [ -z $DOM ]; then 
+if [ -z "$DOM" ]; then 
   show_help
+fi
+
+#Check for valide IP
+if [[ $IP =~ ^[0-9]+(\.[0-9]+){3}$ ]]; then
+  echo "DC IP is: ""$IP"
+else
+  echo "Wrong IP Format"
+  exit 1
+fi
+
+#check for valide NTHASH
+if [ ${#HASH} != 32 ]; then
+echo "Wrong hash Format, just NT HASH"
+exit 1
+else
+echo "Hash looks valide"
 fi
 
 # get DC_FQDN
@@ -65,7 +81,7 @@ FQDN=$(nslookup "$IP" | awk '// {print$4}' | sed 's/.$//')
 # Domain all uppercase for BH query
 BHDOM=$(echo "$DOM" | tr '[:lower:]' '[:upper:]')
 
-if [ -z $HASH ]; then
+if [ -z "$HASH" ]; then
   # Use Password
   export PYTHONUNBUFFERED=TRUE
   echo "GPP_Password" >>/root/output/runtime.txt
@@ -170,7 +186,7 @@ if [ -z $HASH ]; then
   exit 0
 fi
 
-if [ -z $PASS ]; then
+if [ -z "$PASS" ]; then
   # use HASH
   export PYTHONUNBUFFERED=TRUE
   echo "GPP_Password" >>/root/output/runtime.txt
