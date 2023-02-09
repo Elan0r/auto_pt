@@ -2,7 +2,7 @@ Automating PT as good as possible -> as Failsave as Possible.<br>
 <small>will Check for 50+ Findings with output in Findings.txt, and more are possible through RAW files</small><br>
 v1.6<br>
 <br>
-The extern Tools were moved to <code>hacking/extern/</code>.<br>
+The extern Tools were moved to <code>ext_auto_pt</code>.<br>
 <br>
 <b>Installation</b><br>
 download this Repository to <code>/opt</code> via <b>git clone</b> <small>(full command is in 1Password with Token or via dfi)</small>.<br>
@@ -10,7 +10,7 @@ Install all requirements + X via <b>tool-install.sh</b> in <code>/opt/auto_pt</c
 <br>
 <b>Updating</b><br>
 in the folder <code>/opt/auto_pt/</code> do <b>git pull</b>, than run <b>tool_install.sh</b>.<br>
-This updates all Tools.<br>
+This updates all Scripts via git pull and updates all Tools.<br>
 <br>
 <b>intended usage</b><br>
 First start <b>passive_recon.sh</b> for <b>netdiscover</b> (passive!), <b>PCredz</b> and 5 min <b>TCPdump</b> in tmux.<br>
@@ -70,18 +70,19 @@ If <b>passive_recon.sh</b> is not/was not running and all "Modules" schould be r
 <br>
     <h3>Auto_PT DONE!</h3>
     <b></b>copy your<code>output</code> folder to your local machine for further investigation.<br>
-
+<br>
 </details>
 <br>
 <details><summary><h2>Additional Files</h2></summary>
     <h3>user_checks:</h3>
     <b></b>All CME checks LdapRelayScan and BH + Certipy dump with obtained user + PW OR Hash.<br>
     <b></b>Make sure DNS is working as expected!<br>
-    <b></b>CME: GPP_Password, GPP_Autologin, Username=PW, get Passpol, nopac, PetitPotam (unauthenticated), SMBSessions, ASRep, Kerberoasting, MAQ.<br>
-    <b></b>CME ldapchecks may be broken.<br>
+    <b></b>CME: GPP_Password, GPP_Autologin, Username=PW, get Passpol, nopac, PetitPotam (unauthenticated), DFScoerce, SMBSessions, ASRep, Kerberoasting, ldap-checker, MAQ.<br>
+    <b></b>CME ldap may be broken.<br>
     <b></b>All Checks generates files in the related <code>output/loot/intern</code> folder.<br>
     <b></b>Findings.txt will <b>NOT</b> be updated.<br>
     <b></b>Use -h for Help.<br>
+    <b></b>Validates IP and if providet the NThash<br>
 <br>
     <h3>otscan:</h3>
     <b></b>Some Nmap scans for OT Systems, just information gathering.<br>
@@ -100,12 +101,8 @@ If <b>passive_recon.sh</b> is not/was not running and all "Modules" schould be r
     <h3>zshrc</h3>
     <b></b>my <code>.zshrc</code>, Kali 2020.4 with "seperate command line" and 💀.<br>
 <br>
-    <h3>customqueries</h3>
-    <b></b>Custom <b>Bloodhound</b> 4.1 queries. File goes to <code>\~/Library/Application Support/bloodhound</code>.<br>
+    <h3>.files</h3>
+    <b></b>just ignore them.<br>
 <br>
-    <b></b>Additional queries when using the backend for exports "_like_" <b>plumhound</b>.<br>
-    <b></b>Accessible via <code>http://127.0.0.1:7474/browser/</code> or <b>Neo4j Browser</b>.<br>
-<br>
-    <b></b>All used Backend queries are in the Freshdesk <code>https://prosecnetworks.freshdesk.com/a/solutions/articles/77000524534</code>.<br>
 </details>
 <br>

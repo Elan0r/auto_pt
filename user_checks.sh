@@ -70,14 +70,6 @@ else
   exit 1
 fi
 
-#check for valide NTHASH
-if [ ${#HASH} != 32 ]; then
-  echo "Wrong hash Format, just NT HASH"
-  exit 1
-else
-  echo "Hash looks valide"
-fi
-
 # get DC_FQDN
 FQDN=$(nslookup "$IP" | awk '// {print$4}' | sed 's/.$//')
 # Domain all uppercase for BH query
@@ -191,6 +183,15 @@ fi
 
 if [ -z "$PASS" ]; then
   # use HASH
+
+  #check for valide NTHASH
+  if [ ${#HASH} != 32 ]; then
+    echo "Wrong hash Format, just NT HASH"
+    exit 1
+  else
+    echo "Hash looks valide"
+  fi
+
   export PYTHONUNBUFFERED=TRUE
   echo "GPP_Password" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
