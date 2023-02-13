@@ -26,7 +26,6 @@ mkdir -p /root/output/loot/intern/database/mysql/login
 mkdir -p /root/output/loot/intern/database/mongodb/login
 mkdir -p /root/output/loot/intern/rpc/portmapper
 mkdir -p /root/output/loot/intern/rpc/endpointmap
-mkdir -p /root/output/loot/intern/rpc/fuzzing
 mkdir -p /root/output/loot/intern/rpc/amplification
 mkdir -p /root/output/loot/intern/rpc/zero_logon
 mkdir -p /root/output/loot/intern/rpc/print_nightmare
@@ -124,6 +123,9 @@ mkdir -p /root/output/loot/intern/creds/printer
 mkdir -p /root/output/loot/intern/creds/ups
 mkdir -p /root/output/loot/intern/creds/san
 mkdir -p /root/output/loot/intern/creds/web
+mkdir -p /root/output/loot/intern/creds/mssql
+mkdir -p /root/output/loot/intern/creds/postgresql
+mkdir -p /root/output/loot/intern/creds/mysql
 mkdir -p /root/output/loot/intern/web/ilo
 mkdir -p /root/output/loot/intern/web/iis_bypass
 mkdir -p /root/output/loot/intern/web/ms15-034
