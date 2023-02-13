@@ -102,7 +102,7 @@ echo "" >>/root/output/loot/intern/findings.txt
 
 echo "PS-TN-2021-0058 Minolta_Password_Extract" >>/root/output/loot/intern/findings.txt
 wc -l /root/output/loot/intern/printer/extract/hosts.txt >>/root/output/loot/intern/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/printer/extract/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/loot/intern/findings.txt
+cut -d ":" -f 4 /root/output/loot/intern/printer/extract/hosts.txt | sed 's/.*=//g' | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >>/root/output/loot/intern/findings.txt
 echo "" >>/root/output/loot/intern/findings.txt
 
 echo "PS-TN-2021-0059 SNMP_V1V2" >>/root/output/loot/intern/findings.txt

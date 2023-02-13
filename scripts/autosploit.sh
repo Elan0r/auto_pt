@@ -2,7 +2,7 @@
 
 figlet ProSecAutoSploit
 
-if [ -s /opt/hacking/resource_script/resource.txt ]; then
+if [ -s /opt/auto_pt/resources/resource.txt ]; then
   echo '! > resource.txt check OK'
 else
   echo '! > resource.txt missing here: /opt/auto_pt/resources/'
