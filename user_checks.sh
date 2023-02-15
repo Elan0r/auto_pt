@@ -117,6 +117,11 @@ if [ -z "$HASH" ]; then
     echo "MATCH (n) WHERE n.name = '""$i""@""$BHDOM""' SET n.owned=true RETURN n;" >>/root/output/loot/intern/ad/iam/username/bh_owned_"$BHDOM".txt
   done
 
+  echo "kerbrute" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # Kerbrute
+  kerbrute userenum /root/output/list/user.txt -d "$DOM" -o /root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt
+
   echo "Pass-Pol" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # Password policy
@@ -232,6 +237,11 @@ if [ -z "$PASS" ]; then
   for i in $(cat /root/output/loot/intern/ad/iam/username/owneduser.txt); do
     echo "MATCH (n) WHERE n.name = '""$i""@""$BHDOM""' SET n.owned=true RETURN n;" >>/root/output/loot/intern/ad/iam/username/bh_owned.txt
   done
+
+  echo "kerbrute" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # Kerbrute
+  kerbrute userenum /root/output/list/user.txt -d "$DOM" -o /root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt
 
   echo "Pass-Pol" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt

@@ -25,6 +25,7 @@ rm -r /root/.cme
 apt -qq update
 apt -qq install tmux bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip yersinia golang eyewitness enum4linux ipmitool -y
 apt-get install libpcap-dev -y
+apt -qq install golang-go -y
 
 #SearchSploit
 searchsploit -u
@@ -261,7 +262,7 @@ fi
 
 #Go
 cd /opt || ! echo "Failure"
-go install github.com/ropnop/kerbrute@latest
+go install github.com/ropnop/kerbrute
 go install github.com/ropnop/go-windapsearch@latest
 go install github.com/sensepost/gowitness@latest
 go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
