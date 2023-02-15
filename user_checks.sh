@@ -150,7 +150,7 @@ if [ -z "$HASH" ]; then
   echo "ntlmv1" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # sessions
-  crackmapexec smb /root/output/list/smb_open.txt -u "$USER" -p "$PASS" -d "$DOM" -M ntlmv1 >>/root/output/loot/intern/ad/ntlm_auth/ntlmv1_"$DOM".txt
+  crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" -M ntlmv1 >>/root/output/loot/intern/ad/ntlm_auth/ntlmv1_"$DOM".txt
 
   echo "ASRep" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -177,10 +177,14 @@ if [ -z "$HASH" ]; then
   # ldap signing
   python3 /opt/LdapRelayScan/LdapRelayScan.py -u "$USER" -p "$PASS" -dc-ip "$IP" -method BOTH >>/root/output/loot/intern/ldap/signing/signig_"$DOM".txt
 
-  echo "Bloodhound + Certipy OLD" >>/root/output/runtime.txt
+  echo "Bloodhound" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # bloodhound
   bloodhound-python -u "$USER" -p "$PASS" -d "$DOM" -dc "$FQDN" -w 50 -c all --zip
+
+  echo "Certipy OLD" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # certipy
   certipy find -u "$USER" -p "$PASS" -target "$IP" -old-bloodhound
   mv ./*.zip /root/output/loot/intern/ad
 
@@ -262,7 +266,7 @@ if [ -z "$PASS" ]; then
   echo "ntlmv1" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # sessions
-  crackmapexec smb /root/output/list/smb_open.txt -u "$USER" -H "$HASH" -d "$DOM" -M ntlmv1 >>/root/output/loot/intern/ad/ntlm_auth/ntlmv1_"$DOM".txt
+  crackmapexec smb "$IP" -u "$USER" -H "$HASH" -d "$DOM" -M ntlmv1 >>/root/output/loot/intern/ad/ntlm_auth/ntlmv1_"$DOM".txt
 
   echo "ASRep" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -289,10 +293,14 @@ if [ -z "$PASS" ]; then
   # ldap signing
   python3 /opt/LdapRelayScan/LdapRelayScan.py -u "$USER" -nthash "$HASH" -dc-ip "$IP" -method BOTH >/root/output/loot/intern/ldap/signing/signig_"$DOM".txt
 
-  echo "Bloodhound + Certipy OLD" >>/root/output/runtime.txt
+  echo "Bloodhound" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # bloodhound
   bloodhound-python -u "$USER" --hashes aad3b435b51404eeaad3b435b51404ee:"$HASH" -d "$DOM" -dc "$FQDN" -w 50 -c all --zip
+
+  echo "Certipy OLD" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # Certipy
   certipy find -u "$USER" -hashes "$HASH" -target "$IP" -old-bloodhound
   mv ./*.zip /root/output/loot/intern/ad
 
