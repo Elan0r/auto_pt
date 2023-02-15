@@ -14,7 +14,7 @@ This updates all Scripts via git pull and updates all Tools.<br>
 <br>
 <b>intended usage</b><br>
 First start <b>passive_recon.sh</b> for <b>netdiscover</b> (passive!), <b>PCredz</b> and 5 min <b>TCPdump</b> in tmux.<br>
-tTis Script creates all necesseary Folders via <code>scripts/folder.sh</code>.<br>
+This Script creates all necesseary Folders via <code>scripts/folder.sh</code>.<br>
 <b>PCredz</b> should run during the whole test to gather all Credz -> beware it's started in <b>tmux</b> with <code>/opt/auto_pt/dfitmux.conf</code>!<br>
 <small>maybe not compatible with <i>iTerm tmux</i> integration.</small><br>
 <br>
