@@ -121,6 +121,7 @@ if [ -z "$HASH" ]; then
   date >>/root/output/runtime.txt
   # Kerbrute
   kerbrute userenum /root/output/list/user.txt -d "$DOM" >/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt
+  awk '/VALID USERNAME/ {print$7}' /root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt | sed 's/@.*//g' >/root/output/list/user_kerbrute_"$DOM".txt
 
   echo "Pass-Pol" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -242,6 +243,7 @@ if [ -z "$PASS" ]; then
   date >>/root/output/runtime.txt
   # Kerbrute
   kerbrute userenum /root/output/list/user.txt -d "$DOM" >/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt
+  awk '/VALID USERNAME/ {print$7}' /root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt | sed 's/@.*//g' >/root/output/list/user_kerbrute_"$DOM".txt
 
   echo "Pass-Pol" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
