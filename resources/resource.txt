@@ -82,7 +82,7 @@ echo "MSF MSSQL login" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 use auxiliary/scanner/mssql/mssql_login
 services -u -p 1433 -R
-set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
+set USERPASS_FILE /opt/auto_pt/resources/default_userpass.txt
 run
 sleep 5
 
@@ -99,7 +99,7 @@ echo "MSF MySQL login" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 use scanner/mysql/mysql_login
 services -u -p 3306 -u -R
-set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
+set USERPASS_FILE /opt/auto_pt/resources/default_userpass.txt
 run
 sleep 5
 
@@ -116,7 +116,7 @@ echo "MSF PostgreSQL login" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 use scanner/postgres/postgres_login
 services -u -p 5432 -u -R
-set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
+set USERPASS_FILE /opt/auto_pt/resources/default_userpass.txt
 run
 sleep 5
 
@@ -128,7 +128,7 @@ echo "MSF MongoDB login" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 use auxiliary/scanner/mongodb/mongodb_login
 hosts -u -p 27017 -u -R
-set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
+set USERPASS_FILE /opt/auto_pt/resources/default_userpass.txt
 run
 sleep 5
 
@@ -137,7 +137,7 @@ echo "MSF CouchDB login" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 use auxiliary/scanner/couchdb/couchdb_login
 hosts -u -p 5984 -u -R
-set USERPASS_FILE /opt/hacking/dfi/default_userpass.txt
+set USERPASS_FILE /opt/auto_pt/resources/default_userpass.txt
 run
 set SSL true
 set rport 6984
@@ -268,7 +268,7 @@ echo "Telnet Login"
 echo "MSF TELNET login" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 use auxiliary/scanner/telnet/telnet_login
-set userpass_file /opt/hacking/dfi/default_userpass.txt
+set userpass_file /opt/auto_pt/resources/default_userpass.txt
 set STOP_ON_SUCCESS true
 services -u -p 23 -R
 run
@@ -306,7 +306,7 @@ echo "MSF SSH login" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 use auxiliary/scanner/ssh/ssh_login
 services -u -p 22 -R
-set userpass_file /opt/hacking/dfi/default_userpass.txt
+set userpass_file /opt/auto_pt/resources/default_userpass.txt
 set STOP_ON_SUCCESS true
 run
 sleep 5
@@ -319,7 +319,7 @@ echo "MSF RSH login" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 use auxiliary/scanner/rservices/rsh_login
 services -u -p 514 -R
-set userpass_file /opt/hacking/dfi/default_userpass.txt
+set userpass_file /opt/auto_pt/resources/default_userpass.txt
 set STOP_ON_SUCCESS true
 run
 sleep 5
@@ -421,7 +421,7 @@ echo "MSF VMware vmauth login" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 use auxiliary/scanner/vmware/vmauthd_login
 services -p 902 -u -R
-set userpass_file /opt/hacking/dfi/default_userpass.txt
+set userpass_file /opt/auto_pt/resources/default_userpass.txt
 set STOP_ON_SUCCESS true
 run
 sleep 5
