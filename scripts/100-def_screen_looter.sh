@@ -8,7 +8,7 @@ date >>/root/output/runtime.txt
 ### Default pages
 grep -l -e '<title>Microsoft Internet Information Services 8</title>' -e '<title>IIS7</title>' -e '<title>IIS Windows Server</title>' /root/output/screens/source/*.txt | sed 's%.*[http|https]\.%%g' | sed 's/\.txt//g' | cut -d '.' -f 1,2,3,4 | sort -u >/root/output/loot/intern/web/iis/hosts.txt
 grep -l -e '<title>Welcome to JBoss Application Server' -e '<title>Welcome to WildFly' /root/output/screens/source/*.txt | sed 's%.*[http|https]\.%%g' | sed 's/\.txt//g' | cut -d '.' -f 1,2,3,4 | sort -u >/root/output/loot/intern/web/jboss/hosts.txt
-grep -l -e '<title>Apache2 Ubuntu Default Page: It works</title>' -e '<title>Apache2 Debian Default Page: It works</title>' -e '<title>HTTP Server Test Page powered by CentOS</title>' /root/output/screens/source/*.txt | sed 's%.*[http|https]\.%%g' | sed 's/\.txt//g' | cut -d '.' -f 1,2,3,4 | sort -u >/root/output/loot/intern/web/httpd/hosts.txt
+grep -l -e '<title>Apache2 Ubuntu Default Page: It works</title>' -e '<title>Apache2 Debian Default Page: It works</title>' -e '<title>HTTP Server Test Page powered by CentOS</title>' -e '<title>Oracle HTTP Server Index</title>' /root/output/screens/source/*.txt | sed 's%.*[http|https]\.%%g' | sed 's/\.txt//g' | cut -d '.' -f 1,2,3,4 | sort -u >/root/output/loot/intern/web/httpd/hosts.txt
 grep -l -e '<title>Welcome to nginx!</title>' /root/output/screens/source/*.txt | sed 's%.*[http|https]\.%%g' | sed 's/\.txt//g' | cut -d '.' -f 1,2,3,4 | sort -u >/root/output/loot/intern/web/nginx/hosts.txt
 grep -l -e '<title>Apache Tomcat' /root/output/screens/source/*.txt | sed 's%.*[http|https]\.%%g' | sed 's/\.txt//g' | cut -d '.' -f 1,2,3,4 | sort -u >/root/output/loot/intern/web/tomcat/hosts.txt
 
