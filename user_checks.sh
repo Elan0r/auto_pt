@@ -353,7 +353,7 @@ grep '+' /root/output/loot/intern/ad/iam/username/raw_"$DOM".txt >/root/output/l
 awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username/user_"$DOM".txt | cut -d : -f 2 | sort -u | tr '[:lower:]' '[:upper:]' >/root/output/loot/intern/ad/iam/username/owneduser.txt
 
 for i in $(cat /root/output/loot/intern/ad/iam/username/owneduser.txt); do
-  echo "MATCH (n) WHERE n.name = '""$i""@""$BHDOM""' SET n.owned=true RETURN n;" >>/root/output/loot/intern/ad/iam/username/bh_owned.txt
+  echo "MATCH (n) WHERE n.name = '""$i""@""$BHDOM""' SET n.owned=True SET n.UserNameAsPass=True SET n.plaintext=True;" >>/root/output/loot/intern/ad/iam/username/bh_owned.txt
 done
 
 # GPP AutoLogin
