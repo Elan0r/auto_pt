@@ -174,7 +174,7 @@ while true; do
             break
             ;;
 
-          [nN]* )
+          [nN]*)
             echo "go back"
             break
             ;;
