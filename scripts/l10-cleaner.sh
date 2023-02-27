@@ -40,3 +40,5 @@ chattr -i /etc/resolv.conf
 rm /etc/resolv.conf.dhclient-new.*
 
 echo "! > CLEAN!"
+
+exit 0

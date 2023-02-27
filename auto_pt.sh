@@ -38,6 +38,15 @@ echo '! > Start Log4Check'
 echo '! > Start RPC 0 Check'
 /opt/auto_pt/scripts/e13-rpc0check.sh
 
+echo '! > Start def_creds Check'
+/opt/auto_pt/scripts/e14-def_creds.sh
+
+echo '! > Start SSL Check'
+/opt/auto_pt/scripts/e15-sslscan.sh
+
+echo '! > Start RelayList Creation'
+/opt/auto_pt/scripts/e16-relaylist.sh
+
 echo '! > Start Relay'
 /opt/auto_pt/scripts/f10-fast_relay.sh
 

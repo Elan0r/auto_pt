@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet -w 87 ProSecOTScan
+figlet ProSecOTScan
 
 if [ -s /root/input/ipot.txt ]; then
   echo '! > IPs OK '
@@ -9,13 +9,25 @@ else
   exit 1
 fi
 
-echo "Update OTScan" >>/root/output/runtime.txt
+echo "Update nmap scripts" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 
-wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/proconos-info.nse -O /usr/share/nmap/scripts/proconos-info.nse
-wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/pcworx-info.nse -O /usr/share/nmap/scripts/pcworx-info.nse
-wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/BACnet-discover-enumerate.nse -O /usr/share/nmap/scripts/BACnet-discover-enumerate.nse
-wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/codesys-v2-discover.nse -O /usr/share/nmap/scripts/codesys-v2-discover.nse
+if [ ! -s /usr/share/nmap/scripts/proconos-info.nse ]; then
+  wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/proconos-info.nse -O /usr/share/nmap/scripts/proconos-info.nse
+fi
+
+if [ ! -s /usr/share/nmap/scripts/pcworx-info.nse ]; then
+  wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/pcworx-info.nse -O /usr/share/nmap/scripts/pcworx-info.nse
+fi
+
+if [ ! -s /usr/share/nmap/scripts/BACnet-discover-enumerate.nse ]; then
+  wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/BACnet-discover-enumerate.nse -O /usr/share/nmap/scripts/BACnet-discover-enumerate.nse
+fi
+
+if [ ! -s /usr/share/nmap/scripts/codesys-v2-discover.nse ]; then
+  wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/codesys-v2-discover.nse -O /usr/share/nmap/scripts/codesys-v2-discover.nse
+fi
+
 nmap --script-updatedb
 
 echo "Start OT discover" >>/root/output/runtime.txt

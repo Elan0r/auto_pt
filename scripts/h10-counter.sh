@@ -262,5 +262,7 @@ echo "Services" >>/root/output/loot/intern/findings.txt
 tail -n +2 /root/output/list/msf_services.csv | wc -l >>/root/output/loot/intern/findings.txt
 echo "" >>/root/output/loot/intern/findings.txt
 
-echo "Done"
+echo 'END Counting' >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+
 exit 0

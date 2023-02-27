@@ -1,6 +1,20 @@
 #!/bin/bash
 
 # Start
+# create nessesary folder
+/opt/auto_pt/scripts/b10-folder.sh
+
+if [ -s /root/input/msf/workspace.txt ]; then
+  echo 'Workspace already set!'
+else
+  read -p -r "Enter Workspace Name: " WS
+  echo 'workspace -d ' "$WS" >/root/input/msf/workspace.txt
+  echo 'workspace -a ' "$WS" >>/root/input/msf/workspace.txt
+  echo 'db_import /root/output/nmap/service.xml' >>/root/input/msf/workspace.txt
+  #for Zerocheck
+  echo 'workspace -a ' "$WS" >/root/input/msf/ws.txt
+fi
+
 # shellcheck disable=SC1091
 while true; do
   echo '-----------------------------------------------------------'
@@ -86,6 +100,9 @@ while true; do
       source /opt/auto_pt/scripts/e11-zerocheck.sh
       source /opt/auto_pt/scripts/e12-log4check.sh
       source /opt/auto_pt/scripts/e13-rpc0check.sh
+      source /opt/auto_pt/scripts/e14-def_creds.sh
+      source /opt/auto_pt/scripts/e15-sslscan.sh
+      source /opt/auto_pt/scripts/e16-relaylists.sh
       continue
       ;;
 
@@ -126,8 +143,23 @@ while true; do
 
     [kK])
       echo -e "\e[44;1m            OT Scan                                        \e[0m"
+      echo -e "\e[44;1m            needs ipot.txt in input                        \e[0m"
+      echo -e "\e[44;1m            is ipOT.txt    present?                        \e[0m"
       echo ""
-      source /opt/auto_pt/scripts/k10-otscan.sh
+      while true; do
+        read -r yn
+        case $yn in
+          [yY]*)
+            source /opt/auto_pt/scripts/k10-otscan.sh
+            break
+            ;;
+
+          *)
+            echo "go back"
+            break
+            ;;
+        esac
+      done
       continue
       ;;
 
@@ -166,6 +198,9 @@ while true; do
             source /opt/auto_pt/scripts/e11-zerocheck.sh
             source /opt/auto_pt/scripts/e12-log4check.sh
             source /opt/auto_pt/scripts/e13-rpc0check.sh
+            source /opt/auto_pt/scripts/e14-def_creds.sh
+            source /opt/auto_pt/scripts/e15-sslscan.sh
+            source /opt/auto_pt/scripts/e16-relaylists.sh
             source /opt/auto_pt/scripts/f10-fast_relay.sh
             source /opt/auto_pt/scripts/g10-looter.sh
             source /opt/auto_pt/scripts/h10-counter.sh

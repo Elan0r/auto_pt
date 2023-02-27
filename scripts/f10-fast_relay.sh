@@ -67,6 +67,9 @@ wait "$PID_RELAY"
 #Python unbuffered reset to default
 unset PYTHONUNBUFFERED
 
+echo 'END Fast Relay' >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+
 if [ -s /root/output/loot/ntlm_relay_ntlmv2.txt ]; then
   echo '! > Got Hashes!'
   exit 0

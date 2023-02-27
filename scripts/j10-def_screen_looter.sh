@@ -38,4 +38,7 @@ wc -l /root/output/loot/intern/web/tomcat/hosts.txt >>/root/output/loot/intern/f
 cut -d . -f 1,2,3 /root/output/loot/intern/web/tomcat/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/loot/intern/findings.txt
 echo "" >>/root/output/loot/intern/findings.txt
 
+echo 'END DefScreenLooter Check' >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+
 exit 0
