@@ -1,7 +1,9 @@
 #!/bin/bash
 
-#create Folders
-/opt/auto_pt/scripts/folder.sh
+figlet -w 90 ProSecPassiveRecon
+
+# create Folder
+/opt/auto_pt/scripts/b10-folder.sh
 
 if [ -d /opt/PCredz/logs ]; then
   echo '! > Logfolder OK.'
@@ -12,12 +14,7 @@ fi
 echo "Start Passive Recon" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 
-tmux -f /opt/auto_pt/resources/dfitmux.conf new-session -d
-tmux rename-window 'Passive-Recon'
-
-figlet -w 90 ProSecPassiveRecon >/dev/pts/1
-figlet -w 90 ProSecPassiveRecon >/dev/pts/0
-
+tmux new-window -n:Passive-Recon
 tmux send 'netdiscover -p -L -i eth0 | tee -a /root/output/netdiscover.txt' ENTER
 tmux split-window
 tmux send 'python3 /opt/PCredz/Pcredz -i eth0 -ctv' ENTER
