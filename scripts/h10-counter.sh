@@ -264,5 +264,3 @@ echo "" >>/root/output/loot/intern/findings.txt
 
 echo 'END Counting' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
-
-exit 0

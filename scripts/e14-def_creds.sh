@@ -20,5 +20,3 @@ fi
 
 echo 'END Def_Creds Check' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
-
-exit 0

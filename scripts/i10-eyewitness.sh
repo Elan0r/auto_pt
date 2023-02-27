@@ -22,5 +22,3 @@ eyewitness --web --timeout 20 --delay 20 --no-prompt --prepend-https -x /root/ou
 
 echo 'END Eyewitness Check' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
-
-exit 0

@@ -35,5 +35,3 @@ cat /root/output/list/relay* >/root/output/list/relay_all.txt
 
 echo 'END RelayList Creation' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
-
-exit 0

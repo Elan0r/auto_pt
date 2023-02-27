@@ -22,5 +22,3 @@ wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/BACnet-discov
 wget https://raw.githubusercontent.com/digitalbond/Redpoint/master/codesys-v2-discover.nse -O /usr/share/nmap/scripts/codesys-v2-discover.nse
 
 nmap --script-updatedb
-
-exit 0

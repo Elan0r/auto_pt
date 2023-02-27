@@ -71,5 +71,3 @@ awk '/name/ {print$4}' /root/output/list/dc_fqdn.txt | cut -d '.' -f 1 | tr '[:l
 
 echo 'END active_recon' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
-
-exit 0

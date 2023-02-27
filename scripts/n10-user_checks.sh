@@ -376,5 +376,3 @@ figlet "Userchecks Done"
 
 # Python unbuffered reset to default
 unset PYTHONUNBUFFERED
-
-exit 0

@@ -326,4 +326,3 @@ fi
 echo '! > '
 echo '! > Tools go to /opt!'
 echo '! > '
-exit 0

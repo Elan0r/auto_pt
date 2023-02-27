@@ -69,5 +69,3 @@ nmap -Pn -sT -p 1200,2455 --script codesys-v2-discover -iL /root/output/list/ot/
 echo "Finished OTScan"
 echo "END OTScan" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
-
-exit 0

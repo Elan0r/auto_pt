@@ -40,5 +40,3 @@ echo "" >>/root/output/loot/intern/findings.txt
 
 echo 'END DefScreenLooter Check' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
-
-exit 0
