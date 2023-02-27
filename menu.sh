@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Start
+# shellcheck disable=SC1091
 while true; do
   echo '-----------------------------------------------------------'
   figlet Auto_PT
@@ -23,141 +24,166 @@ while true; do
   echo -e "|\e[94mN)\e[0m Userchecks                                            |"
   echo -e "|\e[94m0)\e[0m Exit                                                  |"
   echo '-----------------------------------------------------------'
-  read abcdefghijklmn0
+  read -r abcdefghijklmn0
   case $abcdefghijklmn0 in
-    [aA] )
+    [aA])
       echo -e "\e[44;1m            Full install will take some time!!!            \e[0m"
       echo ""
-      source /opt/auto_pt/scripts/tool_install.sh
-    break;;
+      source /opt/auto_pt/scripts/a10-tool_install.sh
+      break
+      ;;
 
-    [bB] )
+    [bB])
       echo -e "\e[44;1m            Folder Creation                                \e[0m"
       echo ""
-      source /opt/auto_pt/scripts/folder.sh
-    continue;;
+      source /opt/auto_pt/scripts/b10-folder.sh
+      continue
+      ;;
 
-    [cC] )
+    [cC])
       echo -e "\e[44;1m            Passive Listener                               \e[0m"
       echo ""
-      source /opt/auto_pt/scripts/passive_recon.sh
-    continue;;
+      source /opt/auto_pt/scripts/c10-passive_recon.sh
+      continue
+      ;;
 
-    [dD] )
+    [dD])
       echo -e "\e[44;1m            Scope Present or not?                          \e[0m"
       echo -e "\e[44;1m            If not use DNSenum for Scope definition        \e[0m"
       echo -e "\e[44;1m            DNSEnum (d) or scope present (p)               \e[0m"
       echo -e "\e[44;1m            DNSenum and scanning (s)                       \e[0m"
       while true; do
-        read dps
-          case $dps in
-            [dD]* ) source /opt/auto_pt/scripts/dns_enum.sh
-          break;;
+        read -r dps
+        case $dps in
+          [dD]*)
+            source /opt/auto_pt/scripts/d10-dns_enum.sh
+            break
+            ;;
 
-            [pP]* ) source /opt/auto_pt/scripts/active_recon.sh
-          break;;
+          [pP]*)
+            source /opt/auto_pt/scripts/d11-active_recon.sh
+            break
+            ;;
 
-            [sS]* ) source /opt/auto_pt/scripts/dns_enum.sh
-            source /opt/auto_pt/scripts/active_recon.sh
-          break;;
+          [sS]*)
+            source /opt/auto_pt/scripts/d10-dns_enum.sh
+            source /opt/auto_pt/scripts/d11-active_recon.sh
+            break
+            ;;
 
-            * ) echo "Please answer D, P or S";;
-          esac
-        done
-    continue;;
+          *)
+            echo "Please answer D, P or S"
+            ;;
+        esac
+      done
+      continue
+      ;;
 
-    [eE] )
+    [eE])
       echo -e "\e[44;1m            Vulnerability Analysis (MSF+X)                 \e[0m"
       echo ""
-      source /opt/auto_pt/scripts/autosploit.sh
-      source /opt/auto_pt/scripts/zerocheck.sh
-      source /opt/auto_pt/scripts/log4check.sh
-      source /opt/auto_pt/scripts/rpc0check.sh
-    continue;;
+      source /opt/auto_pt/scripts/e10-autosploit.sh
+      source /opt/auto_pt/scripts/e11-zerocheck.sh
+      source /opt/auto_pt/scripts/e12-log4check.sh
+      source /opt/auto_pt/scripts/e13-rpc0check.sh
+      continue
+      ;;
 
-    [fF] )
+    [fF])
       echo -e "\e[44;1m            Responder Relay                                \e[0m"
       echo ""
-      source /opt/auto_pt/scripts/fast_relay.sh
-    continue;;
+      source /opt/auto_pt/scripts/f10-fast_relay.sh
+      continue
+      ;;
 
-    [gG] )
+    [gG])
       echo -e "\e[44;1m            Looting                                        \e[0m"
       echo ""
-      source /opt/auto_pt/scripts/looter.sh
-    continue;;
+      source /opt/auto_pt/scripts/g10-looter.sh
+      continue
+      ;;
 
-    [hH] )
+    [hH])
       echo -e "\e[44;1m            Counting Loot                                  \e[0m"
       echo ""
-      source /opt/auto_pt/scripts/counter.sh
-    continue;;
+      source /opt/auto_pt/scripts/h10-counter.sh
+      continue
+      ;;
 
-    [iI] )
+    [iI])
       echo -e "\e[44;1m            Eyewitness                                     \e[0m"
       echo ""
-      source /opt/auto_pt/scripts/eyewitness.sh
-    continue;;
+      source /opt/auto_pt/scripts/i10-eyewitness.sh
+      continue
+      ;;
 
-    [jJ] )
+    [jJ])
       echo -e "\e[44;1m            Splash Screen looter                           \e[0m"
       echo ""
-      source /opt/auto_pt/scripts/def_screen_looter.sh
-    continue;;
+      source /opt/auto_pt/scripts/j10-def_screen_looter.sh
+      continue
+      ;;
 
-    [kK] )
+    [kK])
       echo -e "\e[44;1m            OT Scan                                        \e[0m"
       echo ""
-      source /opt/auto_pt/scripts/otscan.sh
-    continue;;
+      source /opt/auto_pt/scripts/k10-otscan.sh
+      continue
+      ;;
 
-    [lL] )
+    [lL])
       echo -e "\e[44;1m            Heiko Shotte Tatortreiniger                    \e[0m"
       echo -e "\e[44;1m            Realy? y/n?                                    \e[0m"
       echo ""
       while true; do
-        read yn
-          case $yn in
-          [yY]* )
-            source /opt/auto_pt/scripts/cleaner.sh
-          break;;
+        read -r yn
+        case $yn in
+          [yY]*)
+            source /opt/auto_pt/scripts/l10-cleaner.sh
+            break
+            ;;
 
-          * )
+          *)
             echo "go back"
-          break;;
+            break
+            ;;
         esac
       done
-    continue;;
+      continue
+      ;;
 
-    [mM )
+    [mM])
       echo -e "\e[44;1m            ALL Auto_PT                                    \e[0m"
       echo -e "\e[44;1m            Realy? y/n?                                    \e[0m"
       echo ""
       while true; do
-        read yn
-          case $yn in
-          [yY]* )
-            source /opt/auto_pt/scripts/dns_enum.sh
-            source /opt/auto_pt/scripts/active_recon.sh
-            source /opt/auto_pt/scripts/autosploit.sh
-            source /opt/auto_pt/scripts/zerocheck.sh
-            source /opt/auto_pt/scripts/log4check.sh
-            source /opt/auto_pt/scripts/rpc0check.sh
-            source /opt/auto_pt/scripts/fast_relay.sh
-            source /opt/auto_pt/scripts/looter.sh
-            source /opt/auto_pt/scripts/counter.sh
-            source /opt/auto_pt/scripts/eyewitness.sh
-            source /opt/auto_pt/scripts/def_screen_looter.sh
-          break;;
+        read -r yn
+        case $yn in
+          [yY]*)
+            source /opt/auto_pt/scripts/d10-dns_enum.sh
+            source /opt/auto_pt/scripts/d11-active_recon.sh
+            source /opt/auto_pt/scripts/e10-autosploit.sh
+            source /opt/auto_pt/scripts/e11-zerocheck.sh
+            source /opt/auto_pt/scripts/e12-log4check.sh
+            source /opt/auto_pt/scripts/e13-rpc0check.sh
+            source /opt/auto_pt/scripts/f10-fast_relay.sh
+            source /opt/auto_pt/scripts/g10-looter.sh
+            source /opt/auto_pt/scripts/h10-counter.sh
+            source /opt/auto_pt/scripts/i10-eyewitness.sh
+            source /opt/auto_pt/scripts/j10-def_screen_looter.sh
+            break
+            ;;
 
           [nN]* )
             echo "go back"
-          break;;
+            break
+            ;;
         esac
       done
-    continue;;
+      continue
+      ;;
 
-    [nN] )
+    [nN])
       echo -e "\e[44;1m            User Checks                                    \e[0m"
       echo -e "\e[44;1m            -u Username                                    \e[0m"
       echo -e "\e[44;1m            -p Password                                    \e[0m"
@@ -168,15 +194,19 @@ while true; do
       echo ""
       read -p -r "enter parameter as usual: " INPUT
       source /opt/auto_pt/scripts/n10-user_checks.sh "$INPUT"
-    break;;
+      break
+      ;;
 
-    [0] )
-    break;;
+    [0])
+      break
+      ;;
 
-    * ) echo ""
+    *)
+      echo ""
       echo -e "\e[44;1m            Select a valid option from the list!           \e[0m"
-      echo "";;
-    esac
+      echo ""
+      ;;
+  esac
 done
 
 figlet 'All Done'
