@@ -20,5 +20,4 @@ tmux split-window
 tmux send 'python3 /opt/PCredz/Pcredz -i eth0 -ctv' ENTER
 tmux split-window
 tmux send 'timeout 300 tcpdump -i eth0 -w /root/output/loot/intern/network/passive.pcap' ENTER
-echo '! >'
-echo '! > tmux a ;if you have the dfitmux.conf xD'
+tmux last-window
