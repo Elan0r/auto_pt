@@ -11,7 +11,7 @@ else
 fi
 
 #Create all folder
-/opt/auto_pt/scripts/folder.sh
+/opt/auto_pt/scripts/b10-folder.sh
 
 read -r -p "Enter Workspace Name: " WS
 echo 'workspace -d ' "$WS" >/root/input/msf/workspace.txt
@@ -24,34 +24,34 @@ tmux rename-window 'Auto_PT'
 echo 'Start Auto_PT' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 echo '! > Start Active Recon'
-/opt/auto_pt/scripts/010-active_recon.sh
+/opt/auto_pt/scripts/d11-active_recon.sh
 
 echo '! > Start Metasploit'
-/opt/auto_pt/scripts/020-autosploit.sh
+/opt/auto_pt/scripts/e10-autosploit.sh
 
 echo '! > Start Zerocheck'
-/opt/auto_pt/scripts/030-zerocheck.sh
+/opt/auto_pt/scripts/e11-zerocheck.sh
 
 echo '! > Start Log4Check'
-/opt/auto_pt/scripts/040-log4check.sh
+/opt/auto_pt/scripts/e12-log4check.sh
 
 echo '! > Start RPC 0 Check'
-/opt/auto_pt/scripts/050-rpc0.sh
+/opt/auto_pt/scripts/e13-rpc0check.sh
 
 echo '! > Start Relay'
-/opt/auto_pt/scripts/060-fast_relay.sh
+/opt/auto_pt/scripts/f10-fast_relay.sh
 
 echo "! > grab the loot!"
-/opt/auto_pt/scripts/070-looter.sh
+/opt/auto_pt/scripts/g10-looter.sh
 
 echo "! > Count the Loot!"
-/opt/auto_pt/scripts/080-counter.sh
+/opt/auto_pt/scripts/h10-counter.sh
 
 echo '! > make some Screens'
-/opt/auto_pt/scripts/090-eyewitness.sh
+/opt/auto_pt/scripts/i10-eyewitness.sh
 
 echo '! > loot and count default Pages'
-/opt/auto_pt/scripts/100-def_screen_looter.sh
+/opt/auto_pt/scripts/j10-def_screen_looter.sh
 
 figlet 'Auto PT Done'
 

@@ -51,6 +51,15 @@ export PATH=$PATH:$GOPATH/bin
 
 #GIT
 cd /opt || ! echo "Failure"
+#auto_pt
+if [ -d /opt/auto_pt ]; then
+  cd /opt/auto_pt || ! echo "Failure"
+  git stash
+  git pull
+else
+  cd /opt || ! echo "Failure"
+  git clone https://10.99.9.10:3000/ProSec_DS/auto_pt.git
+fi
 #Petit Potam
 if [ -d /opt/PetitPotam ]; then
   cd /opt/PetitPotam || ! echo "Failure"
@@ -284,6 +293,18 @@ else
   cd /opt/ItWasAllADream || ! echo "Failure"
   docker build -t itwasalladream .
 fi
+#Printnightmare Check PSN version
+if [ -d /opt/ItWasAllADreamPSN ]; then
+  cd /opt/ItWasAllADreamPSN || ! echo "Failure"
+  git stash
+  git pull
+  docker build -t itwasalladreampsn .
+else
+  cd /opt || ! echo "Failure"
+  git clone https://10.99.9.10:3000/ProSec_DS/ItWasAllADream.git /opt/ItWasAllADreamPSN
+  cd /opt/ItWasAllADreamPSN || ! echo "Failure"
+  docker build -t itwasalladreampsn .
+fi
 
 #Special
 
@@ -300,7 +321,7 @@ else
 fi
 
 #Nmap scripts
-/opt/auto_pt/scripts/nse_install.sh
+/opt/auto_pt/scripts/a11-nse_install.sh
 
 echo '! > '
 echo '! > Tools go to /opt!'
