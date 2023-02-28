@@ -24,7 +24,7 @@ while true; do
   echo -e "|\e[94mH)\e[0m Create Host.txt and Findings.txt                      |"
   echo -e "|\e[94mI)\e[0m Eyewitness scan all webservices                       |"
   echo -e "|\e[94mJ)\e[0m Collect default splash pages                          |"
-  echo -e "|\e[94mK)\e[0m Run all above exept installer                         |"
+  echo -e "|\e[94mK)\e[0m Run all above exept installer and passiv              |"
   echo "|---------------------------------------------------------|"
   echo -e "|\e[94mL)\e[0m OT systems scan                                       |"
   echo -e "|\e[94mM)\e[0m Cleanup the mess                                      |"
