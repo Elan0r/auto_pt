@@ -144,8 +144,8 @@ while true; do
       echo -e "\e[44;1m            Realy? y/n?                                    \e[0m"
       echo ""
       while true; do
-        read -r yn
-        case $yn in
+        read -r y
+        case $y in
           [yY]*)
             echo -e "\e[44;1m            Scope Present or not?                          \e[0m"
             echo -e "\e[44;1m            If not use DNSenum for Scope definition        \e[0m"
@@ -154,34 +154,34 @@ while true; do
               read -r dp
               case $dp in
                 [dD]*)
-                source /opt/auto_pt/scripts/d10-dns_enum.sh
-                break
-                ;;
+                  source /opt/auto_pt/scripts/d10-dns_enum.sh
+                  break
+                  ;;
  
                 [pP]*)
-                break
-                ;;
+                  break
+                  ;;
               esac
             done
 
-          source /opt/auto_pt/scripts/d10-dns_enum.sh
-          source /opt/auto_pt/scripts/d11-active_recon.sh
-          source /opt/auto_pt/scripts/e10-autosploit.sh
-          source /opt/auto_pt/scripts/e11-zerocheck.sh
-          source /opt/auto_pt/scripts/e12-log4check.sh
-          source /opt/auto_pt/scripts/e13-rpc0check.sh
-          source /opt/auto_pt/scripts/e14-def_creds.sh
-          source /opt/auto_pt/scripts/e15-sslscan.sh
-          source /opt/auto_pt/scripts/e16-relaylists.sh
-          source /opt/auto_pt/scripts/f10-fast_relay.sh
-          source /opt/auto_pt/scripts/g10-looter.sh
-          source /opt/auto_pt/scripts/h10-counter.sh
-          source /opt/auto_pt/scripts/i10-eyewitness.sh
-          source /opt/auto_pt/scripts/j10-def_screen_looter.sh
-          break
-          ;;
+            source /opt/auto_pt/scripts/d10-dns_enum.sh
+            source /opt/auto_pt/scripts/d11-active_recon.sh
+            source /opt/auto_pt/scripts/e10-autosploit.sh
+            source /opt/auto_pt/scripts/e11-zerocheck.sh
+            source /opt/auto_pt/scripts/e12-log4check.sh
+            source /opt/auto_pt/scripts/e13-rpc0check.sh
+            source /opt/auto_pt/scripts/e14-def_creds.sh
+            source /opt/auto_pt/scripts/e15-sslscan.sh
+            source /opt/auto_pt/scripts/e16-relaylists.sh
+            source /opt/auto_pt/scripts/f10-fast_relay.sh
+            source /opt/auto_pt/scripts/g10-looter.sh
+            source /opt/auto_pt/scripts/h10-counter.sh
+            source /opt/auto_pt/scripts/i10-eyewitness.sh
+            source /opt/auto_pt/scripts/j10-def_screen_looter.sh
+            break
+            ;;
 
-          [nN]*)
+          *)
             echo "go back"
             break
             ;;
@@ -196,8 +196,8 @@ while true; do
       echo -e "\e[44;1m            is ipOT.txt    present?                        \e[0m"
       echo ""
       while true; do
-        read -r yn
-        case $yn in
+        read -r y
+        case $y in
           [yY]*)
             source /opt/auto_pt/scripts/l10-otscan.sh
             break
@@ -217,8 +217,8 @@ while true; do
       echo -e "\e[44;1m            Realy? y/n?                                    \e[0m"
       echo ""
       while true; do
-        read -r yn
-        case $yn in
+        read -r y
+        case $y in
           [yY]*)
             source /opt/auto_pt/scripts/m10-cleaner.sh
             break
@@ -232,8 +232,6 @@ while true; do
       done
       continue
       ;;
-
-
 
     [nN])
       echo -e "\e[44;1m            User Checks                                    \e[0m"
