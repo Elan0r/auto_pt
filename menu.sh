@@ -29,7 +29,7 @@ while true; do
   echo -e "|\e[94mL)\e[0m OT systems scan                                       |"
   echo -e "|\e[94mM)\e[0m Cleanup the mess                                      |"
   echo "|---------------------------------------------------------|"
-  echo -e "|\e[94mN)\e[0m Userchecks                                            |"
+  echo -e "|\e[94mN)\e[0m Userchecks (Creds required!)                          |"
   echo "|---------------------------------------------------------|"
   echo -e "|\e[94mO)\e[0m Set Workspace                                         |"
   echo "|---------------------------------------------------------|"
