@@ -157,14 +157,13 @@ while true; do
                   source /opt/auto_pt/scripts/d10-dns_enum.sh
                   break
                   ;;
- 
+
                 [pP]*)
                   break
                   ;;
               esac
             done
 
-            source /opt/auto_pt/scripts/d10-dns_enum.sh
             source /opt/auto_pt/scripts/d11-active_recon.sh
             source /opt/auto_pt/scripts/e10-autosploit.sh
             source /opt/auto_pt/scripts/e11-zerocheck.sh
