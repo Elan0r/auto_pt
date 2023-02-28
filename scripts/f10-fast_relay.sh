@@ -49,6 +49,10 @@ else
   exit 1
 fi
 
+# Packet forwarding for security reasons
+sysctl -w net.ipv4.ip_forward=1
+sysctl -w net.ipv6.conf.all.forwarding=1
+
 #Responder with 300sec timeout in bg
 echo '! > Starting impacket-ntlmrelayx && Responder'
 #Python unbuffered for logging to file

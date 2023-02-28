@@ -5,61 +5,14 @@ figlet -w 84 ProSecUserChecks
 echo "CME is still buggy u need to press ENTER sometimes!"
 unset USER HASH PASS DOM IP FQDN BHDOM
 
-show_help() {
-  echo "HINT: Special Characters should be escaped better use ''"
-  echo "DNS must be working for bloodhound!"
-  echo ""
-  echo "Options:"
-  echo "  -u              Username -> Required"
-  echo "  -p              Password -> provide pass OR nthash"
-  echo "  -H              NT Hash -> provide pass OR nthash"
-  echo "  -d              domain -> required"
-  echo "  -i              IP Domain Controller -> required"
-  echo "  -h              this help"
-  exit 0
-}
-
-OPTIND=1
-# shellcheck disable=SC2221,SC2222
-while getopts u:p:H:d:i: opt; do
-  case "$opt" in
-    u)
-      USER=${OPTARG}
-      ;;
-    p)
-      PASS=${OPTARG}
-      ;;
-    H)
-      HASH=${OPTARG}
-      ;;
-    d)
-      DOM=${OPTARG}
-      ;;
-    i)
-      IP=${OPTARG}
-      ;;
-    u | p | H | d | i)
-      shift 2
-      OPTIND=1
-      ;;
-    *)
-      show_help
-      ;;
-  esac
-done
-
-shift "$((OPTIND - 1))"
-[ "$1" = "--" ] && shift
-
-if [ -z "$USER" ]; then
-  show_help
-fi
-if [ -z "$IP" ]; then
-  show_help
-fi
-if [ -z "$DOM" ]; then
-  show_help
-fi
+read -r -p "Username: " USER
+echo "do NOT provide Password AND Hash, Script intelligence is missing."
+echo "leave Password EMPTY for Hash usage!"
+read -r -p "Password: " PASS
+echo "leave Hash EMPTY if Password is set!"
+read -r -p "NT Hash: " HASH
+read -r -p "Domain: " DOM
+read -r -p "IP DomainController: " IP
 
 #Check for valide IP
 if [[ $IP =~ ^[0-9]+(\.[0-9]+){3}$ ]]; then

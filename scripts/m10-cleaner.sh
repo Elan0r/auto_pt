@@ -22,6 +22,7 @@ rm /root/.zsh_history
 rm /root/.bash_history
 rm /root/*.log
 rm /root/*.ntds
+rm /root/*.ntds.*
 rm /root/*.sam
 rm /root/*.secrets
 rm /root/*.kerberos
