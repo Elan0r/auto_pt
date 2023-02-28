@@ -18,7 +18,7 @@ fi
 # shellcheck disable=SC1091
 while true; do
   echo '-----------------------------------------------------------'
-  figlet Auto_PT
+  figlet '**Auto PT**'
   echo "|---------------------------------------------------------|"
   echo -e "|\e[94m\e[1mSelect an option from the list:                          \e[0m|"
   echo "|---------------------------------------------------------|"
