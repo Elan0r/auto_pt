@@ -2,15 +2,6 @@
 
 figlet -w 90 ProSecPassiveRecon
 
-# create Folder
-/opt/auto_pt/scripts/b10-folder.sh
-
-if [ -d /opt/PCredz/logs ]; then
-  echo '! > Logfolder OK.'
-else
-  mkdir -p /opt/PCredz/logs
-fi
-
 echo "Start Passive Recon" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 

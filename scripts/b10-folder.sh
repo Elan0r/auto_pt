@@ -142,3 +142,4 @@ mkdir -p /root/output/loot/intern/web/tls/heartbleed
 mkdir -p /root/output/loot/intern/web/log4shell
 mkdir -p /root/output/loot/intern/ssh/root_login
 mkdir -p /root/output/loot/intern/monitoring/ids_ips
+mkdir -p /opt/PCredz/logs

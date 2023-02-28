@@ -9,17 +9,6 @@ else
   exit 1
 fi
 
-if [ -s /root/input/msf/workspace.txt ]; then
-  echo 'Workspace already set!'
-else
-  read -p -r "Enter Workspace Name: " WS
-  echo 'workspace -d ' "$WS" >/root/input/msf/workspace.txt
-  echo 'workspace -a ' "$WS" >>/root/input/msf/workspace.txt
-  echo 'db_import /root/output/nmap/service.xml' >>/root/input/msf/workspace.txt
-  #for Zerocheck
-  echo 'workspace -a ' "$WS" >/root/input/msf/ws.txt
-fi
-
 # Check for SHD_MANAGER
 if grep -Fxq SHD_MANAGER /usr/share/metasploit-framework/data/wordlists/ipmi_users.txt; then
   echo '! > SHD_Manager exists'

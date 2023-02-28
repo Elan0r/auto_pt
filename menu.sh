@@ -1,19 +1,10 @@
 #!/bin/bash
 
-# Start
 # create nessesary folder
 /opt/auto_pt/scripts/b10-folder.sh
 
-if [ -s /root/input/msf/workspace.txt ]; then
-  echo 'Workspace already set!'
-else
-  read -p -r "Enter Workspace Name: " WS
-  echo 'workspace -d ' "$WS" >/root/input/msf/workspace.txt
-  echo 'workspace -a ' "$WS" >>/root/input/msf/workspace.txt
-  echo 'db_import /root/output/nmap/service.xml' >>/root/input/msf/workspace.txt
-  #for Zerocheck
-  echo 'workspace -a ' "$WS" >/root/input/msf/ws.txt
-fi
+#rename Window
+tmux rename-window '**Auto PT**'
 
 # shellcheck disable=SC1091
 while true; do
@@ -23,8 +14,9 @@ while true; do
   echo -e "|\e[94m\e[1mSelect an option from the list:                          \e[0m|"
   echo "|---------------------------------------------------------|"
   echo -e "|\e[94mA)\e[0m Tool Installer                                        |"
-  echo -e "|\e[94mB)\e[0m Folder Creation                                       |"
+  echo -e "|\e[94mB)\e[0m Folder Re-Creation                                    |"
   echo -e "|\e[94mC)\e[0m Passiv Listener                                       |"
+  echo "|---------------------------------------------------------|"
   echo -e "|\e[94mD)\e[0m Host and Service Discovery                            |"
   echo -e "|\e[94mE)\e[0m Vulnerability Analysis (MSF+X)                        |"
   echo -e "|\e[94mF)\e[0m 5 min Responder Relay                                 |"
@@ -32,10 +24,15 @@ while true; do
   echo -e "|\e[94mH)\e[0m Create Host.txt and Findings.txt                      |"
   echo -e "|\e[94mI)\e[0m Eyewitness scan all webservices                       |"
   echo -e "|\e[94mJ)\e[0m Collect default splash pages                          |"
-  echo -e "|\e[94mK)\e[0m OT systems scan                                       |"
-  echo -e "|\e[94mL)\e[0m Cleanup the mess                                      |"
-  echo -e "|\e[94mM)\e[0m Run all exept OT and Cleaner                          |"
+  echo -e "|\e[94mK)\e[0m Run all above exept installer                         |"
+  echo "|---------------------------------------------------------|"
+  echo -e "|\e[94mL)\e[0m OT systems scan                                       |"
+  echo -e "|\e[94mM)\e[0m Cleanup the mess                                      |"
+  echo "|---------------------------------------------------------|"
   echo -e "|\e[94mN)\e[0m Userchecks                                            |"
+  echo "|---------------------------------------------------------|"
+  echo -e "|\e[94mO)\e[0m Set Workspace                                         |"
+  echo "|---------------------------------------------------------|"
   echo -e "|\e[94m0)\e[0m Exit                                                  |"
   echo '-----------------------------------------------------------'
   read -r abcdefghijklmn0
@@ -96,6 +93,7 @@ while true; do
     [eE])
       echo -e "\e[44;1m            Vulnerability Analysis (MSF+X)                 \e[0m"
       echo ""
+      source /opt/auto_pt/scripts/o10-workspace.sh
       source /opt/auto_pt/scripts/e10-autosploit.sh
       source /opt/auto_pt/scripts/e11-zerocheck.sh
       source /opt/auto_pt/scripts/e12-log4check.sh
@@ -142,19 +140,48 @@ while true; do
       ;;
 
     [kK])
-      echo -e "\e[44;1m            OT Scan                                        \e[0m"
-      echo -e "\e[44;1m            needs ipot.txt in input                        \e[0m"
-      echo -e "\e[44;1m            is ipOT.txt    present?                        \e[0m"
+      echo -e "\e[44;1m            ALL Auto_PT                                    \e[0m"
+      echo -e "\e[44;1m            Realy? y/n?                                    \e[0m"
       echo ""
       while true; do
         read -r yn
         case $yn in
           [yY]*)
-            source /opt/auto_pt/scripts/k10-otscan.sh
-            break
-            ;;
+            echo -e "\e[44;1m            Scope Present or not?                          \e[0m"
+            echo -e "\e[44;1m            If not use DNSenum for Scope definition        \e[0m"
+            echo -e "\e[44;1m            DNSEnum (d) or scope present (p)               \e[0m"
+            while true; do
+              read -r dp
+              case $dp in
+                [dD]*)
+                source /opt/auto_pt/scripts/d10-dns_enum.sh
+                break
+                ;;
+ 
+                [pP]*)
+                break
+                ;;
+              esac
+            done
 
-          *)
+          source /opt/auto_pt/scripts/d10-dns_enum.sh
+          source /opt/auto_pt/scripts/d11-active_recon.sh
+          source /opt/auto_pt/scripts/e10-autosploit.sh
+          source /opt/auto_pt/scripts/e11-zerocheck.sh
+          source /opt/auto_pt/scripts/e12-log4check.sh
+          source /opt/auto_pt/scripts/e13-rpc0check.sh
+          source /opt/auto_pt/scripts/e14-def_creds.sh
+          source /opt/auto_pt/scripts/e15-sslscan.sh
+          source /opt/auto_pt/scripts/e16-relaylists.sh
+          source /opt/auto_pt/scripts/f10-fast_relay.sh
+          source /opt/auto_pt/scripts/g10-looter.sh
+          source /opt/auto_pt/scripts/h10-counter.sh
+          source /opt/auto_pt/scripts/i10-eyewitness.sh
+          source /opt/auto_pt/scripts/j10-def_screen_looter.sh
+          break
+          ;;
+
+          [nN]*)
             echo "go back"
             break
             ;;
@@ -164,14 +191,15 @@ while true; do
       ;;
 
     [lL])
-      echo -e "\e[44;1m            Heiko Shotte Tatortreiniger                    \e[0m"
-      echo -e "\e[44;1m            Realy? y/n?                                    \e[0m"
+      echo -e "\e[44;1m            OT Scan                                        \e[0m"
+      echo -e "\e[44;1m            needs ipot.txt in input                        \e[0m"
+      echo -e "\e[44;1m            is ipOT.txt    present?                        \e[0m"
       echo ""
       while true; do
         read -r yn
         case $yn in
           [yY]*)
-            source /opt/auto_pt/scripts/l10-cleaner.sh
+            source /opt/auto_pt/scripts/l10-otscan.sh
             break
             ;;
 
@@ -185,31 +213,18 @@ while true; do
       ;;
 
     [mM])
-      echo -e "\e[44;1m            ALL Auto_PT                                    \e[0m"
+      echo -e "\e[44;1m            Heiko Shotte Tatortreiniger                    \e[0m"
       echo -e "\e[44;1m            Realy? y/n?                                    \e[0m"
       echo ""
       while true; do
         read -r yn
         case $yn in
           [yY]*)
-            source /opt/auto_pt/scripts/d10-dns_enum.sh
-            source /opt/auto_pt/scripts/d11-active_recon.sh
-            source /opt/auto_pt/scripts/e10-autosploit.sh
-            source /opt/auto_pt/scripts/e11-zerocheck.sh
-            source /opt/auto_pt/scripts/e12-log4check.sh
-            source /opt/auto_pt/scripts/e13-rpc0check.sh
-            source /opt/auto_pt/scripts/e14-def_creds.sh
-            source /opt/auto_pt/scripts/e15-sslscan.sh
-            source /opt/auto_pt/scripts/e16-relaylists.sh
-            source /opt/auto_pt/scripts/f10-fast_relay.sh
-            source /opt/auto_pt/scripts/g10-looter.sh
-            source /opt/auto_pt/scripts/h10-counter.sh
-            source /opt/auto_pt/scripts/i10-eyewitness.sh
-            source /opt/auto_pt/scripts/j10-def_screen_looter.sh
+            source /opt/auto_pt/scripts/m10-cleaner.sh
             break
             ;;
 
-          [nN]*)
+          *)
             echo "go back"
             break
             ;;
@@ -217,6 +232,8 @@ while true; do
       done
       continue
       ;;
+
+
 
     [nN])
       echo -e "\e[44;1m            User Checks                                    \e[0m"
@@ -230,6 +247,13 @@ while true; do
       read -p -r "enter parameter as usual: " INPUT
       source /opt/auto_pt/scripts/n10-user_checks.sh "$INPUT"
       break
+      ;;
+
+    [oO)
+      echo -e "\e[44;1m            Set new MSF workspace                          \e[0m"
+      echo ""
+      source /opt/auto_pt/scripts/j10-def_screen_looter.sh
+      continue
       ;;
 
     [0])
