@@ -484,7 +484,7 @@ while true; do
       continue
       ;;
 
-    [oO)
+    [oO])
       echo -e "\e[44;1m            MSF Workspace                                  \e[0m"
       echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
       echo -e "\e[44;1m            Set new MSF workspace for the Modules          \e[0m"
