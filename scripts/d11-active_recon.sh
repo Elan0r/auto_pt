@@ -90,7 +90,7 @@ echo '' >>/root/output/info_gathering.txt
 wc -l /root/output/list/ipup.txt >>/root/output/info_gathering.txt
 echo 'Hosts detected' >>/root/output/info_gathering.txt
 echo '' >>/root/output/info_gathering.txt
-grep ' open ' /root/output/nmap/service.nmap | wc -l >>/root/output/info_gathering.txt
+grep -c ' open ' /root/output/nmap/service.nmap >>/root/output/info_gathering.txt
 echo 'Services detected' >>/root/output/info_gathering.txt
 echo '' >>/root/output/info_gathering.txt
 wc -l /root/output/list/winrm_all_open.txt >>/root/output/info_gathering.txt

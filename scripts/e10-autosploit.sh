@@ -27,7 +27,6 @@ else
   echo 'workspace -a ' "$WS" >/root/input/msf/ws.txt
 fi
 
-
 echo 'Start autosploit' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 

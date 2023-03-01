@@ -196,9 +196,6 @@ while true; do
       done
       continue
       ;;
-      
-      continue
-      ;;
 
     [fF])
       echo -e "\e[44;1m            Responder Relay                                \e[0m"
