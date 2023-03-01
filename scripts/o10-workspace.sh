@@ -2,7 +2,7 @@
 
 figlet MSFWorkspace
 
-read -p -r "Enter Workspace Name: " WS
+read -r -p "Enter Workspace Name: " WS
 echo 'workspace -a ' "$WS" >/root/input/msf/workspace.txt
 echo 'db_import /root/output/nmap/service.xml' >>/root/input/msf/workspace.txt
 #for Zerocheck
