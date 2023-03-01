@@ -37,8 +37,8 @@ while true; do
   echo "|---------------------------------------------------------|"
   echo -e "|\e[94m0)\e[0m Exit                                                  |"
   echo '-----------------------------------------------------------'
-  read -r abcdefghijklmn0
-  case $abcdefghijklmn0 in
+  read -r abcdefghijklmno0
+  case $abcdefghijklmno0 in
     [aA])
       echo -e "\e[44;1m            Tool Installer                                 \e[0m"
       echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
