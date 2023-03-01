@@ -44,7 +44,7 @@ else
   echo "Start IP Protocol Scan" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
 
-  nmap -e eth0 -sO --version-intensity 0 --host-timeout 2m --max-retries 2 --min-hostgroup 64 -oA /root/output/ip_protocol -iL /root/input/ipint.txt >/dev/null 2>&1
+  nmap -e eth0 -sO --version-intensity 0 --host-timeout 2m --max-retries 2 --min-hostgroup 64 -oA /root/output/nmap/ip_protocol -iL /root/input/ipint.txt >/dev/null 2>&1
 
   #Piping the IP-Addresses of the Targets to a file
   awk '/Up/ {print$2}' /root/output/nmap/ip_protocol.gnmap | sort -u >/root/output/list/ip_proto_up.txt
