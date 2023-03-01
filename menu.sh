@@ -35,10 +35,12 @@ while true; do
   echo "|---------------------------------------------------------|"
   echo -e "|\e[94mO)\e[0m Set Workspace                                         |"
   echo "|---------------------------------------------------------|"
+  echo -e "|\e[94mZ)\e[0m Show status                                           |"
+  echo "|---------------------------------------------------------|"
   echo -e "|\e[94m0)\e[0m Exit                                                  |"
   echo '-----------------------------------------------------------'
-  read -r abcdefghijklmno0
-  case $abcdefghijklmno0 in
+  read -r abcdefghijklmnoz0
+  case $abcdefghijklmnoz0 in
     [aA])
       echo -e "\e[44;1m            Tool Installer                                 \e[0m"
       echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
@@ -498,6 +500,31 @@ while true; do
         case $y in
           [yY]*)
             source /opt/auto_pt/scripts/o10-workspace.sh
+            break
+            ;;
+
+          *)
+            echo "go back"
+            break
+            ;;
+        esac
+      done
+      continue
+      ;;
+
+    [zZ])
+      echo -e "\e[44;1m            Runtime                                        \e[0m"
+      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
+      echo -e "\e[44;1m            Opens runtime.txt in split-pane                \e[0m"
+      echo -e "\e[44;1m            is following runtime.txt (auto refresh)        \e[0m"
+      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
+      echo -e "\e[44;1m            view status? y/n?                              \e[0m"
+      echo ""
+      while true; do
+        read -r y
+        case $y in
+          [yY]*)
+            source /opt/auto_pt/scripts/z10-status.sh
             break
             ;;
 
