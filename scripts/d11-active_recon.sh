@@ -72,6 +72,7 @@ awk '/445\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/out
 awk '/443\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/ssl_open.txt
 awk '/22\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/ssh_open.txt
 awk '/6556\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/check_mk_open.txt
+awk '/3389\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/rdp_open.txt
 awk '/5986\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/winrm_https_open.txt
 awk '/5985\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/winrm_http_open.txt
 cat /root/output/list/winrm_http* >/root/output/list/winrm_all_open.txt
@@ -101,6 +102,9 @@ echo 'CheckMK Ports detected' >>/root/output/info_gathering.txt
 echo '' >>/root/output/info_gathering.txt
 wc -l /root/output/list/smb_open.txt >>/root/output/info_gathering.txt
 echo 'SMB Ports detected' >>/root/output/info_gathering.txt
+echo '' >>/root/output/info_gathering.txt
+wc -l /root/output/list/rdp_open.txt >>/root/output/info_gathering.txt
+echo 'RDP Ports detected' >>/root/output/info_gathering.txt
 echo '' >>/root/output/info_gathering.txt
 wc -l /root/output/list/ldap_open.txt >>/root/output/info_gathering.txt
 echo 'LDAP Ports detected' >>/root/output/info_gathering.txt
