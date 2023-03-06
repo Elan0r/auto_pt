@@ -139,6 +139,12 @@ if [ -z "$HASH" ]; then
   echo "CME MAQ"
   crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M MAQ >>/root/output/loot/intern/ad/quota/maq_"$DOM".txt 2>&1
 
+  echo "CME MAQ PWSH" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # MAQ
+  echo "CME MAQ PWSH"
+  crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" -X 'Get-ADObject ((Get-ADDomain).distinguishedname) -Properties ms-DS-MachineAccountQuota' >>/root/output/loot/intern/ad/quota/pwsh_maq_"$DOM".txt 2>&1
+
   echo "CME LDAP Checker" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # CME Ldap signing
@@ -268,6 +274,12 @@ if [ -z "$PASS" ]; then
   # MAQ
   echo "CME MAQ"
   crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M MAQ >>/root/output/loot/intern/ad/quota/maq_"$DOM".txt 2>&1
+
+  echo "CME MAQ PWSH" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # MAQ
+  echo "CME MAQ PWSH"
+  crackmapexec smb "$IP" -u "$USER" -H "$HASH" -d "$DOM" -X 'Get-ADObject ((Get-ADDomain).distinguishedname) -Properties ms-DS-MachineAccountQuota' >>/root/output/loot/intern/ad/quota/pwsh_maq_"$DOM".txt 2>&1
 
   echo "CME LDAP Checker" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
