@@ -139,11 +139,17 @@ if [ -z "$HASH" ]; then
   echo "CME MAQ"
   crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M MAQ >>/root/output/loot/intern/ad/quota/maq_"$DOM".txt 2>&1
 
+  echo "CME LDAP Checker" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # CME Ldap signing
+  echo "CME LDAP Checker"
+  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/signing/ldap_check_"$DOM".txt 2>&1
+
   echo "CME LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # CME Ldap signing
   echo "CME LDAP Signing"
-  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/signing/ldap_check_"$DOM".txt 2>&1
+  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M ldap-signing >>/root/output/loot/intern/ldap/signing/ldap_sign_"$DOM".txt 2>&1
 
   echo "LdapRelayScan LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -263,11 +269,17 @@ if [ -z "$PASS" ]; then
   echo "CME MAQ"
   crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M MAQ >>/root/output/loot/intern/ad/quota/maq_"$DOM".txt 2>&1
 
+  echo "CME LDAP Checker" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # CME Ldap signing
+  echo "CME LDAP Checker"
+  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/signing/ldap_check_"$DOM".txt 2>&1
+
   echo "CME LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # CME Ldap signing
   echo "CME LDAP Signing"
-  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/signing/ldap_check_"$DOM".txt 2>&1
+  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M ldap-signing >>/root/output/loot/intern/ldap/signing/ldap_sign_"$DOM".txt 2>&1
 
   echo "LdapRelayScan LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
