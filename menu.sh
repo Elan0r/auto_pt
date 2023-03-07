@@ -124,7 +124,7 @@ while true; do
       echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
       echo -e "\e[44;1m            DNSenum with nmap sL scan all private IPs      \e[0m"
       echo -e "\e[44;1m            nmap PE and sO for Host Discovery              \e[0m"
-      echo -e "\e[44;1m            nmap sSV for Service detection                 \e[0m"
+      echo -e "\e[44;1m            nmap sSVC for Service detection                \e[0m"
       echo -e "\e[44;1m            CME anonymous Shares detection                 \e[0m"
       echo -e "\e[44;1m            DNSrecon and DNS Zone Transfer                 \e[0m"
       echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
