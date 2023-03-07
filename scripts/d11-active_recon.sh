@@ -106,7 +106,7 @@ echo "DNS Zone Transfer" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 # DNS Zone Transfer
 echo "DNS Zone Transfer"
-for i in $(cat /root/output/list/domainname.txt): do
+for i in $(cat /root/output/list/domainname.txt); do
   dig axfr "$i" @"$(head -n 1 /root/output/list/dc_ip.txt)" >>/root/output/loot/intern/dns/zone_transfer/"$i".txt 2>&1
 done
 
