@@ -23,7 +23,7 @@ else
 fi
 
 # get DC_FQDN
-FQDN=$(nslookup "$IP" | awk '// {print$4}' | sed 's/.$//')
+FQDN=$(nslookup "$IP" "$IP" | awk '/name/ {print$4}' | sed 's/.$//')
 # Domain all uppercase for BH query
 BHDOM=$(echo "$DOM" | tr '[:lower:]' '[:upper:]')
 
@@ -71,7 +71,12 @@ if [ -z "$HASH" ]; then
   date >>/root/output/runtime.txt
   # Kerbrute
   echo "kerbrute userenum"
-  kerbrute userenum /root/output/list/user.txt -d "$DOM" >>/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt
+  kerbrute userenum /root/output/list/user.txt -d "$DOM" >>/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt 2>&1
+
+  echo "CME Shares" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  echo "CME Shares"
+  crackmapexec smb /root/output/list/smb_open.txt -u "$USER" -p "$PASS" -d "$DOM" --shares >/root/output/loot/intern/smb/cme_auth_raw_shares.txt 2>&1
 
   echo "CME Pass-Pol" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -207,7 +212,12 @@ if [ -z "$PASS" ]; then
   date >>/root/output/runtime.txt
   # Kerbrute
   echo "kerbrute userenum"
-  kerbrute userenum /root/output/list/user.txt -d "$DOM" >>/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt
+  kerbrute userenum /root/output/list/user.txt -d "$DOM" >>/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt 2>&1
+
+  echo "CME Shares" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  echo "CME Shares"
+  crackmapexec smb /root/output/list/smb_open.txt -u "$USER" -H "$HASH" -d "$DOM" --shares >/root/output/loot/intern/smb/cme_auth_raw_shares.txt 2>&1
 
   echo "CME Pass-Pol" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -338,6 +348,16 @@ awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_password/
 if [ -s /root/output/loot/intern/ad/gpp_password/host.txt ]; then
   echo "PS-TN-2020-0051 GPP_Password" >>/root/output/loot/intern/findings.txt
   awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_password/pass_"$DOM".txt | sort -u >>/root/output/loot/intern/findings.txt
+fi
+
+#Shares
+grep 'READ' /root/output/loot/intern/smb/cme_auth_raw_shares.txt | grep -v 'IPC\$\|print\$' >/root/output/loot/intern/smb/auth_read_shares.txt
+grep 'WRITE' /root/output/loot/intern/smb/cme_auth_raw_shares.txt | grep -v 'IPC\$\|print\$' >/root/output/loot/intern/smb/auth_write_shares.txt
+
+#Local Admin
+grep 'Pwn3d' /root/output/loot/intern/smb/cme_auth_raw_shares.txt >/root/output/loot/intern/ad/local_admin/cme_admin_raw.txt
+if [ -s /root/output/loot/intern/ad/local_admin/cme_admin_raw.txt ]; then
+  figlet 'Local Admin Found'
 fi
 
 echo "Userchecks Done" >>/root/output/runtime.txt

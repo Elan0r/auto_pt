@@ -78,7 +78,11 @@ awk '/5985\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/ou
 cat /root/output/list/winrm_http* >/root/output/list/winrm_all_open.txt
 
 #Anonymous Shares
-crackmapexec smb /root/output/list/smb_open.txt -u '' -p '' --shares >/root/output/loot/intern/smb/anonymous_enumeration/cme_raw_shares.txt
+echo "CME Anonymous Shares" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "CME Anonymous Shares"
+echo 'CME is buggy need to Press ENTER after a while!'
+crackmapexec smb /root/output/list/smb_open.txt -u '' -p '' --shares >/root/output/loot/intern/smb/anonymous_enumeration/cme_raw_shares.txt 2>&1
 grep 'READ' /root/output/loot/intern/smb/anonymous_enumeration/cme_raw_shares.txt | grep -v 'IPC\$\|print\$' >/root/output/loot/intern/smb/anonymous_enumeration/cme_shares.txt
 
 #DC LISTs
