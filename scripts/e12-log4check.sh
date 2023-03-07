@@ -19,3 +19,4 @@ echo '! > Log4Shell Check Done!'
 
 echo 'END Log4Shell Check' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
+echo 'END Log4Shell Check'

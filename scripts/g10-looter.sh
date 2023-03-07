@@ -158,3 +158,4 @@ awk '/ for / {print$5}' /root/output/loot/intern/ssh/root_login/login.txt | sort
 
 echo 'END Looting' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
+echo 'END Looting'

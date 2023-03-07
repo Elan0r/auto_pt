@@ -57,6 +57,9 @@ mkdir -p /root/output/loot/intern/ad/remote_login_local_admin
 mkdir -p /root/output/loot/intern/ad/adcs/esc8
 mkdir -p /root/output/loot/intern/ad/adcs/esc2
 mkdir -p /root/output/loot/intern/ad/adcs/esc1
+mkdir -p /root/output/loot/intern/ad/adcs/esc6
+mkdir -p /root/output/loot/intern/ad/adcs/esc4
+mkdir -p /root/output/loot/intern/ad/adcs/esc11
 mkdir -p /root/output/loot/intern/ad/local_admin
 mkdir -p /root/output/loot/intern/ad/iam/rights
 mkdir -p /root/output/loot/intern/ad/iam/gmsa

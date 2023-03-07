@@ -37,3 +37,4 @@ echo '! > MSF Done!'
 
 echo 'END Autosploit' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
+echo 'END Autosploit'

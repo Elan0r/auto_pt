@@ -12,3 +12,4 @@ fi
 
 echo 'END SSL Check' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
+echo 'END SSL Check'

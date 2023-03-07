@@ -11,3 +11,4 @@ done
 
 echo 'END RPC0 Check' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
+echo 'END RPC0 Check'

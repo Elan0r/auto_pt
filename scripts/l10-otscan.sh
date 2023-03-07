@@ -66,6 +66,6 @@ nmap -Pn -sT -p 1962 --script pcworx-info -iL /root/output/list/ot/pcworx.txt -o
 nmap -Pn -sU -p 47808 --script BACnet-discover-enumerate --script-args full=yes -iL /root/output/list/ot/bacnet.txt -oA /root/output/nmap/ot/bacnet.enum
 nmap -Pn -sT -p 1200,2455 --script codesys-v2-discover -iL /root/output/list/ot/codesys.txt -oA /root/output/nmap/ot/codesys
 
-echo "Finished OTScan"
 echo "END OTScan" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
+echo "END OTScan"

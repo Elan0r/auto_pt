@@ -31,12 +31,6 @@ BHDOM=$(echo "$DOM" | tr '[:lower:]' '[:upper:]')
 export PYTHONUNBUFFERED=TRUE
 
 # unauthenticated
-echo "DNS Zone Transfer" >>/root/output/runtime.txt
-date >>/root/output/runtime.txt
-# DNS Zone Transfer
-echo "DNS Zone Transfer"
-dig axfr "$DOM" @"$IP" >>/root/output/loot/intern/dns/zone_transfer/"$DOM"_"$IP".txt 2>&1
-
 echo "CME user unauthenticated" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 # CME User unauthenticated

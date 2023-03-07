@@ -6,7 +6,7 @@ if [ -s /root/output/list/smb_sign_off.txt ]; then
   echo '! >> RELAY LIST EXISTS'
 else
   echo '! > BUILDING CME SMB RELAY LIST'
-
+  echo 'CME is buggy need to Press ENTER after a while!'
   echo "Start CME build Relay List" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
 
@@ -35,3 +35,4 @@ cat /root/output/list/relay* >/root/output/list/relay_all.txt
 
 echo 'END RelayList Creation' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
+echo 'END RelayList Creation'

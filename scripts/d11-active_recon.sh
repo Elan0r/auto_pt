@@ -44,7 +44,7 @@ else
   echo "Start IP Protocol Scan" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
 
-  nmap -e eth0 -sO --version-intensity 0 --host-timeout 2m --max-retries 2 --min-hostgroup 64 -oA /root/output/nmap/ip_protocol -iL /root/input/ipint.txt >/dev/null 2>&1
+  nmap -e eth0 -sO --version-intensity 0 --host-timeout 10s --max-retries 2 --min-hostgroup 64 -oA /root/output/nmap/ip_protocol -iL /root/input/ipint.txt >/dev/null 2>&1
 
   #Piping the IP-Addresses of the Targets to a file
   awk '/Up/ {print$2}' /root/output/nmap/ip_protocol.gnmap | sort -u >/root/output/list/ip_proto_up.txt
@@ -61,7 +61,7 @@ else
   echo "Start Service Scan" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
 
-  nmap -e eth0 -sSV -O --osscan-limit --max-os-tries 2 -defeat-rst-ratelimit -n -Pn --max-retries 5 -oA /root/output/nmap/service -iL /root/output/list/ipup.txt >/dev/null 2>&1
+  nmap -e eth0 -sSV -defeat-rst-ratelimit -n -Pn --max-retries 5 -oA /root/output/nmap/service -iL /root/output/list/ipup.txt >/dev/null 2>&1
 fi
 
 #File Splitt in Service LISTs
@@ -77,15 +77,41 @@ awk '/5986\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/ou
 awk '/5985\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/winrm_http_open.txt
 cat /root/output/list/winrm_http* >/root/output/list/winrm_all_open.txt
 
+#Anonymous Shares
+crackmapexec smb /root/output/list/smb_open.txt -u '' -p '' --shares >/root/output/loot/intern/smb/anonymous_enumeration/cme_raw_shares.txt
+grep 'READ' /root/output/loot/intern/smb/anonymous_enumeration/cme_raw_shares.txt | grep -v 'IPC\$\|print\$' >/root/output/loot/intern/smb/anonymous_enumeration/cme_shares.txt
+
 #DC LISTs
 awk '{if (/ 53\/open/ && / 88\/open/ && / 445\/open/) print$2}' /root/output/nmap/service.gnmap >/root/output/list/dc_ip.txt
 for i in $(cat /root/output/list/dc_ip.txt); do
-  nslookup "$i" >>/root/output/list/dc_fqdn.txt
+  nslookup "$i" "$i" | awk '/name/ {print$4}' >>/root/output/list/dc_fqdn.txt
 done
-awk '/name/ {print$4}' /root/output/list/dc_fqdn.txt | cut -d '.' -f 1 | tr '[:lower:]' '[:upper:]' >/root/output/list/dc_nbt.txt
+cut -d '.' -f 1 /root/output/list/dc_fqdn.txt | tr '[:lower:]' '[:upper:]' >/root/output/list/dc_nbt.txt
+cut -d '.' -f 2,3,4,5 /root/output/list/dc_fqdn.txt | sed 's/\.$//' >/root/output/list/domainname.txt
+
+#DNS
+echo "DNSrecon" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+# DNS Zone Transfer
+echo "DNSrecon"
+for i in $(cat /root/output/list/domainname.txt); do
+  dnsrecon -d "$i" -n "$(head -n 1 /root/output/list/dc_ip.txt)" >>/root/output/loot/intern/dns/recon_"$i".txt 2>&1
+done
+
+echo "DNS Zone Transfer" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+# DNS Zone Transfer
+echo "DNS Zone Transfer"
+for i in $(cat /root/output/list/domainname.txt): do
+  dig axfr "$i" @"$(head -n 1 /root/output/list/dc_ip.txt)" >>/root/output/loot/intern/dns/zone_transfer/"$i".txt 2>&1
+done
 
 #Info Gathering Summary File
-cut -d . -f 1,2,3 /root/output/list/ipup.txt | sort -u | wc -l >/root/output/info_gathering.txt
+cat /root/output/list/domainname.txt >/root/output/info_gathering.txt
+wc -l /root/output/list/domainname.txt >>/root/output/info_gathering.txt
+echo 'Domains Found' >>/root/output/info_gathering.txt
+echo '' >>/root/output/info_gathering.txt
+cut -d . -f 1,2,3 /root/output/list/ipup.txt | sort -u | wc -l >>/root/output/info_gathering.txt
 echo '/24 Networks detected' >>/root/output/info_gathering.txt
 echo '' >>/root/output/info_gathering.txt
 wc -l /root/output/list/ipup.txt >>/root/output/info_gathering.txt
@@ -103,6 +129,9 @@ echo '' >>/root/output/info_gathering.txt
 wc -l /root/output/list/smb_open.txt >>/root/output/info_gathering.txt
 echo 'SMB Ports detected' >>/root/output/info_gathering.txt
 echo '' >>/root/output/info_gathering.txt
+wc -l /root/output/loot/intern/smb/anonymous_enumeration/cme_shares.txt >>/root/output/info_gathering.txt
+echo 'SMB Anonymous READABLE Shares found' >>/root/output/info_gathering.txt
+echo '' >>/root/output/info_gathering.txt
 wc -l /root/output/list/rdp_open.txt >>/root/output/info_gathering.txt
 echo 'RDP Ports detected' >>/root/output/info_gathering.txt
 echo '' >>/root/output/info_gathering.txt
@@ -114,3 +143,4 @@ echo 'Kerberos Ports detected' >>/root/output/info_gathering.txt
 
 echo 'END active_recon' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
+echo 'END active_recon'
