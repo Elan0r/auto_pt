@@ -40,4 +40,11 @@ rm /root/*.zip
 chattr -i /etc/resolv.conf
 rm /etc/resolv.conf.dhclient-new.*
 
+docker stop $(docker ps -aq)
+docker container prune
+docker image prune
+docker volume prune
+docker network prune
+docker system prune
+
 echo "! > CLEAN!"
