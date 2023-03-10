@@ -91,7 +91,7 @@ for i in $(cat /root/output/list/dc_ip.txt); do
   nslookup "$i" "$i" | awk '/name/ {print$4}' >>/root/output/list/dc_fqdn.txt
 done
 cut -d '.' -f 1 /root/output/list/dc_fqdn.txt | tr '[:lower:]' '[:upper:]' >/root/output/list/dc_nbt.txt
-cut -d '.' -f 2,3,4,5 /root/output/list/dc_fqdn.txt | sed 's/\.$//' >/root/output/list/domainname.txt
+cut -d '.' -f 2,3,4,5 /root/output/list/dc_fqdn.txt | sort -u | sed 's/\.$//' >/root/output/list/domainname.txt
 
 #DNS
 echo "DNSrecon" >>/root/output/runtime.txt
@@ -99,7 +99,9 @@ date >>/root/output/runtime.txt
 # DNS Zone Transfer
 echo "DNSrecon"
 for i in $(cat /root/output/list/domainname.txt); do
-  dnsrecon -d "$i" -n "$(head -n 1 /root/output/list/dc_ip.txt)" >>/root/output/loot/intern/dns/recon_"$i".txt 2>&1
+  for j in $(cat /root/output/list/dc_ip.txt); do
+    dnsrecon -d "$i" -n "$j" >>/root/output/loot/intern/dns/recon_"$j".txt 2>&1
+  done
 done
 
 echo "DNS Zone Transfer" >>/root/output/runtime.txt
@@ -107,7 +109,9 @@ date >>/root/output/runtime.txt
 # DNS Zone Transfer
 echo "DNS Zone Transfer"
 for i in $(cat /root/output/list/domainname.txt); do
-  dig axfr "$i" @"$(head -n 1 /root/output/list/dc_ip.txt)" >>/root/output/loot/intern/dns/zone_transfer/"$i".txt 2>&1
+  for j in $(cat /root/output/list/dc_ip.txt); do
+    dig axfr "$i" @"$j" >>/root/output/loot/intern/dns/zone_transfer/"$i".txt 2>&1
+  done
 done
 
 echo 'END active_recon' >>/root/output/runtime.txt

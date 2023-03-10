@@ -6,8 +6,8 @@ echo 'Create Info Gathering Report' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 
 #Info Gathering Summary File
-cat /root/output/list/domainname.txt | sort -u >/root/output/info_gathering.txt
-wc -l /root/output/list/domainname.txt >>/root/output/info_gathering.txt
+sort -u /root/output/list/domainname.txt >/root/output/info_gathering.txt
+sort -u /root/output/list/domainname.txt | wc -l >>/root/output/info_gathering.txt
 echo 'Domains Found' >>/root/output/info_gathering.txt
 echo '' >>/root/output/info_gathering.txt
 cut -d . -f 1,2,3 /root/output/list/ipup.txt | sort -u | wc -l >>/root/output/info_gathering.txt
