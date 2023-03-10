@@ -34,13 +34,14 @@ while true; do
   echo -e "|\e[94mN)\e[0m Userchecks (Creds required!)                          |"
   echo "|---------------------------------------------------------|"
   echo -e "|\e[94mO)\e[0m Set Workspace                                         |"
+  echo -e "|\e[94mP)\e[0m Change interface (default eth0)                       |"
   echo "|---------------------------------------------------------|"
   echo -e "|\e[94mZ)\e[0m Show status                                           |"
   echo "|---------------------------------------------------------|"
   echo -e "|\e[94m0)\e[0m Exit                                                  |"
   echo '-----------------------------------------------------------'
-  read -r abcdefghijklmnoz0
-  case $abcdefghijklmnoz0 in
+  read -r abcdefghijklmnopz0
+  case $abcdefghijklmnopz0 in
     [aA])
       echo -e "\e[44;1m            Tool Installer                                 \e[0m"
       echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
@@ -129,15 +130,17 @@ while true; do
       echo -e "\e[44;1m            DNSrecon and DNS Zone Transfer                 \e[0m"
       echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
       echo -e "\e[44;1m            Creates Info Gathering summary in output       \e[0m"
+      echo -e "\e[44;1m            S and P includes the Report by default         \e[0m"
       echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
       echo -e "\e[44;1m            Scope Present or not?                          \e[0m"
       echo -e "\e[44;1m            If not use DNSenum for Scope definition        \e[0m"
-      echo -e "\e[44;1m            DNSEnum (d) or ActiveRecon only (p)            \e[0m"
+      echo -e "\e[44;1m            DNSEnum (d) or ActiveRecon (p)                 \e[0m"
       echo -e "\e[44;1m            DNSenum and ActiveRecon (s)                    \e[0m"
+      echo -e "\e[44;1m            Report only (r)                                \e[0m"
       echo -e "\e[44;1m            Back to Main Menu (x)                          \e[0m"
       while true; do
-        read -r dpsx
-        case $dpsx in
+        read -r dprsx
+        case $dprsx in
           [dD]*)
             source /opt/auto_pt/scripts/d10-dns_enum.sh
             break
@@ -145,12 +148,19 @@ while true; do
 
           [pP]*)
             source /opt/auto_pt/scripts/d11-active_recon.sh
+            source /opt/auto_pt/scripts/d99-report.sh
             break
             ;;
 
           [sS]*)
             source /opt/auto_pt/scripts/d10-dns_enum.sh
             source /opt/auto_pt/scripts/d11-active_recon.sh
+            source /opt/auto_pt/scripts/d99-report.sh
+            break
+            ;;
+
+          [rR]*)
+            source /opt/auto_pt/scripts/d99-report.sh
             break
             ;;
 
@@ -160,7 +170,7 @@ while true; do
             ;;
 
           *)
-            echo "Please answer D, P, S or X"
+            echo "Please answer D, P, R, S or X"
             ;;
         esac
       done
@@ -361,6 +371,7 @@ while true; do
             done
 
             source /opt/auto_pt/scripts/d11-active_recon.sh
+            source /opt/auto_pt/scripts/d99-report.sh
             source /opt/auto_pt/scripts/e10-autosploit.sh
             source /opt/auto_pt/scripts/e11-zerocheck.sh
             source /opt/auto_pt/scripts/e12-log4check.sh
@@ -502,6 +513,32 @@ while true; do
         case $y in
           [yY]*)
             source /opt/auto_pt/scripts/o10-workspace.sh
+            break
+            ;;
+
+          *)
+            echo "go back"
+            break
+            ;;
+        esac
+      done
+      continue
+      ;;
+
+    [pP])
+      echo -e "\e[44;1m            Select Interface                               \e[0m"
+      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
+      echo -e "\e[44;1m            Set new Interface                              \e[0m"
+      echo -e "\e[44;1m            Changes all Scripts in auto_pt                 \e[0m"
+      echo -e "\e[44;1m            Default is eth0                                \e[0m"
+      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
+      echo -e "\e[44;1m            New Interface? y/n?                            \e[0m"
+      echo ""
+      while true; do
+        read -r y
+        case $y in
+          [yY]*)
+            source /opt/auto_pt/scripts/p10-interface.sh
             break
             ;;
 
