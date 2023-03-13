@@ -362,15 +362,17 @@ if [ -s /root/output/loot/intern/ad/local_admin/cme_admin_raw.txt ]; then
 fi
 
 #LDAP Signing
+grep '+.*SERVER SIGNING' -B 4 /root/output/loot/intern/ldap/signing/signig_"$DOM".txt | grep -v 'DeprecationWarning\|Checking DCs for LDAP\|ssl.wrap_socket' >/root/output/loot/intern/ldap/signing/raw_"$DOM".txt
 awk '/Signing NOT Enforced/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >/root/output/loot/intern/ldap/signing/hosts.txt
-if [ -s /root/output/loot/intern/ldap/signing/hosts.txt ]; then
+if [[ -s /root/output/loot/intern/ldap/signing/hosts.txt || -s /root/output/loot/intern/ldap/signing/raw_"$DOM".txt ]]; then
   echo 'PS-TN-2020-0023 LDAP Signing' >>/root/output/findings.txt
   awk '/Signing NOT Enforced/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >>/root/output/findings.txt
 fi
 
 #LDAP ChannelBinding
+grep '+.*CHANNEL BINDING' -B 4 /root/output/loot/intern/ldap/signing/signig_"$DOM".txt | grep -v 'DeprecationWarning\|Checking DCs for LDAP\|ssl.wrap_socket' >/root/output/loot/intern/ldap/channel_binding/raw_"$DOM".txt
 awk '/Channel Binding is set to "NEVER"/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >/root/output/loot/intern/ldap/channel_binding/hosts.txt
-if [ -s /root/output/loot/intern/ldap/channel_binding/hosts.txt ]; then
+if [[ -s /root/output/loot/intern/ldap/channel_binding/hosts.txt || -s /root/output/loot/intern/ldap/channel_binding/raw_"$DOM".txt ]]; then
   echo 'PS-TN-2023-0000 LDAP Channel Binding' >>/root/output/findings.txt
   awk '/Channel Binding is set to "NEVER"/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >>/root/output/findings.txt
   echo '' >>/root/output/findings.txt
