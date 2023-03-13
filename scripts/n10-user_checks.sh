@@ -289,7 +289,7 @@ if [ -z "$PASS" ]; then
   date >>/root/output/runtime.txt
   # CME Ldap signing
   echo "CME LDAP Checker"
-  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/signing/ldap_check_"$DOM".txt 2>&1
+  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt 2>&1
 
   echo "CME LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -339,15 +339,16 @@ done
 # GPP AutoLogin
 awk '/Found credentials/ {print$2}' /root/output/loot/intern/ad/gpp_autologin/login_"$DOM".txt | sort -u >/root/output/loot/intern/ad/gpp_autologin/host.txt
 if [ -s /root/output/loot/intern/ad/gpp_autologin/host.txt ]; then
-  echo "PS-TN-2021-0002 GPP_Autologin" >>/root/output/loot/intern/findings.txt
-  awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_autologin/login_"$DOM".txt | sort -u >>/root/output/loot/intern/findings.txt
+  echo "PS-TN-2021-0002 GPP_Autologin" >>/root/output/findings.txt
+  awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_autologin/login_"$DOM".txt | sort -u >>/root/output/findings.txt
+  echo '' >>/root/output/findings.txt
 fi
 
 # GPP Passwords
 awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_password/pass_"$DOM".txt | sort -u >/root/output/loot/intern/ad/gpp_password/host.txt
 if [ -s /root/output/loot/intern/ad/gpp_password/host.txt ]; then
-  echo "PS-TN-2020-0051 GPP_Password" >>/root/output/loot/intern/findings.txt
-  awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_password/pass_"$DOM".txt | sort -u >>/root/output/loot/intern/findings.txt
+  echo "PS-TN-2020-0051 GPP_Password" >>/root/output/findings.txt
+  awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_password/pass_"$DOM".txt | sort -u >>/root/output/findings.txt
 fi
 
 #Shares
@@ -358,6 +359,22 @@ grep 'WRITE' /root/output/loot/intern/smb/cme_auth_raw_shares.txt | grep -v 'IPC
 grep 'Pwn3d' /root/output/loot/intern/smb/cme_auth_raw_shares.txt >/root/output/loot/intern/ad/local_admin/cme_admin_raw.txt
 if [ -s /root/output/loot/intern/ad/local_admin/cme_admin_raw.txt ]; then
   figlet 'Local Admin Found'
+fi
+
+#LDAP Signing
+awk '/Signing NOT Enforced/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >/root/output/loot/intern/ldap/signing/hosts.txt
+if [ -s /root/output/loot/intern/ldap/signing/hosts.txt ]; then
+  echo 'PS-TN-2020-0023 LDAP Signing' >>/root/output/findings.txt
+  awk '/Signing NOT Enforced/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >>/root/output/findings.txt
+fi
+
+#LDAP ChannelBinding
+awk '/Channel Binding is set to "NEVER"/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >/root/output/loot/intern/ldap/channel_binding/hosts.txt
+if [ -s /root/output/loot/intern/ldap/channel_binding/hosts.txt ]; then
+  echo 'PS-TN-2023-0000 LDAP Channel Binding' >>/root/output/findings.txt
+  awk '/Channel Binding is set to "NEVER"/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >>/root/output/findings.txt
+  echo '' >>/root/output/findings.txt
+  cp /root/output/loot/intern/ldap/signing/signig_"$DOM".txt /root/output/loot/intern/ldap/channel_binding/
 fi
 
 echo "Userchecks Done" >>/root/output/runtime.txt

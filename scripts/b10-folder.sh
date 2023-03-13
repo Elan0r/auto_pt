@@ -118,6 +118,7 @@ mkdir -p /root/output/loot/intern/voip/sip
 mkdir -p /root/output/loot/intern/voip/rtp
 mkdir -p /root/output/loot/intern/ldap/signing
 mkdir -p /root/output/loot/intern/ldap/nopac
+mkdir -p /root/output/loot/intern/ldap/channel_binding
 mkdir -p /root/output/loot/intern/creds/lantronix
 mkdir -p /root/output/loot/intern/creds/bmc
 mkdir -p /root/output/loot/intern/creds/network
