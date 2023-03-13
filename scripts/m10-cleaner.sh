@@ -41,10 +41,10 @@ chattr -i /etc/resolv.conf
 rm /etc/resolv.conf.dhclient-new.*
 
 docker stop "$(docker ps -aq)"
-docker container prune
-docker image prune
-docker volume prune
-docker network prune
-docker system prune
+docker container prune -f
+docker image prune -f
+docker volume prune -f
+docker network prune -f
+docker system prune -f
 
 echo "! > CLEAN!"
