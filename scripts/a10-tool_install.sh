@@ -28,10 +28,10 @@ apt-get install libpcap-dev -y
 apt -qq install golang-go -y
 
 #SearchSploit
-searchsploit -u
+#searchsploit -u
 
 #PIP3
-pip3 install --upgrade ldap3 Cython python-libpcap bloodhound pyx scapy mitm6 impacket minikerberos certipy-ad
+pip3 install --upgrade ldap3 Cython python-libpcap bloodhound pyx scapy mitm6 impacket minikerberos
 
 #go env
 if [ -d /opt/go ]; then
@@ -222,16 +222,16 @@ else
   git clone https://github.com/dirkjanm/krbrelayx.git
 fi
 #Certipy 2.0 maybe via pip
-#if [ -d /opt/Certipy ]; then
-#  cd /opt/Certipy || ! echo "Failure"
-#  git stash
-#  git pull
-#  python3 setup.py install
-#else
-#  cd /opt || ! echo "Failure"
-#  git clone https://github.com/ly4k/Certipy.git
-#  cd /opt/Certipy || ! echo "Failure"
-#  python3 setup.py install
+if [ -d /opt/Certipy ]; then
+  cd /opt/Certipy || ! echo "Failure"
+  git stash
+  git pull
+  python3.10 ./setup.py install
+else
+  cd /opt || ! echo "Failure"
+  git clone https://github.com/ly4k/Certipy.git
+  cd /opt/Certipy || ! echo "Failure"
+  python3.10 ./setup.py install
 #fi
 #PassTheCert
 if [ -d /opt/PassTheCert ]; then
