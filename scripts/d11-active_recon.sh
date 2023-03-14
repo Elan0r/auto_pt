@@ -56,12 +56,12 @@ cat /root/output/list/ip_proto_up.txt /root/output/list/ip_pe_up.txt | sort -u >
 if [ -s /root/output/nmap/service.gnmap ]; then
   echo '! >> SERVICE nmap already Done!'
 else
-  echo '! > NMAP SSVC   SLOW!'
+  echo '! > NMAP SSV   SLOW!'
 
   echo "Start Service Scan" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
 
-  nmap -e eth0 -sSVC -defeat-rst-ratelimit -n -Pn --max-retries 5 -oA /root/output/nmap/service -iL /root/output/list/ipup.txt >/dev/null 2>&1
+  nmap -e eth0 -sSV -defeat-rst-ratelimit -n -Pn --max-retries 5 -oA /root/output/nmap/service -iL /root/output/list/ipup.txt >/dev/null 2>&1
 fi
 
 #File Splitt in Service LISTs
