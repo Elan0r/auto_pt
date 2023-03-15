@@ -23,7 +23,7 @@ rm -r /root/.cme
 
 #APT
 apt -qq update
-apt -qq install tmux bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip yersinia golang eyewitness enum4linux ipmitool -y
+apt -qq install tmux bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip yersinia golang eyewitness enum4linux ipmitool python3.10 python3.10-dev -y
 apt-get install libpcap-dev -y
 apt -qq install golang-go -y
 
