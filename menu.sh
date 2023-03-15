@@ -127,6 +127,7 @@ while true; do
       echo -e "\e[44;1m            nmap PE and sO for Host Discovery              \e[0m"
       echo -e "\e[44;1m            nmap sSV for Service detection                 \e[0m"
       echo -e "\e[44;1m            CME anonymous Shares detection                 \e[0m"
+      echo -e "\e[44;1m            CME SMB no Signing detection                   \e[0m"
       echo -e "\e[44;1m            DNSrecon and DNS Zone Transfer                 \e[0m"
       echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
       echo -e "\e[44;1m            Creates Info Gathering summary in output       \e[0m"
@@ -148,6 +149,9 @@ while true; do
 
           [pP]*)
             source /opt/auto_pt/scripts/d11-active_recon.sh
+            source /opt/auto_pt/scripts/d12-list.sh
+            source /opt/auto_pt/scripts/d13-smbrecon.sh
+            source /opt/auto_pt/scripts/d14-dnsrecon.sh
             source /opt/auto_pt/scripts/d99-report.sh
             break
             ;;
@@ -155,6 +159,9 @@ while true; do
           [sS]*)
             source /opt/auto_pt/scripts/d10-dns_enum.sh
             source /opt/auto_pt/scripts/d11-active_recon.sh
+            source /opt/auto_pt/scripts/d12-list.sh
+            source /opt/auto_pt/scripts/d13-smbrecon.sh
+            source /opt/auto_pt/scripts/d14-dnsrecon.sh
             source /opt/auto_pt/scripts/d99-report.sh
             break
             ;;
@@ -181,9 +188,12 @@ while true; do
       echo -e "\e[44;1m            Vulnerability Analysis (MSF+X)                 \e[0m"
       echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
       echo -e "\e[44;1m            Ths script will start VA                       \e[0m"
-      echo -e "\e[44;1m            Netdiscover for quick host and network view    \e[0m"
-      echo -e "\e[44;1m            PCredz for hash collection                     \e[0m"
-      echo -e "\e[44;1m            tcpdump for further traffic analysis           \e[0m"
+      echo -e "\e[44;1m            Metasploit for general exploitability          \e[0m"
+      echo -e "\e[44;1m            MSF ZeroLogon                                  \e[0m"
+      echo -e "\e[44;1m            RPC 0 Session with enum4linux-ng               \e[0m"
+      echo -e "\e[44;1m            default Creds with nmap and nndefaccts         \e[0m"
+      echo -e "\e[44;1m            SSL Scan with heartbleet                       \e[0m"
+      echo -e "\e[44;1m            NO list creation! Active recon recommended!    \e[0m"
       echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
       echo -e "\e[44;1m            Start VA? y/n                                  \e[0m"
       echo ""
@@ -198,7 +208,6 @@ while true; do
             source /opt/auto_pt/scripts/e13-rpc0check.sh
             source /opt/auto_pt/scripts/e14-def_creds.sh
             source /opt/auto_pt/scripts/e15-sslscan.sh
-            source /opt/auto_pt/scripts/e16-relaylists.sh
             break
             ;;
 
