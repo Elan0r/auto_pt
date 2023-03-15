@@ -37,6 +37,9 @@ echo '' >>/root/output/info_gathering.txt
 wc -l /root/output/list/ldap_open.txt >>/root/output/info_gathering.txt
 echo 'LDAP Ports detected' >>/root/output/info_gathering.txt
 echo '' >>/root/output/info_gathering.txt
+wc -l /root/output/list/ldaps_open.txt >>/root/output/info_gathering.txt
+echo 'LDAPS Ports detected' >>/root/output/info_gathering.txt
+echo '' >>/root/output/info_gathering.txt
 wc -l /root/output/list/kerberos_open.txt >>/root/output/info_gathering.txt
 echo 'Kerberos Ports detected' >>/root/output/info_gathering.txt
 

@@ -66,7 +66,8 @@ fi
 
 #File Splitt in Service LISTs
 awk '/135\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/rpc_open.txt
-awk '/389\/open/ {print$3}' /root/output/nmap/service.gnmap | sed 's/(/''/' | sed 's/)/''/' | sort -u >/root/output/list/ldap_open.txt
+awk '/389\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/ldap_open.txt
+awk '/636\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/ldaps_open.txt
 awk '/88\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/kerberos_open.txt
 awk '/445\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/smb_open.txt
 awk '/443\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/ssl_open.txt
