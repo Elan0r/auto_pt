@@ -232,7 +232,7 @@ else
   git clone https://github.com/ly4k/Certipy.git
   cd /opt/Certipy || ! echo "Failure"
   python3.10 ./setup.py install
-#fi
+fi
 #PassTheCert
 if [ -d /opt/PassTheCert ]; then
   cd /opt/PassTheCert || ! echo "Failure"
