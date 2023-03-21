@@ -1,66 +1,18 @@
 #!/bin/bash
 
 figlet -w 84 ProSecUserChecks
-echo "v0.8"
 
 echo "CME is still buggy u need to press ENTER sometimes!"
 unset USER HASH PASS DOM IP FQDN BHDOM
 
-show_help() {
-  echo "HINT: Special Characters should be escaped better use ''"
-  echo "DNS must be working for bloodhound!"
-  echo ""
-  echo "Options:"
-  echo "  -u              Username -> Required"
-  echo "  -p              Password -> provide pass OR nthash"
-  echo "  -H              NT Hash -> provide pass OR nthash"
-  echo "  -d              domain -> required"
-  echo "  -i              IP Domain Controller -> required"
-  echo "  -h              this help"
-  exit 0
-}
-
-OPTIND=1
-# shellcheck disable=SC2221,SC2222
-while getopts u:p:H:d:i: opt; do
-  case "$opt" in
-    u)
-      USER=${OPTARG}
-      ;;
-    p)
-      PASS=${OPTARG}
-      ;;
-    H)
-      HASH=${OPTARG}
-      ;;
-    d)
-      DOM=${OPTARG}
-      ;;
-    i)
-      IP=${OPTARG}
-      ;;
-    u | p | H | d | i)
-      shift 2
-      OPTIND=1
-      ;;
-    *)
-      show_help
-      ;;
-  esac
-done
-
-shift "$((OPTIND - 1))"
-[ "$1" = "--" ] && shift
-
-if [ -z "$USER" ]; then
-  show_help
-fi
-if [ -z "$IP" ]; then
-  show_help
-fi
-if [ -z "$DOM" ]; then
-  show_help
-fi
+read -r -p "Username: " USER
+echo "do NOT provide Password AND Hash, Script intelligence is missing."
+echo "leave Password EMPTY for Hash usage!"
+read -r -p "Password: " PASS
+echo "leave Hash EMPTY if Password is set!"
+read -r -p "NT Hash: " HASH
+read -r -p "Domain: " DOM
+read -r -p "IP DomainController: " IP
 
 #Check for valide IP
 if [[ $IP =~ ^[0-9]+(\.[0-9]+){3}$ ]]; then
@@ -71,7 +23,7 @@ else
 fi
 
 # get DC_FQDN
-FQDN=$(nslookup "$IP" | awk '// {print$4}' | sed 's/.$//')
+FQDN=$(nslookup "$IP" "$IP" | awk '/name/ {print$4}' | sed 's/.$//')
 # Domain all uppercase for BH query
 BHDOM=$(echo "$DOM" | tr '[:lower:]' '[:upper:]')
 
@@ -79,12 +31,6 @@ BHDOM=$(echo "$DOM" | tr '[:lower:]' '[:upper:]')
 export PYTHONUNBUFFERED=TRUE
 
 # unauthenticated
-echo "DNS Zone Transfer" >>/root/output/runtime.txt
-date >>/root/output/runtime.txt
-# DNS Zone Transfer
-echo "DNS Zone Transfer"
-dig axfr "$DOM" @"$IP" >>/root/output/loot/intern/dns/zone_transfer/"$DOM"_"$IP".txt 2>&1
-
 echo "CME user unauthenticated" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 # CME User unauthenticated
@@ -125,7 +71,12 @@ if [ -z "$HASH" ]; then
   date >>/root/output/runtime.txt
   # Kerbrute
   echo "kerbrute userenum"
-  kerbrute userenum /root/output/list/user.txt -d "$DOM" >>/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt
+  kerbrute userenum /root/output/list/user.txt -d "$DOM" >>/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt 2>&1
+
+  echo "CME Shares" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  echo "CME Shares"
+  crackmapexec smb /root/output/list/smb_open.txt -u "$USER" -p "$PASS" -d "$DOM" --shares >/root/output/loot/intern/smb/cme_auth_raw_shares.txt 2>&1
 
   echo "CME Pass-Pol" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -187,11 +138,23 @@ if [ -z "$HASH" ]; then
   echo "CME MAQ"
   crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M MAQ >>/root/output/loot/intern/ad/quota/maq_"$DOM".txt 2>&1
 
+  echo "CME MAQ PWSH" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # MAQ
+  echo "CME MAQ PWSH"
+  crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" -X 'Get-ADObject ((Get-ADDomain).distinguishedname) -Properties ms-DS-MachineAccountQuota' >>/root/output/loot/intern/ad/quota/pwsh_maq_"$DOM".txt 2>&1
+
+  echo "CME LDAP Checker" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # CME Ldap signing
+  echo "CME LDAP Checker"
+  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/signing/ldap_check_"$DOM".txt 2>&1
+
   echo "CME LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # CME Ldap signing
   echo "CME LDAP Signing"
-  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/signing/ldap_check_"$DOM".txt 2>&1
+  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M ldap-signing >>/root/output/loot/intern/ldap/signing/ldap_sign_"$DOM".txt 2>&1
 
   echo "LdapRelayScan LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -249,7 +212,12 @@ if [ -z "$PASS" ]; then
   date >>/root/output/runtime.txt
   # Kerbrute
   echo "kerbrute userenum"
-  kerbrute userenum /root/output/list/user.txt -d "$DOM" >>/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt
+  kerbrute userenum /root/output/list/user.txt -d "$DOM" >>/root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt 2>&1
+
+  echo "CME Shares" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  echo "CME Shares"
+  crackmapexec smb /root/output/list/smb_open.txt -u "$USER" -H "$HASH" -d "$DOM" --shares >/root/output/loot/intern/smb/cme_auth_raw_shares.txt 2>&1
 
   echo "CME Pass-Pol" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -311,11 +279,23 @@ if [ -z "$PASS" ]; then
   echo "CME MAQ"
   crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M MAQ >>/root/output/loot/intern/ad/quota/maq_"$DOM".txt 2>&1
 
+  echo "CME MAQ PWSH" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # MAQ
+  echo "CME MAQ PWSH"
+  crackmapexec smb "$IP" -u "$USER" -H "$HASH" -d "$DOM" -X 'Get-ADObject ((Get-ADDomain).distinguishedname) -Properties ms-DS-MachineAccountQuota' >>/root/output/loot/intern/ad/quota/pwsh_maq_"$DOM".txt 2>&1
+
+  echo "CME LDAP Checker" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # CME Ldap signing
+  echo "CME LDAP Checker"
+  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt 2>&1
+
   echo "CME LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # CME Ldap signing
   echo "CME LDAP Signing"
-  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/signing/ldap_check_"$DOM".txt 2>&1
+  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M ldap-signing >>/root/output/loot/intern/ldap/signing/ldap_sign_"$DOM".txt 2>&1
 
   echo "LdapRelayScan LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -359,15 +339,44 @@ done
 # GPP AutoLogin
 awk '/Found credentials/ {print$2}' /root/output/loot/intern/ad/gpp_autologin/login_"$DOM".txt | sort -u >/root/output/loot/intern/ad/gpp_autologin/host.txt
 if [ -s /root/output/loot/intern/ad/gpp_autologin/host.txt ]; then
-  echo "PS-TN-2021-0002 GPP_Autologin" >>/root/output/loot/intern/findings.txt
-  awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_autologin/login_"$DOM".txt | sort -u >>/root/output/loot/intern/findings.txt
+  echo "PS-TN-2021-0002 GPP_Autologin" >>/root/output/findings.txt
+  awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_autologin/login_"$DOM".txt | sort -u >>/root/output/findings.txt
+  echo '' >>/root/output/findings.txt
 fi
 
 # GPP Passwords
 awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_password/pass_"$DOM".txt | sort -u >/root/output/loot/intern/ad/gpp_password/host.txt
 if [ -s /root/output/loot/intern/ad/gpp_password/host.txt ]; then
-  echo "PS-TN-2020-0051 GPP_Password" >>/root/output/loot/intern/findings.txt
-  awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_password/pass_"$DOM".txt | sort -u >>/root/output/loot/intern/findings.txt
+  echo "PS-TN-2020-0051 GPP_Password" >>/root/output/findings.txt
+  awk '/Found credentials in/ {print$2}' /root/output/loot/intern/ad/gpp_password/pass_"$DOM".txt | sort -u >>/root/output/findings.txt
+fi
+
+#Shares
+grep 'READ' /root/output/loot/intern/smb/cme_auth_raw_shares.txt | grep -v 'IPC\$\|print\$' >/root/output/loot/intern/smb/auth_read_shares.txt
+grep 'WRITE' /root/output/loot/intern/smb/cme_auth_raw_shares.txt | grep -v 'IPC\$\|print\$' >/root/output/loot/intern/smb/auth_write_shares.txt
+
+#Local Admin
+grep 'Pwn3d' /root/output/loot/intern/smb/cme_auth_raw_shares.txt >/root/output/loot/intern/ad/local_admin/cme_admin_raw.txt
+if [ -s /root/output/loot/intern/ad/local_admin/cme_admin_raw.txt ]; then
+  figlet 'Local Admin Found'
+fi
+
+#LDAP Signing
+grep '+.*SERVER SIGNING' -B 4 /root/output/loot/intern/ldap/signing/signig_"$DOM".txt | grep -v 'DeprecationWarning\|Checking DCs for LDAP\|ssl.wrap_socket' >/root/output/loot/intern/ldap/signing/raw_"$DOM".txt
+awk '/Signing NOT Enforced/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >/root/output/loot/intern/ldap/signing/hosts.txt
+if [[ -s /root/output/loot/intern/ldap/signing/hosts.txt || -s /root/output/loot/intern/ldap/signing/raw_"$DOM".txt ]]; then
+  echo 'PS-TN-2020-0023 LDAP Signing' >>/root/output/findings.txt
+  awk '/Signing NOT Enforced/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >>/root/output/findings.txt
+fi
+
+#LDAP ChannelBinding
+grep '+.*CHANNEL BINDING' -B 4 /root/output/loot/intern/ldap/signing/signig_"$DOM".txt | grep -v 'DeprecationWarning\|Checking DCs for LDAP\|ssl.wrap_socket' >/root/output/loot/intern/ldap/channel_binding/raw_"$DOM".txt
+awk '/Channel Binding is set to "NEVER"/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >/root/output/loot/intern/ldap/channel_binding/hosts.txt
+if [[ -s /root/output/loot/intern/ldap/channel_binding/hosts.txt || -s /root/output/loot/intern/ldap/channel_binding/raw_"$DOM".txt ]]; then
+  echo 'PS-TN-2023-0000 LDAP Channel Binding' >>/root/output/findings.txt
+  awk '/Channel Binding is set to "NEVER"/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >>/root/output/findings.txt
+  echo '' >>/root/output/findings.txt
+  cp /root/output/loot/intern/ldap/signing/signig_"$DOM".txt /root/output/loot/intern/ldap/channel_binding/
 fi
 
 echo "Userchecks Done" >>/root/output/runtime.txt
@@ -377,5 +386,3 @@ figlet "Userchecks Done"
 
 # Python unbuffered reset to default
 unset PYTHONUNBUFFERED
-
-exit 0

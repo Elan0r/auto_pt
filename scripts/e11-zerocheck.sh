@@ -16,4 +16,6 @@ date >>/root/output/runtime.txt
 msfconsole -qx "resource /root/input/msf/ws.txt /root/input/msf/zerocheck.txt" >/dev/null
 echo '! > Zerologon Check Done!'
 
-exit 0
+echo 'END Zerologon check' >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo 'END Zerologon check'

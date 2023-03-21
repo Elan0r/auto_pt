@@ -17,4 +17,6 @@ date >>/root/output/runtime.txt
 msfconsole -qx "resource /root/input/msf/ws.txt /opt/auto_pt/resources/log4j.txt" >/dev/null
 echo '! > Log4Shell Check Done!'
 
-exit 0
+echo 'END Log4Shell Check' >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo 'END Log4Shell Check'

@@ -35,5 +35,4 @@ fi
 
 echo 'END DNS Enum' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
-
-exit 0
+echo 'END DNS Enum'

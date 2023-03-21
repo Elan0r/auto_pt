@@ -23,15 +23,15 @@ rm -r /root/.cme
 
 #APT
 apt -qq update
-apt -qq install tmux bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip yersinia golang eyewitness enum4linux ipmitool -y
+apt -qq install tmux bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip yersinia golang eyewitness enum4linux ipmitool python3.10 python3.10-dev -y
 apt-get install libpcap-dev -y
 apt -qq install golang-go -y
 
 #SearchSploit
-searchsploit -u
+#searchsploit -u
 
 #PIP3
-pip3 install --upgrade ldap3 Cython python-libpcap bloodhound pyx scapy mitm6 impacket minikerberos certipy-ad
+pip3 install --upgrade ldap3 Cython python-libpcap bloodhound pyx scapy mitm6 impacket minikerberos
 
 #go env
 if [ -d /opt/go ]; then
@@ -51,6 +51,15 @@ export PATH=$PATH:$GOPATH/bin
 
 #GIT
 cd /opt || ! echo "Failure"
+#auto_pt
+if [ -d /opt/auto_pt ]; then
+  cd /opt/auto_pt || ! echo "Failure"
+  git stash
+  git pull
+else
+  cd /opt || ! echo "Failure"
+  git clone https://10.99.9.10:3000/ProSec_DS/auto_pt.git
+fi
 #Petit Potam
 if [ -d /opt/PetitPotam ]; then
   cd /opt/PetitPotam || ! echo "Failure"
@@ -213,17 +222,17 @@ else
   git clone https://github.com/dirkjanm/krbrelayx.git
 fi
 #Certipy 2.0 maybe via pip
-#if [ -d /opt/Certipy ]; then
-#  cd /opt/Certipy || ! echo "Failure"
-#  git stash
-#  git pull
-#  python3 setup.py install
-#else
-#  cd /opt || ! echo "Failure"
-#  git clone https://github.com/ly4k/Certipy.git
-#  cd /opt/Certipy || ! echo "Failure"
-#  python3 setup.py install
-#fi
+if [ -d /opt/Certipy ]; then
+  cd /opt/Certipy || ! echo "Failure"
+  git stash
+  git pull
+  python3.10 ./setup.py install
+else
+  cd /opt || ! echo "Failure"
+  git clone https://github.com/ly4k/Certipy.git
+  cd /opt/Certipy || ! echo "Failure"
+  python3.10 ./setup.py install
+fi
 #PassTheCert
 if [ -d /opt/PassTheCert ]; then
   cd /opt/PassTheCert || ! echo "Failure"
@@ -284,6 +293,18 @@ else
   cd /opt/ItWasAllADream || ! echo "Failure"
   docker build -t itwasalladream .
 fi
+#Printnightmare Check PSN version
+if [ -d /opt/ItWasAllADreamPSN ]; then
+  cd /opt/ItWasAllADreamPSN || ! echo "Failure"
+  git stash
+  git pull
+  docker build -t itwasalladreampsn .
+else
+  cd /opt || ! echo "Failure"
+  git clone https://10.99.9.10:3000/ProSec_DS/ItWasAllADream.git /opt/ItWasAllADreamPSN
+  cd /opt/ItWasAllADreamPSN || ! echo "Failure"
+  docker build -t itwasalladreampsn .
+fi
 
 #Special
 
@@ -300,9 +321,8 @@ else
 fi
 
 #Nmap scripts
-/opt/auto_pt/scripts/nse_install.sh
+/opt/auto_pt/scripts/a11-nse_install.sh
 
 echo '! > '
 echo '! > Tools go to /opt!'
 echo '! > '
-exit 0

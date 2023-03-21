@@ -22,6 +22,7 @@ rm /root/.zsh_history
 rm /root/.bash_history
 rm /root/*.log
 rm /root/*.ntds
+rm /root/*.ntds.*
 rm /root/*.sam
 rm /root/*.secrets
 rm /root/*.kerberos
@@ -38,5 +39,12 @@ rm /root/*.zip
 
 chattr -i /etc/resolv.conf
 rm /etc/resolv.conf.dhclient-new.*
+
+docker stop "$(docker ps -aq)"
+docker container prune -f
+docker image prune -f
+docker volume prune -f
+docker network prune -f
+docker system prune -f
 
 echo "! > CLEAN!"

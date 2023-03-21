@@ -49,6 +49,10 @@ else
   exit 1
 fi
 
+# Packet forwarding for security reasons
+sysctl -w net.ipv4.ip_forward=1
+sysctl -w net.ipv6.conf.all.forwarding=1
+
 #Responder with 300sec timeout in bg
 echo '! > Starting impacket-ntlmrelayx && Responder'
 #Python unbuffered for logging to file
@@ -67,10 +71,11 @@ wait "$PID_RELAY"
 #Python unbuffered reset to default
 unset PYTHONUNBUFFERED
 
+echo 'END Fast Relay' >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+
 if [ -s /root/output/loot/ntlm_relay_ntlmv2.txt ]; then
   echo '! > Got Hashes!'
-  exit 0
 else
   echo '! >> No Hashes Found'
-  exit 1
 fi

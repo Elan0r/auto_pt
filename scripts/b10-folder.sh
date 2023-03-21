@@ -57,6 +57,9 @@ mkdir -p /root/output/loot/intern/ad/remote_login_local_admin
 mkdir -p /root/output/loot/intern/ad/adcs/esc8
 mkdir -p /root/output/loot/intern/ad/adcs/esc2
 mkdir -p /root/output/loot/intern/ad/adcs/esc1
+mkdir -p /root/output/loot/intern/ad/adcs/esc6
+mkdir -p /root/output/loot/intern/ad/adcs/esc4
+mkdir -p /root/output/loot/intern/ad/adcs/esc11
 mkdir -p /root/output/loot/intern/ad/local_admin
 mkdir -p /root/output/loot/intern/ad/iam/rights
 mkdir -p /root/output/loot/intern/ad/iam/gmsa
@@ -115,6 +118,7 @@ mkdir -p /root/output/loot/intern/voip/sip
 mkdir -p /root/output/loot/intern/voip/rtp
 mkdir -p /root/output/loot/intern/ldap/signing
 mkdir -p /root/output/loot/intern/ldap/nopac
+mkdir -p /root/output/loot/intern/ldap/channel_binding
 mkdir -p /root/output/loot/intern/creds/lantronix
 mkdir -p /root/output/loot/intern/creds/bmc
 mkdir -p /root/output/loot/intern/creds/network
@@ -142,5 +146,4 @@ mkdir -p /root/output/loot/intern/web/tls/heartbleed
 mkdir -p /root/output/loot/intern/web/log4shell
 mkdir -p /root/output/loot/intern/ssh/root_login
 mkdir -p /root/output/loot/intern/monitoring/ids_ips
-
-exit 0
+mkdir -p /opt/PCredz/logs

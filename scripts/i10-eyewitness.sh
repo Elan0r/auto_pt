@@ -20,4 +20,6 @@ date >>/root/output/runtime.txt
 
 eyewitness --web --timeout 20 --delay 20 --no-prompt --prepend-https -x /root/output/nmap/service.xml -d /root/output/screens/
 
-exit 0
+echo 'END Eyewitness' >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo 'END Eyewitness'
