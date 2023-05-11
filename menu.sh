@@ -380,6 +380,9 @@ while true; do
             done
 
             source /opt/auto_pt/scripts/d11-active_recon.sh
+            source /opt/auto_pt/scripts/d12-list.sh
+            source /opt/auto_pt/scripts/d13-smbrecon.sh
+            source /opt/auto_pt/scripts/d14-dnsrecon.sh
             source /opt/auto_pt/scripts/d99-report.sh
             source /opt/auto_pt/scripts/e10-autosploit.sh
             source /opt/auto_pt/scripts/e11-zerocheck.sh
