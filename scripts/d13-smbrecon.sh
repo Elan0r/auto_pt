@@ -8,7 +8,7 @@ echo 'CME is buggy need to Press ENTER after a while!'
 echo 'CME Anonymous Shares' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 crackmapexec smb /root/output/list/smb_open.txt -u '' -p '' --shares >/root/output/loot/intern/smb/anonymous_enumeration/cme_raw_shares.txt 2>&1
-grep 'READ' /root/output/loot/intern/smb/anonymous_enumeration/cme_raw_shares.txt | grep -v 'IPC\$\|print\$' >/root/output/loot/intern/smb/anonymous_enumeration/cme_shares.txt
+grep -a 'READ' /root/output/loot/intern/smb/anonymous_enumeration/cme_raw_shares.txt | grep -v 'IPC\$\|print\$' >/root/output/loot/intern/smb/anonymous_enumeration/cme_shares.txt
 
 if [ -s /root/output/list/smb_sign_off.txt ]; then
   echo 'CME SMB no Signing list exists!'

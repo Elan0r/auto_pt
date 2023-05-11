@@ -56,7 +56,7 @@ awk '/FTP Banner/ {print$2}' /root/output/msf/ftp.txt | cut -d ":" -f 1 | sort -
 
 ### EOL
 awk '/\+.*OpenSSH/ {print$7,$2}' /root/output/msf/ssh.txt | sed 's/:22/ /g' | sort -u | grep -v '_8.' >/root/output/loot/intern/eol/ssh/openssh_version.txt
-grep 'running Windows 200\|running Windows 7\|running Windows XP\|running Windows Vista\|running Windows 8\|running Windows 9' /root/output/msf/smb.txt | cut -c5- | sed 's/:... //' | sort -u >/root/output/loot/intern/eol/windows/windows_versions.txt
+grep -a 'running Windows 200\|running Windows 7\|running Windows XP\|running Windows Vista\|running Windows 8\|running Windows 9' /root/output/msf/smb.txt | cut -c5- | sed 's/:... //' | sort -u >/root/output/loot/intern/eol/windows/windows_versions.txt
 awk '/\-1.99/ {print$2}' /root/output/msf/ssh.txt | cut -d : -f 1 | sort -u >/root/output/loot/intern/eol/ssh_depricated/hosts.txt
 
 ### TELNET
@@ -133,27 +133,27 @@ awk '/CEIP is fully enabled/ {print$2}' /root/output/msf/vmware.txt | cut -d ":"
 awk '/Log4Shell found.*vsphere/{print$2}' /root/output/msf/log4j.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/vmware/log4shell/hosts.txt
 
 ### Creds
-grep -B 3 'Press Enter for Setup Mode' /root/output/msf/telnet.txt >/root/output/loot/intern/creds/lantronix/raw.txt
+grep -a -B 3 'Press Enter for Setup Mode' /root/output/msf/telnet.txt >/root/output/loot/intern/creds/lantronix/raw.txt
 awk '/\+/{print$2}' /root/output/loot/intern/creds/lantronix/raw.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/creds/lantronix/hosts.txt
-grep '|' -B 6 /root/output/nmap/default-creds.nmap >/root/output/loot/intern/creds/creds.txt
+grep -a '|' -B 6 /root/output/nmap/default-creds.nmap >/root/output/loot/intern/creds/creds.txt
 
 awk '/The target is vulnerable/{print$2}' /root/output/msf/ilo.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/web/ilo/hosts.txt
 
 ### Web
-grep -B 1 'You can bypass auth' /root/output/msf/web.txt | awk '/against/ {print$5}' | sort -u >/root/output/loot/intern/web/iis_bypass/hosts.txt
+grep -a -B 1 'You can bypass auth' /root/output/msf/web.txt | awk '/against/ {print$5}' | sort -u >/root/output/loot/intern/web/iis_bypass/hosts.txt
 awk '/The target is vulnerable/{print$2}' /root/output/msf/web.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/web/ms15-034/hosts.txt
 awk '/The target is vulnerable/{print$2}' /root/output/msf/iis_tilde.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/web/iis_tilde/hosts.txt
 
-grep -B 6 'TLSv1.1.*enabled' /root/output/msf/sslscan.txt >/root/output/loot/intern/web/tls/prototls.txt
-grep -B 4 'SSLv3.*enabled' /root/output/msf/sslscan.txt >/root/output/loot/intern/web/tls/protossl.txt
+grep -a -B 6 'TLSv1.1.*enabled' /root/output/msf/sslscan.txt >/root/output/loot/intern/web/tls/prototls.txt
+grep -a -B 4 'SSLv3.*enabled' /root/output/msf/sslscan.txt >/root/output/loot/intern/web/tls/protossl.txt
 cp /root/output/msf/sslscan.txt /root/output/loot/intern/web/tls/
 awk '/Testing/ {print$4}' /root/output/loot/intern/web/tls/proto*.txt | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | sort -u >/root/output/loot/intern/web/tls/hosts.txt
-grep -v 'not vulnerable' /root/output/msf/sslscan.txt | grep -B 22 vulnerable | grep Connected | cut -d ' ' -f 3 >/root/output/loot/intern/web/tls/heartbleed/hosts.txt
-grep -v 'not vulnerable' /root/output/msf/sslscan.txt | grep -B 22 vulnerable >/root/output/loot/intern/web/tls/heartbleed/raw.txt
+grep -a -v 'not vulnerable' /root/output/msf/sslscan.txt | grep -B 22 vulnerable | grep Connected | cut -d ' ' -f 3 >/root/output/loot/intern/web/tls/heartbleed/hosts.txt
+grep -a -v 'not vulnerable' /root/output/msf/sslscan.txt | grep -B 22 vulnerable >/root/output/loot/intern/web/tls/heartbleed/raw.txt
 awk '/Log4Shell found/{print}' /root/output/msf/log4j.txt | grep -v 'vsphere' | awk '//{print$2}' | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/web/log4shell/hosts.txt
 
 ### SSH
-grep -B 11 'password' /root/output/nmap/ssh.nmap >/root/output/loot/intern/ssh/root_login/login.txt
+grep -a -B 11 'password' /root/output/nmap/ssh.nmap >/root/output/loot/intern/ssh/root_login/login.txt
 awk '/ for / {print$5}' /root/output/loot/intern/ssh/root_login/login.txt | sort -u >/root/output/loot/intern/ssh/root_login/hosts.txt
 
 echo 'END Looting' >>/root/output/runtime.txt
