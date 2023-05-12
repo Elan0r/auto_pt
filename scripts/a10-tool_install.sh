@@ -307,6 +307,15 @@ else
 fi
 
 #Special
+#gowindapsearch
+if [ -d /opt/windapsearch ]; then
+  echo '! > GO Folder Exist!'
+else
+  mkdir /opt/windapsearch
+fi
+wget https://github.com/ropnop/go-windapsearch/releases/download/v0.3.0/windapsearch-linux-amd64 -O /opt/windapsearch/windapsearch
+chmod +x /opt/windapsearch/windapsearch
+ln -s /opt/windapsearch/windapsearch /usr/bin/
 
 #airgeddon
 if [ -d /opt/airgeddon ]; then
