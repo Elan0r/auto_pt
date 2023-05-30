@@ -70,8 +70,8 @@ awk '/(\(DISK\)|\(IPC\)|\(PRINTER\))/{print}' /root/output/msf/smb.txt | cut -c1
 awk '/Found user:/ {print$2,$6,$7,$8,$9}' /root/output/msf/smb.txt | sort -u >/root/output/loot/intern/smb/anonymous_enumeration/users.txt
 
 ### Database
-awk '/:1433.*Incorrect/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/database/mssql/login/hosts.txt
-awk '/:5432.*Incorrect/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/database/postgresql/login/hosts.txt
+awk '/:1433 .*Incorrect/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/database/mssql/login/hosts.txt
+awk '/:5432 .*Incorrect/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/database/postgresql/login/hosts.txt
 awk '/ServerName.*=/ {print$2}' /root/output/msf/sql.txt | sed 's/\:/''/g' | sort -u >/root/output/loot/intern/database/mssql/browser/hosts.txt
 awk '/LOGIN FAILED.*\(Incorrect: Access/ {print$2}' /root/output/msf/sql.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/database/mysql/login/hosts.txt
 awk '/doesn'\''t use authentication/ {print$2}' /root/output/msf/nosql.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/database/mongodb/login/hosts.txt
