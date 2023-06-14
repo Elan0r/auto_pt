@@ -23,7 +23,7 @@ rm -r /root/.cme
 
 #APT
 apt -qq update
-apt -qq install tmux bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip yersinia golang eyewitness enum4linux ipmitool python3.10 python3.10-dev -y
+apt -qq install tmux bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip yersinia golang eyewitness enum4linux ipmitool python3.10 python3.10-dev chromium -y
 apt-get install libpcap-dev -y
 apt -qq install golang-go -y
 
@@ -267,12 +267,12 @@ else
   cd /opt || ! echo "Failure"
   curl --create-dirs -O --output-dir /opt/cme_binary https://github.com/Porchetta-Industries/CrackMapExec/releases/download/v5.4.0/cme-ubuntu-latest-3.10.zip
   unzip /opt/cme_binary/cme-ubuntu-latest-3.10.zip -d /opt/cme_binary
+  chmod +x /opt/cme_binary/cme
 fi
 
 #Go
 cd /opt || ! echo "Failure"
 go install github.com/ropnop/kerbrute
-go install github.com/ropnop/go-windapsearch@latest
 go install github.com/sensepost/gowitness@latest
 go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 
@@ -309,13 +309,22 @@ fi
 #Special
 #gowindapsearch
 if [ -d /opt/windapsearch ]; then
-  echo '! > GO Folder Exist!'
+  echo ''
 else
   mkdir /opt/windapsearch
 fi
 wget https://github.com/ropnop/go-windapsearch/releases/download/v0.3.0/windapsearch-linux-amd64 -O /opt/windapsearch/windapsearch
 chmod +x /opt/windapsearch/windapsearch
 ln -s /opt/windapsearch/windapsearch /usr/bin/
+
+#scrying
+if [ -d /opt/scrying ]; then
+  echo ''
+else
+  mkdir /opt/scrying
+fi
+wget https://github.com/nccgroup/scrying/releases/download/v0.9.2/scrying_0.9.2_amd64.deb -O /opt/scrying/scrying_0.9.2_amd64.deb
+dpkg -i /opt/scrying/scrying_0.9.2_amd64.deb
 
 #airgeddon
 if [ -d /opt/airgeddon ]; then

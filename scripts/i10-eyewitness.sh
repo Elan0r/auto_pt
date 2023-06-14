@@ -23,3 +23,12 @@ eyewitness --web --timeout 20 --delay 20 --no-prompt --prepend-https -x /root/ou
 echo 'END Eyewitness' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 echo 'END Eyewitness'
+
+#echo 'Start Scrying' >>/root/output/runtime.txt
+#date >>/root/output/runtime.txt
+
+#scrying --nmap /root/output/nmap/service.xml --output-dir /root/output/scrying
+
+#echo 'END Scrying' >>/root/output/runtime.txt
+#date >>/root/output/runtime.txt
+#echo 'END Scrying'
