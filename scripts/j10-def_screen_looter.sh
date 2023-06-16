@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet -w 109 ProSecDefScreenLooter
+figlet DefScreenLooter
 
 echo "Start def_screen_lootcollector" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt

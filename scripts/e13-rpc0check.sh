@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet ProSecRPC0
+figlet RPC0
 
 echo "Start RPC0 check" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet ProSecSMBrecon
+figlet SMBrecon
 
 #Anonymous Shares
 echo 'CME Anonymous Shares'

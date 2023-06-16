@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet -w 84 ProSecUserChecks
+figlet UserChecks
 
 echo "CME is still buggy u need to press ENTER sometimes!"
 unset USER HASH PASS DOM IP FQDN BHDOM

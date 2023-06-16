@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet ProSecOTScan
+figlet OTScan
 
 if [ -s /root/input/ipot.txt ]; then
   echo '! > IPs OK '

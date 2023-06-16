@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet ProSecDNSrecon
+figlet DNSrecon
 
 #DNS
 echo "DNSrecon" >>/root/output/runtime.txt

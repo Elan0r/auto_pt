@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet ProSecLooter
+figlet Looter
 
 echo "Start lootcollector" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt

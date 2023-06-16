@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet ProSecFastRelay
+figlet FastRelay
 
 if [ -s /root/input/ipint.txt ]; then
   echo '! >ipint.txt exists.'

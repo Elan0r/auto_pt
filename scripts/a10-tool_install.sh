@@ -2,7 +2,7 @@
 
 apt -qq install figlet -y >/dev/null
 
-figlet ProSecBoxToolz
+figlet ToolzInstall
 
 echo '! > '
 echo '! > Tools go to /opt + ln -s to /root/tools'
@@ -24,7 +24,7 @@ rm -r /root/.cme
 #APT
 apt -qq update
 apt -qq install tmux bettercap crackmapexec nbtscan responder metasploit-framework docker.io python3-pip yersinia golang eyewitness enum4linux ipmitool python3.10 python3.10-dev chromium -y
-apt-get install libpcap-dev -y
+apt-get -qq install libpcap-dev -y
 apt -qq install golang-go -y
 
 #SearchSploit

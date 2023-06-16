@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet ProSecDefCreds
+figlet DefCreds
 
 #Root login check
 if [ -s /root/output/nmap/ssh.nmap ]; then

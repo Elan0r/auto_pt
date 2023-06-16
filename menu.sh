@@ -143,7 +143,7 @@ while true; do
         read -r dprsx
         case $dprsx in
           [dD]*)
-            source /opt/auto_pt/scripts/d10-dns_enum.sh
+            source /opt/auto_pt/scripts/d10_dns_scan.sh
             break
             ;;
 
@@ -157,7 +157,7 @@ while true; do
             ;;
 
           [sS]*)
-            source /opt/auto_pt/scripts/d10-dns_enum.sh
+            source /opt/auto_pt/scripts/d10_dns_scan.sh
             source /opt/auto_pt/scripts/d11-active_recon.sh
             source /opt/auto_pt/scripts/d12-list.sh
             source /opt/auto_pt/scripts/d13-smbrecon.sh
@@ -207,7 +207,7 @@ while true; do
             source /opt/auto_pt/scripts/e12-log4check.sh
             source /opt/auto_pt/scripts/e13-rpc0check.sh
             source /opt/auto_pt/scripts/e14-def_creds.sh
-            source /opt/auto_pt/scripts/e15-sslscan.sh
+            source /opt/auto_pt/scripts/e15-service_enum.sh
             break
             ;;
 
@@ -369,7 +369,7 @@ while true; do
               read -r dp
               case $dp in
                 [dD]*)
-                  source /opt/auto_pt/scripts/d10-dns_enum.sh
+                  source /opt/auto_pt/scripts/d10_dns_scan.sh
                   break
                   ;;
 
@@ -389,7 +389,7 @@ while true; do
             source /opt/auto_pt/scripts/e12-log4check.sh
             source /opt/auto_pt/scripts/e13-rpc0check.sh
             source /opt/auto_pt/scripts/e14-def_creds.sh
-            source /opt/auto_pt/scripts/e15-sslscan.sh
+            source /opt/auto_pt/scripts/e15-service_enum.sh
             source /opt/auto_pt/scripts/e16-relaylists.sh
             source /opt/auto_pt/scripts/f10-fast_relay.sh
             source /opt/auto_pt/scripts/g10-looter.sh

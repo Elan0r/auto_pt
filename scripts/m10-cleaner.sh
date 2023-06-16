@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet ProSecClean
+figlet Cleaner
 
 echo '! > Cleaning all!'
 msfdb start

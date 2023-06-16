@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet ProSecZeroCheck
+figlet ZeroCheck
 
 echo "Start zerocheck" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt

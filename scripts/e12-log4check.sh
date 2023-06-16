@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet -w 104 ProSecLog4ShellCheck
+figlet Log4ShellCheck
 
 echo '! > Log4J check via ETH0!'
 

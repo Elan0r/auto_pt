@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet -w 87 ProSecActiveRecon
+figlet ActiveRecon
 
 if [ -s /root/input/ipint.txt ]; then
   echo '! > IPs OK '

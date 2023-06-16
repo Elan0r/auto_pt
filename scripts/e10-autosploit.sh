@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet ProSecAutoSploit
+figlet AutoSploit
 
 if [ -s /opt/auto_pt/resources/resource.txt ]; then
   echo '! > resource.txt check OK'

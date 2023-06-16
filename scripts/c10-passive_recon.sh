@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet -w 90 ProSecPassiveRecon
+figlet PassiveRecon
 
 echo "Start Passive Recon" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt

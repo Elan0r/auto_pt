@@ -1,27 +1,30 @@
 #!/bin/bash
 
-figlet ProSecLists
+figlet ListCreation
 
 echo 'START List Creation' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 echo 'START List Creation'
 
 #File Splitt in Service LISTs
-awk '/135\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/rpc_open.txt
-awk '/389\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/ldap_open.txt
-awk '/636\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/ldaps_open.txt
-awk '/88\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/kerberos_open.txt
-awk '/445\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/smb_open.txt
-awk '/443\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/ssl_open.txt
 awk '/22\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/ssh_open.txt
-awk '/6556\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/check_mk_open.txt
+awk '/88\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/kerberos_open.txt
+awk '/111\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/rpc_open.txt
+awk '/135\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/msrpc_open.txt
+awk '/389\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/ldap_open.txt
+awk '/443\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/ssl_open.txt
+awk '/445\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/smb_open.txt
+awk '/636\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/ldaps_open.txt
+awk '/1433\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/mssql_open.txt
+awk '/3306\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/mysql_open.txt
 awk '/3389\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/rdp_open.txt
 awk '/5986\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/winrm_https_open.txt
 awk '/5985\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/winrm_http_open.txt
+awk '/6556\/open/ {print$2}' /root/output/nmap/service.gnmap | sort -u >/root/output/list/check_mk_open.txt
 cat /root/output/list/winrm_http* >/root/output/list/winrm_all_open.txt
 
 #Create Relay LISTs
-for i in $(cat /root/output/list/rpc_open.txt); do
+for i in $(cat /root/output/list/msrpc_open.txt); do
   echo rpc://"$i" >>/root/output/list/relay_rpc.txt
 done
 

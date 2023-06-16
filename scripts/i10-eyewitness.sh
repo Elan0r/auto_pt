@@ -24,11 +24,11 @@ echo 'END Eyewitness' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 echo 'END Eyewitness'
 
-#echo 'Start Scrying' >>/root/output/runtime.txt
-#date >>/root/output/runtime.txt
+echo 'Start Scrying' >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
 
-#scrying --nmap /root/output/nmap/service.xml --output-dir /root/output/scrying
+scrying --nmap /root/output/nmap/service.xml --output-dir /root/output/scrying
 
-#echo 'END Scrying' >>/root/output/runtime.txt
-#date >>/root/output/runtime.txt
-#echo 'END Scrying'
+echo 'END Scrying' >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo 'END Scrying'

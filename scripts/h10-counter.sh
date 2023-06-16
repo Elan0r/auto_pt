@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet -w 94 ProSecCounter
+figlet -w 94 Counter
 
 echo "Start Finding Counter" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
