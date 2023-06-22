@@ -359,6 +359,7 @@ grep 'WRITE' /root/output/loot/intern/smb/cme_auth_raw_shares.txt | grep -v 'IPC
 grep 'Pwn3d' /root/output/loot/intern/smb/cme_auth_raw_shares.txt >/root/output/loot/intern/ad/local_admin/cme_admin_raw.txt
 if [ -s /root/output/loot/intern/ad/local_admin/cme_admin_raw.txt ]; then
   figlet 'Local Admin Found'
+  figlet 'Local Admin Found' >>/root/output/runtime.txt
 fi
 
 #LDAP Signing
