@@ -40,7 +40,7 @@ cut -d '.' -f 2,3,4,5 /root/output/list/dc_fqdn.txt | sort -u | sed 's/\.$//' >/
 
 #scrying
 /opt/scrying/scrying --nmap /root/output/nmap/service.xml --test-import >/root/output/list/scrying_raw.txt
-grep http /root/output/list/scrying_raw.txt  >/root/output/list/scrying_web.txt
+grep http /root/output/list/scrying_raw.txt | tr -d '[:blank:]' >/root/output/list/scrying_web.txt
 sed 's%^%vnc://%' /root/output/list/vnc_open.txt >/root/output/list/scrying_vnc.txt
 sed 's%^%rdp://%' /root/output/list/rdp_open.txt >/root/output/list/scrying_rdp.txt
 

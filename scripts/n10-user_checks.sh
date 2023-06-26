@@ -148,19 +148,19 @@ if [ -z "$HASH" ]; then
   date >>/root/output/runtime.txt
   # CME Ldap signing
   echo "CME LDAP Checker"
-  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/signing/ldap_check_"$DOM".txt 2>&1
+  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/ldap_check_"$DOM".txt 2>&1
 
   echo "CME LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # CME Ldap signing
   echo "CME LDAP Signing"
-  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M ldap-signing >>/root/output/loot/intern/ldap/signing/ldap_sign_"$DOM".txt 2>&1
+  crackmapexec ldap "$FQDN" -u "$USER" -p "$PASS" -d "$DOM" -M ldap-signing >>/root/output/loot/intern/ldap/ldap_sign_"$DOM".txt 2>&1
 
   echo "LdapRelayScan LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # ldap signing
   echo "LdapRelayScan LDAP Signing"
-  python3 /opt/LdapRelayScan/LdapRelayScan.py -u "$USER" -p "$PASS" -dc-ip "$IP" -method BOTH >>/root/output/loot/intern/ldap/signing/signig_"$DOM".txt 2>&1
+  python3 /opt/LdapRelayScan/LdapRelayScan.py -u "$USER" -p "$PASS" -dc-ip "$IP" -method BOTH >>/root/output/loot/intern/ldap/signig_"$DOM".txt 2>&1
 
   echo "Bloodhound" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -289,19 +289,19 @@ if [ -z "$PASS" ]; then
   date >>/root/output/runtime.txt
   # CME Ldap signing
   echo "CME LDAP Checker"
-  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt 2>&1
+  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M ldap-checker >>/root/output/loot/intern/ldap/ldap_check_"$DOM".txt 2>&1
 
   echo "CME LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # CME Ldap signing
   echo "CME LDAP Signing"
-  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M ldap-signing >>/root/output/loot/intern/ldap/signing/ldap_sign_"$DOM".txt 2>&1
+  crackmapexec ldap "$FQDN" -u "$USER" -H "$HASH" -d "$DOM" -M ldap-signing >>/root/output/loot/intern/ldap/ldap_sign_"$DOM".txt 2>&1
 
   echo "LdapRelayScan LDAP Signing" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # ldap signing
   echo "LdapRelayScan LDAP Signing"
-  python3 /opt/LdapRelayScan/LdapRelayScan.py -u "$USER" -nthash "$HASH" -dc-ip "$IP" -method BOTH >>/root/output/loot/intern/ldap/signing/signig_"$DOM".txt 2>&1
+  python3 /opt/LdapRelayScan/LdapRelayScan.py -u "$USER" -nthash "$HASH" -dc-ip "$IP" -method BOTH >>/root/output/loot/intern/ldap/signig_"$DOM".txt 2>&1
 
   echo "Bloodhound" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -363,16 +363,16 @@ if [ -s /root/output/loot/intern/ad/local_admin/cme_admin_raw.txt ]; then
 fi
 
 #LDAP Signing
-grep '+.*SERVER SIGNING' -B 4 /root/output/loot/intern/ldap/signing/signig_"$DOM".txt | grep -v 'Unexpected error\|DeprecationWarning\|Checking DCs for LDAP\|ssl.wrap_socket' >/root/output/loot/intern/ldap/signing/raw_"$DOM".txt
-awk '/Signing NOT Enforced/ {print$4}' /root/output/loot/intern/ldap/signing/ldap_check_"$DOM".txt >/root/output/loot/intern/ldap/signing/hosts.txt
+grep '+.*SERVER SIGNING' -B 4 /root/output/loot/intern/ldap/signig_"$DOM".txt | grep -v 'Unexpected error\|DeprecationWarning\|Checking DCs for LDAP\|ssl.wrap_socket' >/root/output/loot/intern/ldap/signing/raw_"$DOM".txt
+awk '/Signing NOT Enforced/ {print$4}' /root/output/loot/intern/ldap/ldap_check_"$DOM".txt >/root/output/loot/intern/ldap/signing/hosts.txt
 if [[ -s /root/output/loot/intern/ldap/signing/hosts.txt || -s /root/output/loot/intern/ldap/signing/raw_"$DOM".txt ]]; then
   echo 'PS-TN-2020-0023 LDAP Signing' >>/root/output/findings.txt
-  awk '/Signing NOT Enforced/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >>/root/output/findings.txt
+  awk '/Signing NOT Enforced/ {print$4}' /root/output/loot/intern/ldap/ldap_check_"$DOM".txt >>/root/output/findings.txt
 fi
 
 #LDAP ChannelBinding
-grep '+.*CHANNEL BINDING' -B 4 /root/output/loot/intern/ldap/signing/signig_"$DOM".txt | grep -v 'Unexpected error\|DeprecationWarning\|Checking DCs for LDAP\|ssl.wrap_socket' >/root/output/loot/intern/ldap/channel_binding/raw_"$DOM".txt
-awk '/Channel Binding is set to "NEVER"/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >/root/output/loot/intern/ldap/channel_binding/hosts.txt
+grep '+.*CHANNEL BINDING' -B 4 /root/output/loot/intern/ldap/signig_"$DOM".txt | grep -v 'Unexpected error\|DeprecationWarning\|Checking DCs for LDAP\|ssl.wrap_socket' >/root/output/loot/intern/ldap/channel_binding/raw_"$DOM".txt
+awk '/Channel Binding is set to "NEVER"/ {print$4}' /root/output/loot/intern/ldap/ldap_check_"$DOM".txt >/root/output/loot/intern/ldap/channel_binding/hosts.txt
 if [[ -s /root/output/loot/intern/ldap/channel_binding/hosts.txt || -s /root/output/loot/intern/ldap/channel_binding/raw_"$DOM".txt ]]; then
   echo 'PS-TN-2023-0000 LDAP Channel Binding' >>/root/output/findings.txt
   awk '/Channel Binding is set to "NEVER"/ {print$4}' /root/output/loot/intern/ldap/channel_binding/ldap_check_"$DOM".txt >>/root/output/findings.txt
