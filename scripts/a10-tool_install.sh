@@ -322,7 +322,7 @@ if [ -d /opt/scrying ]; then
   echo ''
 else
   cd /opt || ! echo "Failure"
-  wget https://github.com/nccgroup/scrying/releases/download/v0.9.2/scrying_0.9.2_amd64_linux.zip 
+  wget https://github.com/nccgroup/scrying/releases/download/v0.9.2/scrying_0.9.2_amd64_linux.zip
   unzip scrying_0.9.2_amd64_linux.zip
   rm /opt/scrying_0.9.2_amd64_linux.zip
   cd /opt/scrying || ! echo "Failure"
