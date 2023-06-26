@@ -321,10 +321,16 @@ ln -s /opt/windapsearch/windapsearch /usr/bin/
 if [ -d /opt/scrying ]; then
   echo ''
 else
-  mkdir /opt/scrying
+  cd /opt || ! echo "Failure"
+  wget https://github.com/nccgroup/scrying/releases/download/v0.9.2/scrying_0.9.2_amd64_linux.zip 
+  unzip scrying_0.9.2_amd64_linux.zip
+  rm /opt/scrying_0.9.2_amd64_linux.zip
+  cd /opt/scrying || ! echo "Failure"
+  wget http://ftp.de.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1n-0+deb11u4_amd64.deb
+  apt install /opt/scrying/libssl1.1_1.1.1n-0+deb11u4_amd64.deb
+  wget https://github.com/nccgroup/scrying/releases/download/v0.9.2/scrying_0.9.2_amd64.deb
+#  apt install /opt/scrying/scrying_0.9.2_amd64.deb
 fi
-wget https://github.com/nccgroup/scrying/releases/download/v0.9.2/scrying_0.9.2_amd64.deb -O /opt/scrying/scrying_0.9.2_amd64.deb
-dpkg -i /opt/scrying/scrying_0.9.2_amd64.deb
 
 #airgeddon
 if [ -d /opt/airgeddon ]; then
