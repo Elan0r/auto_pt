@@ -144,6 +144,14 @@ if [ -z "$HASH" ]; then
   echo "CME MAQ PWSH"
   crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" -X 'Get-ADObject ((Get-ADDomain).distinguishedname) -Properties ms-DS-MachineAccountQuota' >>/root/output/loot/intern/ad/quota/pwsh_maq_"$DOM".txt 2>&1
 
+  echo "MAQ python" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # MAQ
+  echo "MAQ python"
+  python3 /opt/auto_pt/resources/maq.py "$DOM"/"$USER":"$PASS" -dc-ip "$IP" >>/root/output/loot/intern/ad/quota/pymaq_"$DOM".txt 2>&1
+  echo "MAQ python ldaps"
+  python3 /opt/auto_pt/resources/maq.py "$DOM"/"$USER":"$PASS" -dc-ip "$IP" -use-ldaps >>/root/output/loot/intern/ad/quota/pymaq_"$DOM".txt 2>&1
+
   echo "CME LDAP Checker" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
   # CME Ldap signing
@@ -284,6 +292,14 @@ if [ -z "$PASS" ]; then
   # MAQ
   echo "CME MAQ PWSH"
   crackmapexec smb "$IP" -u "$USER" -H "$HASH" -d "$DOM" -X 'Get-ADObject ((Get-ADDomain).distinguishedname) -Properties ms-DS-MachineAccountQuota' >>/root/output/loot/intern/ad/quota/pwsh_maq_"$DOM".txt 2>&1
+
+  echo "MAQ python" >>/root/output/runtime.txt
+  date >>/root/output/runtime.txt
+  # MAQ
+  echo "MAQ python"
+  python3 /opt/auto_pt/resources/maq.py "$DOM"/"$USER" -hashes aad3b435b51404eeaad3b435b51404ee:"$HASH" -dc-ip "$IP" >>/root/output/loot/intern/ad/quota/pymaq_"$DOM".txt 2>&1
+  echo "MAQ python ldaps"
+  python3 /opt/auto_pt/resources/maq.py "$DOM"/"$USER" -hashes aad3b435b51404eeaad3b435b51404ee:"$HASH" -dc-ip "$IP" -use-ldaps >>/root/output/loot/intern/ad/quota/pymaq_"$DOM".txt 2>&1
 
   echo "CME LDAP Checker" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
