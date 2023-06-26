@@ -22,7 +22,6 @@ from impacket.krb5.kerberosv5 import getKerberosTGT
 from impacket.krb5 import constants
 from impacket.krb5.types import Principal
 
-
 def get_machine_name(args, domain):
     if args.dc_ip is not None:
         s = SMBConnection(args.dc_ip, args.dc_ip)
