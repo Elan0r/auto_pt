@@ -27,7 +27,6 @@ echo 'END Eyewitness'
 echo 'Start Scrying' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 
-timeout 120 /opt/scrying/scrying -s -f /root/output/list/scrying_web.txt -o /root/output/scrying/web -m web -l /root/output/scrying/web/log.txt
 timeout 120 /opt/scrying/scrying -s -f /root/output/list/scrying_rdp.txt -o /root/output/scrying/rdp -m rdp -l /root/output/scrying/rdp/log.txt
 timeout 120 /opt/scrying/scrying -s -f /root/output/list/scrying_vnc.txt -o /root/output/scrying/vnc -m vnc -l /root/output/scrying/vnc/log.txt
 
