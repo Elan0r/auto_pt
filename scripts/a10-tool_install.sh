@@ -31,6 +31,7 @@ install_tools() {
   pipx install git+https://github.com/ly4k/Certipy.git --force
   pipx install git+https://github.com/fox-it/BloodHound.py.git --force
   pipx install git+https://github.com/p0dalirius/Coercer --force
+  pipx install git+https://github.com/Hackndo/WebclientServiceScanner.git --force
 
   #go env
   if [ -d /opt/go ]; then
@@ -81,7 +82,7 @@ install_tools() {
     git pull
   else
     cd /opt || ! echo "Failure"
-    git clone https://github.com/chompie1337/SIGRed_RCE_PoC
+    git clone https://github.com/chompie1337/SIGRed_RCE_PoC.git
   fi
   #PCredz
   if [ -d /opt/PCredz ]; then
@@ -179,17 +180,6 @@ install_tools() {
     cd /opt/LdapRelayScan || ! echo "Failure"
     pip3 install --upgrade -r requirements.txt
   fi
-  #webclientservicescanner
-  if [ -d /opt/WebclientServiceScanner ]; then
-    cd /opt/WebclientServiceScanner || ! echo "Failure"
-    git stash
-    git pull
-  else
-    cd /opt || ! echo "Failure"
-    git clone https://github.com/Hackndo/WebclientServiceScanner.git
-    cd /opt/WebclientServiceScanner || ! echo "Failure"
-    python3 ./setup.py install
-  fi
   #krbrelayx
   if [ -d /opt/krbrelayx ]; then
     cd /opt/krbrelayx || ! echo "Failure"
@@ -216,6 +206,15 @@ install_tools() {
   else
     cd /opt || ! echo "Failure"
     git clone https://github.com/Wh04m1001/DFSCoerce.git
+  fi
+   #PrintNightmare
+  if [ -d /opt/PrintNightmare ]; then
+    cd /opt/PrintNightmare || ! echo "Failure"
+    git stash
+    git pull
+  else
+    cd /opt || ! echo "Failure"
+    git clone https://github.com/ly4k/PrintNightmare.git
   fi
   #sploutchy impacket
   if [ -d /opt/impacket-sploutchy ]; then
