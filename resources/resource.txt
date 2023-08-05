@@ -54,7 +54,7 @@ echo "MSF FTP unencrypted" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 use auxiliary/scanner/ftp/ftp_version
 services -u -p 21 -R
-set FTPPASS ProSec_Networks
+set FTPPASS Elan0r_testing
 run
 sleep 5
 
@@ -206,8 +206,8 @@ echo "MSF SMTP relay" >> /root/output/runtime.txt
 date >> /root/output/runtime.txt
 use auxiliary/scanner/smtp/smtp_relay
 services -u -p 25 -R
-set MAILFROM pt@prosec-networks.com
-set MAILTO pt@prosec-networks.com
+set MAILFROM INTERN@EXAMPLE.COM
+set MAILTO EXTERN@EXAMPLE.COM
 set EXTENDED true
 run
 sleep 5
@@ -492,29 +492,8 @@ services -S iLO -R
 check
 sleep 5
 
-spool /root/output/msf/ntp.txt
-echo "####NTP####"
-
-echo "NTP Monlist"
-echo "MSF NTP monlist" >> /root/output/runtime.txt
-date >> /root/output/runtime.txt
-use scanner/ntp/ntp_monlist
-services -p 123 -u -R
-run
-sleep 5
-
 spool /root/output/msf/rpc.txt
 echo "####RPC####"
-
-echo "RPC Endpoint Mapper"
-echo "MSF RPC endpointmapper" >> /root/output/runtime.txt
-date >> /root/output/runtime.txt
-use auxiliary/scanner/dcerpc/endpoint_mapper
-services -p 135 -u -R
-run
-sleep 5
-services -p 135 -u
-sleep 5
 
 echo "SunRPC Portmapper"
 echo "MSF RPC portmapper" >> /root/output/runtime.txt
@@ -557,17 +536,6 @@ sleep 5
 set SSL true
 set RPORT 636
 services -p 636 -u -R
-run
-sleep 5
-
-spool /root/output/msf/ssdp.txt
-echo "####SSDP####"
-
-echo "SSDP Amp"
-echo "MSF SSDP amp" >> /root/output/runtime.txt
-date >> /root/output/runtime.txt
-use auxiliary/scanner/upnp/ssdp_amp
-hosts -R
 run
 sleep 5
 

@@ -81,7 +81,6 @@ awk '/Success:/ {print}' /root/output/msf/sql.txt >/root/output/loot/intern/cred
 
 ### RPC
 awk '/\+.*SunRPC/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/rpc/portmapper/hosts.txt
-awk '/Endpoint Mapper (.*services)/ {print$1}' /root/output/msf/rpc.txt | sort -u >/root/output/loot/intern/rpc/endpointmap/hosts.txt
 awk '/Vulnerable to Portmap/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/rpc/amplification/hosts.txt
 awk '/The target is vulnerable/ {print$2}' /root/output/msf/zerologon.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/rpc/zero_logon/hosts.txt
 awk '/NFS Export/ {print$2}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/rpc/nfs/hosts.txt
@@ -91,9 +90,6 @@ awk '/NFS Export/ {print}' /root/output/msf/rpc.txt | cut -d ":" -f 1 | sort -u 
 awk '/vulnerable.*MS_T120/ {print$2}' /root/output/msf/rdp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/rdp/bluekeep/hosts.txt
 awk '/.*open.*Requires NLA: No/ {print$1}' /root/output/msf/rdp.txt | sort -u >/root/output/loot/intern/rdp/nla/hosts.txt
 awk '/The target is vulnerable.$/{print$2}' /root/output/msf/rdp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/rdp/ms12-020/hosts.txt
-
-### NTP
-awk '/Vulnerable/ {print$2}' /root/output/msf/ntp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/ntp/amplification/hosts.txt
 
 ### AD
 awk '/NetBIOS/ {print$5}' /root/output/msf/udp_scan.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/ad/netbios/hosts.txt
@@ -109,9 +105,6 @@ awk '/- VULNERABLE/ {print$2}' /root/output/msf/ipmi.txt | cut -d ":" -f 1 | sor
 awk '/\+.*:143/ {print$2}' /root/output/msf/mail.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/mail/imap/unencrypted/hosts.txt
 awk '/\+.*:110/ {print$2}' /root/output/msf/mail.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/mail/pop3/unencrypted/hosts.txt
 awk '/Potential open SMTP relay/ {print$2}' /root/output/msf/mail.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/mail/smtp/open_relay/hosts.txt
-
-### SSDP
-awk '/Vulnerable to SSDP/ {print$2}' /root/output/msf/ssdp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/ssdp/amplification/hosts.txt
 
 ### Printer
 awk '/User=/{print}' /root/output/msf/printer.txt | cut -c18- >/root/output/loot/intern/printer/extract/hosts.txt
