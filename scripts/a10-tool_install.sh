@@ -301,6 +301,9 @@ install_tools() {
   /opt/auto_pt/scripts/a11-nse_install.sh
 }
 
-install_tools || { echo -e "\n${RED}[Failure]${NC} Installing tools failed.. exiting script!\n"; exit 1; }
+install_tools || { 
+  echo -e "\n${RED}[Failure]${NC} Installing tools failed.. exiting script!\n"
+  exit 1
+}
 
 echo -e "\n${GREEN}[Success]${NC} Setup completed successfully!\n"
