@@ -14,7 +14,7 @@ install_tools() {
   #APT
   apt -qq update
   apt -qq install tmux bettercap nbtscan responder docker.io yersinia golang golang-go eyewitness enum4linux ipmitool chromium python3 python3-dev python3-pip python3-venv nmap smbmap john libpcap-dev libsasl2-dev libldap2-dev ntpdate wget zip unzip systemd-timesyncd pipx swig -y
- 
+
   #SearchSploit
   #searchsploit -u
 
@@ -301,7 +301,7 @@ install_tools() {
   /opt/auto_pt/scripts/a11-nse_install.sh
 }
 
-install_tools || { 
+install_tools || {
   echo -e "\n${RED}[Failure]${NC} Installing tools failed.. exiting script!\n"
   exit 1
 }
