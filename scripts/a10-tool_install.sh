@@ -293,7 +293,7 @@ install_tools() {
     git pull
   else
     cd /opt || ! echo "Failure"
-  git clone --depth 1 https://github.com/v1s1t0r1sh3r3/airgeddon.git
+    git clone --depth 1 https://github.com/v1s1t0r1sh3r3/airgeddon.git
     cd /opt/airgeddon || ! echo "Failure"
     bash airgeddon.sh
   fi
