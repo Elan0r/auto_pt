@@ -207,7 +207,7 @@ install_tools() {
     cd /opt || ! echo "Failure"
     git clone https://github.com/Wh04m1001/DFSCoerce.git
   fi
-   #PrintNightmare
+  #PrintNightmare
   if [ -d /opt/PrintNightmare ]; then
     cd /opt/PrintNightmare || ! echo "Failure"
     git stash
