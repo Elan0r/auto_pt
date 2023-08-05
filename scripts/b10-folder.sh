@@ -8,14 +8,9 @@ mkdir -p /root/output/scrying/web
 mkdir -p /root/output/scrying/vnc
 mkdir -p /root/output/scrying/rdp
 mkdir -p /root/output/loot/hashes
-mkdir -p /root/output/loot/intern/snmp/community_string
-mkdir -p /root/output/loot/intern/snmp/v1_v2c
-mkdir -p /root/output/loot/intern/ftp/anonymous
-mkdir -p /root/output/loot/intern/ftp/unencrypted
 mkdir -p /root/output/loot/intern/eol/ssh
 mkdir -p /root/output/loot/intern/eol/windows
 mkdir -p /root/output/loot/intern/eol/ssh_depricated
-mkdir -p /root/output/loot/intern/telnet/unencrypted
 mkdir -p /root/output/loot/intern/smb/eternal_blue
 mkdir -p /root/output/loot/intern/smb/smb_v1
 mkdir -p /root/output/loot/intern/smb/smb_signing
@@ -40,7 +35,6 @@ mkdir -p /root/output/loot/intern/rpc/nfs
 mkdir -p /root/output/loot/intern/rdp/bluekeep
 mkdir -p /root/output/loot/intern/rdp/nla
 mkdir -p /root/output/loot/intern/rdp/ms12-020
-mkdir -p /root/output/loot/intern/ntp/amplification
 mkdir -p /root/output/loot/intern/ad/netbios
 mkdir -p /root/output/loot/intern/ad/kerberos/asreproast
 mkdir -p /root/output/loot/intern/ad/kerberos/delegation
@@ -53,17 +47,17 @@ mkdir -p /root/output/loot/intern/ad/session
 mkdir -p /root/output/loot/intern/ad/ntlm_auth
 mkdir -p /root/output/loot/intern/ad/passpol
 mkdir -p /root/output/loot/intern/ad/quota
-mkdir -p /root/output/loot/intern/ad/user_description
+mkdir -p /root/output/loot/intern/ad/iam/user_description
 mkdir -p /root/output/loot/intern/ad/gpp_password
 mkdir -p /root/output/loot/intern/ad/gpp_autologin
-mkdir -p /root/output/loot/intern/ad/remote_login_local_admin
+mkdir -p /root/output/loot/intern/ad/iam/remote_login_local_admin
 mkdir -p /root/output/loot/intern/ad/adcs/esc8
 mkdir -p /root/output/loot/intern/ad/adcs/esc2
 mkdir -p /root/output/loot/intern/ad/adcs/esc1
 mkdir -p /root/output/loot/intern/ad/adcs/esc6
 mkdir -p /root/output/loot/intern/ad/adcs/esc4
 mkdir -p /root/output/loot/intern/ad/adcs/esc11
-mkdir -p /root/output/loot/intern/ad/local_admin
+mkdir -p /root/output/loot/intern/ad/iam/local_admin
 mkdir -p /root/output/loot/intern/ad/iam/rights
 mkdir -p /root/output/loot/intern/ad/iam/gmsa
 mkdir -p /root/output/loot/intern/ad/iam/password
@@ -83,7 +77,6 @@ mkdir -p /root/output/loot/intern/mail/smtp/sender_restriction
 mkdir -p /root/output/loot/intern/mail/smtp/starttls
 mkdir -p /root/output/loot/intern/mail/smtp/unencrypted_auth
 mkdir -p /root/output/loot/intern/mail/smtp/rdns
-mkdir -p /root/output/loot/intern/ssdp/amplification
 mkdir -p /root/output/loot/intern/printer/extract
 mkdir -p /root/output/loot/intern/printer/access
 mkdir -p /root/output/loot/intern/mitm/arp
@@ -95,7 +88,11 @@ mkdir -p /root/output/loot/intern/mitm/llmnr
 mkdir -p /root/output/loot/intern/mitm/nbt
 mkdir -p /root/output/loot/intern/mitm/routing
 mkdir -p /root/output/loot/intern/mitm/wpad
-mkdir -p /root/output/loot/intern/mitm/mdns
+mkdir -p /root/output/loot/intern/mitm/mdnsmkdir -p /root/output/loot/intern/snmp/community_string
+mkdir -p /root/output/loot/intern/network/snmp
+mkdir -p /root/output/loot/intern/network/ftp/anonymous
+mkdir -p /root/output/loot/intern/network/ftp/unencrypted
+mkdir -p /root/output/loot/intern/network/telnet
 mkdir -p /root/output/loot/intern/network/egress_filtering
 mkdir -p /root/output/loot/intern/network/icmp
 mkdir -p /root/output/loot/intern/network/cdp
@@ -110,6 +107,7 @@ mkdir -p /root/output/loot/intern/network/other_protocols
 mkdir -p /root/output/loot/intern/network/clear_text
 mkdir -p /root/output/loot/intern/network/segmentation_segregation
 mkdir -p /root/output/loot/intern/network/host-based_firewall
+mkdir -p /root/output/loot/intern/network/ssh
 mkdir -p /root/output/loot/intern/vmware/vsan
 mkdir -p /root/output/loot/intern/vmware/vmdir
 mkdir -p /root/output/loot/intern/vmware/ova
@@ -147,6 +145,6 @@ mkdir -p /root/output/loot/intern/web/nginx
 mkdir -p /root/output/loot/intern/web/iis_tilde
 mkdir -p /root/output/loot/intern/web/tls/heartbleed
 mkdir -p /root/output/loot/intern/web/log4shell
-mkdir -p /root/output/loot/intern/ssh/root_login
+
 mkdir -p /root/output/loot/intern/monitoring/ids_ips
 mkdir -p /opt/PCredz/logs

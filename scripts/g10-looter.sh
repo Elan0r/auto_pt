@@ -51,8 +51,8 @@ awk '/Login Successful/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 |
 cp /root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt /root/output/loot/intern/snmp/v1_v2c/hosts.txt
 
 ### FTP
-awk '/Anonymous READ/ {print$2}' /root/output/msf/ftp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/ftp/anonymous/hosts.txt
-awk '/FTP Banner/ {print$2}' /root/output/msf/ftp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/ftp/unencrypted/hosts.txt
+awk '/Anonymous READ/ {print$2}' /root/output/msf/ftp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/network/ftp/anonymous/hosts.txt
+awk '/FTP Banner/ {print$2}' /root/output/msf/ftp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/network/ftp/unencrypted/hosts.txt
 
 ### EOL
 awk '/\+.*OpenSSH/ {print$7,$2}' /root/output/msf/ssh.txt | sed 's/:22/ /g' | sort -u | grep -v '_8.' >/root/output/loot/intern/eol/ssh/openssh_version.txt
@@ -60,7 +60,7 @@ grep -a 'running Windows 200\|running Windows 7\|running Windows XP\|running Win
 awk '/\-1.99/ {print$2}' /root/output/msf/ssh.txt | cut -d : -f 1 | sort -u >/root/output/loot/intern/eol/ssh_depricated/hosts.txt
 
 ### TELNET
-awk '/\+.*:23/ {print$2}' /root/output/msf/telnet.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/telnet/unencrypted/hosts.txt
+awk '/\+.*:23/ {print$2}' /root/output/msf/telnet.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/network/telnet/hosts.txt
 
 ### SMB
 awk '/VULNERABLE.*MS17-010/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/smb/eternal_blue/hosts.txt
@@ -146,8 +146,8 @@ grep -a -v 'not vulnerable' /root/output/msf/sslscan.txt | grep -B 22 vulnerable
 awk '/Log4Shell found/{print}' /root/output/msf/log4j.txt | grep -v 'vsphere' | awk '//{print$2}' | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/web/log4shell/hosts.txt
 
 ### SSH
-grep -a -B 11 'password' /root/output/nmap/ssh.nmap >/root/output/loot/intern/ssh/root_login/login.txt
-awk '/ for / {print$5}' /root/output/loot/intern/ssh/root_login/login.txt | sort -u >/root/output/loot/intern/ssh/root_login/hosts.txt
+grep -a -B 11 'password' /root/output/nmap/ssh.nmap >/root/output/loot/intern/network/ssh/login.txt
+awk '/ for / {print$5}' /root/output/loot/intern/network/ssh/login.txt | sort -u >/root/output/loot/intern/network/ssh/hosts.txt
 
 echo 'END Looting' >>/root/output/runtime.txt
 date >>/root/output/runtime.txt

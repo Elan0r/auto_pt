@@ -5,14 +5,10 @@ figlet -w 94 Counter
 echo "Start Finding Counter" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 
+### SMB
 echo "SMB_Signing" >/root/output/findings.txt
 wc -l /root/output/loot/intern/smb/smb_signing/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/smb/smb_signing/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
-echo "" >>/root/output/findings.txt
-
-echo "SMB_v1" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/smb/smb_v1/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/smb/smb_v1/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
 echo "SMB_shares" >>/root/output/findings.txt
@@ -25,21 +21,24 @@ wc -l /root/output/loot/intern/smb/anonymous_enumeration/users.txt >>/root/outpu
 cut -d . -f 1,2,3 /root/output/loot/intern/smb/anonymous_enumeration/users.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
-echo "RDP_NLA" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/rdp/nla/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/rdp/nla/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
-echo "" >>/root/output/findings.txt
-
+###NETBIOS
 echo "NetBIOS" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/ad/netbios/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/ad/netbios/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
+###TELNET
 echo "Telnet" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/telnet/unencrypted/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/telnet/unencrypted/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
+echo "Lantronix_login" >>/root/output/findings.txt
+wc -l /root/output/loot/intern/creds/lantronix/hosts.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/creds/lantronix/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+echo "" >>/root/output/findings.txt
+
+###SSH
 echo "SSH_Depricated" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/eol/ssh_depricated/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/eol/ssh_depricated/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
@@ -51,10 +50,11 @@ cut -d " " -f 2 /root/output/loot/intern/eol/ssh/openssh_version.txt | cut -d . 
 echo "" >>/root/output/findings.txt
 
 echo "SSH_login" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/ssh/root_login/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/ssh/root_login/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+wc -l /root/output/loot/intern/network/ssh/hosts.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/network/ssh/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
+###IPMI
 echo "IPMI_Cipher0" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/ipmi/zero_cipher/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/ipmi/zero_cipher/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
@@ -65,6 +65,7 @@ wc -l /root/output/loot/intern/ipmi/hashdump/hosts.txt >>/root/output/findings.t
 cut -d . -f 1,2,3 /root/output/loot/intern/ipmi/hashdump/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
+###SNMP
 echo "SNMP_V1V2" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/snmp/v1_v2c/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/snmp/v1_v2c/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
@@ -75,6 +76,7 @@ wc -l /root/output/loot/intern/snmp/community_string/hosts_default_community_ro.
 cut -d . -f 1,2,3 /root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
+###FTP
 echo "FTP_Anonymous" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/ftp/anonymous/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/ftp/anonymous/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
@@ -121,11 +123,7 @@ wc -l /root/output/loot/intern/printer/extract/hosts.txt >>/root/output/findings
 cut -d ":" -f 4 /root/output/loot/intern/printer/extract/hosts.txt | sed 's/.*=//g' | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
-echo "IIS_Tilde/Shortname" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/web/iis_tilde/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/web/iis_tilde/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
-echo "" >>/root/output/findings.txt
-
+###MAIL
 echo "IMAP" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/mail/imap/unencrypted/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/mail/imap/unencrypted/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
@@ -152,14 +150,15 @@ wc -l /root/output/loot/intern/rpc/nfs/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/rpc/nfs/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
-echo "Lantronix_login" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/creds/lantronix/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/creds/lantronix/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
-echo "" >>/root/output/findings.txt
-
+###MS Exploits
 echo "ZeroLogon" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/rpc/zero_logon/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/rpc/zero_logon/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+echo "" >>/root/output/findings.txt
+
+echo "RDP_NLA" >>/root/output/findings.txt
+wc -l /root/output/loot/intern/rdp/nla/hosts.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/rdp/nla/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
 echo "BlueKeep" >>/root/output/findings.txt
@@ -172,21 +171,17 @@ wc -l /root/output/loot/intern/rdp/ms12-020/hosts.txt >>/root/output/findings.tx
 cut -d . -f 1,2,3 /root/output/loot/intern/rdp/ms12-020/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
+echo "SMB_v1" >>/root/output/findings.txt
+wc -l /root/output/loot/intern/smb/smb_v1/hosts.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/smb/smb_v1/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+echo "" >>/root/output/findings.txt
+
 echo "EternalBlue" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/smb/eternal_blue/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/smb/eternal_blue/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
-echo "Heartbleed" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/web/tls/heartbleed/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/web/tls/heartbleed/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
-echo "" >>/root/output/findings.txt
-
-echo "HP_iLO_Auth_Bypass" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/web/ilo/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/web/ilo/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
-echo "" >>/root/output/findings.txt
-
+###VMware
 echo "VMWARE_VSAN" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/vmware/vsan/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/vmware/vsan/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
@@ -212,6 +207,12 @@ wc -l /root/output/loot/intern/vmware/log4shell/hosts.txt >>/root/output/finding
 cut -d . -f 1,2,3 /root/output/loot/intern/vmware/log4shell/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
+###IIS
+echo "IIS_Tilde/Shortname" >>/root/output/findings.txt
+wc -l /root/output/loot/intern/web/iis_tilde/hosts.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/web/iis_tilde/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+echo "" >>/root/output/findings.txt
+
 echo "MS15-034_HTTP_dump" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/web/ms15-034/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/web/ms15-034/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
@@ -222,9 +223,20 @@ wc -l /root/output/loot/intern/web/iis_bypass/hosts.txt >>/root/output/findings.
 cut -d . -f 1,2,3 /root/output/loot/intern/web/iis_bypass/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
+###WEB
 echo "Log4Shell" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/web/log4shell/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/web/log4shell/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+echo "" >>/root/output/findings.txt
+
+echo "Heartbleed" >>/root/output/findings.txt
+wc -l /root/output/loot/intern/web/tls/heartbleed/hosts.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/web/tls/heartbleed/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+echo "" >>/root/output/findings.txt
+
+echo "HP_iLO_Auth_Bypass" >>/root/output/findings.txt
+wc -l /root/output/loot/intern/web/ilo/hosts.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/web/ilo/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
 echo "DNS_Amp" >>/root/output/findings.txt
