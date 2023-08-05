@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet -w 94 Counter
+figlet Counter
 
 echo "Start Finding Counter" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
