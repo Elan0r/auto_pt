@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#Colors
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+CYAN='\033[1;36m'
+BLUE='\033[1;34m'
+YELLOW='\033[1;33m'
+PURPLE='\033[1;35m'
+NC='\033[0m'
+
 apt -qq install figlet -y >/dev/null
 
 figlet ToolzInstall
@@ -50,193 +59,193 @@ install_tools() {
   export PATH=$PATH:$GOPATH/bin
 
   #GIT
-  cd /opt || ! echo "Failure"
+  cd /opt || ! echo "${RED}Failure${NC}"
   #auto_pt
   if [ -d /opt/auto_pt ]; then
-    cd /opt/auto_pt || ! echo "Failure"
+    cd /opt/auto_pt || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   fi
   #Petit Potam
   if [ -d /opt/PetitPotam ]; then
-    cd /opt/PetitPotam || ! echo "Failure"
+    cd /opt/PetitPotam || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/topotam/PetitPotam.git
   fi
   #ESXi OpenSLP heap-overflow
   if [ -d /opt/CVE-2021-21974 ]; then
-    cd /opt/CVE-2021-21974 || ! echo "Failure"
+    cd /opt/CVE-2021-21974 || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/Shadow0ps/CVE-2021-21974.git
   fi
   #SIGRed RCE
   if [ -d /opt/SIGRed_RCE_PoC ]; then
-    cd /opt/SIGRed_RCE_PoC || ! echo "Failure"
+    cd /opt/SIGRed_RCE_PoC || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/chompie1337/SIGRed_RCE_PoC.git
   fi
   #PCredz
   if [ -d /opt/PCredz ]; then
-    cd /opt/PCredz || ! echo "Failure"
+    cd /opt/PCredz || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/lgandx/PCredz.git
   fi
   #Enum4linux NG
   if [ -d /opt/enum4linux-ng ]; then
-    cd /opt/enum4linux-ng || ! echo "Failure"
+    cd /opt/enum4linux-ng || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/cddmp/enum4linux-ng.git
   fi
   #Printer Exploitation Toolkit
   if [ -d /opt/PRET ]; then
-    cd /opt/PRET || ! echo "Failure"
+    cd /opt/PRET || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/RUB-NDS/PRET.git
   fi
   #Kerbrute
   if [ -d /opt/kerbrute ]; then
-    cd /opt/kerbrute || ! echo "Failure"
+    cd /opt/kerbrute || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/ropnop/kerbrute.git
   fi
   #NSE default Creds
   if [ -d /opt/nndefaccts ]; then
-    cd /opt/nndefaccts || ! echo "Failure"
+    cd /opt/nndefaccts || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/nnposter/nndefaccts.git
   fi
   #UNICORN
   if [ -d /opt/unicorn ]; then
-    cd /opt/unicorn || ! echo "Failure"
+    cd /opt/unicorn || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/trustedsec/unicorn.git
   fi
   #Pachine CVE-2021-42278
   if [ -d /opt/Pachine ]; then
-    cd /opt/Pachine || ! echo "Failure"
+    cd /opt/Pachine || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/ly4k/Pachine.git
   fi
   #noPAC CVE-2021-42278 and CVE-2021-42287
   if [ -d /opt/noPac ]; then
-    cd /opt/noPac || ! echo "Failure"
+    cd /opt/noPac || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/Ridter/noPac.git
   fi
   #PKINIT
   if [ -d /opt/PKINITtools ]; then
-    cd /opt/PKINITtools || ! echo "Failure"
+    cd /opt/PKINITtools || ! echo "${RED}Failure${NC}"
     git stash
     git pull
     pip3 install --upgrade -r requirements.txt
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/dirkjanm/PKINITtools.git
-    cd /opt/PKINITtools || ! echo "Failure"
+    cd /opt/PKINITtools || ! echo "${RED}Failure${NC}"
     pip3 install --upgrade -r requirements.txt
   fi
   #LDAP Scan Tool
   if [ -d /opt/LdapRelayScan ]; then
-    cd /opt/LdapRelayScan || ! echo "Failure"
+    cd /opt/LdapRelayScan || ! echo "${RED}Failure${NC}"
     git stash
     git pull
     pip3 install --upgrade -r requirements.txt
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/zyn3rgy/LdapRelayScan.git
-    cd /opt/LdapRelayScan || ! echo "Failure"
+    cd /opt/LdapRelayScan || ! echo "${RED}Failure${NC}"
     pip3 install --upgrade -r requirements.txt
   fi
   #krbrelayx
   if [ -d /opt/krbrelayx ]; then
-    cd /opt/krbrelayx || ! echo "Failure"
+    cd /opt/krbrelayx || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/dirkjanm/krbrelayx.git
   fi
   #PassTheCert
   if [ -d /opt/PassTheCert ]; then
-    cd /opt/PassTheCert || ! echo "Failure"
+    cd /opt/PassTheCert || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/AlmondOffSec/PassTheCert.git
   fi
   #DFScoerce
   if [ -d /opt/DFSCoercet ]; then
-    cd /opt/DFSCoerce || ! echo "Failure"
+    cd /opt/DFSCoerce || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/Wh04m1001/DFSCoerce.git
   fi
   #PrintNightmare
   if [ -d /opt/PrintNightmare ]; then
-    cd /opt/PrintNightmare || ! echo "Failure"
+    cd /opt/PrintNightmare || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/ly4k/PrintNightmare.git
   fi
   #sploutchy impacket
   if [ -d /opt/impacket-sploutchy ]; then
-    cd /opt/impacket-sploutchy || ! echo "Failure"
+    cd /opt/impacket-sploutchy || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/sploutchy/impacket /opt/impacket-sploutchy
   fi
   #CME Binary
   if [ -s /opt/cme_binary/cme ]; then
     echo "CME binary existend"
   else
-    cd /opt || ! echo "Failure"
-    curl --create-dirs -O --output-dir /opt/cme_binary https://github.com/mpgn/CrackMapExec/releases/download/v6.0.0/cme-ubuntu-latest-3.10.zip
-    unzip /opt/cme_binary/cme-ubuntu-latest-3.10.zip -d /opt/cme_binary
+    cd /opt || ! echo "${RED}Failure${NC}"
+    curl --create-dirs -O --output-dir /opt/cme_binary https://github.com/mpgn/CrackMapExec/releases/download/v6.0.0/cme-ubuntu-latest-3.11.zip
+    unzip /opt/cme_binary/cme-ubuntu-latest-3.11.zip -d /opt/cme_binary
     chmod +x /opt/cme_binary/cme
   fi
 
   #Go
-  cd /opt || ! echo "Failure"
+  cd /opt || ! echo "${RED}Failure${NC}"
   go install github.com/ropnop/kerbrute
   go install github.com/sensepost/gowitness@latest
   go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
@@ -248,14 +257,14 @@ install_tools() {
   #docker
   #Printnightmare Check
   if [ -d /opt/ItWasAllADream ]; then
-    cd /opt/ItWasAllADream || ! echo "Failure"
+    cd /opt/ItWasAllADream || ! echo "${RED}Failure${NC}"
     git stash
     git pull
     docker build -t itwasalladream .
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/byt3bl33d3r/ItWasAllADream.git
-    cd /opt/ItWasAllADream || ! echo "Failure"
+    cd /opt/ItWasAllADream || ! echo "${RED}Failure${NC}"
     docker build -t itwasalladream .
   fi
 
@@ -274,11 +283,11 @@ install_tools() {
   if [ -d /opt/scrying ]; then
     echo ''
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     wget https://github.com/nccgroup/scrying/releases/download/v0.9.2/scrying_0.9.2_amd64_linux.zip
     unzip scrying_0.9.2_amd64_linux.zip
     rm /opt/scrying_0.9.2_amd64_linux.zip
-    cd /opt/scrying || ! echo "Failure"
+    cd /opt/scrying || ! echo "${RED}Failure${NC}"
     wget http://ftp.de.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1n-0+deb11u4_amd64.deb
     apt install /opt/scrying/libssl1.1_1.1.1n-0+deb11u4_amd64.deb
     wget https://github.com/nccgroup/scrying/releases/download/v0.9.2/scrying_0.9.2_amd64.deb
@@ -287,13 +296,13 @@ install_tools() {
 
   #airgeddon
   if [ -d /opt/airgeddon ]; then
-    cd /opt/airgeddon || ! echo "Failure"
+    cd /opt/airgeddon || ! echo "${RED}Failure${NC}"
     git stash
     git pull
   else
-    cd /opt || ! echo "Failure"
+    cd /opt || ! echo "${RED}Failure${NC}"
     git clone --depth 1 https://github.com/v1s1t0r1sh3r3/airgeddon.git
-    cd /opt/airgeddon || ! echo "Failure"
+    cd /opt/airgeddon || ! echo "${RED}Failure${NC}"
     bash airgeddon.sh
   fi
 
