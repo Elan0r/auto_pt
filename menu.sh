@@ -10,6 +10,7 @@ tmux rename-window '**Auto PT**'
 while true; do
   echo '-----------------------------------------------------------'
   figlet '**Auto PT**'
+  echo "by @Elan0r"
   echo "|---------------------------------------------------------|"
   echo "|All Scripts are tracked in runtime.txt in output         |"
   echo "|Details of all Scripts in SubMenu                        |"
