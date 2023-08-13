@@ -23,24 +23,33 @@ install_tools() {
   #APT
   apt -qq update
   apt -qq install tmux bettercap nbtscan responder docker.io yersinia golang golang-go eyewitness enum4linux ipmitool chromium python3 python3-dev python3-pip python3-venv nmap smbmap john libpcap-dev libsasl2-dev libldap2-dev ntpdate wget zip unzip systemd-timesyncd pipx swig -y
-
+  apt -qq purge crackmapexec python3-ldapdomaindump -y
   #SearchSploit
   #searchsploit -u
 
   #PIP3
-  pip3 install --upgrade ldap3 Cython python-libpcap scapy mitm6 minikerberos
+  pip3 install --upgrade ldap3 Cython python-libpcap scapy minikerberos
 
   #pipx
   pip3 install --user pipx PyYAML alive-progress xlsxwriter sectools --upgrade
   pipx ensurepath
   pipx install git+https://github.com/dirkjanm/ldapdomaindump.git --force
   pipx install git+https://github.com/mpgn/CrackMapExec.git --force
-  pipx install git+https://github.com/ThePorgs/impacket.git --force
+  pipx install git+https://github.com/fortra/impacket.git --force
   pipx install git+https://github.com/zer1t0/certi.git --force
   pipx install git+https://github.com/ly4k/Certipy.git --force
   pipx install git+https://github.com/fox-it/BloodHound.py.git --force
   pipx install git+https://github.com/p0dalirius/Coercer --force
   pipx install git+https://github.com/Hackndo/WebclientServiceScanner.git --force
+  pipx install git+https://github.com/dirkjanm/mitm6.git --force
+  pipx install git+https://github.com/cddmp/enum4linux-ng.git --force
+
+  if grep -Fxq 'export PATH=$PATH:/root/.local/bin' /root/.zshrc; then
+    echo -e ''
+  else
+    echo -e '\nexport PATH=$PATH:/root/.local/bin' >>/root/.zshrc
+  fi
+  export PATH=$PATH:/root/.local/bin
 
   #go env
   if [ -d /opt/go ]; then
@@ -101,15 +110,6 @@ install_tools() {
   else
     cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/lgandx/PCredz.git
-  fi
-  #Enum4linux NG
-  if [ -d /opt/enum4linux-ng ]; then
-    cd /opt/enum4linux-ng || ! echo "${RED}Failure${NC}"
-    git stash
-    git pull
-  else
-    cd /opt || ! echo "${RED}Failure${NC}"
-    git clone https://github.com/cddmp/enum4linux-ng.git
   fi
   #Printer Exploitation Toolkit
   if [ -d /opt/PRET ]; then
