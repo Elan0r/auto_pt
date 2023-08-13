@@ -43,7 +43,7 @@ while true; do
   echo -e "| ${PURPLE}L${CYAN} OT systems scan                                       |"
   echo -e "| ${PURPLE}M${CYAN} Cleanup the mess                                      |"
   echo -e "|---------------------------------------------------------|"
-  echo -e "| ${PURPLE}N${CYAN} Userchecks ${RED}(Creds required\!)${CYAN}                          |"
+  echo -e "| ${PURPLE}N${CYAN} Userchecks ${RED}(Creds required!)${CYAN}                          |"
   echo -e "|---------------------------------------------------------|"
   echo -e "| ${PURPLE}O${CYAN} Set Workspace                                         |"
   echo -e "| ${PURPLE}P${CYAN} Change interface (default eth0)                       |"
