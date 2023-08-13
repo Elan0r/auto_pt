@@ -222,5 +222,4 @@ root 00000000
 admin 1111111
 admin 54321
 admin meinsm
-mother fucker
 cmc password

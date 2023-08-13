@@ -35,7 +35,7 @@ while true; do
   echo -e "| ${PURPLE}E${CYAN} Vulnerability Analysis (MSF+X)                        |"
   echo -e "| ${PURPLE}F${CYAN} 5 min Responder Relay                                 |"
   echo -e "| ${PURPLE}G${CYAN} Collect loot an RAW files                             |"
-  echo -e "| ${PURPLE}H${CYAN} Create Host.txt and Findings.txt                      |"
+  echo -e "| ${PURPLE}H${CYAN} Create host.txts and findings.txt                     |"
   echo -e "| ${PURPLE}I${CYAN} Eyewitness scan all webservices                       |"
   echo -e "| ${PURPLE}J${CYAN} Collect default splash pages                          |"
   echo -e "| ${PURPLE}K${CYAN} Run all above exept installer and passiv              |"
