@@ -14,7 +14,7 @@ apt -qq install figlet -y >/dev/null
 figlet ToolzInstall
 
 echo '! > '
-echo '! > Tools go to /opt'
+echo "${BLUE}! > Tools go to ${PURPLE}/opt${NC}"
 
 install_tools() {
   #CME Cleaning
@@ -119,15 +119,6 @@ install_tools() {
   else
     cd /opt || ! echo "${RED}Failure${NC}"
     git clone https://github.com/RUB-NDS/PRET.git
-  fi
-  #Kerbrute
-  if [ -d /opt/kerbrute ]; then
-    cd /opt/kerbrute || ! echo "${RED}Failure${NC}"
-    git stash
-    git pull
-  else
-    cd /opt || ! echo "${RED}Failure${NC}"
-    git clone https://github.com/ropnop/kerbrute.git
   fi
   #NSE default Creds
   if [ -d /opt/nndefaccts ]; then
@@ -246,7 +237,7 @@ install_tools() {
 
   #Go
   cd /opt || ! echo "${RED}Failure${NC}"
-  go install github.com/ropnop/kerbrute
+  go install github.com/ropnop/kerbrute@latest
   go install github.com/sensepost/gowitness@latest
   go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 
@@ -285,13 +276,13 @@ install_tools() {
   else
     cd /opt || ! echo "${RED}Failure${NC}"
     wget https://github.com/nccgroup/scrying/releases/download/v0.9.2/scrying_0.9.2_amd64_linux.zip
-    unzip scrying_0.9.2_amd64_linux.zip
-    rm /opt/scrying_0.9.2_amd64_linux.zip
+    #unzip scrying_0.9.2_amd64_linux.zip
+    #rm /opt/scrying_0.9.2_amd64_linux.zip
     cd /opt/scrying || ! echo "${RED}Failure${NC}"
     wget http://ftp.de.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1n-0+deb11u4_amd64.deb
-    apt install /opt/scrying/libssl1.1_1.1.1n-0+deb11u4_amd64.deb
+    apt -qq install /opt/scrying/libssl1.1_1.1.1n-0+deb11u4_amd64.deb -y
     wget https://github.com/nccgroup/scrying/releases/download/v0.9.2/scrying_0.9.2_amd64.deb
-  #  apt install /opt/scrying/scrying_0.9.2_amd64.deb
+    apt -qq install /opt/scrying/scrying_0.9.2_amd64.deb -y
   fi
 
   #airgeddon
@@ -303,7 +294,7 @@ install_tools() {
     cd /opt || ! echo "${RED}Failure${NC}"
     git clone --depth 1 https://github.com/v1s1t0r1sh3r3/airgeddon.git
     cd /opt/airgeddon || ! echo "${RED}Failure${NC}"
-    bash airgeddon.sh
+    #bash airgeddon.sh
   fi
 
   #Nmap scripts

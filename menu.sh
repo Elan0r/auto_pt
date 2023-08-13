@@ -1,4 +1,13 @@
 #!/bin/bash
+# shellcheck disable=SC2034
+#Colors
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+CYAN='\033[1;36m'
+BLUE='\033[1;34m'
+YELLOW='\033[1;33m'
+PURPLE='\033[1;35m'
+NC='\033[0m'
 
 # create nessesary folder
 /opt/auto_pt/scripts/b10-folder.sh
@@ -9,7 +18,7 @@ tmux rename-window '**Auto PT**'
 # shellcheck disable=SC1091
 while true; do
   echo '-----------------------------------------------------------'
-  figlet '**Auto PT**'
+  figlet "**Auto PT**"
   echo "by @Elan0r"
   echo "|---------------------------------------------------------|"
   echo "|All Scripts are tracked in runtime.txt in output         |"
