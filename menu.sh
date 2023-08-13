@@ -7,6 +7,8 @@ CYAN='\033[1;36m'
 BLUE='\033[1;34m'
 YELLOW='\033[1;33m'
 PURPLE='\033[1;35m'
+INVB='\e[44;1m'
+RE='\033[0m\e[44;1m'
 NC='\033[0m'
 
 # create nessesary folder
@@ -17,47 +19,47 @@ tmux rename-window '**Auto PT**'
 
 # shellcheck disable=SC1091
 while true; do
-  echo '-----------------------------------------------------------'
+  echo "${CYAN}-----------------------------------------------------------${RED}"
   figlet "**Auto PT**"
-  echo "by @Elan0r"
+  echo "${GREEN}by @Elan0r"
+  echo "${CYAN}|---------------------------------------------------------|"
+  echo "| All Scripts are tracked in ${RED}runtime.txt${CYAN} in output        |"
+  echo "| Details of all Scripts in SubMenu                       |"
+  echo "| ${YELLOW}Select an option from the list:                         ${CYAN}|"
   echo "|---------------------------------------------------------|"
-  echo "|All Scripts are tracked in runtime.txt in output         |"
-  echo "|Details of all Scripts in SubMenu                        |"
-  echo -e "|\e[94m\e[1mSelect an option from the list:                          \e[0m|"
+  echo "| ${PURPLE}A${CYAN} Tool Installer                                        |"
+  echo "| ${PURPLE}B${CYAN} Folder Re-Creation                                    |"
+  echo "| ${PURPLE}C${CYAN} Passiv Listener                                       |"
   echo "|---------------------------------------------------------|"
-  echo -e "|\e[94mA)\e[0m Tool Installer                                        |"
-  echo -e "|\e[94mB)\e[0m Folder Re-Creation                                    |"
-  echo -e "|\e[94mC)\e[0m Passiv Listener                                       |"
+  echo "| ${PURPLE}D${CYAN} Host and Service Discovery                            |"
+  echo "| ${PURPLE}E${CYAN} Vulnerability Analysis (MSF+X)                        |"
+  echo "| ${PURPLE}F${CYAN} 5 min Responder Relay                                 |"
+  echo "| ${PURPLE}G${CYAN} Collect loot an RAW files                             |"
+  echo "| ${PURPLE}H${CYAN} Create Host.txt and Findings.txt                      |"
+  echo "| ${PURPLE}I${CYAN} Eyewitness scan all webservices                       |"
+  echo "| ${PURPLE}J${CYAN} Collect default splash pages                          |"
+  echo "| ${PURPLE}K${CYAN} Run all above exept installer and passiv              |"
   echo "|---------------------------------------------------------|"
-  echo -e "|\e[94mD)\e[0m Host and Service Discovery                            |"
-  echo -e "|\e[94mE)\e[0m Vulnerability Analysis (MSF+X)                        |"
-  echo -e "|\e[94mF)\e[0m 5 min Responder Relay                                 |"
-  echo -e "|\e[94mG)\e[0m Collect loot an RAW files                             |"
-  echo -e "|\e[94mH)\e[0m Create Host.txt and Findings.txt                      |"
-  echo -e "|\e[94mI)\e[0m Eyewitness scan all webservices                       |"
-  echo -e "|\e[94mJ)\e[0m Collect default splash pages                          |"
-  echo -e "|\e[94mK)\e[0m Run all above exept installer and passiv              |"
+  echo "| ${PURPLE}L${CYAN} OT systems scan                                       |"
+  echo "| ${PURPLE}M${CYAN} Cleanup the mess                                      |"
   echo "|---------------------------------------------------------|"
-  echo -e "|\e[94mL)\e[0m OT systems scan                                       |"
-  echo -e "|\e[94mM)\e[0m Cleanup the mess                                      |"
+  echo "| ${PURPLE}N${CYAN} Userchecks ${RED}(Creds required\!)${CYAN}                          |"
   echo "|---------------------------------------------------------|"
-  echo -e "|\e[94mN)\e[0m Userchecks (Creds required!)                          |"
+  echo "| ${PURPLE}O${CYAN} Set Workspace                                         |"
+  echo "| ${PURPLE}P${CYAN} Change interface (default eth0)                       |"
   echo "|---------------------------------------------------------|"
-  echo -e "|\e[94mO)\e[0m Set Workspace                                         |"
-  echo -e "|\e[94mP)\e[0m Change interface (default eth0)                       |"
+  echo "| ${PURPLE}Z${CYAN} Show status                                           |"
   echo "|---------------------------------------------------------|"
-  echo -e "|\e[94mZ)\e[0m Show status                                           |"
-  echo "|---------------------------------------------------------|"
-  echo -e "|\e[94m0)\e[0m Exit                                                  |"
-  echo '-----------------------------------------------------------'
+  echo "| ${PURPLE}0${RED} Exit${CYAN}                                                  |"
+  echo "-----------------------------------------------------------${NC}"
   read -r abcdefghijklmnopz0
   case $abcdefghijklmnopz0 in
     [aA])
-      echo -e "\e[44;1m            Tool Installer                                 \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Ths script will install common used tools      \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Start installation? y/n                        \e[0m"
+      echo "${INVB}            Tool Installer                                 ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Ths script will install common used tools      ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Start installation? ${GREEN}y${RE}/${RED}n${RE}                        ${NC}"
       echo ""
       while true; do
         read -r y
@@ -68,7 +70,7 @@ while true; do
             ;;
 
           *)
-            echo 'go back'
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -77,11 +79,11 @@ while true; do
       ;;
 
     [bB])
-      echo -e "\e[44;1m            Folder Creation                                \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Ths script will create folders if not present  \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Start creation? y/n                            \e[0m"
+      echo "${INVB}            Folder Creation                                ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Ths script will create folders if not present  ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Start creation? ${GREEN}y${RE}/${RED}n${RE}                            ${NC}"
       echo ""
       while true; do
         read -r y
@@ -92,7 +94,7 @@ while true; do
             ;;
 
           *)
-            echo 'go back'
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -101,14 +103,14 @@ while true; do
       ;;
 
     [cC])
-      echo -e "\e[44;1m            Passive Listener                               \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Ths script will start passive Recon            \e[0m"
-      echo -e "\e[44;1m            Netdiscover for quick host and network view    \e[0m"
-      echo -e "\e[44;1m            PCredz for hash collection                     \e[0m"
-      echo -e "\e[44;1m            tcpdump for further traffic analysis           \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Start listener? y/n                            \e[0m"
+      echo "${INVB}            Passive Listener                               ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Ths script will start passive Recon            ${NC}"
+      echo "${INVB}            Netdiscover for quick host and network view    ${NC}"
+      echo "${INVB}            PCredz for hash collection                     ${NC}"
+      echo "${INVB}            tcpdump for further traffic analysis           ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Start listener? ${GREEN}y${RE}/${RED}n${RE}                            ${NC}"
       echo ""
       while true; do
         read -r y
@@ -119,7 +121,7 @@ while true; do
             ;;
 
           *)
-            echo 'go back'
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -128,27 +130,27 @@ while true; do
       ;;
 
     [dD])
-      echo -e "\e[44;1m            Active Recon                                   \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            This script will scann all networks            \e[0m"
-      echo -e "\e[44;1m            can create Scope for check with customer       \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            DNSenum with nmap sL scan all private IPs      \e[0m"
-      echo -e "\e[44;1m            nmap PE and sO for Host Discovery              \e[0m"
-      echo -e "\e[44;1m            nmap sSV for Service detection                 \e[0m"
-      echo -e "\e[44;1m            CME anonymous Shares detection                 \e[0m"
-      echo -e "\e[44;1m            CME SMB no Signing detection                   \e[0m"
-      echo -e "\e[44;1m            DNSrecon and DNS Zone Transfer                 \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Creates Info Gathering summary in output       \e[0m"
-      echo -e "\e[44;1m            S and P includes the Report by default         \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Scope Present or not?                          \e[0m"
-      echo -e "\e[44;1m            If not use DNSenum for Scope definition        \e[0m"
-      echo -e "\e[44;1m            DNSEnum (d) or ActiveRecon (p)                 \e[0m"
-      echo -e "\e[44;1m            DNSenum and ActiveRecon (s)                    \e[0m"
-      echo -e "\e[44;1m            Report only (r)                                \e[0m"
-      echo -e "\e[44;1m            Back to Main Menu (x)                          \e[0m"
+      echo "${INVB}            Active Recon                                   ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            This script will scann all networks            ${NC}"
+      echo "${INVB}            can create Scope for check with customer       ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            DNSenum with nmap sL scan all private IPs      ${NC}"
+      echo "${INVB}            nmap PE and sO for Host Discovery              ${NC}"
+      echo "${INVB}            nmap sSV for Service detection                 ${NC}"
+      echo "${INVB}            CME anonymous Shares detection                 ${NC}"
+      echo "${INVB}            CME SMB no Signing detection                   ${NC}"
+      echo "${INVB}            DNSrecon and DNS Zone Transfer                 ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Creates Info Gathering summary in output       ${NC}"
+      echo "${INVB}            S and P includes the Report by default         ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Scope Present or not?                          ${NC}"
+      echo "${INVB}            If not use DNSenum for Scope definition        ${NC}"
+      echo "${INVB}            DNSEnum (${YELLOW}d${RE}) or ActiveRecon (${YELLOW}p${RE})                 ${NC}"
+      echo "${INVB}            DNSenum and ActiveRecon (${YELLOW}s${RE})                    ${NC}"
+      echo "${INVB}            Report only (${YELLOW}r${RE})                                ${NC}"
+      echo "${INVB}            Back to Main Menu (${RED}x${RE})                          ${NC}"
       while true; do
         read -r dprsx
         case $dprsx in
@@ -182,12 +184,12 @@ while true; do
             ;;
 
           [xX]*)
-            echo "go back"
+            echo "${RED}go back${NC}"
             break
             ;;
 
           *)
-            echo "Please answer D, P, R, S or X"
+            echo "${YELLOW}Please answer ${GREEN}D, P, R, S or X${NC}"
             ;;
         esac
       done
@@ -195,17 +197,17 @@ while true; do
       ;;
 
     [eE])
-      echo -e "\e[44;1m            Vulnerability Analysis (MSF+X)                 \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Ths script will start VA                       \e[0m"
-      echo -e "\e[44;1m            Metasploit for general exploitability          \e[0m"
-      echo -e "\e[44;1m            MSF ZeroLogon                                  \e[0m"
-      echo -e "\e[44;1m            RPC 0 Session with enum4linux-ng               \e[0m"
-      echo -e "\e[44;1m            default Creds with nmap and nndefaccts         \e[0m"
-      echo -e "\e[44;1m            SSL Scan with heartbleet                       \e[0m"
-      echo -e "\e[44;1m            NO list creation! Active recon recommended!    \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Start VA? y/n                                  \e[0m"
+      echo "${INVB}            Vulnerability Analysis (MSF+X)                 ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Ths script will start VA                       ${NC}"
+      echo "${INVB}            Metasploit for general exploitability          ${NC}"
+      echo "${INVB}            MSF ZeroLogon                                  ${NC}"
+      echo "${INVB}            RPC 0 Session with enum4linux-ng               ${NC}"
+      echo "${INVB}            default Creds with nmap and nndefaccts         ${NC}"
+      echo "${INVB}            SSL Scan with heartbleet                       ${NC}"
+      echo "${INVB}            NO list creation! Active recon recommended!    ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Start VA? ${GREEN}y${RE}/${RED}n${RE}                                  ${NC}"
       echo ""
       while true; do
         read -r y
@@ -222,7 +224,7 @@ while true; do
             ;;
 
           *)
-            echo 'go back'
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -231,13 +233,13 @@ while true; do
       ;;
 
     [fF])
-      echo -e "\e[44;1m            Responder Relay                                \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            This Script starts Responder -wbFP on eth0     \e[0m"
-      echo -e "\e[44;1m            Ntlmrelyx versus all smb_no_signing            \e[0m"
-      echo -e "\e[44;1m            If missing it will create a list               \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Start relay? y/n                               \e[0m"
+      echo "${INVB}            Responder Relay                                ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            This Script starts Responder -wbFP on eth0     ${NC}"
+      echo "${INVB}            Ntlmrelyx versus smb_no_signing.txt            ${NC}"
+      echo "${INVB}            If missing it will create a list               ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Start relay? ${GREEN}y${RE}/${RED}n${RE}                               ${NC}"
       echo ""
       while true; do
         read -r y
@@ -248,7 +250,7 @@ while true; do
             ;;
 
           *)
-            echo 'go back'
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -257,12 +259,12 @@ while true; do
       ;;
 
     [gG])
-      echo -e "\e[44;1m            Looting                                        \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Collects all loot from previous scripts        \e[0m"
-      echo -e "\e[44;1m            Creates hosts.txt for each finding             \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Start looting? y/n                             \e[0m"
+      echo "${INVB}            Looting                                        ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Collects all loot from previous scripts        ${NC}"
+      echo "${INVB}            Creates hosts.txt for each finding             ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Start looting? ${GREEN}y${RE}/${RED}n${RE}                             ${NC}"
       echo ""
       while true; do
         read -r y
@@ -273,7 +275,7 @@ while true; do
             ;;
 
           *)
-            echo 'go back'
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -282,12 +284,12 @@ while true; do
       ;;
 
     [hH])
-      echo -e "\e[44;1m            Counting Loot                                  \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Counts all loot                                \e[0m"
-      echo -e "\e[44;1m            Creates findings.txt in output                 \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Start counting? y/n                            \e[0m"
+      echo "${INVB}            Counting Loot                                  ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Counts all loot                                ${NC}"
+      echo "${INVB}            Creates findings.txt in output                 ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Start counting? ${GREEN}y${RE}/${RED}n${RE}                            ${NC}"
       echo ""
       while true; do
         read -r y
@@ -298,7 +300,7 @@ while true; do
             ;;
 
           *)
-            echo 'go back'
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -307,12 +309,12 @@ while true; do
       ;;
 
     [iI])
-      echo -e "\e[44;1m            Eyewitness                                     \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Makes screens of all websites                  \e[0m"
-      echo -e "\e[44;1m            uses nmap service.xml from active recon        \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Start photosession? y/n                        \e[0m"
+      echo "${INVB}            Eyewitness                                     ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Makes screens of all websites                  ${NC}"
+      echo "${INVB}            uses nmap ${RED}service.xml${RE} from active recon        ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Start photosession? ${GREEN}y${RE}/${RED}n${RE}                        ${NC}"
       echo ""
       while true; do
         read -r y
@@ -323,7 +325,7 @@ while true; do
             ;;
 
           *)
-            echo 'go back'
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -332,14 +334,14 @@ while true; do
       ;;
 
     [jJ])
-      echo -e "\e[44;1m            Splash Screen looter                           \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Collect all Splashscreens from eyewitness      \e[0m"
-      echo -e "\e[44;1m            Creates hosts.txt for each finding             \e[0m"
-      echo -e "\e[44;1m            attaches result in findings.txt in output      \e[0m"
-      echo -e "\e[44;1m            Eyewitness needs to finish for usable results  \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Start looting? y/n                             \e[0m"
+      echo "${INVB}            Splash Screen looter                           ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Collect all Splashscreens from eyewitness      ${NC}"
+      echo "${INVB}            Creates hosts.txt for each finding             ${NC}"
+      echo "${INVB}            attaches result in findings.txt in output      ${NC}"
+      echo "${INVB}            Eyewitness needs to finish for usable results  ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Start looting? ${GREEN}y${RE}/${RED}n${RE}                             ${NC}"
       echo ""
       while true; do
         read -r y
@@ -350,7 +352,7 @@ while true; do
             ;;
 
           *)
-            echo 'go back'
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -359,22 +361,22 @@ while true; do
       ;;
 
     [kK])
-      echo -e "\e[44;1m            Auto_PT                                        \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            All AutoPT scripts                             \e[0m"
-      echo -e "\e[44;1m            Pre-set the MSF workspace with the O menu      \e[0m"
-      echo -e "\e[44;1m            Main Menu D till J                             \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Workspace set?                                 \e[0m"
-      echo -e "\e[44;1m            Realy? y/n?                                    \e[0m"
+      echo "${INVB}            Auto_PT                                        ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            All AutoPT scripts                             ${NC}"
+      echo "${INVB}            Pre-set the MSF workspace with the O menu      ${NC}"
+      echo "${INVB}            Main Menu D till J                             ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Workspace set?                                 ${NC}"
+      echo "${INVB}            Realy? ${GREEN}y${RE}/${RED}n${RE}?                                    ${NC}"
       echo ""
       while true; do
         read -r y
         case $y in
           [yY]*)
-            echo -e "\e[44;1m            Scope Present or not?                          \e[0m"
-            echo -e "\e[44;1m            If not use DNSenum for Scope definition        \e[0m"
-            echo -e "\e[44;1m            DNSEnum (d) or scope present (p)               \e[0m"
+            echo "${INVB}            Scope Present or not?                          ${NC}"
+            echo "${INVB}            If not use DNSenum for Scope definition        ${NC}"
+            echo "${INVB}            DNSEnum (d) or scope present (p)               ${NC}"
             while true; do
               read -r dp
               case $dp in
@@ -410,7 +412,7 @@ while true; do
             ;;
 
           *)
-            echo "go back"
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -419,16 +421,16 @@ while true; do
       ;;
 
     [lL])
-      echo -e "\e[44;1m            OT Scan                                        \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Scans OT related stuff                         \e[0m"
-      echo -e "\e[44;1m            this really will take some time                \e[0m"
-      echo -e "\e[44;1m            OT is slow!                                    \e[0m"
-      echo -e "\e[44;1m            Eyewitness needs to finish for usable results  \e[0m"
-      echo -e "\e[44;1m            needs ipot.txt in input                        \e[0m"
-      echo -e "\e[44;1m            is ipOT.txt    present?                        \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            start OT scan? y/n                             \e[0m"
+      echo "${INVB}            OT Scan                                        ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Scans OT related stuff                         ${NC}"
+      echo "${INVB}            this really will take some time                ${NC}"
+      echo "${INVB}            OT is slow!                                    ${NC}"
+      echo "${INVB}            Eyewitness needs to finish for usable results  ${NC}"
+      echo "${INVB}            needs ipot.txt in input                        ${NC}"
+      echo "${INVB}            is   ${RED}ipot.txt${RE}  present?                        ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            start OT scan? ${GREEN}y${RE}/${RED}n${RE}                             ${NC}"
       echo ""
       while true; do
         read -r y
@@ -439,7 +441,7 @@ while true; do
             ;;
 
           *)
-            echo "go back"
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -448,15 +450,15 @@ while true; do
       ;;
 
     [mM])
-      echo -e "\e[44;1m            Heiko Schotte, Firma Lausen                    \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Heiko is a Tatortreiniger.                     \e[0m"
-      echo -e "\e[44;1m            He will clean up your mess!                    \e[0m"
-      echo -e "\e[44;1m            This will barely leave a proof on this system! \e[0m"
-      echo -e "\e[44;1m            All will be lost!                              \e[0m"
-      echo -e "\e[44;1m            No Backup, no Sorry!                           \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Realy? y/n?                                    \e[0m"
+      echo "${INVB}            Heiko Schotte, Firma Lausen                    ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Heiko is a Tatortreiniger.                     ${NC}"
+      echo "${INVB}            He will clean up your mess!                    ${NC}"
+      echo "${INVB}            This will barely leave a proof on this system! ${NC}"
+      echo "${INVB}            All will be lost!                              ${NC}"
+      echo "${INVB}            No Backup, no Sorry!                           ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Realy? ${GREEN}y${RE}/${RED}n${RE}?                                    ${NC}"
       echo ""
       while true; do
         read -r y
@@ -467,7 +469,7 @@ while true; do
             ;;
 
           *)
-            echo "go back"
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -476,33 +478,33 @@ while true; do
       ;;
 
     [nN])
-      echo -e "\e[44;1m            User Checks                                    \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Collection of Checks!                          \e[0m"
-      echo -e "\e[44;1m            Will be LOUD!                                  \e[0m"
-      echo -e "\e[44;1m            DNS Zone Transfer                              \e[0m"
-      echo -e "\e[44;1m            Username as Password with CME                  \e[0m"
-      echo -e "\e[44;1m            Creates BH import query for valid accounts     \e[0m"
-      echo -e "\e[44;1m            GPP Autologin with CME                         \e[0m"
-      echo -e "\e[44;1m            GPP Password with CME                          \e[0m"
-      echo -e "\e[44;1m            Looting of GPP Checks in host.txt              \e[0m"
-      echo -e "\e[44;1m            Check Pass-Pol with CME                        \e[0m"
-      echo -e "\e[44;1m            Check nopac with CME                           \e[0m"
-      echo -e "\e[44;1m            Check petitpotam with CME                      \e[0m"
-      echo -e "\e[44;1m            Check DFScoerce with CME                       \e[0m"
-      echo -e "\e[44;1m            Check Shacowcoerce with CME                    \e[0m"
-      echo -e "\e[44;1m            Check ntlmv1 with CME                          \e[0m"
-      echo -e "\e[44;1m            Check SMB sessions with CME                    \e[0m"
-      echo -e "\e[44;1m            Check ASRep with CME                           \e[0m"
-      echo -e "\e[44;1m            Check Kerberoasting with CME                   \e[0m"
-      echo -e "\e[44;1m            Check MAQ with CME                             \e[0m"
-      echo -e "\e[44;1m            Check ldap signing with CME and ldaprelaycheck \e[0m"
-      echo -e "\e[44;1m            Makes Bloodhound dump                          \e[0m"
-      echo -e "\e[44;1m            Makes Certipy dump for old-bloodhound          \e[0m"
-      echo -e "\e[44;1m            CME LDAP Checks may be broken                  \e[0m"
-      echo -e "\e[44;1m            CME may be broken u need to press ENTER often! \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Realy? y/n?                                    \e[0m"
+      echo "${INVB}            User Checks                                    ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Collection of Checks!                          ${NC}"
+      echo "${INVB}            Will be LOUD!                                  ${NC}"
+      echo "${INVB}            DNS Zone Transfer                              ${NC}"
+      echo "${INVB}            Username as Password with CME                  ${NC}"
+      echo "${INVB}            Creates BH import query for valid accounts     ${NC}"
+      echo "${INVB}            GPP Autologin with CME                         ${NC}"
+      echo "${INVB}            GPP Password with CME                          ${NC}"
+      echo "${INVB}            Looting of GPP Checks in host.txt              ${NC}"
+      echo "${INVB}            Check Pass-Pol with CME                        ${NC}"
+      echo "${INVB}            Check nopac with CME                           ${NC}"
+      echo "${INVB}            Check petitpotam with CME                      ${NC}"
+      echo "${INVB}            Check DFScoerce with CME                       ${NC}"
+      echo "${INVB}            Check Shacowcoerce with CME                    ${NC}"
+      echo "${INVB}            Check ntlmv1 with CME                          ${NC}"
+      echo "${INVB}            Check SMB sessions with CME                    ${NC}"
+      echo "${INVB}            Check ASRep with CME                           ${NC}"
+      echo "${INVB}            Check Kerberoasting with CME                   ${NC}"
+      echo "${INVB}            Check MAQ with CME                             ${NC}"
+      echo "${INVB}            Check ldap signing with CME and ldaprelaycheck ${NC}"
+      echo "${INVB}            Makes Bloodhound dump                          ${NC}"
+      echo "${INVB}            Makes Certipy dump for old-bloodhound          ${NC}"
+      echo "${INVB}            CME LDAP Checks may be broken                  ${NC}"
+      echo "${INVB}            CME may be broken u need to press ENTER often! ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Realy? ${GREEN}y${RE}/${RED}n${RE}?                                    ${NC}"
       echo ""
       while true; do
         read -r y
@@ -513,7 +515,7 @@ while true; do
             ;;
 
           *)
-            echo "go back"
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -522,14 +524,14 @@ while true; do
       ;;
 
     [oO])
-      echo -e "\e[44;1m            MSF Workspace                                  \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Set new MSF workspace for the Modules          \e[0m"
-      echo -e "\e[44;1m            Set E-Mail for SMTP Checks in resource.txt     \e[0m"
-      echo -e "\e[44;1m            creates files in input/msf                     \e[0m"
-      echo -e "\e[44;1m            will NOT delete existing workspace!            \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            New Workspace? y/n?                            \e[0m"
+      echo "${INVB}            MSF Workspace                                  ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Set new MSF workspace for the Modules          ${NC}"
+      echo "${INVB}            Set E-Mail for SMTP Checks in resource.txt     ${NC}"
+      echo "${INVB}            creates files in input/msf                     ${NC}"
+      echo "${INVB}            will NOT delete existing workspace!            ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            New Workspace? ${GREEN}y${RE}/${RED}n${RE}?                            ${NC}"
       echo ""
       while true; do
         read -r y
@@ -540,7 +542,7 @@ while true; do
             ;;
 
           *)
-            echo "go back"
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -549,13 +551,13 @@ while true; do
       ;;
 
     [pP])
-      echo -e "\e[44;1m            Select Interface                               \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Set new Interface                              \e[0m"
-      echo -e "\e[44;1m            Changes all Scripts in auto_pt                 \e[0m"
-      echo -e "\e[44;1m            Default is eth0                                \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            New Interface? y/n?                            \e[0m"
+      echo "${INVB}            Select Interface                               ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Set new Interface                              ${NC}"
+      echo "${INVB}            Changes all Scripts in auto_pt                 ${NC}"
+      echo "${INVB}            Default is ${YELLOW}eth0${RE}                                ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            New Interface? ${GREEN}y${RE}/${RED}n${RE}?                            ${NC}"
       echo ""
       while true; do
         read -r y
@@ -566,7 +568,7 @@ while true; do
             ;;
 
           *)
-            echo "go back"
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -575,12 +577,12 @@ while true; do
       ;;
 
     [zZ])
-      echo -e "\e[44;1m            Runtime                                        \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            Opens runtime.txt in split-pane                \e[0m"
-      echo -e "\e[44;1m            is following runtime.txt (auto refresh)        \e[0m"
-      echo -e "\e[44;1m-----------------------------------------------------------\e[0m"
-      echo -e "\e[44;1m            view status? y/n?                              \e[0m"
+      echo "${INVB}            Runtime                                        ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            Opens runtime.txt in split-pane                ${NC}"
+      echo "${INVB}            is following runtime.txt (auto refresh)        ${NC}"
+      echo "${INVB}-----------------------------------------------------------${NC}"
+      echo "${INVB}            view status? ${GREEN}y${RE}/${RED}n${RE}?                              ${NC}"
       echo ""
       while true; do
         read -r y
@@ -591,7 +593,7 @@ while true; do
             ;;
 
           *)
-            echo "go back"
+            echo "${RED}go back${NC}"
             break
             ;;
         esac
@@ -605,7 +607,7 @@ while true; do
 
     *)
       echo ""
-      echo -e "\e[44;1m            Select a valid option from the list!           \e[0m"
+      echo "${INVB}            ${YELLOW}Select a valid option from the list!           ${NC}"
       echo ""
       ;;
   esac
