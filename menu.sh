@@ -25,7 +25,7 @@ while true; do
   echo -e "${CYAN}|---------------------------------------------------------|"
   echo -e "| All Scripts are tracked in ${RED}runtime.txt${CYAN} in output        |"
   echo -e "| Details of all Scripts in SubMenu                       |"
-  echo -e "| ${YELLOW}Select an option from the list:                         ${CYAN}|"
+  echo -e "| ${YELLOW}Select an option from the list:${CYAN}                         |"
   echo -e "|---------------------------------------------------------|"
   echo -e "| ${PURPLE}A${CYAN} Tool Installer                                        |"
   echo -e "| ${PURPLE}B${CYAN} Folder Re-Creation                                    |"
@@ -41,19 +41,20 @@ while true; do
   echo -e "| ${PURPLE}K${CYAN} Run all above exept installer and passiv              |"
   echo -e "|---------------------------------------------------------|"
   echo -e "| ${PURPLE}L${CYAN} OT systems scan                                       |"
-  echo -e "| ${PURPLE}M${CYAN} Cleanup the mess                                      |"
   echo -e "|---------------------------------------------------------|"
   echo -e "| ${PURPLE}N${CYAN} Userchecks ${RED}(Creds required!)${CYAN}                          |"
   echo -e "|---------------------------------------------------------|"
   echo -e "| ${PURPLE}O${CYAN} Set Workspace                                         |"
   echo -e "| ${PURPLE}P${CYAN} Change interface (default eth0)                       |"
   echo -e "|---------------------------------------------------------|"
+  echo -e "| ${PURPLE}X${RED} Cleanup the mess${CYAN}                                      |"
+  echo -e "|---------------------------------------------------------|"
   echo -e "| ${PURPLE}Z${CYAN} Show status                                           |"
   echo -e "|---------------------------------------------------------|"
   echo -e "| ${PURPLE}0${RED} Exit${CYAN}                                                  |"
   echo -e "-----------------------------------------------------------${NC}"
-  read -r abcdefghijklmnopz0
-  case $abcdefghijklmnopz0 in
+  read -r abcdefghijklnopxz0
+  case $abcdefghijklnopxz0 in
     [aA])
       echo -e "${INVB}            Tool Installer                                 ${NC}"
       echo -e "${INVB}-----------------------------------------------------------${NC}"
@@ -64,7 +65,7 @@ while true; do
       while true; do
         read -r y
         case $y in
-          [yY]*)
+          [yY])
             source /opt/auto_pt/scripts/a10-tool_install.sh
             break
             ;;
@@ -88,7 +89,7 @@ while true; do
       while true; do
         read -r y
         case $y in
-          [yY]*)
+          [yY])
             source /opt/auto_pt/scripts/b10-folder.sh
             break
             ;;
@@ -113,16 +114,20 @@ while true; do
       echo -e "${INVB}            Start listener? ${GREEN}y${RE}/${RED}n${RE}                            ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r yn
+        case $yn in
+          [yY])
             source /opt/auto_pt/scripts/c10-passive_recon.sh
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
             break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -154,12 +159,12 @@ while true; do
       while true; do
         read -r dprsx
         case $dprsx in
-          [dD]*)
+          [dD])
             source /opt/auto_pt/scripts/d10_dns_scan.sh
             break
             ;;
 
-          [pP]*)
+          [pP])
             source /opt/auto_pt/scripts/d11-active_recon.sh
             source /opt/auto_pt/scripts/d12-list.sh
             source /opt/auto_pt/scripts/d13-smbrecon.sh
@@ -168,7 +173,7 @@ while true; do
             break
             ;;
 
-          [sS]*)
+          [sS])
             source /opt/auto_pt/scripts/d10_dns_scan.sh
             source /opt/auto_pt/scripts/d11-active_recon.sh
             source /opt/auto_pt/scripts/d12-list.sh
@@ -178,12 +183,12 @@ while true; do
             break
             ;;
 
-          [rR]*)
+          [rR])
             source /opt/auto_pt/scripts/d99-report.sh
             break
             ;;
 
-          [xX]*)
+          [xX])
             echo -e "${RED}go back${NC}"
             break
             ;;
@@ -210,9 +215,9 @@ while true; do
       echo -e "${INVB}            Start VA? ${GREEN}y${RE}/${RED}n${RE}                                  ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r ny
+        case $yn in
+          [yY])
             source /opt/auto_pt/scripts/o10-workspace.sh
             source /opt/auto_pt/scripts/e10-autosploit.sh
             source /opt/auto_pt/scripts/e11-zerocheck.sh
@@ -223,9 +228,13 @@ while true; do
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
             break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -242,16 +251,20 @@ while true; do
       echo -e "${INVB}            Start relay? ${GREEN}y${RE}/${RED}n${RE}                               ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r yn
+        case $yn in
+          [yY])
             source /opt/auto_pt/scripts/f10-fast_relay.sh
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
             break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -267,16 +280,20 @@ while true; do
       echo -e "${INVB}            Start looting? ${GREEN}y${RE}/${RED}n${RE}                             ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r yn
+        case $yn in
+          [yY])
             source /opt/auto_pt/scripts/g10-looter.sh
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
             break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -292,16 +309,20 @@ while true; do
       echo -e "${INVB}            Start counting? ${GREEN}y${RE}/${RED}n${RE}                            ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r yn
+        case $yn in
+          [yY])
             source /opt/auto_pt/scripts/h10-counter.sh
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
             break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -317,16 +338,20 @@ while true; do
       echo -e "${INVB}            Start photosession? ${GREEN}y${RE}/${RED}n${RE}                        ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r yn
+        case $yn in
+          [yY])
             source /opt/auto_pt/scripts/i10-eyewitness.sh
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
             break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -344,16 +369,20 @@ while true; do
       echo -e "${INVB}            Start looting? ${GREEN}y${RE}/${RED}n${RE}                             ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r yn
+        case $yn in
+          [yY])
             source /opt/auto_pt/scripts/j10-def_screen_looter.sh
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
             break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -371,21 +400,21 @@ while true; do
       echo -e "${INVB}            Realy? ${GREEN}y${RE}/${RED}n${RE}?                                    ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r yn
+        case $yn in
+          [yY])
             echo -e "${INVB}            Scope Present or not?                          ${NC}"
             echo -e "${INVB}            If not use DNSenum for Scope definition        ${NC}"
             echo -e "${INVB}            DNSEnum (d) or scope present (p)               ${NC}"
             while true; do
               read -r dp
               case $dp in
-                [dD]*)
+                [dD])
                   source /opt/auto_pt/scripts/d10_dns_scan.sh
                   break
                   ;;
 
-                [pP]*)
+                [pP])
                   break
                   ;;
               esac
@@ -411,9 +440,13 @@ while true; do
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
             break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -433,44 +466,20 @@ while true; do
       echo -e "${INVB}            start OT scan? ${GREEN}y${RE}/${RED}n${RE}                             ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r yn
+        case $yn in
+          [yY])
             source /opt/auto_pt/scripts/l10-otscan.sh
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
-            break
-            ;;
-        esac
-      done
-      continue
-      ;;
-
-    [mM])
-      echo -e "${INVB}            Heiko Schotte, Firma Lausen                    ${NC}"
-      echo -e "${INVB}-----------------------------------------------------------${NC}"
-      echo -e "${INVB}            Heiko is a Tatortreiniger.                     ${NC}"
-      echo -e "${INVB}            He will clean up your mess!                    ${NC}"
-      echo -e "${INVB}            This will barely leave a proof on this system! ${NC}"
-      echo -e "${INVB}            All will be lost!                              ${NC}"
-      echo -e "${INVB}            No Backup, no Sorry!                           ${NC}"
-      echo -e "${INVB}-----------------------------------------------------------${NC}"
-      echo -e "${INVB}            Realy? ${GREEN}y${RE}/${RED}n${RE}?                                    ${NC}"
-      echo -e ""
-      while true; do
-        read -r y
-        case $y in
-          [yY]*)
-            source /opt/auto_pt/scripts/m10-cleaner.sh
             break
             ;;
 
           *)
-            echo -e "${RED}go back${NC}"
-            break
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -507,16 +516,20 @@ while true; do
       echo -e "${INVB}            Realy? ${GREEN}y${RE}/${RED}n${RE}?                                    ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r yn
+        case $yn in
+          [yY])
             source /opt/auto_pt/scripts/n10-user_checks.sh
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
             break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -534,16 +547,20 @@ while true; do
       echo -e "${INVB}            New Workspace? ${GREEN}y${RE}/${RED}n${RE}?                            ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r yn
+        case $yn in
+          [yY])
             source /opt/auto_pt/scripts/o10-workspace.sh
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
             break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -560,16 +577,52 @@ while true; do
       echo -e "${INVB}            New Interface? ${GREEN}y${RE}/${RED}n${RE}?                            ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r yn
+        case $yn in
+          [yY])
             source /opt/auto_pt/scripts/p10-interface.sh
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
             break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
+            ;;
+        esac
+      done
+      continue
+      ;;
+
+    [xX])
+      echo -e "${INVB}            Heiko Schotte, Firma Lausen                    ${NC}"
+      echo -e "${INVB}-----------------------------------------------------------${NC}"
+      echo -e "${INVB}            Heiko is a Tatortreiniger.                     ${NC}"
+      echo -e "${INVB}            He will clean up your mess!                    ${NC}"
+      echo -e "${INVB}            This will barely leave a proof on this system! ${NC}"
+      echo -e "${INVB}            All will be lost!                              ${NC}"
+      echo -e "${INVB}            No Backup, no Sorry!                           ${NC}"
+      echo -e "${INVB}-----------------------------------------------------------${NC}"
+      echo -e "${INVB}            Realy? ${GREEN}y${RE}/${RED}n${RE}?                                    ${NC}"
+      echo -e ""
+      while true; do
+        read -r yn
+        case $yn in
+          [yY])
+            source /opt/auto_pt/scripts/x10-cleaner.sh
+            break
+            ;;
+
+          [nN])
+            echo -e "${RED}go back${NC}"
+            break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -585,16 +638,20 @@ while true; do
       echo -e "${INVB}            view status? ${GREEN}y${RE}/${RED}n${RE}?                              ${NC}"
       echo -e ""
       while true; do
-        read -r y
-        case $y in
-          [yY]*)
+        read -r yn
+        case $yn in
+          [yY])
             source /opt/auto_pt/scripts/z10-status.sh
             break
             ;;
 
-          *)
+          [nN])
             echo -e "${RED}go back${NC}"
             break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
             ;;
         esac
       done
@@ -606,13 +663,13 @@ while true; do
       ;;
 
     *)
-      echo -e ""
-      echo -e "${INVB}            ${YELLOW}Select a valid option from the list!           ${NC}"
-      echo -e ""
+      echo -e "\n${INVB}            ${YELLOW}Select a valid option from the list!           ${NC}\n"
       ;;
   esac
 done
 
+echo -e "${BLUE}"
 figlet 'All Done'
+echo -e "${NC}"
 
 exit 0

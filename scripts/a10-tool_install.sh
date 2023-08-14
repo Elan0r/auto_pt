@@ -22,7 +22,7 @@ install_tools() {
 
   #APT
   apt -qq update
-  apt -qq install tmux bettercap nbtscan responder docker.io yersinia golang golang-go eyewitness enum4linux ipmitool chromium python3 python3-dev python3-pip python3-venv nmap smbmap john libpcap-dev libsasl2-dev libldap2-dev ntpdate wget zip unzip systemd-timesyncd pipx swig -y
+  apt -qq install tmux bettercap nbtscan responder docker.io docker-compose yersinia golang golang-go eyewitness ipmitool chromium python3 python3-dev python3-pip python3-venv nmap smbmap john libpcap-dev libsasl2-dev libldap2-dev ntpdate wget zip unzip systemd-timesyncd pipx swig -y
   apt -qq purge crackmapexec python3-ldapdomaindump -y
   #SearchSploit
   #searchsploit -u
@@ -259,6 +259,19 @@ install_tools() {
     docker build -t itwasalladream .
   fi
 
+  #Bloodhound CE
+  if [ -d /opt/BloodHound ]; then
+    cd /opt/BloodHound || ! echo -e "${RED}Failure${NC}"
+    git stash
+    git pull
+    docker-compose build --pull
+  else
+    cd /opt || ! echo -e "${RED}Failure${NC}"
+    git clone https://github.com/SpecterOps/BloodHound.git
+    cd /opt/BloodHound || ! echo -e "${RED}Failure${NC}"
+    docker-compose build --pull
+  fi
+
   #Special
   #gowindapsearch
   if [ -d /opt/windapsearch ]; then
@@ -284,6 +297,9 @@ install_tools() {
     wget https://github.com/nccgroup/scrying/releases/download/v0.9.2/scrying_0.9.2_amd64.deb
     apt -qq install /opt/scrying/scrying_0.9.2_amd64.deb -y
   fi
+
+  #Responder Challange for NetNTLMv1
+  sed -i 's/Challenge = Random/Challenge = 1122334455667788/' /usr/share/responder/Responder.conf
 
   #airgeddon
   if [ -d /opt/airgeddon ]; then
