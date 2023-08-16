@@ -160,7 +160,7 @@ while true; do
         read -r dprsx
         case $dprsx in
           [dD])
-            source /opt/auto_pt/scripts/d10_dns_scan.sh
+            source /opt/auto_pt/scripts/d10-dns_scan.sh
             break
             ;;
 
@@ -174,7 +174,7 @@ while true; do
             ;;
 
           [sS])
-            source /opt/auto_pt/scripts/d10_dns_scan.sh
+            source /opt/auto_pt/scripts/d10-dns_scan.sh
             source /opt/auto_pt/scripts/d11-active_recon.sh
             source /opt/auto_pt/scripts/d12-list.sh
             source /opt/auto_pt/scripts/d13-smbrecon.sh
@@ -410,7 +410,7 @@ while true; do
               read -r dp
               case $dp in
                 [dD])
-                  source /opt/auto_pt/scripts/d10_dns_scan.sh
+                  source /opt/auto_pt/scripts/d10-dns_scan.sh
                   break
                   ;;
 
