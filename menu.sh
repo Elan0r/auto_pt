@@ -550,6 +550,7 @@ while true; do
         read -r yn
         case $yn in
           [yY])
+            rm /root/input/msf/w*
             source /opt/auto_pt/scripts/o10-workspace.sh
             break
             ;;
