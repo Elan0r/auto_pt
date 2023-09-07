@@ -5,9 +5,9 @@ figlet RPC0
 echo "Start RPC0 check" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 
-if command -v enum4linux-ng >/dev/null 2>&1; then 
+if command -v enum4linux-ng >/dev/null 2>&1; then
   e4l=enum4linux-ng
-else 
+else
   e4l="python3 $(locate enum4linux-ng.py)"
 fi
 
