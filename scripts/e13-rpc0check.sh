@@ -5,8 +5,14 @@ figlet RPC0
 echo "Start RPC0 check" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 
+if command -v enum4linux-ng >/dev/null 2>&1; then 
+  e4l=enum4linux-ng
+else 
+  e4l="python3 $(locate enum4linux-ng.py)"
+fi
+
 for i in $(cat /root/output/list/dc_ip.txt); do
-  python3 /opt/enum4linux-ng/enum4linux-ng.py -A "$i" >>/root/output/loot/intern/rpc/null_sessions/"$i".txt
+  "$e4l" -A "$i" >>/root/output/loot/intern/rpc/null_sessions/"$i".txt
 done
 
 echo 'END RPC0 Check' >>/root/output/runtime.txt
