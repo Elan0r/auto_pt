@@ -215,7 +215,7 @@ while true; do
       echo -e "${INVB}            Start VA? ${GREEN}y${RE}/${RED}n${RE}                                  ${NC}"
       echo -e ""
       while true; do
-        read -r ny
+        read -r yn
         case $yn in
           [yY])
             source /opt/auto_pt/scripts/o10-workspace.sh
