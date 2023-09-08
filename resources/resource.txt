@@ -140,7 +140,7 @@ hosts -u -p 5984 -u -R
 set USERPASS_FILE /opt/auto_pt/resources/default_userpass.txt
 run
 set SSL true
-set rport 6984
+set RPORT 6984
 hosts -u -p 6984 -u -R
 run
 sleep 5
@@ -589,13 +589,13 @@ echo "MSF HTTP IIS internal IP" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 use auxiliary/scanner/http/iis_internal_ip
 services -u -p 80 -S Microsoft -R
-set rport 80
+set RPORT 80
 set SSL false
 run
 sleep 5
 services -u -p 443 -S Microsoft -R
-set ssl true
-set rport 443
+set SSL true
+set RPORT 443
 run
 sleep 5
 
@@ -610,7 +610,7 @@ sleep 5
 run
 sleep 5
 services -u -p 443 -S Microsoft -R
-set rport 443
+set RPORT 443
 set SSL true
 check
 sleep 5
@@ -642,6 +642,24 @@ echo "MSF VNC apple ard" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 use auxiliary/scanner/vnc/ard_root_pw
 services -u -p 5900 -R
+run
+sleep 5
+
+spool /root/output/msf/citrix.txt
+echo "####Citrix####"
+
+echo "Netscaler Traversel"
+echo "MSF Netscaler Traversel" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use auxiliary/scanner/http/citrix_dir_traversal
+services -u -S Netscaler -R
+set RPORT 80
+set SSL false
+run
+sleep 5
+
+set RPORT 443
+set SSL true
 run
 sleep 5
 
