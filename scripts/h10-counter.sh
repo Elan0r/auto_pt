@@ -21,16 +21,25 @@ wc -l /root/output/loot/intern/smb/anonymous_enumeration/users.txt >>/root/outpu
 cut -d . -f 1,2,3 /root/output/loot/intern/smb/anonymous_enumeration/users.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
-###NETBIOS
-echo "NetBIOS" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/ad/netbios/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/ad/netbios/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+echo "SMB_v1" >>/root/output/findings.txt
+wc -l /root/output/loot/intern/smb/smb_v1/hosts.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/smb/smb_v1/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+echo "" >>/root/output/findings.txt
+
+echo "EternalBlue" >>/root/output/findings.txt
+wc -l /root/output/loot/intern/smb/eternal_blue/hosts.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/smb/eternal_blue/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+echo "" >>/root/output/findings.txt
+
+echo "Windows_eol" >>/root/output/findings.txt
+wc -l /root/output/loot/intern/eol/windows/windows_versions.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/eol/windows/windows_versions.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
 ###TELNET
 echo "Telnet" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/telnet/unencrypted/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/telnet/unencrypted/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+wc -l /root/output/loot/intern/network/telnet/hosts.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/network/telnet/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
 echo "Lantronix_login" >>/root/output/findings.txt
@@ -66,25 +75,20 @@ cut -d . -f 1,2,3 /root/output/loot/intern/ipmi/hashdump/hosts.txt | sort -u | s
 echo "" >>/root/output/findings.txt
 
 ###SNMP
-echo "SNMP_V1V2" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/snmp/v1_v2c/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/snmp/v1_v2c/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
-echo "" >>/root/output/findings.txt
-
-echo "SNMP_RO" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+echo "SNMP" >>/root/output/findings.txt
+wc -l /root/output/loot/intern/network/snmp/hosts_default_community_ro.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/network/snmp/hosts_default_community_ro.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
 ###FTP
 echo "FTP_Anonymous" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/ftp/anonymous/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/ftp/anonymous/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+wc -l /root/output/loot/intern/network/ftp/anonymous/hosts.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/network/ftp/anonymous/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
 echo "FTP_Unencrypted" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/ftp/unencrypted/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/ftp/unencrypted/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+wc -l /root/output/loot/intern/network/ftp/unencrypted/hosts.txt >>/root/output/findings.txt
+cut -d . -f 1,2,3 /root/output/loot/intern/network/ftp/unencrypted/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
 ###Database
@@ -150,12 +154,12 @@ wc -l /root/output/loot/intern/rpc/nfs/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/rpc/nfs/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
-###MS Exploits
 echo "ZeroLogon" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/rpc/zero_logon/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/rpc/zero_logon/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
+###RDP
 echo "RDP_NLA" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/rdp/nla/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/rdp/nla/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
@@ -169,16 +173,6 @@ echo "" >>/root/output/findings.txt
 echo "MS12-020" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/rdp/ms12-020/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/rdp/ms12-020/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
-echo "" >>/root/output/findings.txt
-
-echo "SMB_v1" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/smb/smb_v1/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/smb/smb_v1/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
-echo "" >>/root/output/findings.txt
-
-echo "EternalBlue" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/smb/eternal_blue/hosts.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/smb/eternal_blue/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
 ###VMware
@@ -239,14 +233,10 @@ wc -l /root/output/loot/intern/web/ilo/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/web/ilo/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
+###DNS
 echo "DNS_Amp" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/dns/amplification/hosts.txt >>/root/output/findings.txt
 cut -d . -f 1,2,3 /root/output/loot/intern/dns/amplification/hosts.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
-echo "" >>/root/output/findings.txt
-
-echo "Windows_eol" >>/root/output/findings.txt
-wc -l /root/output/loot/intern/eol/windows/windows_versions.txt >>/root/output/findings.txt
-cut -d . -f 1,2,3 /root/output/loot/intern/eol/windows/windows_versions.txt | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
 echo "Devices" >>/root/output/findings.txt
@@ -256,6 +246,6 @@ echo "Services" >>/root/output/findings.txt
 tail -n +2 /root/output/list/msf_services.csv | wc -l >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
-echo 'END Counting' >>/root/output/runtime.txt
+echo "END Counting" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
-echo 'END Counting'
+echo "END Counting"

