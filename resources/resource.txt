@@ -617,6 +617,61 @@ sleep 5
 run
 sleep 5
 
+spool /root/output/msf/tomcat.txt
+echo "Tomcat Ghostcat"
+
+echo "MSF Tomcat Ghostcat" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use auxiliary/admin/http/tomcat_ghostcat
+services -u -S tomcat -R
+set RPORT 8080
+set SSL false
+check
+sleep 5
+set RPORT 8080
+set SSL true
+check
+sleep 5
+set RPORT 8443
+set SSL true
+check
+sleep 5
+
+echo "MSF Tomcat Enum" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use auxiliary/scanner/http/tomcat_enum
+services -u -S tomcat -R
+set RPORT 8080
+set SSL false
+run
+sleep 5
+set RPORT 8080
+set SSL true
+run
+sleep 5
+set RPORT 8443
+set SSL true
+run
+sleep 5
+
+echo "MSF Tomcat Login" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use auxiliary/scanner/http/tomcat_mgr_login
+services -u -S tomcat -R
+set STOP_ON_SUCCESS true
+set RPORT 8080
+set SSL false
+run
+sleep 5
+set RPORT 8080
+set SSL true
+run
+sleep 5
+set RPORT 8443
+set SSL true
+run
+sleep 5
+
 spool /root/output/msf/vnc.txt
 echo "####VNC####"
 
