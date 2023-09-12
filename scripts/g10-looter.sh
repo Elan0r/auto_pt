@@ -56,15 +56,15 @@ awk '/FTP Banner/ {print$2}' /root/output/msf/ftp.txt | cut -d ":" -f 1 | sort -
 ### EOL
 awk '/\+.*OpenSSH/ {print$7,$2}' /root/output/msf/ssh.txt | sed 's/:22/ /g' | sort -u | grep -v '_8.' >/root/output/loot/intern/eol/ssh/openssh_version.txt
 grep -a 'running Windows 200\|running Windows 7\|running Windows XP\|running Windows Vista\|running Windows 8\|running Windows 9' /root/output/msf/smb.txt | cut -c5- | sed 's/:... //' | sort -u >/root/output/loot/intern/eol/windows/windows_versions.txt
-awk '/\-1.99/ {print$2}' /root/output/msf/ssh.txt | cut -d : -f 1 | sort -u >/root/output/loot/intern/eol/ssh_depricated/hosts.txt
+awk '/\-1.99/ {print$2}' /root/output/msf/ssh.txt | cut -d : -f 1 | sort -u | sed '/^22$/d' >/root/output/loot/intern/eol/ssh_depricated/hosts.txt
 
 ### TELNET
 awk '/\+.*:23/ {print$2}' /root/output/msf/telnet.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/network/telnet/hosts.txt
 
 ### SMB
 awk '/VULNERABLE.*MS17-010/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/smb/eternal_blue/hosts.txt
-awk '/*.+versions:1/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/smb/smb_v1/hosts.txt
-awk '/*.+signatures:optional/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u >/root/output/loot/intern/smb/smb_signing/hosts.txt
+awk '/*.+versions:1/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u | sed '/^445$/d' >/root/output/loot/intern/smb/smb_v1/hosts.txt
+awk '/*.+signatures:optional/ {print$2}' /root/output/msf/smb.txt | cut -d ":" -f 1 | sort -u | sed '/^445$/d' >/root/output/loot/intern/smb/smb_signing/hosts.txt
 awk '/(\(DISK\)|\(IPC\)|\(PRINTER\))/{print}' /root/output/msf/smb.txt | cut -c18- | sed 's/:... //' | sort -u >/root/output/loot/intern/smb/anonymous_enumeration/smb_shares.txt
 awk '/Found user:/ {print$2,$6,$7,$8,$9}' /root/output/msf/smb.txt | sort -u >/root/output/loot/intern/smb/anonymous_enumeration/users.txt
 

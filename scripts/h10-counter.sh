@@ -119,7 +119,7 @@ echo "" >>/root/output/findings.txt
 
 echo "Printer_access" >>/root/output/findings.txt
 wc -l /root/output/loot/intern/printer/access/msf_*_printer.txt >>/root/output/findings.txt
-tail -n +2 /root/output/loot/intern/printer/access/msf_*_printer.txt | cut -c2- | cut -d . -f 1,2,3 | sort -u | sed 's/$/.0\/24/' >>/root/output/findings.txt
+tail -n +2 /root/output/loot/intern/printer/access/msf_*_printer.txt | cut -c2- | cut -d . -f 1,2,3 | sort -u | sed '/^$/d' | sed '/msf_/d' | sed 's/$/.0\/24/' >>/root/output/findings.txt
 echo "" >>/root/output/findings.txt
 
 echo "Minolta_Password_Extract" >>/root/output/findings.txt
