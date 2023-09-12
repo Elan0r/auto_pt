@@ -700,6 +700,24 @@ sleep 5
 spool /root/output/msf/java.txt
 echo "###Java###"
 
+echo "Java RMI Scanner"
+echo "MSF Java RMI scanner" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use auxiliary/scanner/misc/java_rmi_server
+set RPORT 1099
+services -S Java -R
+run
+sleep 5
+set RPORT 9000
+run
+sleep 5
+set RPORT 9001
+run
+sleep 5
+set RPORT 9002
+run
+sleep 5
+
 echo "Java RMI RCE"
 echo "MSF Java RMI RCE" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
@@ -707,6 +725,38 @@ use exploit/multi/misc/java_rmi_server
 set RPORT 1099
 set SSL false
 set SRVPORT 8088
+services -S Java -R
+check
+sleep 5
+set RPORT 9000
+check
+sleep 5
+
+echo "Java JMX Scanner"
+echo "MSF Java JMX scanner" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use auxiliary/scanner/misc/java_jmx_server
+set RPORT 1099
+services -S Java -R
+run
+sleep 5
+set RPORT 9000
+run
+sleep 5
+set RPORT 9001
+run
+sleep 5
+set RPORT 9002
+run
+sleep 5
+
+echo "Java JMX RCE"
+echo "MSF Java JMX RCE" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use exploit/multi/misc/java_jmx_server
+set RPORT 1099
+set SSL false
+set SRVPORT 8089
 services -S Java -R
 check
 sleep 5
