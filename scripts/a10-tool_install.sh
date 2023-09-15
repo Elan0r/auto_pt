@@ -226,14 +226,14 @@ install_tools() {
     git clone https://github.com/sploutchy/impacket /opt/impacket-sploutchy
   fi
   #CME Binary
-  if [ -s /opt/cme_binary/cme ]; then
-    echo "CME binary existend"
-  else
-    cd /opt || ! echo -e "${RED}Failure${NC}"
-    curl --create-dirs -O --output-dir /opt/cme_binary https://github.com/mpgn/CrackMapExec/releases/download/v6.0.0/cme-ubuntu-latest-3.11.zip
-    unzip /opt/cme_binary/cme-ubuntu-latest-3.11.zip -d /opt/cme_binary
-    chmod +x /opt/cme_binary/cme
-  fi
+  #if [ -s /opt/cme_binary/cme ]; then
+  #  echo "CME binary existend"
+  #else
+  #  cd /opt || ! echo -e "${RED}Failure${NC}"
+  #  curl --create-dirs -O --output-dir /opt/cme_binary https://github.com/mpgn/CrackMapExec/releases/download/v6.0.0/cme-ubuntu-latest-3.11.zip
+  #  unzip /opt/cme_binary/cme-ubuntu-latest-3.11.zip -d /opt/cme_binary
+  #  chmod +x /opt/cme_binary/cme
+  #fi
 
   #Go
   cd /opt || ! echo -e "${RED}Failure${NC}"
