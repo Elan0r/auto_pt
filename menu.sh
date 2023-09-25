@@ -11,9 +11,9 @@ INVB='\e[44;1m'
 RE='\033[0m\e[44;1m'
 NC='\033[0m'
 
-if (( $EUID != 0 )); then
-    echo "Please run as root"
-    exit 1
+if [ "$EUID" != 0 ]; then
+  echo "Please run as root"
+  exit 1
 fi
 
 # create nessesary folder
