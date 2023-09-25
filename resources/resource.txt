@@ -486,8 +486,8 @@ services -u -p 3389 -R
 run
 sleep 5
 
-spool /root/output/msf/ipmi.txt
-echo "####IPMI####"
+spool /root/output/msf/bmc.txt
+echo "####BMC####"
 
 echo "IPMI Information Discovery"
 echo "MSF IPMI version" >>/root/output/runtime.txt
@@ -513,9 +513,6 @@ set OUTPUT_HASHCAT_FILE /root/output/loot/hashes/ipmi_hashcat
 services -p 623 -u -R
 run
 sleep 5
-
-spool /root/output/msf/ilo.txt
-echo "####HP iLO####"
 
 echo "HP Lights-Out Bypass"
 echo "MSF HTTP HP iLo bypass" >>/root/output/runtime.txt
@@ -648,7 +645,7 @@ echo "###Tomcat###"
 echo "MSF Tomcat Ghostcat" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 use auxiliary/admin/http/tomcat_ghostcat
-services -u -S tomcat -R
+services -u -p 8080 -S tomcat -R
 set RPORT 8080
 set SSL false
 check
@@ -657,6 +654,12 @@ set RPORT 8080
 set SSL true
 check
 sleep 5
+services -u -p 8081 -S tomcat -R
+set RPORT 8081
+set SSL false
+check
+sleep 5
+services -u -p 8443 -S tomcat -R
 set RPORT 8443
 set SSL true
 check
@@ -665,7 +668,7 @@ sleep 5
 echo "MSF Tomcat Enum" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 use auxiliary/scanner/http/tomcat_enum
-services -u -S tomcat -R
+services -u -p 8080 -S tomcat -R
 set RPORT 8080
 set SSL false
 run
@@ -674,6 +677,7 @@ set RPORT 8080
 set SSL true
 run
 sleep 5
+services -u -p 8443 -S tomcat -R
 set RPORT 8443
 set SSL true
 run
@@ -682,7 +686,7 @@ sleep 5
 echo "MSF Tomcat Login" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 use auxiliary/scanner/http/tomcat_mgr_login
-services -u -S tomcat -R
+services -u -p 8080 -S tomcat -R
 set STOP_ON_SUCCESS true
 set RPORT 8080
 set SSL false
@@ -692,6 +696,7 @@ set RPORT 8080
 set SSL true
 run
 sleep 5
+services -u -p 8443 -S tomcat -R
 set RPORT 8443
 set SSL true
 run
@@ -705,15 +710,18 @@ echo "MSF Java RMI scanner" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 use auxiliary/scanner/misc/java_rmi_server
 set RPORT 1099
-services -S Java -R
+services -u -p 1099 -S Java -R
 run
 sleep 5
+services -u -p 9000 -S Java -R
 set RPORT 9000
 run
 sleep 5
+services -u -p 9001 -S Java -R
 set RPORT 9001
 run
 sleep 5
+services -u -p 9002 -S Java -R
 set RPORT 9002
 run
 sleep 5
@@ -725,9 +733,10 @@ use exploit/multi/misc/java_rmi_server
 set RPORT 1099
 set SSL false
 set SRVPORT 8088
-services -S Java -R
+services -u -p 1099 -S Java -R
 check
 sleep 5
+services -u -p 9000 -S Java -R
 set RPORT 9000
 check
 sleep 5
@@ -737,15 +746,18 @@ echo "MSF Java JMX scanner" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 use auxiliary/scanner/misc/java_jmx_server
 set RPORT 1099
-services -S Java -R
+services -u -p 1099 -S Java -R
 run
 sleep 5
+services -u -p 9000 -S Java -R
 set RPORT 9000
 run
 sleep 5
+services -u -p 9001 -S Java -R
 set RPORT 9001
 run
 sleep 5
+services -u -p 9002 -S Java -R
 set RPORT 9002
 run
 sleep 5
@@ -757,9 +769,10 @@ use exploit/multi/misc/java_jmx_server
 set RPORT 1099
 set SSL false
 set SRVPORT 8089
-services -S Java -R
+services -u -p 1099 -S Java -R
 check
 sleep 5
+services -u -p 9000 -S Java -R
 set RPORT 9000
 check
 sleep 5
@@ -799,12 +812,12 @@ echo "Netscaler Traversel"
 echo "MSF Netscaler Traversel" >>/root/output/runtime.txt
 date >>/root/output/runtime.txt
 use auxiliary/scanner/http/citrix_dir_traversal
-services -u -S Netscaler -R
+services -u -p 80 -S Netscaler -R
 set RPORT 80
 set SSL false
 run
 sleep 5
-
+services -u -p 443 -S Netscaler -R
 set RPORT 443
 set SSL true
 run

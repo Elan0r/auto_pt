@@ -1,0 +1,210 @@
+setg THREADS 150
+setg verbose true
+spool /root/output/ext_msf/log4j.txt
+echo "####Log4Shell####"
+
+echo "####Log4Shell####" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use auxiliary/scanner/http/log4shell_scanner
+set srvhost eth0
+set SSL false
+set RPORT 80
+services -u -p 80 -R
+run
+sleep 5
+
+echo "Log4j Port 8080 NoSSL" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "Log4j Port 8080 NoSSL"
+set RPORT 8080
+set SSL false
+services -u -p 8080 -R
+run
+sleep 5
+
+echo "Log4j Port 8080 SSL" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "Log4j Port 8080 SSL"
+set RPORT 8080
+set SSL true
+services -u -p 8080 -R
+run
+sleep 5
+
+echo "Log4j Port 443" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "Log4j Port 443"
+set RPORT 443
+set SSL true
+services -u -p 443 -R
+run
+sleep 5
+
+echo "Log4j Port 8443" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "Log4j Port 8443"
+set RPORT 8443
+set SSL true
+services -u -p 8443 -R
+run
+sleep 5
+
+echo "Log4j DONE" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+
+spool /root/output/ext_msf/ftp.txt
+echo "####FTP####"
+
+echo "FTP version" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "ftp_version - Detect FTP Version - Set password for username"
+use auxiliary/scanner/ftp/ftp_version
+set FTPPASS ProSec_Networks
+services -u -p 21 -R
+run
+sleep 5
+
+echo "FTP anonymous" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "anonymous - Detect anonymous read_write FTP server access"
+use auxiliary/scanner/ftp/anonymous
+services -u -p 21 -R
+run
+sleep 5
+
+spool /root/output/ext_msf/mail.txt
+echo "####MAIL####"
+
+echo "Proxylogon" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "exchange_proxylogon - Proxylogon Check"
+use auxiliary/scanner/http/exchange_proxylogon
+services -u -p 587 -S Exchange -R
+run
+sleep 5
+
+spool /root/output/ext_msf/web.txt
+echo "####WEB####"
+
+echo "http SSL info" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "HTTP SSL Certificate Information"
+use auxiliary/scanner/http/ssl
+services -u -p 443 -R
+run
+sleep 5
+
+echo "IIS Auth bypass noSSL 80" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "IIS Auth Bypass"
+use auxiliary/admin/http/iis_auth_bypass
+set RPORT 80
+set SSL false
+services -u -p 80 -S Microsoft -R
+run
+sleep 5
+
+echo "IIS Auth bypass SSL 443" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+set RPORT 443
+set SSL true
+services -u -p 443 -S Microsoft -R
+run
+sleep 5
+
+echo "MS15-034 noSSL 80" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "http.sys mem dump ms15-034"
+use auxiliary/scanner/http/ms15_034_http_sys_memory_dump
+set RPORT 80
+set SSL false
+services -u -p 80 -S Microsoft -R
+check
+sleep 5
+
+echo "MS15-034 SSL 443" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+set RPORT 443
+set SSL true
+services -u -p 443 -S Microsoft -R
+check
+sleep 5
+
+echo "IIS internal IP noSSL 80" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "IIS Internal IP disclosure"
+use auxiliary/scanner/http/iis_internal_ip
+set RPORT 80
+set SSL false
+services -p 80 -S Microsoft -R
+run
+sleep 5
+
+echo "IIS internal IP SSL 443" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+set SSL true
+set RPORT 443
+run
+sleep 5
+
+spool /root/output/ext_msf/iis_tilde.txt
+echo "####IIS Tilde####"
+
+echo "IIS shortname Scanner noSSL 80" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "IIS shortname Scanner/Tilde Character"
+use auxiliary/scanner/http/iis_shortname_scanner
+set RPORT 80
+set SSL false
+services -u -p 80 -S Microsoft -R
+check
+sleep 5
+run
+sleep 5
+
+echo "IIS shortname Scanner SSL 443" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+set RPORT 443
+set SSL true
+services -u -p 443 -S Microsoft -R
+check
+sleep 5
+run
+sleep 5
+
+spool /root/output/ext_msf/vmware.txt
+echo "####VMWare####"
+
+echo "VMware Workspace One SSL 443" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+use exploit/linux/http/vmware_workspace_one_access_cve_2022_22954
+set RPORT 443
+set SSL true
+services -p 443 -u -R
+check
+sleep 5
+
+spool /root/output/ext_msf/rpc.txt
+echo "####RPC####"
+
+echo "SunRPC Portmapper" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "SunRPC Portmapper"
+use auxiliary/scanner/misc/sunrpc_portmapper
+services -p 111 -u -R
+run
+sleep 5
+services -p 111 -u
+sleep 5
+
+echo "Portmap Amplification" >>/root/output/runtime.txt
+date >>/root/output/runtime.txt
+echo "Portmap Amplification"
+use auxiliary/scanner/portmap/portmap_amp
+services -p 111 -u -R
+run
+sleep 5
+
+spool off
+sessions -K
+exit

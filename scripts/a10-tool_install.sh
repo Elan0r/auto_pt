@@ -22,7 +22,7 @@ install_tools() {
 
   #APT
   apt -qq update
-  apt -qq install tmux bettercap nbtscan responder docker.io docker-compose yersinia golang golang-go eyewitness ipmitool chromium python3 python3-dev python3-pip python3-venv nmap smbmap john libpcap-dev libsasl2-dev libldap2-dev ntpdate wget zip unzip systemd-timesyncd pipx swig -y
+  apt -qq install tmux bettercap nbtscan responder docker.io docker-compose yersinia golang golang-go eyewitness ipmitool chromium python3 python3-dev python3-pip python3-venv nmap smbmap john libpcap-dev libsasl2-dev libldap2-dev ntpdate wget zip unzip systemd-timesyncd pipx swig slowhttptest -y
   apt -qq purge crackmapexec python3-ldapdomaindump -y
   #SearchSploit
   #searchsploit -u
@@ -43,7 +43,9 @@ install_tools() {
   pipx install git+https://github.com/Hackndo/WebclientServiceScanner.git --force
   pipx install git+https://github.com/dirkjanm/mitm6.git --force
   pipx install git+https://github.com/cddmp/enum4linux-ng.git --force
+  pipx install git+https://github.com/santoru/shcheck.git --force
 
+  # shellcheck disable=SC2016
   if grep -Fxq 'export PATH=$PATH:/root/.local/bin' /root/.zshrc; then
     echo -e ''
   else
@@ -58,6 +60,7 @@ install_tools() {
     mkdir /opt/go
   fi
 
+  # shellcheck disable=SC2016
   if grep -Fxq 'export PATH=$PATH:$GOPATH/bin' /root/.zshrc; then
     echo -e ''
   else

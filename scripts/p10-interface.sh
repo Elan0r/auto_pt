@@ -6,6 +6,7 @@ if test -e /opt/auto_pt/scripts && test -n "$(find /opt/auto_pt/scripts -maxdept
   echo "Directory scripts contains files"
 else
   echo "/opt/auto_pt/scripts is empty or does not exist"
+  exit 1
 fi
 
 read -r -p "Enter OLD interface (previous eth0): " OLD

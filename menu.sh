@@ -27,10 +27,12 @@ while true; do
   echo -e "| Details of all Scripts in SubMenu                       |"
   echo -e "| ${YELLOW}Select an option from the list:${CYAN}                         |"
   echo -e "|---------------------------------------------------------|"
+  echo -e "| ${YELLOW}Preparation${CYAN}                                             |"
   echo -e "| ${PURPLE}A${CYAN} Tool Installer                                        |"
   echo -e "| ${PURPLE}B${CYAN} Folder Re-Creation                                    |"
   echo -e "| ${PURPLE}C${CYAN} Passiv Listener                                       |"
   echo -e "|---------------------------------------------------------|"
+  echo -e "| ${YELLOW}Testing${CYAN}                                                 |"
   echo -e "| ${PURPLE}D${CYAN} Host and Service Discovery                            |"
   echo -e "| ${PURPLE}E${CYAN} Vulnerability Analysis (MSF+X)                        |"
   echo -e "| ${PURPLE}F${CYAN} 5 min Responder Relay                                 |"
@@ -44,8 +46,15 @@ while true; do
   echo -e "|---------------------------------------------------------|"
   echo -e "| ${PURPLE}N${CYAN} Userchecks ${RED}(Creds required!)${CYAN}                          |"
   echo -e "|---------------------------------------------------------|"
+  echo -e "| ${YELLOW}Alligning${CYAN}                                               |"
   echo -e "| ${PURPLE}O${CYAN} Set Workspace                                         |"
   echo -e "| ${PURPLE}P${CYAN} Change interface (default eth0)                       |"
+  echo -e "|---------------------------------------------------------|"
+  echo -e "| ${YELLOW}External${CYAN}                                                |"
+  echo -e "| ${PURPLE}R${CYAN} Security Header                                       |"
+  echo -e "| ${PURPLE}S${CYAN} the Harvester                                         |"
+  echo -e "| ${PURPLE}T${CYAN} Slow HTTP Test                                        |"
+  echo -e "| ${PURPLE}U${CYAN} Mail Checks                                           |"
   echo -e "|---------------------------------------------------------|"
   echo -e "| ${PURPLE}X${RED} Cleanup the mess${CYAN}                                      |"
   echo -e "|---------------------------------------------------------|"
@@ -53,8 +62,8 @@ while true; do
   echo -e "|---------------------------------------------------------|"
   echo -e "| ${PURPLE}0${RED} Exit${CYAN}                                                  |"
   echo -e "-----------------------------------------------------------${NC}"
-  read -r abcdefghijklnopxz0
-  case $abcdefghijklnopxz0 in
+  read -r abcdefghijklnoprstuxz0
+  case $abcdefghijklnoprstuxz0 in
     [aA])
       echo -e "${INVB}            Tool Installer                                 ${NC}"
       echo -e "${INVB}-----------------------------------------------------------${NC}"
@@ -205,6 +214,7 @@ while true; do
       echo -e "${INVB}            Vulnerability Analysis (MSF+X)                 ${NC}"
       echo -e "${INVB}-----------------------------------------------------------${NC}"
       echo -e "${INVB}            Ths script will start VA                       ${NC}"
+      echo -e "${INVB}            Pre-set the MSF workspace with the O menu      ${NC}"
       echo -e "${INVB}            Metasploit for general exploitability          ${NC}"
       echo -e "${INVB}            MSF ZeroLogon                                  ${NC}"
       echo -e "${INVB}            RPC 0 Session with enum4linux-ng               ${NC}"
@@ -212,13 +222,13 @@ while true; do
       echo -e "${INVB}            SSL Scan with heartbleet                       ${NC}"
       echo -e "${INVB}            NO list creation! Active recon recommended!    ${NC}"
       echo -e "${INVB}-----------------------------------------------------------${NC}"
-      echo -e "${INVB}            Start VA? ${GREEN}y${RE}/${RED}n${RE}                                  ${NC}"
+      echo -e "${INVB}            Workspace set?                                 ${NC}"
+      echo -e "${INVB}            Realy? ${GREEN}y${RE}/${RED}n${RE}?                                    ${NC}"
       echo -e ""
       while true; do
         read -r yn
         case $yn in
           [yY])
-            source /opt/auto_pt/scripts/o10-workspace.sh
             source /opt/auto_pt/scripts/e10-autosploit.sh
             source /opt/auto_pt/scripts/e11-zerocheck.sh
             source /opt/auto_pt/scripts/e12-log4check.sh
@@ -431,7 +441,6 @@ while true; do
             source /opt/auto_pt/scripts/e13-rpc0check.sh
             source /opt/auto_pt/scripts/e14-def_creds.sh
             source /opt/auto_pt/scripts/e15-service_enum.sh
-            source /opt/auto_pt/scripts/e16-relaylists.sh
             source /opt/auto_pt/scripts/f10-fast_relay.sh
             source /opt/auto_pt/scripts/g10-looter.sh
             source /opt/auto_pt/scripts/h10-counter.sh
@@ -582,6 +591,124 @@ while true; do
         case $yn in
           [yY])
             source /opt/auto_pt/scripts/p10-interface.sh
+            break
+            ;;
+
+          [nN])
+            echo -e "${RED}go back${NC}"
+            break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
+            ;;
+        esac
+      done
+      continue
+      ;;
+
+    [rR])
+      echo -e "${INVB}            Security Header Check                          ${NC}"
+      echo -e "${INVB}-----------------------------------------------------------${NC}"
+      echo -e "${INVB}            Checks Webserver                               ${NC}"
+      echo -e "${INVB}            with shcheck.py                                ${NC}"
+      echo -e "${INVB}-----------------------------------------------------------${NC}"
+      echo -e "${INVB}            Start Check? ${GREEN}y${RE}/${RED}n${RE}?                              ${NC}"
+      echo -e ""
+      while true; do
+        read -r yn
+        case $yn in
+          [yY])
+            source /opt/auto_pt/scripts/r10-sheader.sh
+            break
+            ;;
+
+          [nN])
+            echo -e "${RED}go back${NC}"
+            break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
+            ;;
+        esac
+      done
+      continue
+      ;;
+
+    [sS])
+      echo -e "${INVB}            the Harvester                                  ${NC}"
+      echo -e "${INVB}-----------------------------------------------------------${NC}"
+      echo -e "${INVB}            Harvest Stuff                                  ${NC}"
+      echo -e "${INVB}            dont forget to set yout API Keys               ${NC}"
+      echo -e "${INVB}-----------------------------------------------------------${NC}"
+      echo -e "${INVB}            Start harvesting? ${GREEN}y${RE}/${RED}n${RE}?                         ${NC}"
+      echo -e ""
+      while true; do
+        read -r yn
+        case $yn in
+          [yY])
+            source /opt/auto_pt/scripts/s10-harvester.sh
+            break
+            ;;
+
+          [nN])
+            echo -e "${RED}go back${NC}"
+            break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
+            ;;
+        esac
+      done
+      continue
+      ;;
+
+    [tT])
+      echo -e "${INVB}            Slow http Check DoS                            ${NC}"
+      echo -e "${INVB}-----------------------------------------------------------${NC}"
+      echo -e "${INVB}            ${YELLOW}Attention ! ${INVB}                                   ${NC}"
+      echo -e "${INVB}            ${YELLOW}this is a Denial of Service${INVB}                    ${NC}"
+      echo -e "${INVB}            DoS to Webserver                               ${NC}"
+      echo -e "${INVB}            with slowhttptest                              ${NC}"
+      echo -e "${INVB}-----------------------------------------------------------${NC}"
+      echo -e "${INVB}            Start DoS? ${GREEN}y${RE}/${RED}n${RE}?                                ${NC}"
+      echo -e ""
+      while true; do
+        read -r yn
+        case $yn in
+          [yY])
+            source /opt/auto_pt/scripts/t10-slowhttp.sh
+            break
+            ;;
+
+          [nN])
+            echo -e "${RED}go back${NC}"
+            break
+            ;;
+
+          *)
+            echo -e "${YELLOW}Please answer ${GREEN}Y ${NC}or ${RED}N${NC}"
+            ;;
+        esac
+      done
+      continue
+      ;;
+
+    [uU])
+      echo -e "${INVB}            MailTester                                     ${NC}"
+      echo -e "${INVB}-----------------------------------------------------------${NC}"
+      echo -e "${INVB}            Checks Mailserver                              ${NC}"
+      echo -e "${INVB}            and some more                                  ${NC}"
+      echo -e "${INVB}-----------------------------------------------------------${NC}"
+      echo -e "${INVB}            Start Check? ${GREEN}y${RE}/${RED}n${RE}?                              ${NC}"
+      echo -e ""
+      while true; do
+        read -r yn
+        case $yn in
+          [yY])
+            source /opt/auto_pt/scripts/u10-mailtest.sh
             break
             ;;
 

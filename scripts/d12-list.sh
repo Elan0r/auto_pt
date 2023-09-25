@@ -2,8 +2,11 @@
 
 figlet ListCreation
 
-echo 'START List Creation' >>/root/output/runtime.txt
-date >>/root/output/runtime.txt
+{
+  echo 'START List Creation'
+  date
+} >>/root/output/runtime.txt
+
 echo 'START List Creation'
 
 #File Splitt in Service LISTs
@@ -44,6 +47,8 @@ grep http /root/output/list/scrying_raw.txt | tr -d '[:blank:]' >/root/output/li
 sed 's%^%vnc://%' /root/output/list/vnc_open.txt >/root/output/list/scrying_vnc.txt
 sed 's%^%rdp://%' /root/output/list/rdp_open.txt >/root/output/list/scrying_rdp.txt
 
-echo 'END List Creation' >>/root/output/runtime.txt
-date >>/root/output/runtime.txt
+{
+  echo 'END List Creation'
+  date
+} >>/root/output/runtime.txt
 echo 'END List Creation'
