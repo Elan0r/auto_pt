@@ -5,6 +5,7 @@ Work needs to be done, CME Checks are in v5.X and needed to be updated to v6+<br
 <br>
 <b>Installation</b><br>
 download this Repository to <code>/opt</code> via <b>git clone</b>.<br>
+<code>/opt/autp_pt</code> is expected.
 Pathes to the files are hardcoded, that is may way of test.<br>
 <br>
 <b>Updating</b><br>
