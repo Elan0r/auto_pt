@@ -5,7 +5,7 @@ Work needs to be done, CME Checks are in v5.X and needed to be updated to v6+<br
 <br>
 <b>Installation</b><br>
 download this Repository to <code>/opt</code> via <b>git clone</b>.<br>
-<code>/opt/autp_pt</code> is expected.
+<code>/opt/auto_pt</code>is expected as folder.<br>
 Pathes to the files are hardcoded, that is may way of test.<br>
 <br>
 <b>Updating</b><br>
@@ -21,6 +21,6 @@ from there you can start the <b>status</b> in <b>new pane</b> and <b>passiv list
 <small><b>Host and Service Discovery</b> can create it, DNS Server Listscan with <b>nmap</b>.</small><br>
 <br>
 <b>Auto_PT</b> creates <code>/root/output/runtime.txt</code> for <i>Performance and Evidence</i> in case of an <i>Incident</i>. Mind the <b>local</b> time!<br>
-<b>Auto_PT</b> requests Workspace for <b>MSF</b>. Should be set manually via <b>menu.sh</b>.<br>
+<b>Auto_PT</b> needs Workspace for <b>MSF</b>. Must be set manually via <b>menu.sh</b>.<br>
 <small><b>Auto_PT</b> may be stuck at CME checks, this is a feature of CME, just press ENTER</small><br>
 <br>

@@ -33,8 +33,9 @@ install_tools() {
   #pipx
   pip3 install --user pipx PyYAML alive-progress xlsxwriter sectools --upgrade
   pipx ensurepath
+  pipx install scoutsuite --force
   pipx install git+https://github.com/dirkjanm/ldapdomaindump.git --force
-  pipx install git+https://github.com/Porchetta-Industries/CrackMapExec.git --force
+  pipx install git+https://github.com/byt3bl33d3r/CrackMapExec.git --force
   pipx install git+https://github.com/fortra/impacket.git --force
   pipx install git+https://github.com/zer1t0/certi.git --force
   pipx install git+https://github.com/ly4k/Certipy.git --force

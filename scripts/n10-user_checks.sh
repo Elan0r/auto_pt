@@ -1,16 +1,31 @@
 #!/bin/bash
+# shellcheck disable=SC2034
+#Colors
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+CYAN='\033[1;36m'
+BLUE='\033[1;34m'
+YELLOW='\033[1;33m'
+PURPLE='\033[1;35m'
+NC='\033[0m'
 
 figlet UserChecks
 
-echo "CME is still buggy u need to press ENTER sometimes!"
+echo -e "${PURPLE}CME is still buggy u need to press ENTER sometimes!${NC}"
 unset USER HASH PASS DOM IP FQDN BHDOM
 
 read -r -p "Username: " USER
-echo "do NOT provide Password AND Hash, Script intelligence is missing."
-echo "leave Password EMPTY for Hash usage!"
+echo -e "${RED}leave Password EMPTY for Hash usage!${NC}"
 read -r -p "Password: " PASS
-echo "leave Hash EMPTY if Password is set!"
-read -r -p "NT Hash: " HASH
+if [ -z "$PASS" ]; then
+  read -r -p "NT Hash: " HASH
+  #check for valide NTHASH
+  if [ ${#HASH} != 32 ]; then
+    echo -e "${RED}No Password AND"
+    echo -e "Wrong hash Format${NC}, just NT HASH"
+    exit 1
+  fi
+fi
 read -r -p "Domain: " DOM
 read -r -p "IP DomainController: " IP
 
@@ -18,7 +33,7 @@ read -r -p "IP DomainController: " IP
 if [[ $IP =~ ^[0-9]+(\.[0-9]+){3}$ ]]; then
   echo "DC IP is: ""$IP"
 else
-  echo "Wrong IP Format"
+  echo -e "${RED}Wrong IP Format${NC}"
   exit 1
 fi
 
@@ -44,7 +59,7 @@ crackmapexec smb "$IP" --users --log /root/output/loot/smb/anonymous_enumeration
 echo "CME PetitPotam unauthenticated"
 crackmapexec smb "$IP" -M petitpotam --log /root/output/loot/rpc/petit_potam/"$IP"_unauthenticated.txt >/dev/null 2>&1
 
-if [ -z "$HASH" ]; then
+if [ -n "$PASS" ]; then
   # Use Password
   {
     echo "CME GPP_Password"
@@ -228,14 +243,8 @@ if [ -z "$HASH" ]; then
   certipy find -u "$USER" -p "$PASS" -target "$IP" -old-bloodhound
 fi
 
-if [ -z "$PASS" ]; then
+if [ -n "$HASH" ]; then
   # use HASH
-
-  #check for valide NTHASH
-  if [ ${#HASH} != 32 ]; then
-    echo "Wrong hash Format, just NT HASH"
-    exit 1
-  fi
 
   {
     echo "CME GPP_Password"
@@ -489,10 +498,12 @@ if [[ -s /root/output/loot/ldap/channel_binding/hosts.txt || -s /root/output/loo
   cp /root/output/loot/ldap/signing/signig_"$DOM".txt /root/output/loot/ldap/channel_binding/
 fi
 
-echo "Userchecks Done"
-date
+{
+  echo "Userchecks Done"
+  date
+} >>/root/output/runtime.txt
 
 figlet "Userchecks Done"
 
 # Python unbuffered reset to default
-unset PYTHONUNBUFFERED
+#unset PYTHONUNBUFFERED
